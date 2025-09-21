@@ -11,6 +11,7 @@ use App\Filament\Resources\Features\Schemas\FeatureInfolist;
 use App\Filament\Resources\Features\Tables\FeaturesTable;
 use App\Models\Feature;
 use BackedEnum;
+use UnitEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
@@ -19,8 +20,8 @@ use Filament\Tables\Table;
 class FeatureResource extends Resource
 {
     protected static ?string $model = Feature::class;
+     protected static string | UnitEnum   | null $navigationGroup = 'Products Details';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
     protected static ?string $recordTitleAttribute = 'Features';
 

@@ -11,6 +11,7 @@ use App\Filament\Resources\PowerTypes\Schemas\PowerTypeInfolist;
 use App\Filament\Resources\PowerTypes\Tables\PowerTypesTable;
 use App\Models\PowerType;
 use BackedEnum;
+use UnitEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
@@ -19,8 +20,9 @@ use Filament\Tables\Table;
 class PowerTypeResource extends Resource
 {
     protected static ?string $model = PowerType::class;
+    protected static string | UnitEnum   | null $navigationGroup = 'Products Details';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+
 
     public static function form(Schema $schema): Schema
     {
