@@ -16,8 +16,8 @@ class GallariesTable
     {
         return $table
             ->columns([
-                TextColumn::make('product_id')
-                    ->numeric()
+                TextColumn::make('product.name')
+                  
                     ->sortable(),
                 TextColumn::make('name')
                     ->searchable(),

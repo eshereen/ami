@@ -15,8 +15,9 @@ class ProductInfolist
                 TextEntry::make('name'),
                 TextEntry::make('slug'),
                 TextEntry::make('model_name'),
-                TextEntry::make('subcategory_id')
-                    ->numeric(),
+                TextEntry::make('subcategory.name')
+                    ->relationship('subcategory', 'name'),
+                   
                 TextEntry::make('description')
                     ->placeholder('-')
                     ->columnSpanFull(),

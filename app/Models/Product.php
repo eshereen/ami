@@ -4,11 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use App\Traits\Sluggable;
 class Product extends Model
 {
     /** @use HasFactory<\Database\Factories\ProductFactory> */
-    use HasFactory;
+    use HasFactory, Sluggable;
 
     protected $fillable = ['name','model_name','slug','subcategory_id','image','description','fuel_type','frequency','status'];
 
@@ -35,5 +35,5 @@ class Product extends Model
     public function gallaries()
     {
         return $this->hasMany(Gallary::class);
-    }   
+    }
 }

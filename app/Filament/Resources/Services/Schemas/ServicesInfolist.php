@@ -1,23 +1,19 @@
 <?php
 
-namespace App\Filament\Resources\Gallaries\Schemas;
+namespace App\Filament\Resources\Services\Schemas;
 
-use Filament\Infolists\Components\ImageEntry;
-use Filament\Infolists\Components\TextEntry;
 use Filament\Schemas\Schema;
-
-class GallaryInfolist
+use Filament\Infolists\Components\TextEntry;
+use Filament\Infolists\Components\ImageEntry;
+class ServicesInfolist
 {
     public static function configure(Schema $schema): Schema
     {
         return $schema
             ->components([
-                TextEntry::make('product.name')
-                    ->numeric(),
-                TextEntry::make('name')
-                    ->placeholder('-'),
-                TextEntry::make('description')
-                    ->placeholder('-'),
+                TextEntry::make('name'),
+                TextEntry::make('slug'),
+                TextEntry::make('description'),
                 ImageEntry::make('image'),
                 TextEntry::make('status'),
                 TextEntry::make('created_at')

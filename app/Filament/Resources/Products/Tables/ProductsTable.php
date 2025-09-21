@@ -22,8 +22,8 @@ class ProductsTable
                     ->searchable(),
                 TextColumn::make('model_name')
                     ->searchable(),
-                TextColumn::make('subcategory_id')
-                    ->numeric()
+                TextColumn::make('subcategory.name')
+                    
                     ->sortable(),
                 ImageColumn::make('image'),
                 TextColumn::make('fuel_type')

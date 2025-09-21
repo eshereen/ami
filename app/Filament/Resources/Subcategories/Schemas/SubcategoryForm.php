@@ -6,7 +6,8 @@ use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Schemas\Schema;
-
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Toggle;
 class SubcategoryForm
 {
     public static function configure(Schema $schema): Schema
@@ -17,17 +18,16 @@ class SubcategoryForm
                     ->required(),
                 TextInput::make('slug')
                     ->required(),
-                TextInput::make('category_id')
+                Select::make('category.name')
                     ->required()
-                    ->numeric(),
+                    ->relationship('category', 'name'),
                 FileUpload::make('image')
                     ->image(),
                 Textarea::make('description')
                     ->columnSpanFull(),
                 Textarea::make('overview')
                     ->columnSpanFull(),
-                TextInput::make('status')
-                    ->required()
+                Toggle::make('status')
                     ->default('active'),
             ]);
     }

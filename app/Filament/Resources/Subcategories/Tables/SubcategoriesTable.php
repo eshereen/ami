@@ -20,8 +20,8 @@ class SubcategoriesTable
                     ->searchable(),
                 TextColumn::make('slug')
                     ->searchable(),
-                TextColumn::make('category_id')
-                    ->numeric()
+                TextColumn::make('category.name')
+                  
                     ->sortable(),
                 ImageColumn::make('image'),
                 TextColumn::make('status')

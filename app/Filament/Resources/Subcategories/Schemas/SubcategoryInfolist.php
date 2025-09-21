@@ -14,8 +14,9 @@ class SubcategoryInfolist
             ->components([
                 TextEntry::make('name'),
                 TextEntry::make('slug'),
-                TextEntry::make('category_id')
-                    ->numeric(),
+                TextEntry::make('category.name')
+                    ->relationship('category', 'name'),
+                    
                 ImageEntry::make('image')
                     ->placeholder('-'),
                 TextEntry::make('description')

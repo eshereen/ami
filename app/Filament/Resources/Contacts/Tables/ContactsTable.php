@@ -1,32 +1,26 @@
 <?php
 
-namespace App\Filament\Resources\Features\Tables;
+namespace App\Filament\Resources\Contacts\Tables;
 
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
-use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-
-class FeaturesTable
+use Filament\Tables\Columns\TextColumn;
+class ContactsTable
 {
     public static function configure(Table $table): Table
     {
         return $table
             ->columns([
-                TextColumn::make('product.name')
-                    ->sortable(),
-                TextColumn::make('name')
-                    ->searchable(),
+                TextColumn::make('name'),
+                TextColumn::make('email'),
+                TextColumn::make('phone'),
+                TextColumn::make('message'),
                 TextColumn::make('created_at')
                     ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->placeholder('-'),
             ])
             ->filters([
                 //

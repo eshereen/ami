@@ -2,8 +2,9 @@
 
 namespace App\Filament\Resources\Features\Schemas;
 
-use Filament\Infolists\Components\TextEntry;
 use Filament\Schemas\Schema;
+use Filament\Forms\Components\Select;
+use Filament\Infolists\Components\TextEntry;
 
 class FeatureInfolist
 {
@@ -11,8 +12,8 @@ class FeatureInfolist
     {
         return $schema
             ->components([
-                TextEntry::make('product_id')
-                    ->numeric(),
+                Select::make('product.name')
+                    ->relationship('product', 'name'),
                 TextEntry::make('name')
                     ->placeholder('-'),
                 TextEntry::make('description')

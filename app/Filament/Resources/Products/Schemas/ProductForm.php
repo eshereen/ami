@@ -6,7 +6,8 @@ use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Schemas\Schema;
-
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Toggle;
 class ProductForm
 {
     public static function configure(Schema $schema): Schema
@@ -19,17 +20,17 @@ class ProductForm
                     ->required(),
                 TextInput::make('model_name')
                     ->required(),
-                TextInput::make('subcategory_id')
+                Select::make('subcategory.name')
                     ->required()
-                    ->numeric(),
+                    ->relationship('subcategory', 'name'),
                 Textarea::make('description')
                     ->columnSpanFull(),
                 FileUpload::make('image')
                     ->image(),
                 TextInput::make('fuel_type'),
                 TextInput::make('frequency'),
-                TextInput::make('status')
-                    ->required()
+                Toggle::make('status')
+
                     ->default('active'),
             ]);
     }
