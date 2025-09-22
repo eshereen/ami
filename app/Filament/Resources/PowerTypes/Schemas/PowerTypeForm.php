@@ -22,7 +22,7 @@ class PowerTypeForm
                 TextInput::make('value'),
                 Textarea::make('note')
                     ->columnSpanFull(),
-            ])->columns(2)->columnSpanFull(),
+            ])->columns(3)->columnSpanFull(),
         ]);
     }
 }

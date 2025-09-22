@@ -22,7 +22,7 @@ class SubcategoryResource extends Resource
     protected static ?string $model = Subcategory::class;
     protected static string | UnitEnum   | null $navigationGroup = 'Categories & Subcategories Details';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static ?int $navigationSort = 2;
 
     protected static ?string $recordTitleAttribute = 'Subcategory';
 

@@ -21,18 +21,28 @@ class ProductForm
                     ->required(),
                 TextInput::make('model_name')
                     ->required(),
+
                 Select::make('subcategory.name')
                     ->required()
                     ->relationship('subcategory', 'name'),
+                ])->columns(3)->columnSpanFull(),
+                Section::make('Product Images')
+                ->schema([
                 Textarea::make('description')
                     ->columnSpanFull(),
                 FileUpload::make('image')
-                    ->image(),
+                    ->image()->imageEditor()->disk('public')->columnSpanFull(),
+                ])->columns(2)->columnSpanFull(),
+                Section::make('Product Specifications')
+                ->schema([
                 TextInput::make('fuel_type'),
                 TextInput::make('frequency'),
+                ])->columns(2)->columnSpanFull(),
+                Section::make('Product Status')
+                ->schema([
                 Toggle::make('status')
                     ->default('active'),
-            ])->columns(3)->columnSpanFull(),
-        ]);
+                ])->columns(3)->columnSpanFull(),
+            ]);
     }
 }

@@ -19,7 +19,8 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
-
+use Filament\Navigation\NavigationGroup;
+use App\Filament\Widgets\StatsOverview;
 class AdminPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
@@ -40,12 +41,29 @@ class AdminPanelProvider extends PanelProvider
             ->pages([
                 Dashboard::class,
             ])
+            ->brandLogo(asset('imgs/logo.png'))
+            ->brandLogoHeight('3rem')
             ->resourceCreatePageRedirect('index')
             ->resourceEditPageRedirect('index')
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\Filament\Widgets')
+            ->navigationGroups([
+                NavigationGroup::make()
+                    ->label('Users & Roles')
+                    ->icon('heroicon-o-users')
+                    ->collapsible(),
+
+                NavigationGroup::make()
+                    ->label('Categories & Subcategories Details')
+                    ->icon('heroicon-o-archive-box'),
+
+                NavigationGroup::make()
+                    ->label('Products Details')
+                    ->icon('heroicon-o-cube'),
+
+            ])
             ->widgets([
                 AccountWidget::class,
-                FilamentInfoWidget::class,
+                StatsOverview::class,
             ])
             ->middleware([
                 EncryptCookies::class,

@@ -29,9 +29,12 @@ class SubcategoryForm
                     ->columnSpanFull(),
                 Textarea::make('overview')
                     ->columnSpanFull(),
+                ])->columns(3)->columnSpanFull(),
+                Section::make('Subcategory Status')
+                ->schema([
                     Toggle::make('status')
                     ->default('active'),
-            ])->columns(2)->columnSpanFull(),
+                ])->columnSpanFull(),
         ]);
     }
 }
