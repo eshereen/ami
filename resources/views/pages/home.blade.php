@@ -1,281 +1,176 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Al Mohandes International - Power Solutions Excellence</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        .hero-bg {
-            background-image: linear-gradient(rgba(0, 51, 102, 0.7), rgba(0, 51, 102, 0.7)), url('https://images.unsplash.com/photo-1613665813446-82a78c468a1d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80');
-            background-size: cover;
-            background-position: center;
-        }
-        .product-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-        .tab-active {
-            border-bottom: 3px solid #003366;
-            color: #003366;
-        }
-    </style>
-</head>
-<body class="font-sans text-gray-800" x-data="{ mobileMenuOpen: false, activeTab: 'generators' }">
-    <!-- Header -->
-    <header class="bg-white shadow-md fixed w-full z-50">
-        <div class="container mx-auto px-4 py-3">
-            <div class="flex justify-between items-center">
-                <div class="flex items-center">
-                    <div class="bg-blue-800 text-white font-bold text-xl py-2 px-4 rounded">
-                        AMI
-                    </div>
-                    <span class="ml-2 text-xl font-semibold text-blue-900">Al Mohandes International</span>
-                </div>
-
-                <!-- Desktop Navigation -->
-                <nav class="hidden md:flex space-x-8">
-                    <a href="#home" class="text-blue-900 hover:text-blue-700 font-medium">Home</a>
-                    <a href="#about" class="text-blue-900 hover:text-blue-700 font-medium">About Us</a>
-                    <a href="#products" class="text-blue-900 hover:text-blue-700 font-medium">Products</a>
-                    <a href="#services" class="text-blue-900 hover:text-blue-700 font-medium">Services</a>
-                    <a href="#manufacturing" class="text-blue-900 hover:text-blue-700 font-medium">Manufacturing</a>
-                    <a href="#partners" class="text-blue-900 hover:text-blue-700 font-medium">Partners</a>
-                    <a href="#contact" class="text-blue-900 hover:text-blue-700 font-medium">Contact</a>
-                </nav>
-
-                <!-- Mobile Menu Button -->
-                <button @click="mobileMenuOpen = !mobileMenuOpen" class="md:hidden text-blue-900 focus:outline-none">
-                    <i class="fas fa-bars text-2xl"></i>
-                </button>
-            </div>
-
-            <!-- Mobile Navigation -->
-            <div x-show="mobileMenuOpen" x-transition class="md:hidden mt-4 pb-4">
-                <a href="#home" class="block py-2 text-blue-900 hover:text-blue-700 font-medium">Home</a>
-                <a href="#about" class="block py-2 text-blue-900 hover:text-blue-700 font-medium">About Us</a>
-                <a href="#products" class="block py-2 text-blue-900 hover:text-blue-700 font-medium">Products</a>
-                <a href="#services" class="block py-2 text-blue-900 hover:text-blue-700 font-medium">Services</a>
-                <a href="#manufacturing" class="block py-2 text-blue-900 hover:text-blue-700 font-medium">Manufacturing</a>
-                <a href="#partners" class="block py-2 text-blue-900 hover:text-blue-700 font-medium">Partners</a>
-                <a href="#contact" class="block py-2 text-blue-900 hover:text-blue-700 font-medium">Contact</a>
-            </div>
-        </div>
-    </header>
+@extends('layouts.app')
+@section('content')
 
     <!-- Hero Section -->
-    <section id="home" class="hero-bg text-white pt-24 pb-20">
-        <div class="container mx-auto px-4 py-16">
-            <div class="max-w-3xl">
-                <h1 class="text-4xl md:text-5xl font-bold mb-6">Powering the World Since 1983</h1>
-                <p class="text-xl mb-8">Al Mohandes International delivers reliable, innovative power solutions for the most challenging environments across the globe.</p>
-                <div class="flex flex-wrap gap-4">
-                    <a href="#products" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition duration-300">Explore Products</a>
-                    <a href="#contact" class="bg-transparent border-2 border-white hover:bg-white hover:text-blue-900 text-white font-bold py-3 px-6 rounded-lg transition duration-300">Contact Us</a>
+    <section id="home" class="relative h-screen">
+        <div class="absolute inset-0 overflow-hidden">
+            <template x-for="(slide, index) in slides" :key="index">
+                <div
+                    x-show="currentSlide === index"
+                    x-transition:enter="transition ease-in-out duration-1000"
+                    x-transition:enter-start="opacity-0"
+                    x-transition:enter-end="opacity-100"
+                    x-transition:leave="transition ease-in-out duration-1000"
+                    x-transition:leave-start="opacity-100"
+                    x-transition:leave-end="opacity-0"
+                    class="absolute inset-0 bg-cover bg-center hero-slider"
+                    :style="`background-image: url('${slide}')`"
+                ></div>
+            </template>
+            <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+        </div>
+
+        <div class="relative z-10 h-full flex items-center justify-center text-white text-center px-4">
+            <div class="max-w-3xl fade-in">
+                <h1 class="text-4xl md:text-6xl font-bold mb-4 text-shadow">Powering Reliability Since 1983</h1>
+                <p class="text-xl md:text-2xl mb-8 text-shadow">Engineering Excellence in Diesel Generator Solutions</p>
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    <a href="#products" class="bg-ami-orange hover:bg-orange-600 text-white font-bold py-3 px-8 rounded-full transition transform hover:scale-105">
+                        Explore Products
+                    </a>
+                    <a href="#contact" class="bg-transparent border-2 border-white hover:bg-white hover:text-ami-blue text-white font-bold py-3 px-8 rounded-full transition">
+                        Get a Quote
+                    </a>
                 </div>
             </div>
+        </div>
+
+        <!-- Slider Indicators -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-2 z-10">
+            <template x-for="(slide, index) in slides" :key="index">
+                <button
+                    @click="currentSlide = index"
+                    class="w-3 h-3 rounded-full"
+                    :class="currentSlide === index ? 'bg-white' : 'bg-white bg-opacity-50'"
+                ></button>
+            </template>
         </div>
     </section>
 
-    <!-- About Section -->
-    <section id="about" class="py-16 bg-gray-50">
+    <!-- About AMI Section -->
+    <section id="about" class="py-20 bg-gray-50">
         <div class="container mx-auto px-4">
-            <div class="flex flex-col md:flex-row items-center">
-                <div class="md:w-1/2 mb-8 md:mb-0">
-                    <img src="https://cdn.pixabay.com/photo/2016/04/24/19/28/spain-1350439_1280.jpg" alt="AMI Manufacturing Facility" class="rounded-lg shadow-lg">
-                </div>
-                <div class="md:w-1/2 md:pl-12">
-                    <h2 class="text-3xl font-bold text-blue-900 mb-6">About Al Mohandes International</h2>
-                    <p class="mb-4">Founded in 1983, Al Mohandes International (AMI) has grown into a globally recognized leader in diesel generator manufacturing and power solutions.</p>
-                    <p class="mb-4">Our innovative, problem-solving culture drives us to develop customized power solutions for the most challenging environments, from rugged terrains to marine applications.</p>
-                    <div class="grid grid-cols-2 gap-4 mt-6">
-                        <div class="bg-white p-4 rounded-lg shadow">
-                            <div class="text-blue-600 text-3xl font-bold">40+</div>
-                            <div class="text-gray-600">Years of Excellence</div>
-                        </div>
-                        <div class="bg-white p-4 rounded-lg shadow">
-                            <div class="text-blue-600 text-3xl font-bold">50+</div>
-                            <div class="text-gray-600">Countries Served</div>
-                        </div>
-                        <div class="bg-white p-4 rounded-lg shadow">
-                            <div class="text-blue-600 text-3xl font-bold">5000+</div>
-                            <div class="text-gray-600">Projects Completed</div>
-                        </div>
-                        <div class="bg-white p-4 rounded-lg shadow">
-                            <div class="text-blue-600 text-3xl font-bold">24/7</div>
-                            <div class="text-gray-600">Technical Support</div>
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold ami-blue mb-4">About Al Mohandes International</h2>
+                <div class="w-24 h-1 bg-ami-orange mx-auto"></div>
+            </div>
+
+            <div class="flex flex-col md:flex-row gap-12 items-center">
+                <div class="md:w-1/2">
+                    <h3 class="text-2xl font-bold mb-6">Our Legacy of Excellence</h3>
+                    <p class="text-gray-700 mb-6">
+                        Established in 1983, Al Mohandes International (AMI) has grown from a local enterprise to a globally recognized manufacturer of diesel generators. With nearly four decades of experience, we've built a reputation for engineering excellence, reliability, and innovative power solutions.
+                    </p>
+                    <p class="text-gray-700 mb-6">
+                        Our expertise spans custom power solutions, turnkey projects, and comprehensive after-sales service. We pride ourselves on solving complex power challenges across industries and environments worldwide.
+                    </p>
+
+                    <div class="mt-10">
+                        <h4 class="text-xl font-bold mb-6">Our Journey</h4>
+                        <div class="relative">
+                            <div class="absolute left-4 top-0 bottom-0 w-0.5 bg-ami-blue"></div>
+
+                            <div class="relative pl-10 pb-8">
+                                <div class="timeline-dot"></div>
+                                <h5 class="font-bold text-lg">1983</h5>
+                                <p class="text-gray-600">Founded as a local generator service provider</p>
+                            </div>
+
+                            <div class="relative pl-10 pb-8">
+                                <div class="timeline-dot"></div>
+                                <h5 class="font-bold text-lg">1995</h5>
+                                <p class="text-gray-600">Expanded to manufacturing generator sets</p>
+                            </div>
+
+                            <div class="relative pl-10 pb-8">
+                                <div class="timeline-dot"></div>
+                                <h5 class="font-bold text-lg">2005</h5>
+                                <p class="text-gray-600">Established international presence</p>
+                            </div>
+
+                            <div class="relative pl-10">
+                                <div class="timeline-dot"></div>
+                                <h5 class="font-bold text-lg">Present</h5>
+                                <p class="text-gray-600">Global leader in power solutions with clients worldwide</p>
+                            </div>
                         </div>
                     </div>
+                </div>
+
+                <div class="md:w-1/2">
+                    <img src="https://images.unsplash.com/photo-1649777689164-c4ad5dd3a83c?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aW5kdXN0cmllc3xlbnwwfDJ8MHx8fDA%3D" alt="AMI Manufacturing Facility" class="rounded-lg shadow-lg w-full">
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Products Section -->
-    <section id="products" class="py-16">
+    <section id="products" class="py-20 bg-white">
         <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center text-blue-900 mb-12">Our Products</h2>
-
-            <!-- Product Tabs -->
-            <div class="flex flex-wrap justify-center mb-8 border-b">
-                <button @click="activeTab = 'generators'" :class="activeTab === 'generators' ? 'tab-active' : ''" class="px-4 py-2 font-medium text-gray-700 hover:text-blue-900 focus:outline-none">
-                    Generator Sets
-                </button>
-                <button @click="activeTab = 'accessories'" :class="activeTab === 'accessories' ? 'tab-active' : ''" class="px-4 py-2 font-medium text-gray-700 hover:text-blue-900 focus:outline-none">
-                    Accessories
-                </button>
-                <button @click="activeTab = 'trailers'" :class="activeTab === 'trailers' ? 'tab-active' : ''" class="px-4 py-2 font-medium text-gray-700 hover:text-blue-900 focus:outline-none">
-                    Trailers
-                </button>
-                <button @click="activeTab = 'canopies'" :class="activeTab === 'canopies' ? 'tab-active' : ''" class="px-4 py-2 font-medium text-gray-700 hover:text-blue-900 focus:outline-none">
-                    Canopies
-                </button>
-                <button @click="activeTab = 'panels'" :class="activeTab === 'panels' ? 'tab-active' : ''" class="px-4 py-2 font-medium text-gray-700 hover:text-blue-900 focus:outline-none">
-                    Low Voltage Panels
-                </button>
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold ami-blue mb-4">Our Products</h2>
+                <div class="w-24 h-1 bg-ami-orange mx-auto"></div>
+                <p class="mt-4 text-gray-600 max-w-2xl mx-auto">Explore our comprehensive range of power solutions designed for reliability and performance.</p>
             </div>
 
-            <!-- Product Content -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Generator Sets -->
-                <div x-show="activeTab === 'generators'" x-transition class="product-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300">
-                    <img src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80" alt="Diesel Generator" class="w-full h-48 object-cover">
+                <div class="bg-white rounded-lg shadow-md overflow-hidden hover-lift">
+                    <img src="https://cdn.pixabay.com/photo/2015/10/28/12/31/motor-1010495_1280.jpg" alt="Generator Sets" class="w-full h-48 object-cover">
                     <div class="p-6">
-                        <h3 class="text-xl font-bold text-blue-900 mb-2">Industrial Diesel Generators</h3>
-                        <p class="text-gray-600 mb-4">High-performance diesel generators ranging from 20kVA to 4000kVA for industrial and commercial applications.</p>
-                        <a href="#" class="text-blue-600 hover:text-blue-800 font-medium">Learn More <i class="fas fa-arrow-right ml-1"></i></a>
-                    </div>
-                </div>
-
-                <div x-show="activeTab === 'generators'" x-transition class="product-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300">
-                    <img src="https://cdn.pixabay.com/photo/2013/10/09/13/48/vehicle-193213_1280.jpg" alt="Marine Generator" class="w-full h-48 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold text-blue-900 mb-2">Marine Generators</h3>
-                        <p class="text-gray-600 mb-4">Specialized marine power solutions designed to withstand harsh marine environments with corrosion-resistant components.</p>
-                        <a href="#" class="text-blue-600 hover:text-blue-800 font-medium">Learn More <i class="fas fa-arrow-right ml-1"></i></a>
-                    </div>
-                </div>
-
-                <div x-show="activeTab === 'generators'" x-transition class="product-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300">
-                    <img src="https://images.unsplash.com/photo-1613665813446-82a78c468a1d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80" alt="Mobile Generator" class="w-full h-48 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold text-blue-900 mb-2">Mobile Generators</h3>
-                        <p class="text-gray-600 mb-4">Portable power solutions for construction sites, events, and emergency situations with quick deployment capabilities.</p>
-                        <a href="#" class="text-blue-600 hover:text-blue-800 font-medium">Learn More <i class="fas fa-arrow-right ml-1"></i></a>
+                        <h3 class="text-xl font-bold mb-2 ami-blue">Generator Sets</h3>
+                        <p class="text-gray-600 mb-4">High-performance diesel generators ranging from 10kVA to 4000kVA for various applications.</p>
+                        <a href="#" class="text-ami-orange font-medium hover:underline">Learn More <i class="fas fa-arrow-right ml-1"></i></a>
                     </div>
                 </div>
 
                 <!-- Accessories -->
-                <div x-show="activeTab === 'accessories'" x-transition class="product-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300">
-                    <img src="https://images.unsplash.com/photo-1581094271901-8022df4466f9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80" alt="Fuel Tanks" class="w-full h-48 object-cover">
+                <div class="bg-white rounded-lg shadow-md overflow-hidden hover-lift">
+                    <img src="https://cdn.pixabay.com/photo/2019/12/22/07/45/trailer-4711979_1280.jpg" alt="Accessories" class="w-full h-48 object-cover">
                     <div class="p-6">
-                        <h3 class="text-xl font-bold text-blue-900 mb-2">Fuel Tanks</h3>
-                        <p class="text-gray-600 mb-4">Durable fuel storage solutions in various capacities to ensure extended generator operation without refueling.</p>
-                        <a href="#" class="text-blue-600 hover:text-blue-800 font-medium">Learn More <i class="fas fa-arrow-right ml-1"></i></a>
-                    </div>
-                </div>
-
-                <div x-show="activeTab === 'accessories'" x-transition class="product-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300">
-                    <img src="https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80" alt="Control Systems" class="w-full h-48 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold text-blue-900 mb-2">Control Systems</h3>
-                        <p class="text-gray-600 mb-4">Advanced control panels and monitoring systems for seamless generator operation and remote management.</p>
-                        <a href="#" class="text-blue-600 hover:text-blue-800 font-medium">Learn More <i class="fas fa-arrow-right ml-1"></i></a>
-                    </div>
-                </div>
-
-                <div x-show="activeTab === 'accessories'" x-transition class="product-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300">
-                    <img src="https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80" alt="Transfer Switches" class="w-full h-48 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold text-blue-900 mb-2">Transfer Switches</h3>
-                        <p class="text-gray-600 mb-4">Automatic and manual transfer switches for seamless power transition between utility and generator power.</p>
-                        <a href="#" class="text-blue-600 hover:text-blue-800 font-medium">Learn More <i class="fas fa-arrow-right ml-1"></i></a>
+                        <h3 class="text-xl font-bold mb-2 ami-blue">Accessories</h3>
+                        <p class="text-gray-600 mb-4">Comprehensive range of generator accessories including fuel tanks, control systems, and more.</p>
+                        <a href="#" class="text-ami-orange font-medium hover:underline">Learn More <i class="fas fa-arrow-right ml-1"></i></a>
                     </div>
                 </div>
 
                 <!-- Trailers -->
-                <div x-show="activeTab === 'trailers'" x-transition class="product-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300">
-                    <img src="https://images.unsplash.com/photo-1617814076367-b759c7d7e738?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80" alt="Standard Trailer" class="w-full h-48 object-cover">
+                <div class="bg-white rounded-lg shadow-md overflow-hidden hover-lift">
+                    <img src="https://images.pexels.com/photos/17816971/pexels-photo-17816971.jpeg" alt="Trailers" class="w-full h-48 object-cover">
                     <div class="p-6">
-                        <h3 class="text-xl font-bold text-blue-900 mb-2">Standard Trailers</h3>
-                        <p class="text-gray-600 mb-4">Robust trailer solutions for easy transportation of generators to various job sites and locations.</p>
-                        <a href="#" class="text-blue-600 hover:text-blue-800 font-medium">Learn More <i class="fas fa-arrow-right ml-1"></i></a>
-                    </div>
-                </div>
-
-                <div x-show="activeTab === 'trailers'" x-transition class="product-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300">
-                    <img src="https://images.unsplash.com/photo-1589476993333-8e4df517e7c5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80" alt="Heavy-Duty Trailer" class="w-full h-48 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold text-blue-900 mb-2">Heavy-Duty Trailers</h3>
-                        <p class="text-gray-600 mb-4">Specialized trailers designed for transporting larger generator sets to rugged terrains and remote locations.</p>
-                        <a href="#" class="text-blue-600 hover:text-blue-800 font-medium">Learn More <i class="fas fa-arrow-right ml-1"></i></a>
-                    </div>
-                </div>
-
-                <div x-show="activeTab === 'trailers'" x-transition class="product-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300">
-                    <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80" alt="Custom Trailer" class="w-full h-48 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold text-blue-900 mb-2">Custom Trailers</h3>
-                        <p class="text-gray-600 mb-4">Bespoke trailer solutions designed to meet specific project requirements and environmental challenges.</p>
-                        <a href="#" class="text-blue-600 hover:text-blue-800 font-medium">Learn More <i class="fas fa-arrow-right ml-1"></i></a>
+                        <h3 class="text-xl font-bold mb-2 ami-blue">Trailers</h3>
+                        <p class="text-gray-600 mb-4">Mobile generator trailers for easy transportation and deployment in remote locations.</p>
+                        <a href="#" class="text-ami-orange font-medium hover:underline">Learn More <i class="fas fa-arrow-right ml-1"></i></a>
                     </div>
                 </div>
 
                 <!-- Canopies -->
-                <div x-show="activeTab === 'canopies'" x-transition class="product-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300">
-                    <img src="https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80" alt="Soundproof Canopy" class="w-full h-48 object-cover">
+                <div class="bg-white rounded-lg shadow-md overflow-hidden hover-lift">
+                    <img src="https://cdn.pixabay.com/photo/2016/09/02/18/38/factory-1639990_1280.jpg" alt="Canopies" class="w-full h-48 object-cover">
                     <div class="p-6">
-                        <h3 class="text-xl font-bold text-blue-900 mb-2">Soundproof Canopies</h3>
-                        <p class="text-gray-600 mb-4">Acoustic enclosures designed to minimize noise pollution while protecting generators from environmental elements.</p>
-                        <a href="#" class="text-blue-600 hover:text-blue-800 font-medium">Learn More <i class="fas fa-arrow-right ml-1"></i></a>
-                    </div>
-                </div>
-
-                <div x-show="activeTab === 'canopies'" x-transition class="product-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300">
-                    <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80" alt="Weatherproof Canopy" class="w-full h-48 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold text-blue-900 mb-2">Weatherproof Canopies</h3>
-                        <p class="text-gray-600 mb-4">Durable enclosures that protect generators from harsh weather conditions, ensuring reliable operation in any environment.</p>
-                        <a href="#" class="text-blue-600 hover:text-blue-800 font-medium">Learn More <i class="fas fa-arrow-right ml-1"></i></a>
-                    </div>
-                </div>
-
-                <div x-show="activeTab === 'canopies'" x-transition class="product-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300">
-                    <img src="https://images.unsplash.com/photo-1613665813446-82a78c468a1d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80" alt="Custom Canopy" class="w-full h-48 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold text-blue-900 mb-2">Custom Canopies</h3>
-                        <p class="text-gray-600 mb-4">Tailored canopy solutions designed to meet specific aesthetic, acoustic, and environmental requirements.</p>
-                        <a href="#" class="text-blue-600 hover:text-blue-800 font-medium">Learn More <i class="fas fa-arrow-right ml-1"></i></a>
+                        <h3 class="text-xl font-bold mb-2 ami-blue">Canopies</h3>
+                        <p class="text-gray-600 mb-4">Weatherproof and soundproof canopies designed for optimal generator protection and noise reduction.</p>
+                        <a href="#" class="text-ami-orange font-medium hover:underline">Learn More <i class="fas fa-arrow-right ml-1"></i></a>
                     </div>
                 </div>
 
                 <!-- Low Voltage Panels -->
-                <div x-show="activeTab === 'panels'" x-transition class="product-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300">
-                    <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80" alt="Distribution Panels" class="w-full h-48 object-cover">
+                <div class="bg-white rounded-lg shadow-md overflow-hidden hover-lift">
+                    <img src="https://cdn.pixabay.com/photo/2014/12/15/14/04/cylinders-569151_1280.jpg" alt="Low Voltage Panels" class="w-full h-48 object-cover">
                     <div class="p-6">
-                        <h3 class="text-xl font-bold text-blue-900 mb-2">Distribution Panels</h3>
-                        <p class="text-gray-600 mb-4">Comprehensive low voltage distribution panels for efficient power management and distribution in various applications.</p>
-                        <a href="#" class="text-blue-600 hover:text-blue-800 font-medium">Learn More <i class="fas fa-arrow-right ml-1"></i></a>
+                        <h3 class="text-xl font-bold mb-2 ami-blue">Low Voltage Panels</h3>
+                        <p class="text-gray-600 mb-4">Advanced LV panels for power distribution, monitoring, and control systems.</p>
+                        <a href="#" class="text-ami-orange font-medium hover:underline">Learn More <i class="fas fa-arrow-right ml-1"></i></a>
                     </div>
                 </div>
 
-                <div x-show="activeTab === 'panels'" x-transition class="product-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300">
-                    <img src="https://images.unsplash.com/photo-1581094271901-8022df4466f9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80" alt="Control Panels" class="w-full h-48 object-cover">
+                <!-- Custom Solutions -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden hover-lift">
+                    <img src="https://cdn.pixabay.com/photo/2013/10/09/13/48/vehicle-193213_1280.jpg" alt="Custom Solutions" class="w-full h-48 object-cover">
                     <div class="p-6">
-                        <h3 class="text-xl font-bold text-blue-900 mb-2">Control Panels</h3>
-                        <p class="text-gray-600 mb-4">Advanced control panels for generator monitoring, protection, and automation with user-friendly interfaces.</p>
-                        <a href="#" class="text-blue-600 hover:text-blue-800 font-medium">Learn More <i class="fas fa-arrow-right ml-1"></i></a>
-                    </div>
-                </div>
-
-                <div x-show="activeTab === 'panels'" x-transition class="product-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300">
-                    <img src="https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80" alt="Synchronization Panels" class="w-full h-48 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold text-blue-900 mb-2">Synchronization Panels</h3>
-                        <p class="text-gray-600 mb-4">Specialized panels for parallel operation of multiple generators to ensure stable and efficient power supply.</p>
-                        <a href="#" class="text-blue-600 hover:text-blue-800 font-medium">Learn More <i class="fas fa-arrow-right ml-1"></i></a>
+                        <h3 class="text-xl font-bold mb-2 ami-blue">Custom Solutions</h3>
+                        <p class="text-gray-600 mb-4">Tailored power solutions designed to meet specific client requirements and challenging environments.</p>
+                        <a href="#" class="text-ami-orange font-medium hover:underline">Learn More <i class="fas fa-arrow-right ml-1"></i></a>
                     </div>
                 </div>
             </div>
@@ -283,88 +178,200 @@
     </section>
 
     <!-- Services Section -->
-    <section id="services" class="py-16 bg-gray-50">
+    <section id="services" class="py-20 bg-ami-light-blue">
         <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center text-blue-900 mb-12">Our Services</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow duration-300">
-                    <div class="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mb-4">
-                        <i class="fas fa-cogs text-blue-800 text-2xl"></i>
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold ami-blue mb-4">Our Services</h2>
+                <div class="w-24 h-1 bg-ami-orange mx-auto"></div>
+                <p class="mt-4 text-gray-600 max-w-2xl mx-auto">Comprehensive services to support your power needs from installation to maintenance.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Custom Solutions -->
+                <div class="bg-white rounded-lg p-8 text-center hover-lift">
+                    <div class="w-16 h-16 bg-ami-blue hover:bg-ami-orange transition-all duration-300 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-cogs text-white text-2xl"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-blue-900 mb-3">Custom Power Solutions</h3>
-                    <p class="text-gray-600">Tailored power solutions designed to meet specific project requirements, from initial design to implementation and commissioning.</p>
+                    <h3 class="text-xl font-bold mb-3 ami-blue">Custom Solutions</h3>
+                    <p class="text-gray-600">Tailored power solutions designed to meet specific requirements and challenging environments.</p>
                 </div>
 
-                <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow duration-300">
-                    <div class="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mb-4">
-                        <i class="fas fa-tools text-blue-800 text-2xl"></i>
+                <!-- Maintenance -->
+                <div class="bg-white rounded-lg p-8 text-center hover-lift">
+                    <div class="w-16 h-16 bg-ami-blue hover:bg-ami-orange transition-all duration-300 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-tools text-white text-2xl"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-blue-900 mb-3">Maintenance Services</h3>
-                    <p class="text-gray-600">Comprehensive maintenance programs including regular inspections, preventive maintenance, and emergency repair services.</p>
+                    <h3 class="text-xl font-bold mb-3 ami-blue">Maintenance</h3>
+                    <p class="text-gray-600">Preventive and corrective maintenance services to ensure optimal performance and longevity.</p>
                 </div>
 
-                <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow duration-300">
-                    <div class="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mb-4">
-                        <i class="fas fa-box-open text-blue-800 text-2xl"></i>
+                <!-- Spare Parts -->
+                <div class="bg-white rounded-lg p-8 text-center hover-lift">
+                    <div class="w-16 h-16 bg-ami-blue hover:bg-ami-orange transition-all duration-300 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-box-open text-white text-2xl"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-blue-900 mb-3">Spare Parts</h3>
-                    <p class="text-gray-600">Genuine spare parts and components for all AMI products, ensuring optimal performance and longevity of your power systems.</p>
+                    <h3 class="text-xl font-bold mb-3 ami-blue">Spare Parts</h3>
+                    <p class="text-gray-600">Genuine spare parts and components for all our products to maintain reliability and performance.</p>
+                </div>
+
+                <!-- Technical Support -->
+                <div class="bg-white rounded-lg p-8 text-center hover-lift">
+                    <div class="w-16 h-16 bg-ami-blue hover:bg-ami-orange transition-all duration-300 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-headset text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 ami-blue">Technical Support</h3>
+                    <p class="text-gray-600">24/7 technical support and assistance from our team of experienced engineers.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Manufacturing Capabilities Section -->
-    <section id="manufacturing" class="py-16">
+    <section id="manufacturing" class="py-20 bg-white">
         <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center text-blue-900 mb-12">Manufacturing Capabilities</h2>
-            <div class="flex flex-col md:flex-row items-center">
-                <div class="md:w-1/2 mb-8 md:mb-0 md:order-2">
-                    <img src="https://images.unsplash.com/photo-1755377205428-ec47fcc8b9d2?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fGluZHVzdHJpZXN8ZW58MHwxfDB8fHww" alt="Manufacturing Facility" class="rounded-lg shadow-lg">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold ami-blue mb-4">Manufacturing Capabilities</h2>
+                <div class="w-24 h-1 bg-ami-orange mx-auto"></div>
+                <p class="mt-4 text-gray-600 max-w-2xl mx-auto">State-of-the-art facilities and in-house production capabilities for quality control and customization.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-16">
+                <div>
+                    <img src="https://images.unsplash.com/photo-1511454493857-0a29f2c023c7?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDZ8fGluZHVzdHJpZXN8ZW58MHwxfDB8fHww" alt="Manufacturing Facility" class="rounded-lg shadow-lg w-full">
                 </div>
-                <div class="md:w-1/2 md:pr-12 md:order-1">
-                    <h3 class="text-2xl font-bold text-blue-900 mb-4">In-House Manufacturing Excellence</h3>
-                    <p class="mb-4">At AMI, we pride ourselves on our comprehensive in-house manufacturing capabilities that allow us to maintain strict quality control and deliver customized solutions efficiently.</p>
-
-                    <div class="space-y-4">
-                        <div class="flex items-start">
-                            <div class="bg-blue-100 p-2 rounded-full mr-3">
-                                <i class="fas fa-check text-blue-800"></i>
-                            </div>
+                <div>
+                    <h3 class="text-2xl font-bold mb-6 ami-blue">In-House Production Excellence</h3>
+                    <p class="text-gray-700 mb-6">
+                        Our vertically integrated manufacturing process allows us to maintain strict quality control and deliver customized solutions efficiently. We produce a wide range of components in-house:
+                    </p>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-ami-orange mt-1 mr-3"></i>
                             <div>
-                                <h4 class="font-bold text-blue-900">Storage Tanks</h4>
-                                <p class="text-gray-600">Custom-designed fuel storage tanks in various capacities and configurations.</p>
+                                <h4 class="font-bold">Storage Tanks</h4>
+                                <p class="text-gray-600">Custom-designed fuel storage solutions in various capacities.</p>
                             </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-ami-orange mt-1 mr-3"></i>
+                            <div>
+                                <h4 class="font-bold">Canopies</h4>
+                                <p class="text-gray-600">Weatherproof and soundproof enclosures for generators.</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-ami-orange mt-1 mr-3"></i>
+                            <div>
+                                <h4 class="font-bold">Control Systems</h4>
+                                <p class="text-gray-600">Advanced control panels and monitoring systems.</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-ami-orange mt-1 mr-3"></i>
+                            <div>
+                                <h4 class="font-bold">LV Panels</h4>
+                                <p class="text-gray-600">Low voltage distribution and control panels.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-ami-light-blue rounded-lg p-6 text-center">
+                    <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80" alt="Workshop" class="rounded-lg mb-4 w-full h-48 object-cover">
+                    <h4 class="font-bold ami-blue mb-2">Modern Workshops</h4>
+                    <p class="text-gray-600">Equipped with advanced machinery and technology for precision manufacturing.</p>
+                </div>
+
+                <div class="bg-ami-light-blue rounded-lg p-6 text-center">
+                    <img src="https://images.unsplash.com/photo-1613665813446-82a78c468a1d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80" alt="Quality Control" class="rounded-lg mb-4 w-full h-48 object-cover">
+                    <h4 class="font-bold ami-blue mb-2">Quality Control</h4>
+                    <p class="text-gray-600">Rigorous testing and quality assurance processes at every production stage.</p>
+                </div>
+
+                <div class="bg-ami-light-blue rounded-lg p-6 text-center">
+                    <img src="https://images.unsplash.com/photo-1581094271901-8022df4466f9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80" alt="Skilled Team" class="rounded-lg mb-4 w-full h-48 object-cover">
+                    <h4 class="font-bold ami-blue mb-2">Skilled Team</h4>
+                    <p class="text-gray-600">Experienced engineers and technicians dedicated to excellence.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Global Reach & Partnerships Section -->
+    <section id="global" class="py-20 world-map">
+        <div class="container mx-auto px-4 world-map-content">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text- mb-4">Global Reach & Partnerships</h2>
+                <div class="w-24 h-1 bg-ami-orange mx-auto"></div>
+                <p class="mt-4 text-gray-200 max-w-2xl mx-auto">Serving clients across continents with reliable power solutions and trusted partnerships.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-16">
+                <div class="bg-white bg-opacity-90 rounded-lg p-8">
+                    <h3 class="text-2xl font-bold mb-6 ami-blue">Worldwide Presence</h3>
+                    <p class="text-gray-700 mb-6">
+                        From our headquarters, we've expanded our reach to serve clients in over 50 countries across the Middle East, Africa, Asia, and Europe. Our global network of partners and service centers ensures prompt support wherever our clients operate.
+                    </p>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="text-center">
+                            <div class="text-3xl font-bold ami-orange">50+</div>
+                            <div class="text-gray-600">Countries</div>
                         </div>
-
-                        <div class="flex items-start">
-                            <div class="bg-blue-100 p-2 rounded-full mr-3">
-                                <i class="fas fa-check text-blue-800"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-blue-900">Canopies</h4>
-                                <p class="text-gray-600">Acoustic and weatherproof enclosures tailored to specific requirements.</p>
-                            </div>
+                        <div class="text-center">
+                            <div class="text-3xl font-bold ami-orange">5000+</div>
+                            <div class="text-gray-600">Projects Completed</div>
                         </div>
-
-                        <div class="flex items-start">
-                            <div class="bg-blue-100 p-2 rounded-full mr-3">
-                                <i class="fas fa-check text-blue-800"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-blue-900">Control Systems</h4>
-                                <p class="text-gray-600">Advanced control panels and monitoring systems for optimal performance.</p>
-                            </div>
+                        <div class="text-center">
+                            <div class="text-3xl font-bold ami-orange">100+</div>
+                            <div class="text-gray-600">Partners</div>
                         </div>
+                        <div class="text-center">
+                            <div class="text-3xl font-bold ami-orange">24/7</div>
+                            <div class="text-gray-600">Support</div>
+                        </div>
+                    </div>
+                </div>
 
-                        <div class="flex items-start">
-                            <div class="bg-blue-100 p-2 rounded-full mr-3">
-                                <i class="fas fa-check text-blue-800"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-blue-900">Low Voltage Panels</h4>
-                                <p class="text-gray-600">Comprehensive range of distribution and control panels for various applications.</p>
-                            </div>
+                <div class="bg-white bg-opacity-90 rounded-lg p-8">
+                    <h3 class="text-2xl font-bold mb-6 ami-blue">Trusted Partners</h3>
+                    <p class="text-gray-700 mb-6">
+                        We collaborate with leading industry partners to deliver the best power solutions. Our partners include:
+                    </p>
+                    <div class="grid grid-cols-3 gap-4 items-center">
+                        <div class="bg-gray-100 rounded-lg p-4 flex items-center justify-center h-auto">
+                            <img src="{{ asset('imgs/avk.png') }}" alt="avk" class="w-full h-full object-cover">
+                        </div>
+                            <div class="bg-gray-100 rounded-lg p-4 flex items-center justify-center h-auto">
+                            <img src="{{ asset('imgs/detuz.png') }}" alt="detus" class="w-full h-full object-cover">
+                        </div>
+                        <div class="bg-gray-100 rounded-lg p-4 flex items-center justify-center h-auto">
+                            <img src="{{ asset('imgs/doosan.png') }}" alt="doosan" class="w-full h-full object-cover">
+                        </div>
+                        <div class="bg-gray-100 rounded-lg p-4 flex items-center justify-center h-auto">
+                            <img src="{{ asset('imgs/iveco.png') }}" alt="iveco" class="w-full h-full object-cover">
+                        </div>
+                        <div class="bg-gray-100 rounded-lg p-4 flex items-center justify-center h-auto">
+                            <img src="{{ asset('imgs/marathon.png') }}" alt="marathon" class="w-full h-full object-cover">
+                        </div>
+                        <div class="bg-gray-100 rounded-lg p-4 flex items-center justify-center h-auto">
+                            <img src="{{ asset('imgs/volvo.png') }}" alt="volvo" class="w-full h-full object-cover">
+                        </div>
+                        <div class="bg-gray-100 rounded-lg p-4 flex items-center justify-center h-auto">
+                            <img src="{{ asset('imgs/mtu.png') }}" alt="mtu" class="w-full h-full object-cover">
+                        </div>
+                        <div class="bg-gray-100 rounded-lg p-4 flex items-center justify-center h-auto">
+                            <img src="{{ asset('imgs/stamford.png') }}" alt="stamford" class="w-full h-full object-cover">
+                        </div>
+                        <div class="bg-gray-100 rounded-lg p-4 flex items-center justify-center h-20">
+                            <img src="{{ asset('imgs/perkins.png') }}" alt="perkins" class="w-full h-full object-cover">
+                        </div>
+                        <div class="bg-gray-100 rounded-lg p-4 flex items-center justify-center h-20">
+                            <img src="{{ asset('imgs/mecc-alta.png') }}" alt="meccalte" class="w-full h-full object-cover">
+                        </div>
+                        <div class="bg-gray-100 rounded-lg p-4 flex items-center justify-center h-auto">
+                            <img src="{{ asset('imgs/leroysomer.png') }}" alt="leroysomer" class="w-full h-full object-cover">
                         </div>
                     </div>
                 </div>
@@ -372,178 +379,144 @@
         </div>
     </section>
 
-    <!-- Global Partnerships Section -->
-    <section id="partners" class="py-16 bg-gray-50">
+    <!-- Case Studies / Environments Section -->
+    <section class="py-20 bg-gray-50">
         <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center text-blue-900 mb-12">Global Partnerships</h2>
-            <p class="text-center max-w-3xl mx-auto mb-12">AMI has established strong partnerships with leading engine manufacturers and technology providers worldwide to deliver the most reliable and innovative power solutions.</p>
-
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
-                <div class="bg-white p-6 rounded-lg shadow flex items-center justify-center h-32">
-                    <div class="text-center">
-                        <div class="text-blue-800 font-bold text-lg">Partner 1</div>
-                        <div class="text-gray-600 text-sm">Engine Manufacturer</div>
-                    </div>
-                </div>
-
-                <div class="bg-white p-6 rounded-lg shadow flex items-center justify-center h-32">
-                    <div class="text-center">
-                        <div class="text-blue-800 font-bold text-lg">Partner 2</div>
-                        <div class="text-gray-600 text-sm">Technology Provider</div>
-                    </div>
-                </div>
-
-                <div class="bg-white p-6 rounded-lg shadow flex items-center justify-center h-32">
-                    <div class="text-center">
-                        <div class="text-blue-800 font-bold text-lg">Partner 3</div>
-                        <div class="text-gray-600 text-sm">Control Systems</div>
-                    </div>
-                </div>
-
-                <div class="bg-white p-6 rounded-lg shadow flex items-center justify-center h-32">
-                    <div class="text-center">
-                        <div class="text-blue-800 font-bold text-lg">Partner 4</div>
-                        <div class="text-gray-600 text-sm">Components Supplier</div>
-                    </div>
-                </div>
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold ami-blue mb-4">Case Studies & Environments</h2>
+                <div class="w-24 h-1 bg-ami-orange mx-auto"></div>
+                <p class="mt-4 text-gray-600 max-w-2xl mx-auto">Our generators excel in diverse environments, demonstrating adaptability and reliability.</p>
             </div>
 
-            <div class="mt-12 text-center">
-                <h3 class="text-2xl font-bold text-blue-900 mb-4">Global Presence</h3>
-                <div class="inline-block bg-blue-800 text-white py-2 px-6 rounded-full">
-                    <i class="fas fa-globe-americas mr-2"></i> Serving 50+ Countries Worldwide
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Rugged Terrains -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden hover-lift">
+                    <img src="https://cdn.pixabay.com/photo/2016/09/02/18/38/factory-1639990_1280.jpg" alt="Rugged Terrains" class="w-full h-56 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 ami-blue">Rugged Terrains</h3>
+                        <p class="text-gray-600 mb-4">Powering mining operations and remote construction sites in challenging environments with extreme temperatures and difficult access.</p>
+                        <a href="#" class="text-ami-orange font-medium hover:underline">View Case Study <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+
+                <!-- Urban Setups -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden hover-lift">
+                    <img src="https://cdn.pixabay.com/photo/2019/12/22/07/45/trailer-4711979_1280.jpg" alt="Urban Setups" class="w-full h-56 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 ami-blue">Urban Setups</h3>
+                        <p class="text-gray-600 mb-4">Providing backup power for hospitals, data centers, and commercial buildings in densely populated urban areas with strict noise regulations.</p>
+                        <a href="#" class="text-ami-orange font-medium hover:underline">View Case Study <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+
+                <!-- Marine Environments -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden hover-lift">
+                    <img src="https://cdn.pixabay.com/photo/2015/10/28/12/31/motor-1010495_1280.jpg" alt="Marine Environments" class="w-full h-56 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 ami-blue">Marine Environments</h3>
+                        <p class="text-gray-600 mb-4">Specialized generators for offshore platforms, ports, and marine vessels with corrosion-resistant materials and saltwater protection.</p>
+                        <a href="#" class="text-ami-orange font-medium hover:underline">View Case Study <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="py-16">
+    <!-- Contact & Inquiry Section -->
+    <section id="contact" class="py-20 bg-white">
         <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center text-blue-900 mb-12">Contact Us</h2>
-            <div class="flex flex-col md:flex-row">
-                <div class="md:w-1/2 mb-8 md:mb-0 md:pr-8">
-                    <h3 class="text-xl font-bold text-blue-900 mb-4">Get in Touch</h3>
-                    <p class="mb-6">For inquiries about our products, services, or to discuss your power requirements, please contact us using the information below or fill out the contact form.</p>
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold ami-blue mb-4">Contact & Inquiry</h2>
+                <div class="w-24 h-1 bg-ami-orange mx-auto"></div>
+                <p class="mt-4 text-gray-600 max-w-2xl mx-auto">Get in touch with our team for inquiries, quotes, or support.</p>
+            </div>
 
-                    <div class="space-y-4">
-                        <div class="flex items-start">
-                            <div class="bg-blue-100 p-3 rounded-full mr-4">
-                                <i class="fas fa-map-marker-alt text-blue-800"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-blue-900">Headquarters</h4>
-                                <p class="text-gray-600">123 Industrial Area, Dubai, UAE</p>
-                            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Contact Form -->
+                <div>
+                    <h3 class="text-2xl font-bold mb-6 ami-blue">Send Us a Message</h3>
+                    <form method="post" action="{{ route('contact.store') }}" class="space-y-6">
+                        @csrf
+                        <div>
+                            <label for="name" class="block text-gray-700 font-medium mb-2">Name</label>
+                            <input type="text" id="name" name="name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-ami-blue focus:border-transparent">
                         </div>
 
-                        <div class="flex items-start">
-                            <div class="bg-blue-100 p-3 rounded-full mr-4">
-                                <i class="fas fa-phone text-blue-800"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-blue-900">Phone</h4>
-                                <p class="text-gray-600">+971 4 123 4567</p>
-                            </div>
+                        <div>
+                            <label for="email" class="block text-gray-700 font-medium mb-2">Email</label>
+                            <input type="email" id="email" name="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-ami-blue focus:border-transparent">
                         </div>
 
-                        <div class="flex items-start">
-                            <div class="bg-blue-100 p-3 rounded-full mr-4">
-                                <i class="fas fa-envelope text-blue-800"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-blue-900">Email</h4>
-                                <p class="text-gray-600">info@almohandes-int.com</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="md:w-1/2">
-                    <form class="bg-white p-6 rounded-lg shadow-md">
-                        <div class="mb-4">
-                            <label for="name" class="block text-gray-700 font-bold mb-2">Name</label>
-                            <input type="text" id="name" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <div>
+                            <label for="phone" class="block text-gray-700 font-medium mb-2">Phone</label>
+                            <input type="tel" id="phone" name="phone" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-ami-blue focus:border-transparent">
                         </div>
 
-                        <div class="mb-4">
-                            <label for="email" class="block text-gray-700 font-bold mb-2">Email</label>
-                            <input type="email" id="email" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <div>
+                            <label for="message" class="block text-gray-700 font-medium mb-2">Your Message</label>
+                            <textarea id="message" name="message" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-ami-blue focus:border-transparent"></textarea>
                         </div>
 
-                        <div class="mb-4">
-                            <label for="subject" class="block text-gray-700 font-bold mb-2">Subject</label>
-                            <input type="text" id="subject" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-                        </div>
-
-                        <div class="mb-4">
-                            <label for="message" class="block text-gray-700 font-bold mb-2">Message</label>
-                            <textarea id="message" rows="4" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
-                        </div>
-
-                        <button type="submit" class="bg-blue-800 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-300">
-                            Send Message
+                        <button type="submit" class="bg-ami-orange hover:bg-orange-600 text-white font-bold py-3 px-8 rounded-full transition transform hover:scale-105">
+                            Submit Inquiry
                         </button>
                     </form>
                 </div>
+
+                <!-- Contact Information -->
+                <div>
+                    <h3 class="text-2xl font-bold mb-6 ami-blue">Get in Touch</h3>
+
+                    <div class="space-y-6 mb-8">
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 bg-ami-blue hover:bg-ami-orange transition-all duration-300 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                                <i class="fas fa-map-marker-alt text-white"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold mb-1">Headquarters</h4>
+                                <p class="text-gray-600">123 Industrial Area, Amman, Jordan</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 bg-ami-blue hover:bg-ami-orange transition-all duration-300 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                                <i class="fas fa-phone text-white"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold mb-1">Phone</h4>
+                                <p class="text-gray-600">+962 6 123 4567</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 bg-ami-blue hover:bg-ami-orange transition-all duration-300 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                                <i class="fas fa-envelope text-white"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold mb-1">Email</h4>
+                                <p class="text-gray-600">info@almohandes-int.com</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 bg-ami-blue hover:bg-ami-orange transition-all duration-300 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                                <i class="fas fa-clock text-white"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold mb-1">Business Hours</h4>
+                                <p class="text-gray-600">Monday - Friday: 8:00 AM - 6:00 PM</p>
+                                <p class="text-gray-600">Saturday: 9:00 AM - 2:00 PM</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-gray-200 hover:bg-gray-300 transition-all duration-300 rounded-lg h-64 flex items-center justify-center">
+                        <div class="relative w-full h-full">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d13830.033018943786!2d30.923326!3d29.936056000000004!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14585539d61dafb7%3A0x5b0f7c23fd598347!2zQWwgTW9oYW5kZXMgSW50ZXJuYXRpb25hbCAtINin2YTZhdmH2YbYr9izINin2YTYr9mI2YTZitipINmE2YTZhdmI2YTYr9in2Ko!5e0!3m2!1sen!2seg!4v1758542923568!5m2!1sen!2seg" width="730" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
-
-    <!-- Footer -->
-    <footer class="bg-blue-900 text-white py-8">
-        <div class="container mx-auto px-4">
-            <div class="flex flex-col md:flex-row justify-between items-center">
-                <div class="mb-4 md:mb-0">
-                    <div class="flex items-center">
-                        <div class="bg-white text-blue-800 font-bold text-xl py-1 px-3 rounded">
-                            AMI
-                        </div>
-                        <span class="ml-2 text-xl font-semibold">Al Mohandes International</span>
-                    </div>
-                    <p class="mt-2 text-blue-200">Powering the World Since 1983</p>
-                </div>
-
-                <div class="flex space-x-6">
-                    <a href="#" class="text-blue-200 hover:text-white transition duration-300">
-                        <i class="fab fa-facebook-f text-xl"></i>
-                    </a>
-                    <a href="#" class="text-blue-200 hover:text-white transition duration-300">
-                        <i class="fab fa-twitter text-xl"></i>
-                    </a>
-                    <a href="#" class="text-blue-200 hover:text-white transition duration-300">
-                        <i class="fab fa-linkedin-in text-xl"></i>
-                    </a>
-                    <a href="#" class="text-blue-200 hover:text-white transition duration-300">
-                        <i class="fab fa-instagram text-xl"></i>
-                    </a>
-                </div>
-            </div>
-
-            <div class="border-t border-blue-800 mt-6 pt-6 text-center text-blue-200">
-                <p>&copy; 2025 Al Mohandes International. All Rights Reserved.</p>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    window.scrollTo({
-                        top: target.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                    // Close mobile menu if open
-                    if (window.innerWidth < 768) {
-                        document.querySelector('[x-data]').__x.$data.mobileMenuOpen = false;
-                    }
-                }
-            });
-        });
-    </script>
-</body>
-</html>
+@endsection
