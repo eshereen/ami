@@ -12,8 +12,8 @@ class FeatureInfolist
     {
         return $schema
             ->components([
-                Select::make('product.name')
-                    ->relationship('product', 'name'),
+                Select::make('product.name'),
+
                 TextEntry::make('name')
                     ->placeholder('-'),
                 TextEntry::make('description')

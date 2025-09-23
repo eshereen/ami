@@ -21,17 +21,21 @@ class ProductForm
                     ->required(),
                 TextInput::make('model_name')
                     ->required(),
-
-                Select::make('subcategory.name')
+                Select::make('subcategory_id')
                     ->required()
-                    ->relationship('subcategory', 'name'),
+                    ->relationship('subcategory', 'name')
+                    ->searchable()
+                    ->preload(),
                 ])->columns(3)->columnSpanFull(),
                 Section::make('Product Images')
                 ->schema([
                 Textarea::make('description')
                     ->columnSpanFull(),
                 FileUpload::make('image')
-                    ->image()->imageEditor()->disk('public')->columnSpanFull(),
+                    ->disk('public')
+                    ->image()
+                    ->imageEditor()
+                    ->columnSpanFull(),
                 ])->columns(2)->columnSpanFull(),
                 Section::make('Product Specifications')
                 ->schema([

@@ -11,8 +11,8 @@ class PowerTypeInfolist
     {
         return $schema
             ->components([
-                TextEntry::make('product.name')
-                    ->relationship('product', 'name'),
+                TextEntry::make('product.name'),
+
                 TextEntry::make('name')
                     ->placeholder('-'),
                 TextEntry::make('value')

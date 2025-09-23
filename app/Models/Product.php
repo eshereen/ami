@@ -17,6 +17,7 @@ class Product extends Model
         return $this->belongsTo(Subcategory::class);
     }
 
+
     public function features()
     {
         return $this->hasMany(Feature::class);

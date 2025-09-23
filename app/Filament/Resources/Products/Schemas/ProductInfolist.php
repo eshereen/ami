@@ -15,13 +15,15 @@ class ProductInfolist
                 TextEntry::make('name'),
                 TextEntry::make('slug'),
                 TextEntry::make('model_name'),
-                TextEntry::make('subcategory.name')
-                    ->relationship('subcategory', 'name'),
-                   
+                TextEntry::make('subcategory.name'),
+
+
                 TextEntry::make('description')
                     ->placeholder('-')
                     ->columnSpanFull(),
                 ImageEntry::make('image')
+                    ->disk('public')
+
                     ->placeholder('-'),
                 TextEntry::make('fuel_type')
                     ->placeholder('-'),

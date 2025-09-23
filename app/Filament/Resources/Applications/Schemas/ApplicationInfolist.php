@@ -11,8 +11,8 @@ class ApplicationInfolist
     {
         return $schema
             ->components([
-                TextEntry::make('product_id')
-                    ->numeric(),
+                TextEntry::make('product.name'),
+                  
                 TextEntry::make('name')
                     ->placeholder('-'),
                 TextEntry::make('description')

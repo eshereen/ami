@@ -112,68 +112,24 @@
                 <div class="w-24 h-1 bg-ami-orange mx-auto"></div>
                 <p class="mt-4 text-gray-600 max-w-2xl mx-auto">Explore our comprehensive range of power solutions designed for reliability and performance.</p>
             </div>
-
+ @if ($products->count() > 0)
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                @foreach ($products->take(6) as $product)
                 <!-- Generator Sets -->
                 <div class="bg-white rounded-lg shadow-md overflow-hidden hover-lift">
-                    <img src="https://cdn.pixabay.com/photo/2015/10/28/12/31/motor-1010495_1280.jpg" alt="Generator Sets" class="w-full h-48 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2 ami-blue">Generator Sets</h3>
-                        <p class="text-gray-600 mb-4">High-performance diesel generators ranging from 10kVA to 4000kVA for various applications.</p>
-                        <a href="#" class="text-ami-orange font-medium hover:underline">Learn More <i class="fas fa-arrow-right ml-1"></i></a>
-                    </div>
-                </div>
+                    <img src="{{ $product->image ? asset('storage/' . $product->image) : asset('imgs/products/G1.png') }}" alt="{{ $product->name }}" class="w-full h-64 object-cover">
 
-                <!-- Accessories -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden hover-lift">
-                    <img src="https://cdn.pixabay.com/photo/2019/12/22/07/45/trailer-4711979_1280.jpg" alt="Accessories" class="w-full h-48 object-cover">
                     <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2 ami-blue">Accessories</h3>
-                        <p class="text-gray-600 mb-4">Comprehensive range of generator accessories including fuel tanks, control systems, and more.</p>
-                        <a href="#" class="text-ami-orange font-medium hover:underline">Learn More <i class="fas fa-arrow-right ml-1"></i></a>
+                        <h3 class="text-xl font-bold mb-2 ami-blue">{{ $product->name }}</h3>
+                        @if($product->description)
+                        <p class="text-gray-600 mb-4">{{ $product->description }}</p>
+                        @endif
+                        <a href="{{ route('product.show', $product->slug) }}" class="text-ami-orange font-medium hover:underline">Learn More <i class="fas fa-arrow-right ml-1"></i></a>
                     </div>
                 </div>
-
-                <!-- Trailers -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden hover-lift">
-                    <img src="https://images.pexels.com/photos/17816971/pexels-photo-17816971.jpeg" alt="Trailers" class="w-full h-48 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2 ami-blue">Trailers</h3>
-                        <p class="text-gray-600 mb-4">Mobile generator trailers for easy transportation and deployment in remote locations.</p>
-                        <a href="#" class="text-ami-orange font-medium hover:underline">Learn More <i class="fas fa-arrow-right ml-1"></i></a>
-                    </div>
-                </div>
-
-                <!-- Canopies -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden hover-lift">
-                    <img src="https://cdn.pixabay.com/photo/2016/09/02/18/38/factory-1639990_1280.jpg" alt="Canopies" class="w-full h-48 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2 ami-blue">Canopies</h3>
-                        <p class="text-gray-600 mb-4">Weatherproof and soundproof canopies designed for optimal generator protection and noise reduction.</p>
-                        <a href="#" class="text-ami-orange font-medium hover:underline">Learn More <i class="fas fa-arrow-right ml-1"></i></a>
-                    </div>
-                </div>
-
-                <!-- Low Voltage Panels -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden hover-lift">
-                    <img src="https://cdn.pixabay.com/photo/2014/12/15/14/04/cylinders-569151_1280.jpg" alt="Low Voltage Panels" class="w-full h-48 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2 ami-blue">Low Voltage Panels</h3>
-                        <p class="text-gray-600 mb-4">Advanced LV panels for power distribution, monitoring, and control systems.</p>
-                        <a href="#" class="text-ami-orange font-medium hover:underline">Learn More <i class="fas fa-arrow-right ml-1"></i></a>
-                    </div>
-                </div>
-
-                <!-- Custom Solutions -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden hover-lift">
-                    <img src="https://cdn.pixabay.com/photo/2013/10/09/13/48/vehicle-193213_1280.jpg" alt="Custom Solutions" class="w-full h-48 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2 ami-blue">Custom Solutions</h3>
-                        <p class="text-gray-600 mb-4">Tailored power solutions designed to meet specific client requirements and challenging environments.</p>
-                        <a href="#" class="text-ami-orange font-medium hover:underline">Learn More <i class="fas fa-arrow-right ml-1"></i></a>
-                    </div>
-                </div>
+                @endforeach
             </div>
+            @endif
         </div>
     </section>
 

@@ -23,9 +23,11 @@ class ProductsTable
                 TextColumn::make('model_name')
                     ->searchable(),
                 TextColumn::make('subcategory.name')
-                    
+
                     ->sortable(),
-                ImageColumn::make('image'),
+                ImageColumn::make('image')
+                    ->disk('public')
+                    ->width(80),
                 TextColumn::make('fuel_type')
                     ->searchable(),
                 TextColumn::make('frequency')

@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Mail\ContactMail;
-use Illuminate\Http\Request;
-
+use App\Models\Product;
+use App\Models\Blog;
 class FrontendController extends Controller
 {
     public function index()
     {
-        return view(view: 'pages.home');
+        $products = Product::with(['subcategory'])->get();
+        $blogs = Blog::all();
+        return view('pages.home', compact('products', 'blogs'));
     }
 
     public function about()
