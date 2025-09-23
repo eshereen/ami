@@ -13,10 +13,8 @@ class BlogInfolist
     {
         return $schema
             ->components([
-                TextEntry::make('user_id')
-                    ->numeric(),
+                TextEntry::make('user.name'),
                 TextEntry::make('title'),
-                TextEntry::make('slug'),
                 TextEntry::make('content')
                     ->columnSpanFull(),
                 ImageEntry::make('image')

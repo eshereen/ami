@@ -22,7 +22,6 @@ class BlogForm
                     ->relationship('user', 'name'),
                 TextInput::make('title')
                     ->required(),
-
                 Textarea::make('content')
                     ->required()
                     ->columnSpanFull(),

@@ -17,14 +17,13 @@ class BlogsTable
     {
         return $table
             ->columns([
-                TextColumn::make('user_id')
+                ImageColumn::make('image'),
+                TextColumn::make('user.name')
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('title')
                     ->searchable(),
-                TextColumn::make('slug')
-                    ->searchable(),
-                ImageColumn::make('image'),
+
                 IconColumn::make('status')
                     ->boolean(),
                 TextColumn::make('created_at')
