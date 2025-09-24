@@ -85,7 +85,7 @@
         </div>
     </section>
 
-    <!-- Newsletter Signup -->
+    <!-- Newsletter Signup
     <section class="py-16 bg-gradient-to-r from-blue-600 to-blue-800">
         <div class="container mx-auto px-4 text-center">
             <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Stay Updated</h2>
@@ -102,9 +102,9 @@
                 </form>
             </div>
         </div>
-    </section>
+    </section>-->
 
-    <!-- Industry Insights -->
+    <!-- Industry Insights
     <section class="py-16 bg-gray-50">
         <div class="container mx-auto px-4">
             <div class="text-center mb-16">
@@ -147,7 +147,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section>-->
 
     <!-- Call to Action -->
     <section class="py-16 bg-gradient-to-r from-ami-orange to-orange-600">

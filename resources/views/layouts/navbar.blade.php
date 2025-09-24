@@ -56,7 +56,7 @@
 
                     <a href="{{ route('services.index') }}" class="text-gray-700 hover:text-ami-orange  hover:underline transition">Services</a>
                     <a href="{{ route('blog.index') }}" class="text-gray-700 hover:text-ami-orange  hover:underline transition">Blog</a>
-                    <a href="{{ route('contact.index') }}" class="text-gray-700 hover:text-ami-orange  hover:underline transition">Contact</a>
+                    <a href="{{ route('home') }}#contact" class="text-gray-700 hover:text-ami-orange  hover:underline transition">Contact</a>
                 </nav>
 
                 <!-- Mobile Menu Button -->

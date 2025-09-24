@@ -24,8 +24,10 @@ Route::get('/category/{slug}', function(string $slug){
     return view('pages.products.category', compact('category'));
 })->name('category.show');
 Route::get('/subcategory/{slug}', function(string $slug){
-    $subcategory = Subcategory::where('slug', $slug)->with(['products'])->firstOrFail();
-    return view('pages.products.subcategory', compact('subcategory'));
+    $subcategory = Subcategory::where('slug', $slug)->with(['products', 'category'])->firstOrFail();
+    $allProducts = \App\Models\Product::with(['subcategory.category'])->get();
+    $allCategories = \App\Models\Category::with(['subcategories'])->get();
+    return view('pages.products.subcategory', compact('subcategory', 'allProducts', 'allCategories'));
 })->name('subcategory.show');
 Route::get('/contact',[ContactController::class,'contact'])->name('contact.index');
 Route::post('/contact',[ContactController::class,'store'])->name('contact.store');

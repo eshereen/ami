@@ -56,8 +56,14 @@
                 </div>
             </div>
 
-            <div class="border-t border-white border-opacity-20 mt-12 pt-8 text-center">
-                <p class="text-gray-300">&copy; 2025 Al Mohandes International. All rights reserved.</p>
+            <div class="border-t border-white border-opacity-20 mt-12 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-gray-300">&copy; 2025 Al Mohandes International. All rights reserved.</p>
+                    <div class="flex space-x-6 mt-4 md:mt-0">
+                        <a href="{{ route('terms') }}" class="text-gray-300 hover:text-white transition">Terms & Conditions</a>
+                        <a href="{{ route('privacy') }}" class="text-gray-300 hover:text-white transition">Privacy Policy</a>
+                    </div>
+                </div>
             </div>
         </div>
     </footer>

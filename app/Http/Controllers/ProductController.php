@@ -31,6 +31,12 @@ class ProductController extends Controller
 
     public function show($slug)
     {
-        return view('pages.products.show', compact('slug'));
+        $product = Product::where('slug', $slug)->with(['subcategory.category'])->firstOrFail();
+        $relatedProducts = Product::where('subcategory_id', $product->subcategory_id)
+                                 ->where('id', '!=', $product->id)
+                                 ->with(['subcategory'])
+                                 ->take(4)
+                                 ->get();
+        return view('pages.products.show', compact('product', 'relatedProducts'));
     }
 }
