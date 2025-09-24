@@ -180,13 +180,6 @@
             }
         });
     });
-
-    // Form submission handler
-    document.querySelector('form').addEventListener('submit', function(e) {
-        e.preventDefault();
-        alert('Thank you for your inquiry. We will contact you soon!');
-        this.reset();
-    });
 </script>
 </body>
 </html>

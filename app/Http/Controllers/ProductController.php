@@ -22,16 +22,11 @@ class ProductController extends Controller
         return view('pages.categories.index', compact('categories'));
     }
 
-    public function subcategories()
-    {
-        $subcategories = Subcategory::with(['products', 'category'])->get();
-        $categories = Category::with(['subcategories'])->get();
-        return view('pages.subcategories.index', compact('subcategories', 'categories'));
-    }
+
 
     public function show($slug)
     {
-        $product = Product::where('slug', $slug)->with(['subcategory.category'])->firstOrFail();
+        $product = Product::where('slug', $slug)->with(['subcategory.category','applications','features','powertypes'])->firstOrFail();
         $relatedProducts = Product::where('subcategory_id', $product->subcategory_id)
                                  ->where('id', '!=', $product->id)
                                  ->with(['subcategory'])

@@ -159,7 +159,7 @@
             <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Ready to Get Started?</h2>
             <p class="text-xl text-orange-100 mb-8 max-w-2xl mx-auto">Contact our service team today for a consultation and discover how we can help optimize your power systems.</p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="{{ route('contact.index') }}" class="bg-white text-ami-orange px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition">
+                <a href="{{ route('home') }}#contact" class="bg-white text-ami-orange px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition">
                     Get Free Consultation
                 </a>
                 <a href="{{ route('products.index') }}" class="bg-transparent border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-ami-orange transition">

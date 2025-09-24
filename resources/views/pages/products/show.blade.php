@@ -49,23 +49,7 @@
                                  class="w-full h-96 object-cover">
                         @endif
                     </div>
-
-                    <!-- Product Gallery (if multiple images) -->
-                    <div class="grid grid-cols-4 gap-4">
-                 
-                        <!-- Additional image placeholders
-                        <div class="bg-gray-100 rounded-lg flex items-center justify-center h-20">
-                            <i class="fas fa-image text-gray-400"></i>
-                        </div>
-                        <div class="bg-gray-100 rounded-lg flex items-center justify-center h-20">
-                            <i class="fas fa-image text-gray-400"></i>
-                        </div>
-                        <div class="bg-gray-100 rounded-lg flex items-center justify-center h-20">
-                            <i class="fas fa-image text-gray-400"></i>
-                        </div>-->
-                    </div>
                 </div>
-
                 <!-- Product Information -->
                 <div class="space-y-8">
                     <!-- Product Title & Category -->
@@ -94,27 +78,64 @@
                                 <span class="font-medium text-gray-700">Frequency:</span>
                                 <span class="text-gray-900">{{ $product->frequency }}</span>
                             </div>
+                            @if($product->powertypes->count() > 0)
+                                @foreach($product->powertypes as $powertype)
+                                    <div class="flex justify-between py-2 border-b border-gray-200">
+                                        <span class="font-medium text-gray-700">{{ $powertype->name }}:</span>
+                                        <span class="text-gray-900">{{ $powertype->value }}</span>
+                                    </div>
+                                @endforeach
+                            @endif
+                            @if($product->powertypes->count() > 0 && $product->powertypes->name)
                             <div class="flex justify-between py-2 border-b border-gray-200">
-                                <span class="font-medium text-gray-700">Status:</span>
-                                <span class="text-gray-900 capitalize">{{ $product->status }}</span>
+                                <span class="font-medium text-gray-700">{{ $product->powertypes->name }}:</span>
+                                <span class="text-gray-900 capitalize">{{ $product->powertypes->name }}</span>
                             </div>
+                            @endif
                             <div class="flex justify-between py-2 border-b border-gray-200">
                                 <span class="font-medium text-gray-700">Category:</span>
                                 <span class="text-gray-900">{{ $product->subcategory->category->name }}</span>
                             </div>
                         </div>
                     </div>
-
-                    <!-- Product Description -->
-                    <div>
-                        <h3 class="text-xl font-bold text-gray-900 mb-4">Description</h3>
-                        <div class="prose prose-lg max-w-none text-gray-600">
-                            <p>{{ $product->description }}</p>
-                        </div>
-                    </div>
+</div>
+                </div>
+ <!-- Product Description -->
+ @if($product->description)
+ <div class="bg-gray-50 rounded-xl p-6">
+    <h3 class="text-xl font-bold text-gray-900 mb-4">Description</h3>
+    <div class="prose prose-lg max-w-none text-gray-600">
+        <p>{{ $product->description }}</p>
+    </div>
+</div>
+@endif
+<!-- Product Features -->
+@if($product->features->count() > 0)
+<div class="bg-gray-50 rounded-xl p-6">
+    <h3 class="text-xl font-bold text-gray-900 mb-4">Features</h3>
+    <div class="prose prose-lg max-w-none text-gray-600">
+        @foreach($product->features as $feature)
+            <p class="font-bold text-gray-900 mb-2 text-lg">{{ $feature->name }}</p>
+            <p>{{ $feature->description }}</p>
+        @endforeach
+    </div>
+</div>
+@endif
+<!-- Product Applications -->
+@if($product->applications->count() > 0)
+<div class="bg-gray-50 rounded-xl p-6">
+    <h3 class="text-xl font-bold text-gray-900 mb-4">Applications</h3>
+    <div class="prose prose-lg max-w-none text-gray-600">
+        @foreach($product->applications as $application)
+            <p class="font-bold text-gray-900 mb-2 text-lg">{{ $application->name }}</p>
+            <p>{{ $application->description }}</p>
+        @endforeach
+    </div>
+</div>
+@endif
 
                     <!-- Action Buttons -->
-                    <div class="flex flex-col sm:flex-row gap-4">
+                    <div class="flex flex-col sm:flex-row gap-4 mt-4">
                         <a href="{{ route('contact.index') }}"
                            class="bg-ami-orange text-white px-8 py-4 rounded-lg font-semibold hover:bg-orange-600 transition text-center">
                             <i class="fas fa-envelope mr-2"></i>Request Quote
@@ -146,6 +167,7 @@
                     </div>
                 </div>
             </div>
+
         </div>
     </section>
 

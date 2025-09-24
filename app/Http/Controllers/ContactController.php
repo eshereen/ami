@@ -25,7 +25,7 @@ class ContactController extends Controller
 
 
         $contact = Contact::create($request->all());
-        Mail::to('ami@email.com')->later(now()->addSeconds(5), new ContactMail($contact));
+        Mail::to('info@amigenset.comail.com')->cc('inquiry@amigenset.com')->later(now()->addSeconds(5), new ContactMail($contact));
 
         return redirect()->route('contact.index')->with('success', 'Contact message sent successfully');
     }

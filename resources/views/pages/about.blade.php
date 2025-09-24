@@ -20,9 +20,13 @@
                 <h2 class="text-3xl md:text-4xl font-bold ami-blue mb-4">Our Story</h2>
                 <div class="w-24 h-1 bg-ami-orange mx-auto"></div>
                 <p class="mt-4 text-gray-600 max-w-3xl mx-auto">
-                    Since 1983, Al Mohandes International (AMI) has been at the forefront of power generation technology,
-                    providing reliable solutions to industries worldwide. Our commitment to excellence and innovation has
-                    made us a trusted partner in the power generation sector.
+                    Founded in 1983, Al Mohandes International (AMI) is a leading diesel generator manufacturer in Egypt, providing integrated power solutions to global markets. We specialize in designing and manufacturing gensets, backup power systems, and custom electrical solutions for industrial, commercial, and marine applications.
+                </p>
+                <p class="mt-4 text-gray-600 max-w-3xl mx-auto">
+                With a proven reputation for reliability, performance, and durability, our diesel gensets are engineered to meet the highest international standards. We also provide generator accessories, including canopies, fuel tanks, and control systems, ensuring complete and efficient power generation solutions.
+                </p>
+                <p class="mt-4 text-gray-600 max-w-3xl mx-auto">
+                    At AMI, we combine technical expertise, quality engineering, and a customer-focused approach to deliver sustainable energy solutions and unmatched after-sales service. Our mission is to ensure reliable energy supply for businesses, industries, and communities worldwide.
                 </p>
             </div>
         </div>
@@ -77,7 +81,7 @@
 
                     <!-- Timeline Item 5 -->
                     <div class="flex items-start">
-                        <div class="flex-shrink-0 w-16 h-16 bg-ami-orange text-white rounded-full flex items-center justify-center font-bold text-lg">2023</div>
+                        <div class="flex-shrink-0 w-16 h-16 bg-ami-orange text-white rounded-full flex items-center justify-center font-bold text-lg">2025</div>
                         <div class="ml-8">
                             <h3 class="text-xl font-bold text-gray-900 mb-2">40 Years Strong</h3>
                             <p class="text-gray-600">Celebrating four decades of excellence with continued commitment to innovation and customer satisfaction.</p>
@@ -88,7 +92,8 @@
         </div>
     </section>
 
-    <!-- Mission, Vision, Values -->
+    <!-- Mission, Vision, Values
+        {{--
     <section class="py-16 bg-gradient-to-r from-blue-600 to-blue-800">
         <div class="container mx-auto px-4">
             <div class="text-center mb-16">
@@ -256,21 +261,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section>  --}}
+@include('layouts.call-to-action')
 
-    <!-- Call to Action -->
-    <section class="py-16 bg-gradient-to-r from-ami-orange to-orange-600">
-        <div class="container mx-auto px-4 text-center">
-            <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Ready to Work With Us?</h2>
-            <p class="text-xl text-orange-100 mb-8 max-w-2xl mx-auto">Join hundreds of satisfied customers who trust AMI for their power generation needs.</p>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="{{ route('contact.index') }}" class="bg-white text-ami-orange px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition">
-                    Get In Touch
-                </a>
-                <a href="{{ route('products.index') }}" class="bg-transparent border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-ami-orange transition">
-                    Explore Products
-                </a>
-            </div>
-        </div>
-    </section>
 @endsection

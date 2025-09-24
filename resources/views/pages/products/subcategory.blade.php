@@ -24,6 +24,8 @@
                 </div>
             </div>
         </div>
+    </section>
+
     <!-- Main Content -->
     <section class="py-16">
         <div class="container mx-auto px-4">
@@ -234,6 +236,51 @@
             </div>
         </div>
     </section>
+
+    @if(isset($relatedProducts) && $relatedProducts->count() > 0)
+    <!-- Related Products -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Related Products</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">Explore more products from {{ $subcategory->category->name }}</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                @foreach($relatedProducts as $product)
+                    <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 product-card">
+                        <a href="{{ route('product.show', $product->slug) }}" class="block">
+                            <div class="relative">
+                                @if($product->image)
+                                    <img src="{{ asset('storage/' . $product->image) }}"
+                                         alt="{{ $product->name }}"
+                                         class="w-full h-48 object-cover">
+                                @else
+                                    <img src="{{ asset('imgs/products/G1.png') }}"
+                                         alt="{{ $product->name }}"
+                                         class="w-full h-48 object-cover">
+                                @endif
+                                <div class="absolute top-4 left-4">
+                                    <span class="bg-ami-orange text-white px-3 py-1 rounded-full text-sm font-semibold">
+                                        {{ $product->subcategory->name }}
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-lg font-bold text-gray-900 mb-2">{{ $product->name }}</h3>
+                                <p class="text-gray-600 mb-3">{{ $product->model_name }}</p>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-sm text-gray-500">{{ $product->fuel_type }}</span>
+                                    <span class="text-sm text-gray-500">{{ $product->frequency }}</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </section>
+    @endif
 
     <!-- Call to Action -->
     <section class="py-16 bg-gradient-to-r from-blue-100 to-blue-400">

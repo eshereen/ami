@@ -33,16 +33,13 @@
                 <div>
                     <h4 class="text-xl font-bold mb-4">Connect With Us</h4>
                     <div class="flex space-x-4 mb-4">
-                        <a href="#" class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center hover:bg-ami-orange transition">
+                        <a href="http://www.facebook.com/Al-Mohandes-International-AMI-469567549743548" class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center hover:bg-ami-orange transition">
                             <i class="fab fa-facebook-f"></i>
                         </a>
-                        <a href="#" class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center hover:bg-ami-orange transition">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                                <a href="#" class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center hover:bg-ami-orange transition">
-                            <i class="fab fa-linkedin-in"></i>
-                        </a>
-                        <a href="#" class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center hover:bg-ami-orange transition">
+                        <a href="http://www.youtube.com/user/amigenset" class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center hover:bg-ami-orange transition">
+                            <i class="fab fa-youtube"></i>
+
+                        <a href="http://www.linkedin.com/company/almohandesinternational" class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center hover:bg-ami-orange transition">
                             <i class="fab fa-instagram"></i>
                         </a>
                     </div>

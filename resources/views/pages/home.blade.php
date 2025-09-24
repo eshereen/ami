@@ -59,10 +59,14 @@
                 <div class="md:w-1/2">
                     <h3 class="text-2xl font-bold mb-6">Our Legacy of Excellence</h3>
                     <p class="text-gray-700 mb-6">
-                        Established in 1983, Al Mohandes International (AMI) has grown from a local enterprise to a globally recognized manufacturer of diesel generators. With nearly four decades of experience, we've built a reputation for engineering excellence, reliability, and innovative power solutions.
+                        Founded in 1983, Al Mohandes International (AMI) is a leading diesel generator manufacturer in Egypt, providing integrated power solutions to global markets. We specialize in designing and manufacturing gensets, backup power systems, and custom electrical solutions for industrial, commercial, and marine applications.
+
                     </p>
                     <p class="text-gray-700 mb-6">
-                        Our expertise spans custom power solutions, turnkey projects, and comprehensive after-sales service. We pride ourselves on solving complex power challenges across industries and environments worldwide.
+                        With a proven reputation for reliability, performance, and durability, our diesel gensets are engineered to meet the highest international standards. We also provide generator accessories, including canopies, fuel tanks, and control systems, ensuring complete and efficient power generation solutions.
+                    </p>
+                    <p class="text-gray-700 mb-6">
+                        At AMI, we combine technical expertise, quality engineering, and a customer-focused approach to deliver sustainable energy solutions and unmatched after-sales service. Our mission is to ensure reliable energy supply for businesses, industries, and communities worldwide.
                     </p>
 
                     <div class="mt-10">
@@ -74,12 +78,6 @@
                                 <div class="timeline-dot"></div>
                                 <h5 class="font-bold text-lg">1983</h5>
                                 <p class="text-gray-600">Founded as a local generator service provider</p>
-                            </div>
-
-                            <div class="relative pl-10 pb-8">
-                                <div class="timeline-dot"></div>
-                                <h5 class="font-bold text-lg">1995</h5>
-                                <p class="text-gray-600">Expanded to manufacturing generator sets</p>
                             </div>
 
                             <div class="relative pl-10 pb-8">
@@ -204,36 +202,56 @@
                         <li class="flex items-start">
                             <i class="fas fa-check-circle text-ami-orange mt-1 mr-3"></i>
                             <div>
-                                <h4 class="font-bold">Storage Tanks</h4>
-                                <p class="text-gray-600">Custom-designed fuel storage solutions in various capacities.</p>
+                                <h4 class="font-bold capitalize">Diesel Generating Set
+                                </h4>
+                                <p class="text-gray-600">Full range of reliable diesel generator power solutions.</p>
                             </div>
                         </li>
                         <li class="flex items-start">
                             <i class="fas fa-check-circle text-ami-orange mt-1 mr-3"></i>
                             <div>
-                                <h4 class="font-bold">Canopies</h4>
-                                <p class="text-gray-600">Weatherproof and soundproof enclosures for generators.</p>
+                                <h4 class="font-bold capitalize">Fuel Storage Tanks
+                                </h4>
+                                <p class="text-gray-600">Distant job site location is no longer an issue with our storage tank solutions.</p>
                             </div>
                         </li>
                         <li class="flex items-start">
                             <i class="fas fa-check-circle text-ami-orange mt-1 mr-3"></i>
                             <div>
-                                <h4 class="font-bold">Control Systems</h4>
-                                <p class="text-gray-600">Advanced control panels and monitoring systems.</p>
+                                <h4 class="font-bold capitalize">Marine Gensets</h4>
+                                <p class="text-gray-600">Where performance & reliability are critical the most.</p>
                             </div>
                         </li>
                         <li class="flex items-start">
                             <i class="fas fa-check-circle text-ami-orange mt-1 mr-3"></i>
                             <div>
-                                <h4 class="font-bold">LV Panels</h4>
-                                <p class="text-gray-600">Low voltage distribution and control panels.</p>
+                                <h4 class="font-bold capitalize">Trailers
+                                </h4>
+                                <p class="text-gray-600">On the Job site, rough terrain or on a boat, various accessories to meet your application requirement perfectly.</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-ami-orange mt-1 mr-3"></i>
+                            <div>
+                                <h4 class="font-bold capitalize">Flood Light
+                                </h4>
+                                <p class="text-gray-600">Ease your night working days with the right Flood Light Set.</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-ami-orange mt-1 mr-3"></i>
+                            <div>
+                                <h4 class="font-bold capitalize">Low Voltage Panels
+                                </h4>
+                                <p class="text-gray-600">LCompatible, High-Quality Low Voltage panels Distribution Switchgear, Lighting panels, Synchronization panels and ATS.
+                                </p>
                             </div>
                         </li>
                     </ul>
                 </div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+           {{--   <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div class="bg-ami-light-blue rounded-lg p-6 text-center">
                     <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80" alt="Workshop" class="rounded-lg mb-4 w-full h-48 object-cover">
                     <h4 class="font-bold ami-blue mb-2">Modern Workshops</h4>
@@ -251,7 +269,7 @@
                     <h4 class="font-bold ami-blue mb-2">Skilled Team</h4>
                     <p class="text-gray-600">Experienced engineers and technicians dedicated to excellence.</p>
                 </div>
-            </div>
+            </div>--}}
         </div>
     </section>
 
@@ -261,11 +279,11 @@
             <div class="text-center mb-16">
                 <h2 class="text-3xl md:text-4xl font-bold text- mb-4">Global Reach & Partnerships</h2>
                 <div class="w-24 h-1 bg-ami-orange mx-auto"></div>
-                <p class="mt-4 text-gray-200 max-w-2xl mx-auto">Serving clients across continents with reliable power solutions and trusted partnerships.</p>
+                <p class="mt-4 text-gray-800 max-w-2xl mx-auto">Serving clients across continents with reliable power solutions and trusted partnerships.</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-16">
-                <div class="bg-white bg-opacity-90 rounded-lg p-8">
+               <div class="bg-white bg-opacity-90 rounded-lg p-8">
                     <h3 class="text-2xl font-bold mb-6 ami-blue">Worldwide Presence</h3>
                     <p class="text-gray-700 mb-6">
                         From our headquarters, we've expanded our reach to serve clients in over 50 countries across the Middle East, Africa, Asia, and Europe. Our global network of partners and service centers ensures prompt support wherever our clients operate.
@@ -296,39 +314,39 @@
                         We collaborate with leading industry partners to deliver the best power solutions. Our partners include:
                     </p>
                     <div class="grid grid-cols-3 gap-4 items-center">
-                        <div class="bg-gray-100 rounded-lg p-4 flex items-center justify-center h-auto">
+                        <a href="https://www.avk.com" class="bg-gray-100 rounded-lg p-4 flex items-center justify-center h-auto">
                             <img src="{{ asset('imgs/avk.png') }}" alt="avk" class="w-full h-full object-cover">
-                        </div>
-                            <div class="bg-gray-100 rounded-lg p-4 flex items-center justify-center h-auto">
+                        </a>
+                        <a href="https://www.detuz.com" class="bg-gray-100 rounded-lg p-4 flex items-center justify-center h-auto">
                             <img src="{{ asset('imgs/detuz.png') }}" alt="detus" class="w-full h-full object-cover">
-                        </div>
-                        <div class="bg-gray-100 rounded-lg p-4 flex items-center justify-center h-auto">
+                        </a>
+                        <a href="https://www.doosan.com" class="bg-gray-100 rounded-lg p-4 flex items-center justify-center h-auto">
                             <img src="{{ asset('imgs/doosan.png') }}" alt="doosan" class="w-full h-full object-cover">
-                        </div>
-                        <div class="bg-gray-100 rounded-lg p-4 flex items-center justify-center h-auto">
+                        </a>
+                        <a href="https://www.iveco.com" class="bg-gray-100 rounded-lg p-4 flex items-center justify-center h-auto">
                             <img src="{{ asset('imgs/iveco.png') }}" alt="iveco" class="w-full h-full object-cover">
-                        </div>
-                        <div class="bg-gray-100 rounded-lg p-4 flex items-center justify-center h-auto">
+                        </a>
+                        <a href="https://www.marathonelectric.com" class="bg-gray-100 rounded-lg p-4 flex items-center justify-center h-auto">
                             <img src="{{ asset('imgs/marathon.png') }}" alt="marathon" class="w-full h-full object-cover">
-                        </div>
-                        <div class="bg-gray-100 rounded-lg p-4 flex items-center justify-center h-auto">
+                        </a>
+                        <a href="https://www.volvopenta.com" class="bg-gray-100 rounded-lg p-4 flex items-center justify-center h-auto">
                             <img src="{{ asset('imgs/volvo.png') }}" alt="volvo" class="w-full h-full object-cover">
-                        </div>
-                        <div class="bg-gray-100 rounded-lg p-4 flex items-center justify-center h-auto">
+                        </a>
+                        <a href="https://www.mtu-online.com" class="bg-gray-100 rounded-lg p-4 flex items-center justify-center h-auto">
                             <img src="{{ asset('imgs/mtu.png') }}" alt="mtu" class="w-full h-full object-cover">
-                        </div>
-                        <div class="bg-gray-100 rounded-lg p-4 flex items-center justify-center h-auto">
+                        </a>
+                        <a href="https://www.stamford-avk.com" class="bg-gray-100 rounded-lg p-4 flex items-center justify-center h-auto">
                             <img src="{{ asset('imgs/stamford.png') }}" alt="stamford" class="w-full h-full object-cover">
-                        </div>
-                        <div class="bg-gray-100 rounded-lg p-4 flex items-center justify-center h-20">
+                        </a>
+                        <a href="https://www.perkins.com" class="bg-gray-100 rounded-lg p-4 flex items-center justify-center h-20">
                             <img src="{{ asset('imgs/perkins.png') }}" alt="perkins" class="w-full h-full object-cover">
-                        </div>
-                        <div class="bg-gray-100 rounded-lg p-4 flex items-center justify-center h-20">
+                        </a>
+                        <a href="https://www.meccalte.com" class="bg-gray-100 rounded-lg p-4 flex items-center justify-center h-20">
                             <img src="{{ asset('imgs/mecc-alta.png') }}" alt="meccalte" class="w-full h-full object-cover">
-                        </div>
-                        <div class="bg-gray-100 rounded-lg p-4 flex items-center justify-center h-auto">
+                        </a>
+                        <a href="https://acim.nidec.com/en-US/motors/leroy-somer" class="bg-gray-100 rounded-lg p-4 flex items-center justify-center h-auto">
                             <img src="{{ asset('imgs/leroysomer.png') }}" alt="leroysomer" class="w-full h-full object-cover">
-                        </div>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -336,6 +354,7 @@
     </section>
 
     <!-- Case Studies / Environments Section -->
+
     <section class="py-20 bg-gray-50">
         <div class="container mx-auto px-4">
             <div class="text-center mb-16">
@@ -430,7 +449,8 @@
                             </div>
                             <div>
                                 <h4 class="font-bold mb-1">Headquarters</h4>
-                                <p class="text-gray-600">123 Industrial Area, Amman, Jordan</p>
+                                <p class="text-gray-600">6th of October City - 3rd Industrial Zone 54 St of 7 St. - Block 59, 61 - P.O. Box 48
+                                </p>
                             </div>
                         </div>
 
@@ -440,7 +460,8 @@
                             </div>
                             <div>
                                 <h4 class="font-bold mb-1">Phone</h4>
-                                <p class="text-gray-600">+962 6 123 4567</p>
+                                <a href="tel:(+2) 01223907708" class="text-gray-600" tel="(+2) 01223907708">(+2) 01223907708</a><br>
+                                <a href="tel:(+2) 01223295077" class="text-gray-600" tel="(+2) 01223295077">(+2) 01223295077</a>
                             </div>
                         </div>
 
@@ -450,7 +471,7 @@
                             </div>
                             <div>
                                 <h4 class="font-bold mb-1">Email</h4>
-                                <p class="text-gray-600">info@almohandes-int.com</p>
+                                <a href="mailto:inquiry@amigenset.com" class="text-gray-600" email="inquiry@amigenset.com">inquiry@amigenset.com</a>
                             </div>
                         </div>
 
@@ -459,9 +480,8 @@
                                 <i class="fas fa-clock text-white"></i>
                             </div>
                             <div>
-                                <h4 class="font-bold mb-1">Business Hours</h4>
-                                <p class="text-gray-600">Monday - Friday: 8:00 AM - 6:00 PM</p>
-                                <p class="text-gray-600">Saturday: 9:00 AM - 2:00 PM</p>
+                                <h4 class="font-bold mb-1">Fax</h4>
+                                <a href="tel:(+2) 38206210" class="text-gray-600" tel="(+2) 38206210">(+2) 38206210</a>
                             </div>
                         </div>
                     </div>
