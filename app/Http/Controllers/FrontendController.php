@@ -4,12 +4,25 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\Blog;
+use Illuminate\Support\Facades\Cache;
 class FrontendController extends Controller
 {
     public function index()
     {
-        $products = Product::with(['subcategory'])->get();
-        $blogs = Blog::all();
+        $products = Cache::remember('home_products_v1', 300, function () {
+            return Product::select(['id','name','slug','model_name','description','image','subcategory_id','fuel_type','frequency'])
+                ->with(['subcategory:id,name,category_id'])
+                ->latest('id')
+                ->take(60)
+                ->get();
+        });
+
+        $blogs = Cache::remember('home_blogs_v1', 300, function () {
+            return Blog::select(['id','title','slug','image','created_at'])
+                ->latest('created_at')
+                ->take(6)
+                ->get();
+        });
         return view('pages.home', compact('products', 'blogs'));
     }
 
