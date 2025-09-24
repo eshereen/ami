@@ -5,11 +5,13 @@
         @if($product->image)
             <img src="{{ asset('storage/' . $product->image) }}"
                  alt="{{ $product->name }}"
-                 class="w-full h-full object-cover">
+                 class="w-full h-full object-cover"
+                 fetchpriority="high" decoding="async">
         @else
             <img src="{{ asset('imgs/products/G1.png') }}"
                  alt="{{ $product->name }}"
-                 class="w-full h-full object-cover">
+                 class="w-full h-full object-cover"
+                 fetchpriority="high" decoding="async">
         @endif
         <div class="absolute inset-0 bg-gradient-to-r from-blue-900/80 to-blue-700/60 flex items-center">
             <div class="container mx-auto px-4">
@@ -42,11 +44,13 @@
                         @if($product->image)
                             <img src="{{ asset('storage/' . $product->image) }}"
                                  alt="{{ $product->name }}"
-                                 class="w-full h-96 object-cover">
+                                 class="w-full h-96 object-cover"
+                                 loading="lazy" decoding="async">
                         @else
                             <img src="{{ asset('imgs/products/G1.png') }}"
                                  alt="{{ $product->name }}"
-                                 class="w-full h-96 object-cover">
+                                 class="w-full h-96 object-cover"
+                                 loading="lazy" decoding="async">
                         @endif
                     </div>
                 </div>
@@ -188,11 +192,13 @@
                                 @if($relatedProduct->image)
                                     <img src="{{ asset('storage/' . $relatedProduct->image) }}"
                                          alt="{{ $relatedProduct->name }}"
-                                         class="w-full h-48 object-cover">
+                                         class="w-full h-48 object-cover"
+                                         loading="lazy" decoding="async">
                                 @else
                                     <img src="{{ asset('imgs/products/G1.png') }}"
                                          alt="{{ $relatedProduct->name }}"
-                                         class="w-full h-48 object-cover">
+                                         class="w-full h-48 object-cover"
+                                         loading="lazy" decoding="async">
                                 @endif
                                 <div class="absolute top-4 left-4">
                                     <span class="bg-ami-orange text-white px-3 py-1 rounded-full text-sm font-semibold">

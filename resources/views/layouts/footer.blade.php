@@ -4,7 +4,7 @@
         <div class="container mx-auto px-4">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                 <div>
-                    <img src="{{ asset('imgs/dark-logo.png') }}" alt="AMI Logo" class="h-12 mb-4">
+                    <img src="{{ asset('imgs/dark-logo.png') }}" alt="AMI Logo" class="h-12 mb-4" loading="lazy" decoding="async">
                     <p class="text-gray-300">Powering reliability since 1983, Al Mohandes International is a global leader in diesel generator solutions.</p>
                 </div>
 

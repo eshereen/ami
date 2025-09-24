@@ -96,7 +96,7 @@
                 </div>
 
                 <div class="md:w-1/2">
-                    <img src="https://images.unsplash.com/photo-1649777689164-c4ad5dd3a83c?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aW5kdXN0cmllc3xlbnwwfDJ8MHx8fDA%3D" alt="AMI Manufacturing Facility" class="rounded-lg shadow-lg w-full">
+                    <img src="https://images.unsplash.com/photo-1649777689164-c4ad5dd3a83c?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aW5kdXN0cmllc3xlbnwwfDJ8MHx8fDA%3D" alt="AMI Manufacturing Facility" class="rounded-lg shadow-lg w-full" loading="lazy" decoding="async">
                 </div>
             </div>
         </div>
@@ -115,7 +115,7 @@
                 @foreach ($products->take(6) as $product)
                 <!-- Generator Sets -->
                 <div class="bg-white rounded-lg shadow-md overflow-hidden hover-lift">
-                    <img src="{{ $product->image ? asset('storage/' . $product->image) : asset('imgs/products/G1.png') }}" alt="{{ $product->name }}" class="w-full h-64 object-cover">
+                    <img src="{{ $product->image ? asset('storage/' . $product->image) : asset('imgs/products/G1.png') }}" alt="{{ $product->name }}" class="w-full h-64 object-cover" loading="lazy" decoding="async">
 
                     <div class="p-6">
                         <h3 class="text-xl font-bold mb-2 ami-blue">{{ $product->name }}</h3>
@@ -191,7 +191,7 @@
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-16">
                 <div>
-                    <img src="https://images.unsplash.com/photo-1511454493857-0a29f2c023c7?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDZ8fGluZHVzdHJpZXN8ZW58MHwxfDB8fHww" alt="Manufacturing Facility" class="rounded-lg shadow-lg w-full">
+                    <img src="https://images.unsplash.com/photo-1511454493857-0a29f2c023c7?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDZ8fGluZHVzdHJpZXN8ZW58MHwxfDB8fHww" alt="Manufacturing Facility" class="rounded-lg shadow-lg w-full" loading="lazy" decoding="async">
                 </div>
                 <div>
                     <h3 class="text-2xl font-bold mb-6 ami-blue">In-House Production Excellence</h3>
@@ -366,7 +366,7 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <!-- Rugged Terrains -->
                 <div class="bg-white rounded-lg shadow-md overflow-hidden hover-lift">
-                    <img src="https://cdn.pixabay.com/photo/2016/09/02/18/38/factory-1639990_1280.jpg" alt="Rugged Terrains" class="w-full h-56 object-cover">
+                    <img src="https://cdn.pixabay.com/photo/2016/09/02/18/38/factory-1639990_1280.jpg" alt="Rugged Terrains" class="w-full h-56 object-cover" loading="lazy" decoding="async">
                     <div class="p-6">
                         <h3 class="text-xl font-bold mb-2 ami-blue">Rugged Terrains</h3>
                         <p class="text-gray-600 mb-4">Powering mining operations and remote construction sites in challenging environments with extreme temperatures and difficult access.</p>
@@ -376,7 +376,7 @@
 
                 <!-- Urban Setups -->
                 <div class="bg-white rounded-lg shadow-md overflow-hidden hover-lift">
-                    <img src="https://cdn.pixabay.com/photo/2019/12/22/07/45/trailer-4711979_1280.jpg" alt="Urban Setups" class="w-full h-56 object-cover">
+                    <img src="https://cdn.pixabay.com/photo/2019/12/22/07/45/trailer-4711979_1280.jpg" alt="Urban Setups" class="w-full h-56 object-cover" loading="lazy" decoding="async">
                     <div class="p-6">
                         <h3 class="text-xl font-bold mb-2 ami-blue">Urban Setups</h3>
                         <p class="text-gray-600 mb-4">Providing backup power for hospitals, data centers, and commercial buildings in densely populated urban areas with strict noise regulations.</p>
@@ -386,7 +386,7 @@
 
                 <!-- Marine Environments -->
                 <div class="bg-white rounded-lg shadow-md overflow-hidden hover-lift">
-                    <img src="https://cdn.pixabay.com/photo/2015/10/28/12/31/motor-1010495_1280.jpg" alt="Marine Environments" class="w-full h-56 object-cover">
+                    <img src="https://cdn.pixabay.com/photo/2015/10/28/12/31/motor-1010495_1280.jpg" alt="Marine Environments" class="w-full h-56 object-cover" loading="lazy" decoding="async">
                     <div class="p-6">
                         <h3 class="text-xl font-bold mb-2 ami-blue">Marine Environments</h3>
                         <p class="text-gray-600 mb-4">Specialized generators for offshore platforms, ports, and marine vessels with corrosion-resistant materials and saltwater protection.</p>
@@ -488,7 +488,7 @@
 
                     <div class="bg-gray-200 hover:bg-gray-300 transition-all duration-300 rounded-lg h-64 flex items-center justify-center">
                         <div class="relative w-full h-full">
-                            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d13830.033018943786!2d30.923326!3d29.936056000000004!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14585539d61dafb7%3A0x5b0f7c23fd598347!2zQWwgTW9oYW5kZXMgSW50ZXJuYXRpb25hbCAtINin2YTZhdmH2YbYr9izINin2YTYr9mI2YTZitipINmE2YTZhdmI2YTYr9in2Ko!5e0!3m2!1sen!2seg!4v1758542923568!5m2!1sen!2seg" width="730" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d13830.033018943786!2d30.923326!3d29.936056000000004!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14585539d61dafb7%3A0x5b0f7c23fd598347!2zQWwgTW9oYW5kZXMgSW50ZXJuYXRpb25hbCAtINin2YTZhdmH2YbYr9izINin2YTYr9mI2YTZitipINmE2YTZhdmI2YTYr9in2Ko!5e0!3m2!1sen!2seg!4v1758542923568!5m2!1sen!2seg" width="730" height="250" style="border:0;" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                         </div>
                     </div>
                 </div>
