@@ -102,7 +102,8 @@
                  x-transition
                  data-mobile-menu
                  class="p-4 mt-4 bg-white rounded-md md:hidden mobile-menu"
-                 style="display: none;">
+                 style="display: none;"
+                 @click.away="mobileMenuOpen = false">
                 <div class="flex flex-col space-y-3">
                     <a href="{{ route('home') }}"
                        class="text-gray-700 transition hover:text-ami-orange"
