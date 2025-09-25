@@ -15,7 +15,7 @@
 @section('content')
 
     <!-- Hero Section -->
-    <section id="home" class="relative h-screen hero-section" x-data="{
+    <section id="home" class="relative hero-section" style="height: calc(100vh - 72px); margin-top: -72px;" x-data="{
             currentSlide: 0,
             slides: [
                 {

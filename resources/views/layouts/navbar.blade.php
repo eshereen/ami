@@ -1,5 +1,5 @@
     <!-- Header -->
-    <header class="sticky top-0 z-50 transition-all duration-300"
+    <header class="fixed top-0 right-0 left-0 z-50 transition-all duration-300"
             :class="scrolled ? 'bg-white shadow-md' : 'bg-transparent'"
             style="min-height:72px;"
             x-data="{
