@@ -2,7 +2,7 @@
 
 namespace App\Filament\Resources\Products\Schemas;
 
-use Filament\Forms\Components\FileUpload;
+use App\Filament\Forms\Components\WebPFileUpload;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Schemas\Schema;
@@ -31,11 +31,9 @@ class ProductForm
                 ->schema([
                 Textarea::make('description')
                     ->columnSpanFull(),
-                FileUpload::make('image')
-                    ->disk('public')
-                    ->image()
-                    ->imageEditor()
-                    ->columnSpanFull(),
+                WebPFileUpload::make('image')
+                    ->thumbnail()
+                    ->webpQuality(90),
                 ])->columns(2)->columnSpanFull(),
                 Section::make('Product Specifications')
                 ->schema([

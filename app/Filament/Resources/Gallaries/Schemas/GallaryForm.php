@@ -2,7 +2,7 @@
 
 namespace App\Filament\Resources\Gallaries\Schemas;
 
-use Filament\Forms\Components\FileUpload;
+use App\Filament\Forms\Components\WebPFileUpload;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
@@ -23,10 +23,9 @@ class GallaryForm
 
                 TextInput::make('description'),
 
-                FileUpload::make('image')
-                    ->image()
-                    ->imageEditor()
-                    ->disk('public')
+                WebPFileUpload::make('image')
+                    ->gallery()
+                    ->webpQuality(85)
                     ->required(),
                 Toggle::make('status')
                     ->default('active'),

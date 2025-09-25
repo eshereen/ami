@@ -46,11 +46,8 @@
 
     <!-- Preload LCP hero images -->
 
+    <!-- Only preload the first hero image for LCP -->
     <link rel="preload" as="image" href="{{ asset('imgs/slide.webp') }}" fetchpriority="high">
-    <link rel="preload" as="image" href="{{ asset('imgs/slide-1.webp') }}" fetchpriority="high">
-    <link rel="preload" as="image" href="{{ asset('imgs/slide-2.webp') }}" fetchpriority="high">
-    <link rel="preload" as="image" href="{{ asset('imgs/about.webp') }}" fetchpriority="high">
-    <link rel="preload" as="image" href="{{ asset('imgs/products.webp') }}" fetchpriority="high">
 
 
     <!-- Preload critical fonts with font-display swap -->
@@ -65,17 +62,9 @@
 
     <!-- Inline Critical CSS -->
     <style>
-        /* Critical CSS - Above the fold styling */
-        body{margin:0;font-family:'Roboto',sans-serif;line-height:1.6;background:#fff}
-        h1,h2,h3,h4,h5,h6{font-family:'Montserrat',sans-serif;font-weight:700;margin:0}
-        .container{max-width:1200px;margin:0 auto;padding:0 1rem}
-        .bg-ami-blue{background-color:#0056b3}
-        .bg-ami-orange{background-color:#ff7700}
-        .text-white{color:#fff}
-        .flex{display:flex}
-        .items-center{align-items:center}
-        .justify-center{justify-content:center}
-        .justify-between{justify-content:space-between}
+        /* Minimal Critical CSS - Only hero section */
+        *{box-sizing:border-box}
+        body{margin:0;font-family:system-ui,-apple-system,sans-serif;line-height:1.6}
         .relative{position:relative}
         .absolute{position:absolute}
         .h-screen{height:100vh}
@@ -83,74 +72,48 @@
         .w-full{width:100%}
         .inset-0{top:0;right:0;bottom:0;left:0}
         .z-10{z-index:10}
-        .z-50{z-index:50}
+        .flex{display:flex}
+        .items-center{align-items:center}
+        .justify-center{justify-content:center}
         .text-center{text-align:center}
-        .text-4xl{font-size:2.25rem;line-height:1.1}
+        .text-white{color:#fff}
+        .bg-cover{background-size:cover}
+        .bg-center{background-position:center}
+        .overflow-hidden{overflow:hidden}
+        .max-w-3xl{max-width:48rem}
+        .text-4xl{font-size:2.25rem}
         .text-xl{font-size:1.25rem}
         .mb-4{margin-bottom:1rem}
         .mb-8{margin-bottom:2rem}
-        .py-3{padding-top:0.75rem;padding-bottom:0.75rem}
-        .px-8{padding-left:2rem;padding-right:2rem}
-        .bg-opacity-50{background-color:rgba(0,0,0,0.5)}
-        .rounded-full{border-radius:9999px}
-        .transition{transition-duration:150ms}
-        .hover\:bg-orange-600:hover{background-color:#ea580c}
-        .bg-transparent{background-color:transparent}
-        .border-2{border-width:2px}
-        .border-white{border-color:#fff}
-        .hidden{display:none}
-        .overflow-hidden{overflow:hidden}
-        .bg-cover{background-size:cover}
-        .bg-center{background-position:center}
-        .text-shadow{text-shadow:0 2px 4px rgba(0,0,0,0.2)}
-        .max-w-3xl{max-width:48rem}
-        .fade-in{animation:fadeIn 1s ease-in}
-        @keyframes fadeIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-        @media(min-width:768px){
-            .md\:flex{display:flex}
-            .md\:text-6xl{font-size:3.75rem;line-height:1}
-            .md\:text-2xl{font-size:1.5rem}
-        }
-        @media(min-width:640px){
-            .sm\:flex-row{flex-direction:row}
-        }
-        /* Hero section optimization */
-        .hero-slider{transition:opacity 0.8s ease-in-out}
-        /* Prevent layout shift */
-        img{max-width:100%;height:auto}
+        .px-4{padding-left:1rem;padding-right:1rem}
+        /* Hero section specific */
+        .hero-slider{width:100%;height:100%;position:absolute;top:0;left:0}
+        @media(min-width:768px){.text-4xl{font-size:3.75rem}}
     </style>
 
-    <!-- Load Tailwind CSS asynchronously -->
-    <link rel="preload" href="https://cdn.tailwindcss.com" as="script">
+    <!-- Load Tailwind CSS with simple defer -->
+    <script defer src="https://cdn.tailwindcss.com"></script>
     <script>
-        const tailwindScript = document.createElement('script');
-        tailwindScript.src = 'https://cdn.tailwindcss.com';
-        tailwindScript.onload = function() {
-            tailwind.config = {
-                theme: {
-                    extend: {
-                        colors: {
-                            'ami-blue': '#0056b3',
-                            'ami-orange': '#ff7700',
-                            'ami-light-blue': '#e6f2ff'
+        // Configure Tailwind after it loads
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof tailwind !== 'undefined') {
+                tailwind.config = {
+                    theme: {
+                        extend: {
+                            colors: {
+                                'ami-blue': '#0056b3',
+                                'ami-orange': '#ff7700',
+                                'ami-light-blue': '#e6f2ff'
+                            }
                         }
                     }
                 }
             }
-        };
-        document.head.appendChild(tailwindScript);
-    </script>
-
-    <!-- Alpine.js (optimized loading) -->
-    <script>
-        // Load Alpine.js after DOM is ready but before window load
-        document.addEventListener('DOMContentLoaded', function() {
-            const alpineScript = document.createElement('script');
-            alpineScript.src = 'https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js';
-            alpineScript.defer = true;
-            document.head.appendChild(alpineScript);
         });
     </script>
+
+    <!-- Alpine.js -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
     <!-- Font Awesome for icons (non-blocking) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
@@ -164,8 +127,6 @@
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     </noscript>
 
-    <!-- Preload likely LCP hero image -->
-    <link rel="preload" as="image" href="https://images.unsplash.com/photo-1496247749665-49cf5b1022e9?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGluZHVzdHJpZXN8ZW58MHwwfDB8fHww" fetchpriority="high">
 
     <style>
         :root {
