@@ -1,17 +1,40 @@
     <!-- Header -->
-    <header class="sticky top-0 z-50 bg-white shadow-md" style="min-height:72px;">
+    <header class="sticky top-0 z-50 transition-all duration-300"
+            :class="scrolled ? 'bg-white shadow-md' : 'bg-transparent'"
+            style="min-height:72px;"
+            x-data="{
+                scrolled: false,
+                mobileMenuOpen: false,
+                productsOpen: false
+            }"
+            x-init="
+                window.addEventListener('scroll', () => {
+                    scrolled = window.scrollY > 50;
+                });
+            ">
         <div class="container px-4 py-3 mx-auto">
             <div class="flex justify-between items-center">
                 <a href="{{ route('home') }}" class="flex items-center">
-                    <img src="{{ asset('imgs/logo.png') }}" alt="AMI Logo" class="h-14" width="160" height="56" style="aspect-ratio:160/56;">
+                    <img :src="scrolled ? '{{ asset('imgs/logo.png') }}' : '{{ asset('imgs/dark-logo.png') }}'"
+                         alt="AMI Logo"
+                         class="h-14 transition-all duration-300"
+                         width="160"
+                         height="56"
+                         style="aspect-ratio:160/56;">
                 </a>
 
                 <!-- Desktop Navigation -->
-                <nav class="hidden relative space-x-8 md:flex" x-data="{ productsOpen: false }" @mouseleave="productsOpen = false">
-                    <a href="{{ route('home') }}" class="text-gray-700 transition hover:text-ami-orange hover:underline">Home</a>
-                    <a href="{{ route('about') }}" class="text-gray-700 transition hover:text-ami-orange hover:underline">About</a>
+                <nav class="hidden relative space-x-8 md:flex" @mouseleave="productsOpen = false">
+                    <a href="{{ route('home') }}"
+                       class="transition hover:text-ami-orange hover:underline"
+                       :class="scrolled ? 'text-gray-700' : 'text-white'">Home</a>
+                    <a href="{{ route('about') }}"
+                       class="transition hover:text-ami-orange hover:underline"
+                       :class="scrolled ? 'text-gray-700' : 'text-white'">About</a>
                     <div class="relative" @mouseenter="productsOpen = true">
-                        <a href="{{ route('products.index') }}" class="inline-flex items-center text-gray-700 transition hover:text-ami-orange hover:underline">
+                        <a href="{{ route('products.index') }}"
+                           class="inline-flex items-center transition hover:text-ami-orange hover:underline"
+                           :class="scrolled ? 'text-gray-700' : 'text-white'">
                             Products
                             <svg class="ml-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.21 8.29a.75.75 0 01.02-1.08z" clip-rule="evenodd"/></svg>
                         </a>
@@ -53,26 +76,58 @@
                         </div>
                     </div>
 
-                    <a href="{{ route('services.index') }}" class="text-gray-700 transition hover:text-ami-orange hover:underline">Services</a>
-                    <a href="{{ route('blog.index') }}" class="text-gray-700 transition hover:text-ami-orange hover:underline">Blog</a>
-                    <a href="{{ route('home') }}#contact" class="text-gray-700 transition hover:text-ami-orange hover:underline">Contact</a>
+                    <a href="{{ route('services.index') }}"
+                       class="transition hover:text-ami-orange hover:underline"
+                       :class="scrolled ? 'text-gray-700' : 'text-white'">Services</a>
+                    <a href="{{ route('blog.index') }}"
+                       class="transition hover:text-ami-orange hover:underline"
+                       :class="scrolled ? 'text-gray-700' : 'text-white'">Blog</a>
+                    <a href="{{ route('home') }}#contact"
+                       class="transition hover:text-ami-orange hover:underline"
+                       :class="scrolled ? 'text-gray-700' : 'text-white'">Contact</a>
                 </nav>
 
                 <!-- Mobile Menu Button -->
-                <button @click="mobileMenuOpen = !mobileMenuOpen" data-mobile-toggle class="text-gray-700 md:hidden focus:outline-none">
+                <button @click="mobileMenuOpen = !mobileMenuOpen"
+                        data-mobile-toggle
+                        class="transition-colors duration-300 md:hidden focus:outline-none"
+                        :class="scrolled ? 'text-gray-700' : 'text-white'">
                     <i class="text-2xl fas fa-bars"></i>
                 </button>
             </div>
 
             <!-- Mobile Navigation -->
-            <div x-cloak x-show="mobileMenuOpen" x-transition data-mobile-menu class="pb-4 mt-4 md:hidden mobile-menu" style="display: none;">
+            <div x-cloak
+                 x-show="mobileMenuOpen"
+                 x-transition
+                 data-mobile-menu
+                 class="pb-4 mt-4 md:hidden mobile-menu"
+                 style="display: none;">
                 <div class="flex flex-col space-y-3">
-                    <a href="{{ route('home') }}" class="text-gray-700 transition hover:text-ami-blue" @click="mobileMenuOpen = false">Home</a>
-                    <a href="{{ route('about') }}" class="text-gray-700 transition hover:text-ami-blue" @click="mobileMenuOpen = false">About</a>
-                    <a href="{{ route('products.index') }}" class="text-gray-700 transition hover:text-ami-blue" @click="mobileMenuOpen = false">Products</a>
-                    <a href="{{ route('services.index') }}" class="text-gray-700 transition hover:text-ami-blue" @click="mobileMenuOpen = false">Services</a>
-                    <a href="{{ route('blog.index') }}" class="text-gray-700 transition hover:text-ami-blue" @click="mobileMenuOpen = false">Blog</a>
-                    <a href="{{ route('home') }}#contact" class="text-gray-700 transition hover:text-ami-blue" @click="mobileMenuOpen = false">Contact</a>
+                    <a href="{{ route('home') }}"
+                       class="transition hover:text-ami-blue"
+                       :class="scrolled ? 'text-gray-700' : 'text-white'"
+                       @click="mobileMenuOpen = false">Home</a>
+                    <a href="{{ route('about') }}"
+                       class="transition hover:text-ami-blue"
+                       :class="scrolled ? 'text-gray-700' : 'text-white'"
+                       @click="mobileMenuOpen = false">About</a>
+                    <a href="{{ route('products.index') }}"
+                       class="transition hover:text-ami-blue"
+                       :class="scrolled ? 'text-gray-700' : 'text-white'"
+                       @click="mobileMenuOpen = false">Products</a>
+                    <a href="{{ route('services.index') }}"
+                       class="transition hover:text-ami-blue"
+                       :class="scrolled ? 'text-gray-700' : 'text-white'"
+                       @click="mobileMenuOpen = false">Services</a>
+                    <a href="{{ route('blog.index') }}"
+                       class="transition hover:text-ami-blue"
+                       :class="scrolled ? 'text-gray-700' : 'text-white'"
+                       @click="mobileMenuOpen = false">Blog</a>
+                    <a href="{{ route('home') }}#contact"
+                       class="transition hover:text-ami-blue"
+                       :class="scrolled ? 'text-gray-700' : 'text-white'"
+                       @click="mobileMenuOpen = false">Contact</a>
                 </div>
             </div>
         </div>

@@ -326,7 +326,7 @@
         [x-cloak] { display: none !important; }
     </style>
 </head>
-<body class="smooth-scroll" x-data="{ mobileMenuOpen: false }">
+<body class="smooth-scroll">
 
 @include('layouts.navbar')
 @yield('content')
