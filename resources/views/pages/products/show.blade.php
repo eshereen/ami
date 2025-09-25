@@ -149,10 +149,7 @@
                                 <span class="text-gray-900 capitalize">{{ $product->powertypes->name }}</span>
                             </div>
                             @endif
-                            <div class="flex justify-between py-2 border-b border-gray-200">
-                                <span class="font-medium text-gray-700">Category:</span>
-                                <span class="text-gray-900">{{ $product->subcategory->category->name }}</span>
-                            </div>
+                          
                         </div>
                     </div>
 </div>
