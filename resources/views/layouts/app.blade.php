@@ -257,9 +257,9 @@
     mobileMenuOpen: false,
     currentSlide: 0,
     slides: [
-        'https://images.unsplash.com/photo-1496247749665-49cf5b1022e9?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGluZHVzdHJpZXN8ZW58MHwwfDB8fHww',
-        'https://images.unsplash.com/photo-1613665813446-82a78c468a1d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80',
-        'https://images.pexels.com/photos/2760241/pexels-photo-2760241.jpeg'
+        '{{ asset('imgs/slide.webp') }}',
+        '{{ asset('imgs/slide-1.webp') }}',
+        '{{ asset('imgs/slide-2.webp') }}'
     ],
     init() {
         setInterval(() => {
