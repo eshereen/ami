@@ -66,7 +66,7 @@
     <style>
         /* Critical CSS for mobile-first performance */
         *{box-sizing:border-box;margin:0;padding:0}
-        html{font-size:16px;-webkit-text-size-adjust:100%}
+        html{font-size:16px;-webkit-text-size-adjust:100%;overflow-x:hidden}
         body{margin:0;font-family:system-ui,-apple-system,BlinkMacSystemFont,sans-serif;line-height:1.6;overflow-x:hidden}
 
         /* Layout utilities */
@@ -141,8 +141,11 @@
     <!-- Load Alpine.js - mobile optimized with specific version -->
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.3/dist/cdn.min.js" integrity="sha384-tV8/VPwjP+hFZRwGNc0Ug5NVFL6CkjKKfGYxF5wv84p6QI/G7z5LfO8m7oEvbNJr" crossorigin="anonymous"></script>
 
-    <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Font Awesome for icons (non-blocking) -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    </noscript>
 
     <!-- Google Fonts (optimized with font-display swap) -->
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
