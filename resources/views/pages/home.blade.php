@@ -41,11 +41,6 @@
         }">
         <!-- Mobile optimized hero images with explicit dimensions -->
         <div class="overflow-hidden absolute inset-0">
-            <!-- Debug overlay (temporary) -->
-            <div class="absolute top-2 right-2 z-20 px-2 py-1 text-xs text-white rounded pointer-events-none bg-black/60">
-                <span>slide:</span> <span x-text="currentSlide"></span>
-                <span class="ml-2" x-text="slides[currentSlide] ? slides[currentSlide].desktop.split('/').pop() : ''"></span>
-            </div>
             <template x-for="(slide, index) in slides" :key="index">
                 <div
                     x-show="currentSlide === index"
