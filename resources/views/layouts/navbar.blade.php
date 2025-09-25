@@ -1,9 +1,9 @@
     <!-- Header -->
-    <header class="bg-white shadow-md sticky top-0 z-50">
+    <header class="bg-white shadow-md sticky top-0 z-50" style="min-height:72px;">
         <div class="container mx-auto px-4 py-3">
             <div class="flex justify-between items-center">
                 <div class="flex items-center">
-                    <img src="{{ asset('imgs/logo.png') }}" alt="AMI Logo" class="h-14">
+                    <img src="{{ asset('imgs/logo.png') }}" alt="AMI Logo" class="h-14" width="160" height="56" style="aspect-ratio:160/56;">
 
                 </div>
 

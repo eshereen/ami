@@ -95,7 +95,7 @@
     </section>
 
     <!-- About AMI Section -->
-    <section id="about" class="py-20 bg-gray-50">
+    <section id="about" class="py-20 bg-gray-50" style="content-visibility:auto; contain-intrinsic-size: 1px 1000px;">
         <div class="container mx-auto px-4">
             <div class="text-center mb-16">
                 <h2 class="text-3xl md:text-4xl font-bold ami-blue mb-4">About Al Mohandes International</h2>
@@ -166,7 +166,7 @@
     </section>
 
     <!-- Products Section -->
-    <section id="products" class="py-20 bg-white">
+    <section id="products" class="py-20 bg-white" style="content-visibility:auto; contain-intrinsic-size: 1px 1200px;">
         <div class="container mx-auto px-4">
             <div class="text-center mb-16">
                 <h2 class="text-3xl md:text-4xl font-bold ami-blue mb-4">Our Products</h2>

@@ -118,26 +118,8 @@
         [style*="aspect-ratio"]{contain:layout}
     </style>
 
-    <!-- Load Tailwind CSS with simple defer -->
-    <script defer src="https://cdn.tailwindcss.com"></script>
-    <script>
-        // Configure Tailwind after it loads
-        document.addEventListener('DOMContentLoaded', function() {
-            if (typeof tailwind !== 'undefined') {
-                tailwind.config = {
-                    theme: {
-                        extend: {
-                            colors: {
-                                'ami-blue': '#0056b3',
-                                'ami-orange': '#ff7700',
-                                'ami-light-blue': '#e6f2ff'
-                            }
-                        }
-                    }
-                }
-            }
-        });
-    </script>
+    <!-- Vite build: load compiled CSS/JS -->
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <!-- Alpine.js -->
     <!-- Load Alpine.js - mobile optimized with specific version -->
