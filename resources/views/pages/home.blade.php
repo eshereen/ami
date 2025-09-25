@@ -188,7 +188,7 @@
                         <img
                             src="{{ $product->image ? asset('storage/' . $product->image) : asset('imgs/products/G1.png') }}"
                             alt="{{ $product->name }}"
-                            class="object-cover w-full h-64"
+                            class="object-contain w-full h-64 bg-gray-100"
                             loading="lazy"
                             decoding="async"
                             width="400"
