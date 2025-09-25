@@ -60,13 +60,13 @@
                 </nav>
 
                 <!-- Mobile Menu Button -->
-                <button @click="mobileMenuOpen = !mobileMenuOpen" class="md:hidden text-gray-700 focus:outline-none">
+                <button @click="mobileMenuOpen = !mobileMenuOpen" data-mobile-toggle class="md:hidden text-gray-700 focus:outline-none">
                     <i class="fas fa-bars text-2xl"></i>
                 </button>
             </div>
 
             <!-- Mobile Navigation -->
-            <div x-cloak x-show="mobileMenuOpen" x-transition class="md:hidden mt-4 pb-4" style="display: none;">
+            <div x-cloak x-show="mobileMenuOpen" x-transition data-mobile-menu class="md:hidden mt-4 pb-4 mobile-menu" style="display: none;">
                 <div class="flex flex-col space-y-3">
                     <a href="{{ route('home') }}" class="text-gray-700 hover:text-ami-blue transition" @click="mobileMenuOpen = false">Home</a>
                     <a href="{{ route('about') }}" class="text-gray-700 hover:text-ami-blue transition" @click="mobileMenuOpen = false">About</a>

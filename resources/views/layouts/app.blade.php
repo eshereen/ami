@@ -109,6 +109,13 @@
         /* Prevent CLS */
         img,picture{height:auto;max-width:100%}
         [style*="aspect-ratio"]{contain:layout}
+
+        /* Mobile menu fallback */
+        .mobile-menu{display:none}
+        .mobile-menu.active{display:block}
+        @media(max-width:767px){
+            .mobile-menu-toggle{display:block}
+        }
     </style>
 
     <!-- Vite build: load compiled CSS/JS -->
@@ -133,6 +140,32 @@
     <!-- Alpine.js -->
     <!-- Load Alpine.js - mobile optimized with specific version -->
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.3/dist/cdn.min.js" integrity="sha384-tV8/VPwjP+hFZRwGNc0Ug5NVFL6CkjKKfGYxF5wv84p6QI/G7z5LfO8m7oEvbNJr" crossorigin="anonymous"></script>
+
+    <!-- Alpine.js fallback initialization -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Ensure Alpine.js is loaded
+            if (typeof Alpine === 'undefined') {
+                console.warn('Alpine.js not loaded, loading fallback...');
+                const script = document.createElement('script');
+                script.src = 'https://cdn.jsdelivr.net/npm/alpinejs@3.13.3/dist/cdn.min.js';
+                script.defer = true;
+                document.head.appendChild(script);
+            }
+
+            // Fallback mobile menu toggle (in case Alpine.js fails)
+            setTimeout(() => {
+                const mobileToggle = document.querySelector('[data-mobile-toggle]');
+                const mobileMenu = document.querySelector('[data-mobile-menu]');
+
+                if (mobileToggle && mobileMenu) {
+                    mobileToggle.addEventListener('click', function() {
+                        mobileMenu.classList.toggle('active');
+                    });
+                }
+            }, 1000);
+        });
+    </script>
 
     <!-- Font Awesome for icons (non-blocking) -->
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
