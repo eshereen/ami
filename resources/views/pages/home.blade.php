@@ -55,13 +55,14 @@
                 >
                     <img :src="slide.desktop"
                          :srcset="slide.mobileSmall + ' 480w, ' + slide.mobile + ' 768w, ' + slide.desktop + ' 1920w'"
-                         sizes="(max-width: 768px) 100vw, (max-width: 1024px) 90vw, 1920px"
+                         sizes="(max-width: 480px) 100vw, (max-width: 768px) 100vw, (max-width: 1024px) 90vw, 1920px"
                          alt="AMI Power Generation Solutions"
                          class="object-cover w-full h-full"
                          width="1920"
                          height="1080"
                          :fetchpriority="index === 0 ? 'high' : 'low'"
                          decoding="async"
+                         loading="eager"
                          style="aspect-ratio: 16/9;"
                          :onerror="console.error('Failed to load image:', slide.desktop)">
                 </div>
@@ -181,9 +182,14 @@
                 <div class="overflow-hidden bg-white rounded-lg shadow-md hover-lift">
                     <picture>
                         <source
+                            media="(max-width: 480px)"
+                            srcset="{{ $product->image ? asset('storage/' . $product->image) : asset('imgs/products/G1.png') }}"
+                            sizes="(max-width: 480px) 100vw"
+                        >
+                        <source
                             media="(max-width: 768px)"
                             srcset="{{ $product->image ? asset('storage/' . $product->image) : asset('imgs/products/G1.png') }}"
-                            sizes="(max-width: 768px) 100vw, 400px"
+                            sizes="(max-width: 768px) 50vw"
                         >
                         <img
                             src="{{ $product->image ? asset('storage/' . $product->image) : asset('imgs/products/G1.png') }}"

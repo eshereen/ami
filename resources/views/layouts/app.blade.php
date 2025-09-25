@@ -43,17 +43,37 @@
     <!-- Critical Resource Hints -->
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="dns-prefetch" href="//images.unsplash.com">
-    <link rel="dns-prefetch" href="//cdn.pixabay.com">
-    <link rel="dns-prefetch" href="//images.pexels.com">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="dns-prefetch" href="//cdn.tailwindcss.com">
+    <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
 
     <!-- Preload LCP hero images with mobile optimization -->
     <link rel="preload" as="image" href="{{ asset('imgs/slide-mobile.webp') }}" media="(max-width: 768px)" fetchpriority="high">
     <link rel="preload" as="image" href="{{ asset('imgs/slide.webp') }}" media="(min-width: 769px)" fetchpriority="high">
 
-    <!-- Preload critical fonts with font-display swap -->
+    <!-- Optimized font loading with font-display swap -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload" href="https://fonts.gstatic.com/s/roboto/v30/KFOmCnqEu92Fr1Mu4mxKKTU1Kg.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="https://fonts.gstatic.com/s/montserrat/v25/JTUSjIg1_i6t8kCHKm459WlhyyTh89Y.woff2" as="font" type="font/woff2" crossorigin>
+
+    <!-- Font CSS with font-display swap -->
+    <style>
+        @font-face {
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 300;
+            font-display: swap;
+            src: url('https://fonts.gstatic.com/s/roboto/v30/KFOmCnqEu92Fr1Mu4mxKKTU1Kg.woff2') format('woff2');
+        }
+        @font-face {
+            font-family: 'Montserrat';
+            font-style: normal;
+            font-weight: 400;
+            font-display: swap;
+            src: url('https://fonts.gstatic.com/s/montserrat/v25/JTUSjIg1_i6t8kCHKm459WlhyyTh89Y.woff2') format('woff2');
+        }
+    </style>
     <!--Favicons-->
     <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -128,31 +148,74 @@
         }
     </style>
 
-    <!-- Vite build: load compiled CSS/JS -->
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <!-- Critical CSS inline for immediate rendering -->
+    <style>
+        /* Critical above-the-fold styles */
+        .hero-section { height: calc(100vh - 72px); margin-top: -72px; }
+        .hero-slider { width: 100%; height: 100%; position: absolute; top: 0; left: 0; }
+        .hero-slider img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
+        .fixed { position: fixed; }
+        .top-0 { top: 0; }
+        .left-0 { left: 0; }
+        .right-0 { right: 0; }
+        .z-50 { z-index: 50; }
+        .transition-all { transition: all 0.3s ease; }
+        .duration-300 { transition-duration: 300ms; }
+        .bg-transparent { background-color: transparent; }
+        .bg-white { background-color: white; }
+        .shadow-md { box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); }
+        .text-white { color: white; }
+        .text-gray-700 { color: #374151; }
+        .hover\:text-ami-orange:hover { color: #ff7700; }
+        .h-14 { height: 3.5rem; }
+        .transition-all { transition: all 0.3s ease; }
+        .duration-300 { transition-duration: 300ms; }
+    </style>
 
-    <!-- Temporary Tailwind CDN fallback while fixing build -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Non-critical CSS loaded asynchronously -->
+    <link rel="preload" href="{{ Vite::asset('resources/css/app.css') }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="{{ Vite::asset('resources/css/app.css') }}"></noscript>
+
+    <!-- Tailwind CDN with async loading -->
     <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'ami-blue': '#0056b3',
-                        'ami-orange': '#ff7700',
-                        'ami-light-blue': '#e6f2ff'
+        // Load Tailwind asynchronously
+        (function() {
+            const script = document.createElement('script');
+            script.src = 'https://cdn.tailwindcss.com';
+            script.async = true;
+            script.onload = function() {
+                tailwind.config = {
+                    theme: {
+                        extend: {
+                            colors: {
+                                'ami-blue': '#0056b3',
+                                'ami-orange': '#ff7700',
+                                'ami-light-blue': '#e6f2ff'
+                            }
+                        }
                     }
                 }
-            }
-        }
+            };
+            document.head.appendChild(script);
+        })();
     </script>
 
-    <!-- Alpine.js -->
-    <!-- Load Alpine.js - mobile optimized with specific version -->
+    <!-- Alpine.js loaded with high priority but deferred -->
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.3/dist/cdn.min.js" integrity="sha384-tV8/VPwjP+hFZRwGNc0Ug5NVFL6CkjKKfGYxF5wv84p6QI/G7z5LfO8m7oEvbNJr" crossorigin="anonymous"></script>
 
-    <!-- Alpine.js fallback initialization -->
+    <!-- Non-critical JavaScript loaded asynchronously -->
     <script>
+        // Load Font Awesome asynchronously
+        (function() {
+            const link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css';
+            link.media = 'print';
+            link.onload = function() { this.media = 'all'; };
+            document.head.appendChild(link);
+        })();
+
+        // Alpine.js fallback initialization (deferred)
         document.addEventListener('DOMContentLoaded', function() {
             // Ensure Alpine.js is loaded
             if (typeof Alpine === 'undefined') {
@@ -176,18 +239,6 @@
             }, 1000);
         });
     </script>
-
-    <!-- Font Awesome for icons (non-blocking) -->
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    </noscript>
-
-    <!-- Google Fonts (deferred for mobile performance) -->
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript>
-        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-    </noscript>
 
 
     <style>
