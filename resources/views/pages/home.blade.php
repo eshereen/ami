@@ -30,7 +30,10 @@
                     class="absolute inset-0 hero-slider"
                     style="width: 100%; height: 100vh;"
                 >
-                    <img :src="slide.desktop" alt="AMI Power Generation Solutions" class="object-cover w-full h-full" width="1920" height="1080" :fetchpriority="index === 0 ? 'high' : 'low'" decoding="async" style="aspect-ratio: 16/9;">
+                    <picture>
+                        <source :srcset="`${slide.mobile} 768w, ${slide.mobileSmall} 480w`" media="(max-width: 768px)" sizes="100vw">
+                        <img :src="slide.desktop" alt="AMI Power Generation Solutions" class="object-cover w-full h-full" width="1920" height="1080" :fetchpriority="index === 0 ? 'high' : 'low'" decoding="async" style="aspect-ratio: 16/9;">
+                    </picture>
                 </div>
             </template>
             <div class="absolute inset-0 bg-black bg-opacity-50"></div>
