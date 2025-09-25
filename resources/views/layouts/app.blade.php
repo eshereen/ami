@@ -44,7 +44,16 @@
     <link rel="dns-prefetch" href="//cdn.pixabay.com">
     <link rel="dns-prefetch" href="//images.pexels.com">
 
-    <!-- Preload critical fonts -->
+    <!-- Preload LCP hero images -->
+
+    <link rel="preload" as="image" href="{{ asset('imgs/slide.webp') }}" fetchpriority="high">
+    <link rel="preload" as="image" href="{{ asset('imgs/slide-1.webp') }}" fetchpriority="high">
+    <link rel="preload" as="image" href="{{ asset('imgs/slide-2.webp') }}" fetchpriority="high">
+    <link rel="preload" as="image" href="{{ asset('imgs/about.webp') }}" fetchpriority="high">
+    <link rel="preload" as="image" href="{{ asset('imgs/products.webp') }}" fetchpriority="high">
+
+
+    <!-- Preload critical fonts with font-display swap -->
     <link rel="preload" href="https://fonts.gstatic.com/s/roboto/v30/KFOmCnqEu92Fr1Mu4mxKKTU1Kg.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="https://fonts.gstatic.com/s/montserrat/v25/JTUSjIg1_i6t8kCHKm459WlhyyTh89Y.woff2" as="font" type="font/woff2" crossorigin>
     <!--Favicons-->
@@ -57,8 +66,8 @@
     <!-- Inline Critical CSS -->
     <style>
         /* Critical CSS - Above the fold styling */
-        body{margin:0;font-family:'Roboto',sans-serif;line-height:1.6}
-        h1,h2,h3,h4,h5,h6{font-family:'Montserrat',sans-serif;font-weight:700}
+        body{margin:0;font-family:'Roboto',sans-serif;line-height:1.6;background:#fff}
+        h1,h2,h3,h4,h5,h6{font-family:'Montserrat',sans-serif;font-weight:700;margin:0}
         .container{max-width:1200px;margin:0 auto;padding:0 1rem}
         .bg-ami-blue{background-color:#0056b3}
         .bg-ami-orange{background-color:#ff7700}
@@ -76,13 +85,13 @@
         .z-10{z-index:10}
         .z-50{z-index:50}
         .text-center{text-align:center}
-        .text-4xl{font-size:2.25rem}
+        .text-4xl{font-size:2.25rem;line-height:1.1}
         .text-xl{font-size:1.25rem}
         .mb-4{margin-bottom:1rem}
         .mb-8{margin-bottom:2rem}
         .py-3{padding-top:0.75rem;padding-bottom:0.75rem}
         .px-8{padding-left:2rem;padding-right:2rem}
-        .bg-opacity-50{background-opacity:0.5}
+        .bg-opacity-50{background-color:rgba(0,0,0,0.5)}
         .rounded-full{border-radius:9999px}
         .transition{transition-duration:150ms}
         .hover\:bg-orange-600:hover{background-color:#ea580c}
@@ -90,16 +99,25 @@
         .border-2{border-width:2px}
         .border-white{border-color:#fff}
         .hidden{display:none}
+        .overflow-hidden{overflow:hidden}
+        .bg-cover{background-size:cover}
+        .bg-center{background-position:center}
+        .text-shadow{text-shadow:0 2px 4px rgba(0,0,0,0.2)}
+        .max-w-3xl{max-width:48rem}
+        .fade-in{animation:fadeIn 1s ease-in}
+        @keyframes fadeIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
         @media(min-width:768px){
             .md\:flex{display:flex}
-            .md\:text-6xl{font-size:3.75rem}
+            .md\:text-6xl{font-size:3.75rem;line-height:1}
             .md\:text-2xl{font-size:1.5rem}
         }
         @media(min-width:640px){
             .sm\:flex-row{flex-direction:row}
         }
-        .fade-in{animation:fadeIn 1s ease-in}
-        @keyframes fadeIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+        /* Hero section optimization */
+        .hero-slider{transition:opacity 0.8s ease-in-out}
+        /* Prevent layout shift */
+        img{max-width:100%;height:auto}
     </style>
 
     <!-- Load Tailwind CSS asynchronously -->
@@ -124,9 +142,9 @@
     </script>
 
     <!-- Alpine.js (optimized loading) -->
-    <link rel="preload" href="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" as="script">
     <script>
-        window.addEventListener('load', function() {
+        // Load Alpine.js after DOM is ready but before window load
+        document.addEventListener('DOMContentLoaded', function() {
             const alpineScript = document.createElement('script');
             alpineScript.src = 'https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js';
             alpineScript.defer = true;
@@ -140,7 +158,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     </noscript>
 
-    <!-- Google Fonts (non-blocking) -->
+    <!-- Google Fonts (optimized with font-display swap) -->
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript>
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">

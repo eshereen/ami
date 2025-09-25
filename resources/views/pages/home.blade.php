@@ -28,6 +28,7 @@
                     x-transition:leave-end="opacity-0"
                     class="absolute inset-0 bg-cover bg-center hero-slider"
                     :style="`background-image: url('${slide}')`"
+                    :fetchpriority="index === 0 ? 'high' : 'low'"
                 ></div>
             </template>
             <div class="absolute inset-0 bg-black bg-opacity-50"></div>
