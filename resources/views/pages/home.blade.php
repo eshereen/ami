@@ -109,7 +109,7 @@
                 </div>
 
                 <div class="md:w-1/2">
-                    <img src="https://images.unsplash.com/photo-1649777689164-c4ad5dd3a83c?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aW5kdXN0cmllc3xlbnwwfDJ8MHx8fDA%3D" alt="AMI Manufacturing Facility" class="rounded-lg shadow-lg w-full" loading="lazy" decoding="async" width="900" height="600">
+                    <img src="{{ asset('imgs/about.webp') }}" alt="AMI Manufacturing Facility" class="rounded-lg shadow-lg w-full" loading="lazy" decoding="async" width="900" height="600">
                 </div>
             </div>
         </div>
@@ -206,7 +206,7 @@
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-16">
                 <div>
-                    <img src="https://images.unsplash.com/photo-1511454493857-0a29f2c023c7?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDZ8fGluZHVzdHJpZXN8ZW58MHwxfDB8fHww" alt="Manufacturing Facility" class="rounded-lg shadow-lg w-full" loading="lazy" decoding="async" width="900" height="600">
+                    <img src="{{ asset('imgs/products.webp') }}" alt="Manufacturing Facility" class="rounded-lg shadow-lg w-full" loading="lazy" decoding="async" width="900" height="600">
                 </div>
                 <div>
                     <h3 class="text-2xl font-bold mb-6 ami-blue">In-House Production Excellence</h3>
