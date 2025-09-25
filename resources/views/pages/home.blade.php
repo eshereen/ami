@@ -31,8 +31,18 @@
                     style="width: 100%; height: 100vh;"
                 >
                     <picture>
-                        <source :srcset="`${slide.mobile} 768w, ${slide.mobileSmall} 480w`" media="(max-width: 768px)" sizes="100vw">
-                        <img :src="slide.desktop" alt="AMI Power Generation Solutions" class="object-cover w-full h-full" width="1920" height="1080" :fetchpriority="index === 0 ? 'high' : 'low'" decoding="async" style="aspect-ratio: 16/9;">
+                        <source :srcset="slide.mobile + ' 768w, ' + slide.mobileSmall + ' 480w'" media="(max-width: 768px)" sizes="100vw">
+                        <img :src="slide.desktop"
+                             :srcset="slide.mobile + ' 768w, ' + slide.mobileSmall + ' 480w, ' + slide.desktop + ' 1920w'"
+                             sizes="(max-width: 768px) 100vw, (max-width: 1024px) 90vw, 1920px"
+                             alt="AMI Power Generation Solutions"
+                             class="object-cover w-full h-full"
+                             width="1920"
+                             height="1080"
+                             :fetchpriority="index === 0 ? 'high' : 'low'"
+                             decoding="async"
+                             style="aspect-ratio: 16/9;"
+                             :onerror="console.error('Failed to load image:', slide.desktop)">
                     </picture>
                 </div>
             </template>

@@ -312,21 +312,47 @@
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
+
+        /* Hero slider improvements */
+        .hero-slider {
+            z-index: 1;
+        }
+        .hero-slider img {
+            object-fit: cover;
+            object-position: center;
+        }
+
+        /* Debug - remove in production */
+        [x-cloak] { display: none !important; }
     </style>
 </head>
 <body class="smooth-scroll" x-data="{
     mobileMenuOpen: false,
     currentSlide: 0,
     slides: [
-        {{ json_encode(['desktop' => asset('imgs/slide.webp'), 'mobile' => asset('imgs/slide-mobile.webp'), 'mobileSmall' => asset('imgs/slide-mobile-sm.webp')]) }},
-        {{ json_encode(['desktop' => asset('imgs/slide-1.webp'), 'mobile' => asset('imgs/slide-1-mobile.webp'), 'mobileSmall' => asset('imgs/slide-1-mobile-sm.webp')]) }},
-        {{ json_encode(['desktop' => asset('imgs/slide-2.webp'), 'mobile' => asset('imgs/slide-2-mobile.webp'), 'mobileSmall' => asset('imgs/slide-2-mobile-sm.webp')]) }}
+        {
+            desktop: '{{ asset('imgs/slide.webp') }}',
+            mobile: '{{ asset('imgs/slide-mobile.webp') }}',
+            mobileSmall: '{{ asset('imgs/slide-mobile-sm.webp') }}'
+        },
+        {
+            desktop: '{{ asset('imgs/slide-1.webp') }}',
+            mobile: '{{ asset('imgs/slide-1-mobile.webp') }}',
+            mobileSmall: '{{ asset('imgs/slide-1-mobile-sm.webp') }}'
+        },
+        {
+            desktop: '{{ asset('imgs/slide-2.webp') }}',
+            mobile: '{{ asset('imgs/slide-2-mobile.webp') }}',
+            mobileSmall: '{{ asset('imgs/slide-2-mobile-sm.webp') }}'
+        }
     ],
     init() {
-        // Delay slider initialization for better mobile FCP/LCP
+        console.log('Slider initialized with slides:', this.slides);
+        // Start slider after 3 seconds
         setTimeout(() => {
             setInterval(() => {
                 this.currentSlide = (this.currentSlide + 1) % this.slides.length;
+                console.log('Current slide:', this.currentSlide);
             }, 5000);
         }, 3000);
     }
