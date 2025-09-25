@@ -1,4 +1,14 @@
 @extends('layouts.app')
+
+@section('title', 'Diesel Generators & Power Solutions | Al Mohandes International')
+@section('description', 'Explore our comprehensive range of diesel generators, gensets, and power solutions. Professional-grade equipment for industrial, commercial, and marine applications.')
+@section('keywords', 'diesel generators, gensets, power solutions, industrial generators, marine generators, backup power, power generation equipment')
+
+@section('og_type', 'website')
+@section('og_title', 'Diesel Generators & Power Solutions | Al Mohandes International')
+@section('og_description', 'Explore our comprehensive range of diesel generators, gensets, and power solutions.')
+@section('og_image', asset('imgs/ami-logo.png'))
+
 @section('content')
     <!-- Hero Section with Large Image -->
     <section class="relative h-96 md:h-[500px] overflow-hidden">

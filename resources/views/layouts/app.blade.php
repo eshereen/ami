@@ -3,14 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Al Mohandes International</title>
-    <meta name="description" content="Al Mohandes International is a leading provider of power generation solutions. We offer a wide range of products and services to meet your needs.">
-    <meta name="keywords" content="Al Mohandes International, power generation, products, services, blog, contact">
+    <!-- Dynamic SEO Meta Tags -->
+    <title>@yield('title', 'Al Mohandes International - Leading Diesel Generator Manufacturer Since 1983')</title>
+    <meta name="description" content="@yield('description', 'Al Mohandes International (AMI) is a leading diesel generator manufacturer in Egypt, providing integrated power solutions to global markets since 1983.')">
+    <meta name="keywords" content="@yield('keywords', 'diesel generators, power generation, gensets, backup power, marine generators, industrial generators, Egypt, AMI')">
     <meta name="author" content="Al Mohandes International">
-    <meta name="robots" content="index, follow">
-    <meta name="googlebot" content="index, follow">
+    <meta name="robots" content="@yield('robots', 'index, follow')">
+    <meta name="googlebot" content="@yield('robots', 'index, follow')">
     <meta name="google" content="notranslate">
     <meta name="google-site-verification" content="google-site-verification=1234567890">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="{{ url()->current() }}">
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:type" content="@yield('og_type', 'website')">
+    <meta property="og:title" content="@yield('og_title', 'Al Mohandes International - Leading Diesel Generator Manufacturer')">
+    <meta property="og:description" content="@yield('og_description', 'Leading diesel generator manufacturer in Egypt providing power solutions globally since 1983.')">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:site_name" content="Al Mohandes International">
+    <meta property="og:image" content="@yield('og_image', asset('imgs/ami-logo.png'))">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale" content="en_US">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="@yield('twitter_title', 'Al Mohandes International - Diesel Generator Manufacturer')">
+    <meta name="twitter:description" content="@yield('twitter_description', 'Leading diesel generator manufacturer in Egypt providing power solutions globally since 1983.')">
+    <meta name="twitter:image" content="@yield('twitter_image', asset('imgs/ami-logo.png'))">
+
+    <!-- Additional SEO Meta Tags -->
+    <meta name="theme-color" content="#0056b3">
+    <meta name="msapplication-TileColor" content="#0056b3">
+    <meta name="format-detection" content="telephone=no">
     <!-- Performance: DNS Prefetch & Preconnect -->
     <link rel="dns-prefetch" href="//fonts.googleapis.com">
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -199,5 +225,41 @@
     });
 
 </script>
+
+<!-- Structured Data (JSON-LD) -->
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Al Mohandes International",
+    "alternateName": "AMI",
+    "url": "{{ url('/') }}",
+    "logo": "{{ asset('imgs/logo.png') }}",
+    "description": "Leading diesel generator manufacturer in Egypt providing integrated power solutions to global markets since 1983.",
+    "foundingDate": "1983",
+    "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "6th of October City - 3rd Industrial Zone 54 St of 7 St. - Block 59, 61",
+        "addressLocality": "6th of October City",
+        "addressCountry": "Egypt"
+    },
+    "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+2-01223907708",
+        "contactType": "customer service",
+        "email": "inquiry@amigenset.com"
+    },
+    "sameAs": [
+        "http://www.facebook.com/Al-Mohandes-International-AMI-469567549743548",
+        "http://www.youtube.com/user/amigenset",
+        "http://www.linkedin.com/company/almohandesinternational"
+    ],
+    "areaServed": "Worldwide",
+    "industry": "Power Generation Equipment Manufacturing"
+}
+</script>
+
+@yield('structured_data')
+
 </body>
 </html>

@@ -11,6 +11,7 @@ use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\SubcategoryController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FrontendController;
+
 /*
 Frontend Routes
 */
@@ -33,3 +34,75 @@ Route::get('/blog',[BlogController::class,'index'])->name('blog.index');
 Route::get('/blog/{slug}',[BlogController::class,'show'])->name('blog.show');
 Route::get('/services',[ServiceController::class,'index'])->name('services.index');
 Route::get('/service/{slug}',[ServiceController::class,'show'])->name('service.show');
+
+// XML Sitemap
+Route::get('/sitemap.xml', function () {
+    $products = Product::select(['slug', 'updated_at'])->get();
+    $categories = Category::select(['slug', 'updated_at'])->get();
+    $subcategories = Subcategory::select(['slug', 'updated_at'])->get();
+
+    $sitemap = '<?xml version="1.0" encoding="UTF-8"?>';
+    $sitemap .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+
+    // Home page
+    $sitemap .= '<url>';
+    $sitemap .= '<loc>' . url('/') . '</loc>';
+    $sitemap .= '<lastmod>' . now()->toISOString() . '</lastmod>';
+    $sitemap .= '<changefreq>daily</changefreq>';
+    $sitemap .= '<priority>1.0</priority>';
+    $sitemap .= '</url>';
+
+    // Static pages
+    $staticPages = [
+        ['url' => '/about', 'priority' => '0.8'],
+        ['url' => '/products', 'priority' => '0.9'],
+        ['url' => '/categories', 'priority' => '0.8'],
+        ['url' => '/subcategories', 'priority' => '0.7'],
+        ['url' => '/services', 'priority' => '0.8'],
+        ['url' => '/contact', 'priority' => '0.7'],
+        ['url' => '/blog', 'priority' => '0.6'],
+    ];
+
+    foreach ($staticPages as $page) {
+        $sitemap .= '<url>';
+        $sitemap .= '<loc>' . url($page['url']) . '</loc>';
+        $sitemap .= '<lastmod>' . now()->toISOString() . '</lastmod>';
+        $sitemap .= '<changefreq>weekly</changefreq>';
+        $sitemap .= '<priority>' . $page['priority'] . '</priority>';
+        $sitemap .= '</url>';
+    }
+
+    // Products
+    foreach ($products as $product) {
+        $sitemap .= '<url>';
+        $sitemap .= '<loc>' . route('product.show', $product->slug) . '</loc>';
+        $sitemap .= '<lastmod>' . $product->updated_at->toISOString() . '</lastmod>';
+        $sitemap .= '<changefreq>monthly</changefreq>';
+        $sitemap .= '<priority>0.8</priority>';
+        $sitemap .= '</url>';
+    }
+
+    // Categories
+    foreach ($categories as $category) {
+        $sitemap .= '<url>';
+        $sitemap .= '<loc>' . route('category.show', $category->slug) . '</loc>';
+        $sitemap .= '<lastmod>' . $category->updated_at->toISOString() . '</lastmod>';
+        $sitemap .= '<changefreq>weekly</changefreq>';
+        $sitemap .= '<priority>0.7</priority>';
+        $sitemap .= '</url>';
+    }
+
+    // Subcategories
+    foreach ($subcategories as $subcategory) {
+        $sitemap .= '<url>';
+        $sitemap .= '<loc>' . route('subcategory.show', $subcategory->slug) . '</loc>';
+        $sitemap .= '<lastmod>' . $subcategory->updated_at->toISOString() . '</lastmod>';
+        $sitemap .= '<changefreq>weekly</changefreq>';
+        $sitemap .= '<priority>0.6</priority>';
+        $sitemap .= '</url>';
+    }
+
+    $sitemap .= '</urlset>';
+
+    return response($sitemap, 200)->header('Content-Type', 'application/xml');
+})->name('sitemap');

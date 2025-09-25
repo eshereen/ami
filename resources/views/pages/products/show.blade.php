@@ -1,4 +1,56 @@
 @extends('layouts.app')
+
+@section('title', $product->name . ' - ' . $product->model_name . ' | Al Mohandes International')
+@section('description', $product->description ? Str::limit($product->description, 160) : 'Professional ' . $product->name . ' (' . $product->model_name . ') diesel generator by Al Mohandes International. Reliable power solutions for industrial and commercial applications.')
+@section('keywords', $product->name . ', ' . $product->model_name . ', diesel generator, ' . $product->fuel_type . ', ' . $product->frequency . ', ' . $product->subcategory->name . ', power generation, AMI')
+
+@section('og_type', 'product')
+@section('og_title', $product->name . ' - ' . $product->model_name . ' | Al Mohandes International')
+@section('og_description', $product->description ? Str::limit($product->description, 160) : 'Professional ' . $product->name . ' diesel generator by Al Mohandes International.')
+@section('og_image', $product->image ? asset('storage/' . $product->image) : asset('imgs/products/G1.png'))
+
+@section('twitter_title', $product->name . ' - ' . $product->model_name . ' | AMI')
+@section('twitter_description', $product->description ? Str::limit($product->description, 160) : 'Professional ' . $product->name . ' diesel generator by Al Mohandes International.')
+@section('twitter_image', $product->image ? asset('storage/' . $product->image) : asset('imgs/products/G1.png'))
+
+@section('structured_data')
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "{{ $product->name }}",
+    "description": "{{ $product->description ?: 'Professional diesel generator by Al Mohandes International' }}",
+    "brand": {
+        "@type": "Brand",
+        "name": "Al Mohandes International"
+    },
+    "manufacturer": {
+        "@type": "Organization",
+        "name": "Al Mohandes International",
+        "url": "{{ url('/') }}"
+    },
+    "category": "{{ $product->subcategory->category->name }}",
+    "subcategory": "{{ $product->subcategory->name }}",
+    "model": "{{ $product->model_name }}",
+    "fuelType": "{{ $product->fuel_type }}",
+    "frequency": "{{ $product->frequency }}",
+    @if($product->image)
+    "image": "{{ asset('storage/' . $product->image) }}",
+    @endif
+    "url": "{{ route('product.show', $product->slug) }}",
+    "offers": {
+        "@type": "Offer",
+        "availability": "https://schema.org/InStock",
+        "priceCurrency": "USD",
+        "seller": {
+            "@type": "Organization",
+            "name": "Al Mohandes International"
+        }
+    }
+}
+</script>
+@endsection
+
 @section('content')
     <!-- Hero Section -->
     <section class="relative h-96 md:h-[500px] overflow-hidden">

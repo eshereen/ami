@@ -1,4 +1,17 @@
 @extends('layouts.app')
+
+@section('title', 'Al Mohandes International - Leading Diesel Generator Manufacturer Since 1983')
+@section('description', 'Leading diesel generator manufacturer in Egypt providing integrated power solutions to global markets since 1983. Explore our comprehensive range of gensets, marine generators, and industrial power solutions.')
+@section('keywords', 'diesel generators, power generation, gensets, backup power, marine generators, industrial generators, Egypt, AMI, Al Mohandes International, power solutions, generator manufacturer')
+
+@section('og_type', 'website')
+@section('og_title', 'Al Mohandes International - Leading Diesel Generator Manufacturer Since 1983')
+@section('og_description', 'Leading diesel generator manufacturer in Egypt providing integrated power solutions to global markets since 1983.')
+@section('og_image', asset('imgs/ami-logo.png'))
+
+@section('twitter_title', 'Al Mohandes International - Diesel Generator Manufacturer')
+@section('twitter_description', 'Leading diesel generator manufacturer in Egypt providing power solutions globally since 1983.')
+
 @section('content')
 
     <!-- Hero Section -->
