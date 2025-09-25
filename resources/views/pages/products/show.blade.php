@@ -18,8 +18,8 @@
 {
     "@context": "https://schema.org",
     "@type": "Product",
-    "name": "{{ $product->name }}",
-    "description": "{{ $product->description ?: 'Professional diesel generator by Al Mohandes International' }}",
+    "name": "{!! $product->name !!}",
+    "description": "{!! $product->description ?: 'Professional diesel generator by Al Mohandes International' !!}",
     "brand": {
         "@type": "Brand",
         "name": "Al Mohandes International"
@@ -27,17 +27,17 @@
     "manufacturer": {
         "@type": "Organization",
         "name": "Al Mohandes International",
-        "url": "{{ url('/') }}"
+        "url": "{!! url('/') !!}"
     },
-    "category": "{{ $product->subcategory->category->name }}",
-    "subcategory": "{{ $product->subcategory->name }}",
-    "model": "{{ $product->model_name }}",
-    "fuelType": "{{ $product->fuel_type }}",
-    "frequency": "{{ $product->frequency }}",
+    "category": "{!! $product->subcategory->category->name !!}",
+    "subcategory": "{!! $product->subcategory->name !!}",
+    "model": "{!! $product->model_name !!}",
+    "fuelType": "{!! $product->fuel_type !!}",
+    "frequency": "{!! $product->frequency !!}",
     @if($product->image)
-    "image": "{{ asset('storage/' . $product->image) }}",
+    "image": "{!! asset('storage/' . $product->image) !!}",
     @endif
-    "url": "{{ route('product.show', $product->slug) }}",
+    "url": "{!! route('product.show', $product->slug) !!}",
     "offers": {
         "@type": "Offer",
         "availability": "https://schema.org/InStock",

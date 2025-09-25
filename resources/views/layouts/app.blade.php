@@ -233,8 +233,8 @@
     "@type": "Organization",
     "name": "Al Mohandes International",
     "alternateName": "AMI",
-    "url": "{{ url('/') }}",
-    "logo": "{{ asset('imgs/logo.png') }}",
+    "url": "{!! url('/') !!}",
+    "logo": "{!! asset('imgs/logo.png') !!}",
     "description": "Leading diesel generator manufacturer in Egypt providing integrated power solutions to global markets since 1983.",
     "foundingDate": "1983",
     "address": {
