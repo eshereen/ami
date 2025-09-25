@@ -101,7 +101,7 @@
                  x-show="mobileMenuOpen"
                  x-transition
                  data-mobile-menu
-                 class="pb-4 mt-4 bg-white md:hidden mobile-menu"
+                 class="p-4 mt-4 bg-white md:hidden mobile-menu"
                  style="display: none;">
                 <div class="flex flex-col space-y-3">
                     <a href="{{ route('home') }}"
