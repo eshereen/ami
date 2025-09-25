@@ -29,7 +29,7 @@
                             @mouseenter="productsOpen = true"
                             @mouseleave="productsOpen = false"
                             class="absolute top-full left-0 right-0 bg-white shadow-2xl border-t border-gray-200 p-8 z-[9999] overflow-x-hidden navbar-dropdown"
-                            style="margin-top: -1px;"
+                            style="margin-top: -1px; display: none;"
                         >
                             <?php $categories = \App\Models\Category::with(['subcategories' => function($q){ $q->withCount('products'); }])->take(4)->get(); ?>
                             <div class="max-w-7xl mx-auto px-4">
@@ -66,7 +66,7 @@
             </div>
 
             <!-- Mobile Navigation -->
-            <div x-show="mobileMenuOpen" x-transition class="md:hidden mt-4 pb-4">
+            <div x-cloak x-show="mobileMenuOpen" x-transition class="md:hidden mt-4 pb-4" style="display: none;">
                 <div class="flex flex-col space-y-3">
                     <a href="{{ route('home') }}" class="text-gray-700 hover:text-ami-blue transition" @click="mobileMenuOpen = false">Home</a>
                     <a href="{{ route('about') }}" class="text-gray-700 hover:text-ami-blue transition" @click="mobileMenuOpen = false">About</a>
