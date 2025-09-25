@@ -8,8 +8,19 @@
                 productsOpen: false
             }"
             x-init="
-                window.addEventListener('scroll', () => {
+                // Initialize scroll state
+                scrolled = window.scrollY > 50;
+
+                // Add scroll listener
+                const handleScroll = () => {
                     scrolled = window.scrollY > 50;
+                };
+
+                window.addEventListener('scroll', handleScroll, { passive: true });
+
+                // Cleanup on component destroy
+                this.$el.addEventListener('alpine:destroying', () => {
+                    window.removeEventListener('scroll', handleScroll);
                 });
             ">
         <div class="container px-4 py-3 mx-auto">

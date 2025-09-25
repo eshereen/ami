@@ -226,6 +226,27 @@
                 document.head.appendChild(script);
             }
 
+            // Navbar scroll fallback (in case Alpine.js fails)
+            const header = document.querySelector('header');
+            if (header) {
+                const handleScroll = () => {
+                    const scrolled = window.scrollY > 50;
+                    if (scrolled) {
+                        header.classList.add('bg-white', 'shadow-md');
+                        header.classList.remove('bg-transparent');
+                    } else {
+                        header.classList.remove('bg-white', 'shadow-md');
+                        header.classList.add('bg-transparent');
+                    }
+                };
+
+                // Initialize state
+                handleScroll();
+
+                // Add scroll listener
+                window.addEventListener('scroll', handleScroll, { passive: true });
+            }
+
             // Fallback mobile menu toggle (in case Alpine.js fails)
             setTimeout(() => {
                 const mobileToggle = document.querySelector('[data-mobile-toggle]');
@@ -376,6 +397,22 @@
 
         /* Debug - remove in production */
         [x-cloak] { display: none !important; }
+
+        /* Navbar transparency fallback */
+        header {
+            background-color: transparent !important;
+            transition: all 0.3s ease;
+        }
+
+        /* Ensure navbar is transparent by default */
+        header:not([class*="bg-white"]) {
+            background-color: transparent !important;
+        }
+
+        /* Force transparency when not scrolled */
+        header[x-data] {
+            background-color: transparent !important;
+        }
     </style>
 </head>
 <body class="smooth-scroll">
