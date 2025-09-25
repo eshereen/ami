@@ -1,6 +1,6 @@
     <!-- Header -->
-    <header class="bg-white shadow-md sticky top-0 z-50" style="min-height:72px;">
-        <div class="container mx-auto px-4 py-3">
+    <header class="sticky top-0 z-50 bg-white shadow-md" style="min-height:72px;">
+        <div class="container px-4 py-3 mx-auto">
             <div class="flex justify-between items-center">
                 <div class="flex items-center">
                     <img src="{{ asset('imgs/logo.png') }}" alt="AMI Logo" class="h-14" width="160" height="56" style="aspect-ratio:160/56;">
@@ -8,13 +8,13 @@
                 </div>
 
                 <!-- Desktop Navigation -->
-                <nav class="hidden md:flex space-x-8 relative" x-data="{ productsOpen: false }" @mouseleave="productsOpen = false">
-                    <a href="{{ route('home') }}" class="text-gray-700 hover:text-ami-orange  hover:underline transition">Home</a>
-                    <a href="{{ route('about') }}" class="text-gray-700 hover:text-ami-orange  hover:underline transition">About</a>
+                <nav class="hidden relative space-x-8 md:flex" x-data="{ productsOpen: false }" @mouseleave="productsOpen = false">
+                    <a href="{{ route('home') }}" class="text-gray-700 transition hover:text-ami-orange hover:underline">Home</a>
+                    <a href="{{ route('about') }}" class="text-gray-700 transition hover:text-ami-orange hover:underline">About</a>
                     <div class="relative" @mouseenter="productsOpen = true">
-                        <a href="{{ route('products.index') }}" class="text-gray-700 hover:text-ami-orange hover:underline transition inline-flex items-center">
+                        <a href="{{ route('products.index') }}" class="inline-flex items-center text-gray-700 transition hover:text-ami-orange hover:underline">
                             Products
-                            <svg class="ml-1 h-4 w-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.21 8.29a.75.75 0 01.02-1.08z" clip-rule="evenodd"/></svg>
+                            <svg class="ml-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.21 8.29a.75.75 0 01.02-1.08z" clip-rule="evenodd"/></svg>
                         </a>
 
                         <div
@@ -28,11 +28,11 @@
                             x-transition:leave-end="opacity-0 -translate-y-4 scale-95"
                             @mouseenter="productsOpen = true"
                             @mouseleave="productsOpen = false"
-                            class="absolute top-full left-0 right-0 bg-white shadow-2xl border-t border-gray-200 p-8 z-[9999] overflow-x-hidden navbar-dropdown"
-                            style="margin-top: -1px; display: none;"
+                            class="fixed left-0 right-0 top-[72px] bg-white shadow-2xl border-t border-gray-200 p-8 z-[9999] overflow-x-hidden navbar-dropdown"
+                            style="display: none;"
                         >
                             <?php $categories = \App\Models\Category::with(['subcategories' => function($q){ $q->withCount('products'); }])->take(4)->get(); ?>
-                            <div class="max-w-7xl mx-auto px-4">
+                            <div class="px-4 mx-auto max-w-7xl">
                                 <div class="flex divide-x">
                                 @foreach ($categories as $category)
                                     <div class="px-6 w-1/4">
@@ -40,7 +40,7 @@
                                         <ul class="mt-3 space-y-2">
                                             @foreach ($category->subcategories as $subcategory)
                                                 <li>
-                                                    <a href="{{ route('subcategory.show', $subcategory->slug) }}" class="flex items-center justify-between text-gray-700 hover:text-ami-orange">
+                                                    <a href="{{ route('subcategory.show', $subcategory->slug) }}" class="flex justify-between items-center text-gray-700 hover:text-ami-orange">
                                                         <span class="text-sm">{{ $subcategory->name }}</span>
                                                         <span class="ml-2 text-xs text-gray-500">({{ $subcategory->products_count }})</span>
                                                     </a>
@@ -54,26 +54,26 @@
                         </div>
                     </div>
 
-                    <a href="{{ route('services.index') }}" class="text-gray-700 hover:text-ami-orange  hover:underline transition">Services</a>
-                    <a href="{{ route('blog.index') }}" class="text-gray-700 hover:text-ami-orange  hover:underline transition">Blog</a>
-                    <a href="{{ route('home') }}#contact" class="text-gray-700 hover:text-ami-orange  hover:underline transition">Contact</a>
+                    <a href="{{ route('services.index') }}" class="text-gray-700 transition hover:text-ami-orange hover:underline">Services</a>
+                    <a href="{{ route('blog.index') }}" class="text-gray-700 transition hover:text-ami-orange hover:underline">Blog</a>
+                    <a href="{{ route('home') }}#contact" class="text-gray-700 transition hover:text-ami-orange hover:underline">Contact</a>
                 </nav>
 
                 <!-- Mobile Menu Button -->
-                <button @click="mobileMenuOpen = !mobileMenuOpen" data-mobile-toggle class="md:hidden text-gray-700 focus:outline-none">
-                    <i class="fas fa-bars text-2xl"></i>
+                <button @click="mobileMenuOpen = !mobileMenuOpen" data-mobile-toggle class="text-gray-700 md:hidden focus:outline-none">
+                    <i class="text-2xl fas fa-bars"></i>
                 </button>
             </div>
 
             <!-- Mobile Navigation -->
-            <div x-cloak x-show="mobileMenuOpen" x-transition data-mobile-menu class="md:hidden mt-4 pb-4 mobile-menu" style="display: none;">
+            <div x-cloak x-show="mobileMenuOpen" x-transition data-mobile-menu class="pb-4 mt-4 md:hidden mobile-menu" style="display: none;">
                 <div class="flex flex-col space-y-3">
-                    <a href="{{ route('home') }}" class="text-gray-700 hover:text-ami-blue transition" @click="mobileMenuOpen = false">Home</a>
-                    <a href="{{ route('about') }}" class="text-gray-700 hover:text-ami-blue transition" @click="mobileMenuOpen = false">About</a>
-                    <a href="{{ route('products.index') }}" class="text-gray-700 hover:text-ami-blue transition" @click="mobileMenuOpen = false">Products</a>
-                    <a href="{{ route('services.index') }}" class="text-gray-700 hover:text-ami-blue transition" @click="mobileMenuOpen = false">Services</a>
-                    <a href="{{ route('blog.index') }}" class="text-gray-700 hover:text-ami-blue transition" @click="mobileMenuOpen = false">Blog</a>
-                    <a href="{{ route('home') }}#contact" class="text-gray-700 hover:text-ami-blue transition" @click="mobileMenuOpen = false">Contact</a>
+                    <a href="{{ route('home') }}" class="text-gray-700 transition hover:text-ami-blue" @click="mobileMenuOpen = false">Home</a>
+                    <a href="{{ route('about') }}" class="text-gray-700 transition hover:text-ami-blue" @click="mobileMenuOpen = false">About</a>
+                    <a href="{{ route('products.index') }}" class="text-gray-700 transition hover:text-ami-blue" @click="mobileMenuOpen = false">Products</a>
+                    <a href="{{ route('services.index') }}" class="text-gray-700 transition hover:text-ami-blue" @click="mobileMenuOpen = false">Services</a>
+                    <a href="{{ route('blog.index') }}" class="text-gray-700 transition hover:text-ami-blue" @click="mobileMenuOpen = false">Blog</a>
+                    <a href="{{ route('home') }}#contact" class="text-gray-700 transition hover:text-ami-blue" @click="mobileMenuOpen = false">Contact</a>
                 </div>
             </div>
         </div>
