@@ -227,37 +227,38 @@
 </script>
 
 <!-- Structured Data (JSON-LD) -->
-<script type="application/ld+json">
-{
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "Al Mohandes International",
-    "alternateName": "AMI",
-    "url": "{!! url('/') !!}",
-    "logo": "{!! asset('imgs/logo.png') !!}",
-    "description": "Leading diesel generator manufacturer in Egypt providing integrated power solutions to global markets since 1983.",
-    "foundingDate": "1983",
-    "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "6th of October City - 3rd Industrial Zone 54 St of 7 St. - Block 59, 61",
-        "addressLocality": "6th of October City",
-        "addressCountry": "Egypt"
-    },
-    "contactPoint": {
-        "@type": "ContactPoint",
-        "telephone": "+2-01223907708",
-        "contactType": "customer service",
-        "email": "inquiry@amigenset.com"
-    },
-    "sameAs": [
-        "http://www.facebook.com/Al-Mohandes-International-AMI-469567549743548",
-        "http://www.youtube.com/user/amigenset",
-        "http://www.linkedin.com/company/almohandesinternational"
-    ],
-    "areaServed": "Worldwide",
-    "industry": "Power Generation Equipment Manufacturing"
-}
-</script>
+@php
+    $orgJsonLd = [
+        '@context' => 'https://schema.org',
+        '@type' => 'Organization',
+        'name' => 'Al Mohandes International',
+        'alternateName' => 'AMI',
+        'url' => url('/'),
+        'logo' => asset('imgs/logo.png'),
+        'description' => 'Leading diesel generator manufacturer in Egypt providing integrated power solutions to global markets since 1983.',
+        'foundingDate' => '1983',
+        'address' => [
+            '@type' => 'PostalAddress',
+            'streetAddress' => '6th of October City - 3rd Industrial Zone 54 St of 7 St. - Block 59, 61',
+            'addressLocality' => '6th of October City',
+            'addressCountry' => 'Egypt',
+        ],
+        'contactPoint' => [
+            '@type' => 'ContactPoint',
+            'telephone' => '+2-01223907708',
+            'contactType' => 'customer service',
+            'email' => 'inquiry@amigenset.com',
+        ],
+        'sameAs' => [
+            'http://www.facebook.com/Al-Mohandes-International-AMI-469567549743548',
+            'http://www.youtube.com/user/amigenset',
+            'http://www.linkedin.com/company/almohandesinternational',
+        ],
+        'areaServed' => 'Worldwide',
+        'industry' => 'Power Generation Equipment Manufacturing',
+    ];
+@endphp
+<script type="application/ld+json">{!! json_encode($orgJsonLd, JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE) !!}</script>
 
 @yield('structured_data')
 

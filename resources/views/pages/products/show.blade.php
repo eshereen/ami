@@ -14,41 +14,42 @@
 @section('twitter_image', $product->image ? asset('storage/' . $product->image) : asset('imgs/products/G1.png'))
 
 @section('structured_data')
-<script type="application/ld+json">
-{
-    "@context": "https://schema.org",
-    "@type": "Product",
-    "name": "{!! $product->name !!}",
-    "description": "{!! $product->description ?: 'Professional diesel generator by Al Mohandes International' !!}",
-    "brand": {
-        "@type": "Brand",
-        "name": "Al Mohandes International"
-    },
-    "manufacturer": {
-        "@type": "Organization",
-        "name": "Al Mohandes International",
-        "url": "{!! url('/') !!}"
-    },
-    "category": "{!! $product->subcategory->category->name !!}",
-    "subcategory": "{!! $product->subcategory->name !!}",
-    "model": "{!! $product->model_name !!}",
-    "fuelType": "{!! $product->fuel_type !!}",
-    "frequency": "{!! $product->frequency !!}",
-    @if($product->image)
-    "image": "{!! asset('storage/' . $product->image) !!}",
-    @endif
-    "url": "{!! route('product.show', $product->slug) !!}",
-    "offers": {
-        "@type": "Offer",
-        "availability": "https://schema.org/InStock",
-        "priceCurrency": "USD",
-        "seller": {
-            "@type": "Organization",
-            "name": "Al Mohandes International"
-        }
+@php
+    $productJsonLd = [
+        '@context' => 'https://schema.org',
+        '@type' => 'Product',
+        'name' => $product->name,
+        'description' => $product->description ?: 'Professional diesel generator by Al Mohandes International',
+        'brand' => [
+            '@type' => 'Brand',
+            'name' => 'Al Mohandes International',
+        ],
+        'manufacturer' => [
+            '@type' => 'Organization',
+            'name' => 'Al Mohandes International',
+            'url' => url('/'),
+        ],
+        'category' => $product->subcategory->category->name,
+        'subcategory' => $product->subcategory->name,
+        'model' => $product->model_name,
+        'fuelType' => $product->fuel_type,
+        'frequency' => $product->frequency,
+        'url' => route('product.show', $product->slug),
+        'offers' => [
+            '@type' => 'Offer',
+            'availability' => 'https://schema.org/InStock',
+            'priceCurrency' => 'USD',
+            'seller' => [
+                '@type' => 'Organization',
+                'name' => 'Al Mohandes International',
+            ],
+        ],
+    ];
+    if ($product->image) {
+        $productJsonLd['image'] = asset('storage/' . $product->image);
     }
-}
-</script>
+@endphp
+<script type="application/ld+json">{!! json_encode($productJsonLd, JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE) !!}</script>
 @endsection
 
 @section('content')
