@@ -93,7 +93,7 @@
                                  class="ml-4 mt-2 space-y-1">
                                 @foreach ($category->subcategories as $subcategory)
                                 <div class="px-3 py-2 text-sm text-gray-600 bg-gray-50 rounded-lg">
-                                    {{ $subcategory->name }} ({{ $subcategory->products->count() }})
+                                    {{ $subcategory->name }} ({{ $subcategory->products_count }})
                                 </div>
                                 @endforeach
                             </div>
