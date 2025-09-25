@@ -15,11 +15,44 @@
 @section('content')
 
     <!-- Hero Section -->
-    <section id="home" class="relative h-screen">
+    <section id="home" class="relative h-screen hero-section">
+        <!-- Mobile optimized hero images with explicit dimensions -->
         <div class="absolute inset-0 overflow-hidden">
-            <template x-for="(slide, index) in slides" :key="index">
+            <!-- First slide - critical LCP image -->
+            <div
+                x-show="currentSlide === 0"
+                x-transition:enter="transition ease-in-out duration-1000"
+                x-transition:enter-start="opacity-0"
+                x-transition:enter-end="opacity-100"
+                x-transition:leave="transition ease-in-out duration-1000"
+                x-transition:leave-start="opacity-100"
+                x-transition:leave-end="opacity-0"
+                class="absolute inset-0 hero-slider"
+                style="width: 100%; height: 100vh;"
+            >
+                <picture>
+                    <source
+                        media="(max-width: 768px)"
+                        srcset="{{ asset('imgs/slide-mobile.webp') }} 768w, {{ asset('imgs/slide-mobile-sm.webp') }} 480w"
+                        sizes="100vw"
+                    >
+                    <img
+                        src="{{ asset('imgs/slide.webp') }}"
+                        alt="AMI Power Generation Solutions"
+                        class="w-full h-full object-cover"
+                        width="1920"
+                        height="1080"
+                        fetchpriority="high"
+                        decoding="async"
+                        style="aspect-ratio: 16/9;"
+                    >
+                </picture>
+            </div>
+
+            <!-- Remaining slides - lazy loaded -->
+            <template x-for="(slide, index) in slides.slice(1)" :key="index + 1">
                 <div
-                    x-show="currentSlide === index"
+                    x-show="currentSlide === index + 1"
                     x-transition:enter="transition ease-in-out duration-1000"
                     x-transition:enter-start="opacity-0"
                     x-transition:enter-end="opacity-100"
@@ -28,7 +61,7 @@
                     x-transition:leave-end="opacity-0"
                     class="absolute inset-0 bg-cover bg-center hero-slider"
                     :style="`background-image: url('${slide}')`"
-                    :fetchpriority="index === 0 ? 'high' : 'low'"
+                    style="width: 100%; height: 100vh;"
                 ></div>
             </template>
             <div class="absolute inset-0 bg-black bg-opacity-50"></div>
@@ -110,7 +143,23 @@
                 </div>
 
                 <div class="md:w-1/2">
-                    <img src="{{ asset('imgs/about.webp') }}" alt="AMI Manufacturing Facility" class="rounded-lg shadow-lg w-full" loading="lazy" decoding="async" width="900" height="600">
+                    <picture>
+                        <source
+                            media="(max-width: 768px)"
+                            srcset="{{ asset('imgs/about-mobile.webp') }} 768w, {{ asset('imgs/about-mobile-sm.webp') }} 480w"
+                            sizes="100vw"
+                        >
+                        <img
+                            src="{{ asset('imgs/about.webp') }}"
+                            alt="AMI Manufacturing Facility"
+                            class="rounded-lg shadow-lg w-full"
+                            loading="lazy"
+                            decoding="async"
+                            width="900"
+                            height="600"
+                            style="aspect-ratio: 3/2;"
+                        >
+                    </picture>
                 </div>
             </div>
         </div>
@@ -129,7 +178,23 @@
                 @foreach ($products->take(6) as $product)
                 <!-- Generator Sets -->
                 <div class="bg-white rounded-lg shadow-md overflow-hidden hover-lift">
-                    <img src="{{ $product->image ? asset('storage/' . $product->image) : asset('imgs/products/G1.png') }}" alt="{{ $product->name }}" class="w-full h-64 object-cover" loading="lazy" decoding="async" width="400" height="256">
+                    <picture>
+                        <source
+                            media="(max-width: 768px)"
+                            srcset="{{ $product->image ? asset('storage/' . $product->image) : asset('imgs/products/G1.png') }}"
+                            sizes="(max-width: 768px) 100vw, 400px"
+                        >
+                        <img
+                            src="{{ $product->image ? asset('storage/' . $product->image) : asset('imgs/products/G1.png') }}"
+                            alt="{{ $product->name }}"
+                            class="w-full h-64 object-cover"
+                            loading="lazy"
+                            decoding="async"
+                            width="400"
+                            height="256"
+                            style="aspect-ratio: 400/256;"
+                        >
+                    </picture>
 
                     <div class="p-6">
                         <h3 class="text-xl font-bold mb-2 ami-blue">{{ $product->name }}</h3>

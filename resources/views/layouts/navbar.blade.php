@@ -8,7 +8,7 @@
                 </div>
 
                 <!-- Desktop Navigation -->
-                <nav class="hidden md:flex space-x-8 relative" x-data="{ productsOpen: false, menuTop: 0, measure() { const hdr = this.$el.closest('header'); if (hdr) { this.menuTop = hdr.getBoundingClientRect().bottom; } } }" x-init="measure(); window.addEventListener('resize', () => measure()); window.addEventListener('scroll', () => measure())" @mouseleave="productsOpen = false">
+                <nav class="hidden md:flex space-x-8 relative" x-data="{ productsOpen: false }" @mouseleave="productsOpen = false">
                     <a href="{{ route('home') }}" class="text-gray-700 hover:text-ami-orange  hover:underline transition">Home</a>
                     <a href="{{ route('about') }}" class="text-gray-700 hover:text-ami-orange  hover:underline transition">About</a>
                     <div class="relative" @mouseenter="productsOpen = true">
@@ -28,8 +28,8 @@
                             x-transition:leave-end="opacity-0 -translate-y-4 scale-95"
                             @mouseenter="productsOpen = true"
                             @mouseleave="productsOpen = false"
-                            :style="{ top: menuTop + 'px' }"
-                            class="fixed inset-x-0 bg-white shadow-2xl border-t border-gray-200 p-8 z-50 overflow-x-hidden"
+                            class="absolute top-full left-0 right-0 bg-white shadow-2xl border-t border-gray-200 p-8 z-[9999] overflow-x-hidden navbar-dropdown"
+                            style="margin-top: -1px;"
                         >
                             <?php $categories = \App\Models\Category::with(['subcategories' => function($q){ $q->withCount('products'); }])->take(4)->get(); ?>
                             <div class="max-w-7xl mx-auto px-4">
