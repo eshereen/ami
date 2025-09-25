@@ -319,19 +319,19 @@
     currentSlide: 0,
     slides: [
         {
-            desktop: "{{ asset('imgs/slide.webp') }}",
-            mobile: "{{ asset('imgs/slide-mobile.webp') }}",
-            mobileSmall: "{{ asset('imgs/slide-mobile-sm.webp') }}"
+            desktop: '{{ asset('imgs/slide.webp') }}',
+            mobile: '{{ asset('imgs/slide-mobile.webp') }}',
+            mobileSmall: '{{ asset('imgs/slide-mobile-sm.webp') }}'
         },
         {
-            desktop: "{{ asset('imgs/slide-1.webp') }}",
-            mobile: "{{ asset('imgs/slide-1-mobile.webp') }}",
-            mobileSmall: "{{ asset('imgs/slide-1-mobile-sm.webp') }}"
+            desktop: '{{ asset('imgs/slide-1.webp') }}',
+            mobile: '{{ asset('imgs/slide-1-mobile.webp') }}',
+            mobileSmall: '{{ asset('imgs/slide-1-mobile-sm.webp') }}'
         },
         {
-            desktop: "{{ asset('imgs/slide-2.webp') }}",
-            mobile: "{{ asset('imgs/slide-2-mobile.webp') }}",
-            mobileSmall: "{{ asset('imgs/slide-2-mobile-sm.webp') }}"
+            desktop: '{{ asset('imgs/slide-2.webp') }}',
+            mobile: '{{ asset('imgs/slide-2-mobile.webp') }}',
+            mobileSmall: '{{ asset('imgs/slide-2-mobile-sm.webp') }}'
         }
     ],
     init() {
