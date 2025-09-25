@@ -135,7 +135,9 @@
                         @if($product->description)
                         <p class="text-gray-600 mb-4">{{ $product->description }}</p>
                         @endif
-                        <a href="{{ route('product.show', $product->slug) }}" class="text-ami-orange font-medium hover:underline">Learn More <i class="fas fa-arrow-right ml-1"></i></a>
+                        <a href="{{ route('product.show', $product->slug) }}" class="text-ami-orange font-medium hover:underline">
+                            View {{ $product->name }} Details <i class="fas fa-arrow-right ml-1"></i>
+                        </a>
                     </div>
                 </div>
                 @endforeach
@@ -383,7 +385,7 @@
                     <div class="p-6">
                         <h3 class="text-xl font-bold mb-2 ami-blue">Rugged Terrains</h3>
                         <p class="text-gray-600 mb-4">Powering mining operations and remote construction sites in challenging environments with extreme temperatures and difficult access.</p>
-                        <a href="#" class="text-ami-orange font-medium hover:underline">View Case Study <i class="fas fa-arrow-right ml-1"></i></a>
+                        <a href="#" class="text-ami-orange font-medium hover:underline">View Rugged Terrain Generator Case Study <i class="fas fa-arrow-right ml-1"></i></a>
                     </div>
                 </div>
 
@@ -393,7 +395,7 @@
                     <div class="p-6">
                         <h3 class="text-xl font-bold mb-2 ami-blue">Urban Setups</h3>
                         <p class="text-gray-600 mb-4">Providing backup power for hospitals, data centers, and commercial buildings in densely populated urban areas with strict noise regulations.</p>
-                        <a href="#" class="text-ami-orange font-medium hover:underline">View Case Study <i class="fas fa-arrow-right ml-1"></i></a>
+                        <a href="#" class="text-ami-orange font-medium hover:underline">View Urban Setup Generator Case Study <i class="fas fa-arrow-right ml-1"></i></a>
                     </div>
                 </div>
 
@@ -403,7 +405,7 @@
                     <div class="p-6">
                         <h3 class="text-xl font-bold mb-2 ami-blue">Marine Environments</h3>
                         <p class="text-gray-600 mb-4">Specialized generators for offshore platforms, ports, and marine vessels with corrosion-resistant materials and saltwater protection.</p>
-                        <a href="#" class="text-ami-orange font-medium hover:underline">View Case Study <i class="fas fa-arrow-right ml-1"></i></a>
+                        <a href="#" class="text-ami-orange font-medium hover:underline">View Marine Generator Case Study <i class="fas fa-arrow-right ml-1"></i></a>
                     </div>
                 </div>
             </div>

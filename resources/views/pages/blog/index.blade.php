@@ -61,7 +61,7 @@
                         </h3>
                         <p class="text-gray-600 mb-4">{{ Str::limit(strip_tags($blog->content), 120) }}</p>
                         <div class="flex justify-between items-center">
-                            <span class="text-ami-orange font-semibold text-sm">Read More</span>
+                            <span class="text-ami-orange font-semibold text-sm">Read Full Article</span>
                             <a href="{{ route('blog.show', $blog->slug) }}" class="text-blue-600 hover:text-ami-orange transition">
                                 <i class="fas fa-arrow-right"></i>
                             </a>
