@@ -51,7 +51,6 @@
     <link rel="preload" as="image" href="{{ asset('imgs/slide-mobile.webp') }}" media="(max-width: 768px)" fetchpriority="high">
     <link rel="preload" as="image" href="{{ asset('imgs/slide.webp') }}" media="(min-width: 769px)" fetchpriority="high">
 
-
     <!-- Preload critical fonts with font-display swap -->
     <link rel="preload" href="https://fonts.gstatic.com/s/roboto/v30/KFOmCnqEu92Fr1Mu4mxKKTU1Kg.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="https://fonts.gstatic.com/s/montserrat/v25/JTUSjIg1_i6t8kCHKm459WlhyyTh89Y.woff2" as="font" type="font/woff2" crossorigin>
@@ -62,19 +61,17 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
 
-    <!-- Inline Critical CSS - Mobile Optimized -->
+    <!-- Ultra-minimal Critical CSS for mobile FCP -->
     <style>
-        /* Critical CSS for mobile-first performance */
+        /* Essential mobile-first critical CSS only */
         *{box-sizing:border-box;margin:0;padding:0}
         html{font-size:16px;-webkit-text-size-adjust:100%;overflow-x:hidden}
-        body{margin:0;font-family:system-ui,-apple-system,BlinkMacSystemFont,sans-serif;line-height:1.6;overflow-x:hidden}
+        body{margin:0;font-family:system-ui,-apple-system,sans-serif;line-height:1.6;overflow-x:hidden}
 
-        /* Layout utilities */
+        /* Hero section - absolute minimum */
         .relative{position:relative}
         .absolute{position:absolute}
         .h-screen{height:100vh;min-height:600px}
-        .h-full{height:100%}
-        .w-full{width:100%}
         .inset-0{top:0;right:0;bottom:0;left:0}
         .z-10{z-index:10}
         .flex{display:flex}
@@ -84,12 +81,12 @@
         .text-white{color:#fff}
         .overflow-hidden{overflow:hidden}
 
-        /* Hero section critical styles */
+        /* Hero image optimization */
         .hero-section{contain:layout style paint}
         .hero-slider{width:100%;height:100%;position:absolute;top:0;left:0;contain:layout}
         .hero-slider img{width:100%;height:100%;object-fit:cover;object-position:center}
 
-        /* Mobile-first typography */
+        /* Critical typography only */
         .text-4xl{font-size:2rem;line-height:1.1;font-weight:700}
         .text-xl{font-size:1.125rem;line-height:1.4}
         .mb-4{margin-bottom:1rem}
@@ -97,23 +94,19 @@
         .px-4{padding-left:1rem;padding-right:1rem}
         .max-w-3xl{max-width:48rem;margin:0 auto}
 
-        /* Performance optimizations */
-        .fade-in{opacity:1;transform:translateY(0)}
+        /* Essential performance */
         .bg-black{background-color:#000}
         .bg-opacity-50{background-color:rgba(0,0,0,0.5)}
-
-        /* Mobile navigation z-index fix */
         header{z-index:1000;position:sticky;top:0}
 
-        /* Medium screens and up */
+        /* Desktop only */
         @media(min-width:768px){
             .text-4xl{font-size:3.75rem}
             .text-xl{font-size:1.5rem}
             .mb-8{margin-bottom:2rem}
-            .h-screen{min-height:100vh}
         }
 
-        /* Prevent layout shifts */
+        /* Prevent CLS */
         img,picture{height:auto;max-width:100%}
         [style*="aspect-ratio"]{contain:layout}
     </style>
@@ -147,7 +140,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     </noscript>
 
-    <!-- Google Fonts (optimized with font-display swap) -->
+    <!-- Google Fonts (deferred for mobile performance) -->
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript>
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -287,12 +280,12 @@
         '{{ asset('imgs/slide-2.webp') }}'
     ],
     init() {
-        // Delay slider initialization for better FCP/LCP
+        // Delay slider initialization for better mobile FCP/LCP
         setTimeout(() => {
             setInterval(() => {
                 this.currentSlide = (this.currentSlide + 1) % this.slides.length;
             }, 5000);
-        }, 2000);
+        }, 3000);
     }
 }">
 
