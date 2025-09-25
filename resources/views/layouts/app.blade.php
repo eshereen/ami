@@ -37,17 +37,16 @@
     <meta name="theme-color" content="#0056b3">
     <meta name="msapplication-TileColor" content="#0056b3">
     <meta name="format-detection" content="telephone=no">
-    <!-- Performance: DNS Prefetch & Preconnect -->
-    <link rel="dns-prefetch" href="//fonts.googleapis.com">
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link rel="dns-prefetch" href="//cdn.tailwindcss.com">
-    <link rel="dns-prefetch" href="//cdn.jsdelivr.net">
-    <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
+    <!-- Critical Resource Hints -->
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
-    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="dns-prefetch" href="//images.unsplash.com">
+    <link rel="dns-prefetch" href="//cdn.pixabay.com">
+    <link rel="dns-prefetch" href="//images.pexels.com">
+
+    <!-- Preload critical fonts -->
+    <link rel="preload" href="https://fonts.gstatic.com/s/roboto/v30/KFOmCnqEu92Fr1Mu4mxKKTU1Kg.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="https://fonts.gstatic.com/s/montserrat/v25/JTUSjIg1_i6t8kCHKm459WlhyyTh89Y.woff2" as="font" type="font/woff2" crossorigin>
     <!--Favicons-->
     <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -55,24 +54,85 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
 
-    <!-- Tailwind CSS (deferred) -->
-    <script defer src="https://cdn.tailwindcss.com"></script>
+    <!-- Inline Critical CSS -->
+    <style>
+        /* Critical CSS - Above the fold styling */
+        body{margin:0;font-family:'Roboto',sans-serif;line-height:1.6}
+        h1,h2,h3,h4,h5,h6{font-family:'Montserrat',sans-serif;font-weight:700}
+        .container{max-width:1200px;margin:0 auto;padding:0 1rem}
+        .bg-ami-blue{background-color:#0056b3}
+        .bg-ami-orange{background-color:#ff7700}
+        .text-white{color:#fff}
+        .flex{display:flex}
+        .items-center{align-items:center}
+        .justify-center{justify-content:center}
+        .justify-between{justify-content:space-between}
+        .relative{position:relative}
+        .absolute{position:absolute}
+        .h-screen{height:100vh}
+        .h-full{height:100%}
+        .w-full{width:100%}
+        .inset-0{top:0;right:0;bottom:0;left:0}
+        .z-10{z-index:10}
+        .z-50{z-index:50}
+        .text-center{text-align:center}
+        .text-4xl{font-size:2.25rem}
+        .text-xl{font-size:1.25rem}
+        .mb-4{margin-bottom:1rem}
+        .mb-8{margin-bottom:2rem}
+        .py-3{padding-top:0.75rem;padding-bottom:0.75rem}
+        .px-8{padding-left:2rem;padding-right:2rem}
+        .bg-opacity-50{background-opacity:0.5}
+        .rounded-full{border-radius:9999px}
+        .transition{transition-duration:150ms}
+        .hover\:bg-orange-600:hover{background-color:#ea580c}
+        .bg-transparent{background-color:transparent}
+        .border-2{border-width:2px}
+        .border-white{border-color:#fff}
+        .hidden{display:none}
+        @media(min-width:768px){
+            .md\:flex{display:flex}
+            .md\:text-6xl{font-size:3.75rem}
+            .md\:text-2xl{font-size:1.5rem}
+        }
+        @media(min-width:640px){
+            .sm\:flex-row{flex-direction:row}
+        }
+        .fade-in{animation:fadeIn 1s ease-in}
+        @keyframes fadeIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+    </style>
+
+    <!-- Load Tailwind CSS asynchronously -->
+    <link rel="preload" href="https://cdn.tailwindcss.com" as="script">
     <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'ami-blue': '#0056b3',
-                        'ami-orange': '#ff7700',
-                        'ami-light-blue': '#e6f2ff'
+        const tailwindScript = document.createElement('script');
+        tailwindScript.src = 'https://cdn.tailwindcss.com';
+        tailwindScript.onload = function() {
+            tailwind.config = {
+                theme: {
+                    extend: {
+                        colors: {
+                            'ami-blue': '#0056b3',
+                            'ami-orange': '#ff7700',
+                            'ami-light-blue': '#e6f2ff'
+                        }
                     }
                 }
             }
-        }
+        };
+        document.head.appendChild(tailwindScript);
     </script>
 
-    <!-- Alpine.js -->
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <!-- Alpine.js (optimized loading) -->
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" as="script">
+    <script>
+        window.addEventListener('load', function() {
+            const alpineScript = document.createElement('script');
+            alpineScript.src = 'https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js';
+            alpineScript.defer = true;
+            document.head.appendChild(alpineScript);
+        });
+    </script>
 
     <!-- Font Awesome for icons (non-blocking) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
@@ -80,8 +140,11 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     </noscript>
 
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Google Fonts (non-blocking) -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    </noscript>
 
     <!-- Preload likely LCP hero image -->
     <link rel="preload" as="image" href="https://images.unsplash.com/photo-1496247749665-49cf5b1022e9?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGluZHVzdHJpZXN8ZW58MHwwfDB8fHww" fetchpriority="high">
