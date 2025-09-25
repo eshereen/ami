@@ -121,15 +121,28 @@
     <!-- Vite build: load compiled CSS/JS -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
+    <!-- Temporary Tailwind CDN fallback while fixing build -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'ami-blue': '#0056b3',
+                        'ami-orange': '#ff7700',
+                        'ami-light-blue': '#e6f2ff'
+                    }
+                }
+            }
+        }
+    </script>
+
     <!-- Alpine.js -->
     <!-- Load Alpine.js - mobile optimized with specific version -->
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.3/dist/cdn.min.js" integrity="sha384-tV8/VPwjP+hFZRwGNc0Ug5NVFL6CkjKKfGYxF5wv84p6QI/G7z5LfO8m7oEvbNJr" crossorigin="anonymous"></script>
 
-    <!-- Font Awesome for icons (non-blocking) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
-    <noscript>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    </noscript>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <!-- Google Fonts (optimized with font-display swap) -->
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
