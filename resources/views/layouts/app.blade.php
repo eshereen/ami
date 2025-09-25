@@ -397,22 +397,6 @@
 
         /* Debug - remove in production */
         [x-cloak] { display: none !important; }
-
-        /* Navbar transparency fallback */
-        header {
-            background-color: transparent !important;
-            transition: all 0.3s ease;
-        }
-
-        /* Ensure navbar is transparent by default */
-        header:not([class*="bg-white"]) {
-            background-color: transparent !important;
-        }
-
-        /* Force transparency when not scrolled */
-        header[x-data] {
-            background-color: transparent !important;
-        }
     </style>
 </head>
 <body class="smooth-scroll">
