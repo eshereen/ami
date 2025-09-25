@@ -2,10 +2,9 @@
     <header class="sticky top-0 z-50 bg-white shadow-md" style="min-height:72px;">
         <div class="container px-4 py-3 mx-auto">
             <div class="flex justify-between items-center">
-                <div class="flex items-center">
+                <a href="{{ route('home') }}" class="flex items-center">
                     <img src="{{ asset('imgs/logo.png') }}" alt="AMI Logo" class="h-14" width="160" height="56" style="aspect-ratio:160/56;">
-
-                </div>
+                </a>
 
                 <!-- Desktop Navigation -->
                 <nav class="hidden relative space-x-8 md:flex" x-data="{ productsOpen: false }" @mouseleave="productsOpen = false">
