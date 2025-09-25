@@ -18,57 +18,28 @@
     <section id="home" class="relative h-screen hero-section">
         <!-- Mobile optimized hero images with explicit dimensions -->
         <div class="absolute inset-0 overflow-hidden">
-            <!-- First slide - critical LCP image -->
-            <div
-                x-show="currentSlide === 0"
-                x-transition:enter="transition ease-in-out duration-1000"
-                x-transition:enter-start="opacity-0"
-                x-transition:enter-end="opacity-100"
-                x-transition:leave="transition ease-in-out duration-1000"
-                x-transition:leave-start="opacity-100"
-                x-transition:leave-end="opacity-0"
-                class="absolute inset-0 hero-slider"
-                style="width: 100%; height: 100vh;"
-            >
-                <picture>
-                    <source
-                        media="(max-width: 768px)"
-                        srcset="{{ asset('imgs/slide-mobile.webp') }} 768w, {{ asset('imgs/slide-mobile-sm.webp') }} 480w"
-                        sizes="100vw"
-                    >
-                    <img
-                        src="{{ asset('imgs/slide.webp') }}"
-                        alt="AMI Power Generation Solutions"
-                        class="w-full h-full object-cover"
-                        width="1920"
-                        height="1080"
-                        fetchpriority="high"
-                        decoding="async"
-                        style="aspect-ratio: 16/9;"
-                    >
-                </picture>
-            </div>
-
-            <!-- Remaining slides - lazy loaded -->
-            <template x-for="(slide, index) in slides.slice(1)" :key="index + 1">
+            <template x-for="(slide, index) in slides" :key="index">
                 <div
-                    x-show="currentSlide === index + 1"
+                    x-show="currentSlide === index"
                     x-transition:enter="transition ease-in-out duration-1000"
                     x-transition:enter-start="opacity-0"
                     x-transition:enter-end="opacity-100"
                     x-transition:leave="transition ease-in-out duration-1000"
                     x-transition:leave-start="opacity-100"
                     x-transition:leave-end="opacity-0"
-                    class="absolute inset-0 bg-cover bg-center hero-slider"
-                    :style="`background-image: url('${slide}')`"
+                    class="absolute inset-0 hero-slider"
                     style="width: 100%; height: 100vh;"
-                ></div>
+                >
+                    <picture>
+                        <source :srcset="`${slide.mobile} 768w, ${slide.mobileSmall} 480w`" media="(max-width: 768px)" sizes="100vw">
+                        <img :src="slide.desktop" :srcset="`${slide.mobile} 768w, ${slide.mobileSmall} 480w, ${slide.desktop} 1920w`" sizes="(max-width: 768px) 100vw, (max-width: 1024px) 90vw, 1920px" alt="AMI Power Generation Solutions" class="w-full h-full object-cover" width="1920" height="1080" :fetchpriority="index === 0 ? 'high' : 'low'" decoding="async" style="aspect-ratio: 16/9;">
+                    </picture>
+                </div>
             </template>
             <div class="absolute inset-0 bg-black bg-opacity-50"></div>
         </div>
 
-        <div class="relative z-10 h-full flex items-center justify-center text-white text-center px-4">
-            <div class="max-w-3xl fade-in">
+        <div class="relative z-10 h-full flex items-center justify-center text-white text-center px-4" style="contain:layout;"><div class="max-w-3xl fade-in">
                 <h1 class="text-4xl md:text-6xl font-bold mb-4 text-shadow">Powering Reliability Since 1983</h1>
                 <p class="text-xl md:text-2xl mb-8 text-shadow">Engineering Excellence in Diesel Generator Solutions</p>
                 <div class="flex flex-col sm:flex-row justify-center gap-4">

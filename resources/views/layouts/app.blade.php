@@ -318,9 +318,21 @@
     mobileMenuOpen: false,
     currentSlide: 0,
     slides: [
-        '{{ asset('imgs/slide.webp') }}',
-        '{{ asset('imgs/slide-1.webp') }}',
-        '{{ asset('imgs/slide-2.webp') }}'
+        {
+            desktop: "{{ asset('imgs/slide.webp') }}",
+            mobile: "{{ asset('imgs/slide-mobile.webp') }}",
+            mobileSmall: "{{ asset('imgs/slide-mobile-sm.webp') }}"
+        },
+        {
+            desktop: "{{ asset('imgs/slide-1.webp') }}",
+            mobile: "{{ asset('imgs/slide-1-mobile.webp') }}",
+            mobileSmall: "{{ asset('imgs/slide-1-mobile-sm.webp') }}"
+        },
+        {
+            desktop: "{{ asset('imgs/slide-2.webp') }}",
+            mobile: "{{ asset('imgs/slide-2-mobile.webp') }}",
+            mobileSmall: "{{ asset('imgs/slide-2-mobile-sm.webp') }}"
+        }
     ],
     init() {
         // Delay slider initialization for better mobile FCP/LCP
