@@ -110,9 +110,53 @@
                     <a href="{{ route('about') }}"
                        class="text-gray-700 transition hover:text-ami-orange"
                        @click="mobileMenuOpen = false">About</a>
-                    <a href="{{ route('products.index') }}"
-                       class="text-gray-700 transition hover:text-ami-orange"
-                       @click="mobileMenuOpen = false">Products</a>
+
+                    <!-- Products with Mobile Mega Menu -->
+                    <div class="relative">
+                        <button @click="productsOpen = !productsOpen"
+                                class="flex justify-between items-center w-full text-gray-700 transition hover:text-ami-orange">
+                            <span>Products</span>
+                            <svg class="w-4 h-4 transition-transform duration-200"
+                                 :class="productsOpen ? 'rotate-180' : ''"
+                                 fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.21 8.29a.75.75 0 01.02-1.08z" clip-rule="evenodd"/>
+                            </svg>
+                        </button>
+
+                        <!-- Mobile Products Dropdown -->
+                        <div x-show="productsOpen"
+                             x-transition:enter="transition ease-out duration-200"
+                             x-transition:enter-start="opacity-0 transform scale-95"
+                             x-transition:enter-end="opacity-100 transform scale-100"
+                             x-transition:leave="transition ease-in duration-150"
+                             x-transition:leave-start="opacity-100 transform scale-100"
+                             x-transition:leave-end="opacity-0 transform scale-95"
+                             class="mt-3 ml-4 space-y-3">
+                            <?php $categories = \App\Models\Category::with(['subcategories' => function($q){ $q->withCount('products'); }])->take(4)->get(); ?>
+                            @foreach ($categories as $category)
+                                <div class="pl-3 border-l-2 border-ami-orange">
+                                    <a href="{{ route('category.show', $category->slug) }}"
+                                       class="block mb-2 text-sm font-semibold text-gray-900 hover:text-ami-orange"
+                                       @click="mobileMenuOpen = false">
+                                        {{ $category->name }}
+                                    </a>
+                                    <ul class="space-y-1">
+                                        @foreach ($category->subcategories as $subcategory)
+                                            <li>
+                                                <a href="{{ route('subcategory.show', $subcategory->slug) }}"
+                                                   class="block text-sm text-gray-600 hover:text-ami-orange"
+                                                   @click="mobileMenuOpen = false">
+                                                    {{ $subcategory->name }}
+                                                    <span class="text-xs text-gray-400">({{ $subcategory->products_count }})</span>
+                                                </a>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+
                     <a href="{{ route('services.index') }}"
                        class="text-gray-700 transition hover:text-ami-orange"
                        @click="mobileMenuOpen = false">Services</a>
