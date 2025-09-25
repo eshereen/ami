@@ -326,37 +326,7 @@
         [x-cloak] { display: none !important; }
     </style>
 </head>
-<body class="smooth-scroll" x-data="{
-    mobileMenuOpen: false,
-    currentSlide: 0,
-    slides: [
-        {
-            desktop: '{{ asset('imgs/slide.webp') }}',
-            mobile: '{{ asset('imgs/slide-mobile.webp') }}',
-            mobileSmall: '{{ asset('imgs/slide-mobile-sm.webp') }}'
-        },
-        {
-            desktop: '{{ asset('imgs/slide-1.webp') }}',
-            mobile: '{{ asset('imgs/slide-1-mobile.webp') }}',
-            mobileSmall: '{{ asset('imgs/slide-1-mobile-sm.webp') }}'
-        },
-        {
-            desktop: '{{ asset('imgs/slide-2.webp') }}',
-            mobile: '{{ asset('imgs/slide-2-mobile.webp') }}',
-            mobileSmall: '{{ asset('imgs/slide-2-mobile-sm.webp') }}'
-        }
-    ],
-    init() {
-        console.log('Slider initialized with slides:', this.slides);
-        // Start slider after 3 seconds
-        setTimeout(() => {
-            setInterval(() => {
-                this.currentSlide = (this.currentSlide + 1) % this.slides.length;
-                console.log('Current slide:', this.currentSlide);
-            }, 5000);
-        }, 3000);
-    }
-}">
+<body class="smooth-scroll" x-data="{ mobileMenuOpen: false }">
 
 @include('layouts.navbar')
 @yield('content')

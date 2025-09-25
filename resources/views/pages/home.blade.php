@@ -15,7 +15,26 @@
 @section('content')
 
     <!-- Hero Section -->
-    <section id="home" class="relative h-screen hero-section">
+    <section id="home" class="relative h-screen hero-section" x-data="{
+            currentSlide: 0,
+            slides: [
+                {
+                    desktop: '{{ asset('imgs/slide.webp') }}',
+                    mobile: '{{ asset('imgs/slide-mobile.webp') }}',
+                    mobileSmall: '{{ asset('imgs/slide-mobile-sm.webp') }}'
+                },
+                {
+                    desktop: '{{ asset('imgs/slide-1.webp') }}',
+                    mobile: '{{ asset('imgs/slide-1-mobile.webp') }}',
+                    mobileSmall: '{{ asset('imgs/slide-1-mobile-sm.webp') }}'
+                },
+                {
+                    desktop: '{{ asset('imgs/slide-2.webp') }}',
+                    mobile: '{{ asset('imgs/slide-2-mobile.webp') }}',
+                    mobileSmall: '{{ asset('imgs/slide-2-mobile-sm.webp') }}'
+                }
+            ]
+        }" x-init="setTimeout(() => { setInterval(() => { currentSlide = (currentSlide + 1) % slides.length }, 5000) }, 3000)">
         <!-- Mobile optimized hero images with explicit dimensions -->
         <div class="overflow-hidden absolute inset-0">
             <template x-for="(slide, index) in slides" :key="index">
