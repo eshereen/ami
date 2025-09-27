@@ -189,11 +189,11 @@
 
                     <!-- Action Buttons -->
                     <div class="flex flex-col gap-4 mt-4 sm:flex-row">
-                        <a href="{{ route('contact.index') }}"
+                        <a href="{{ route('home') }}#contact"
                            class="px-8 py-4 font-semibold text-center text-white rounded-lg transition bg-ami-orange hover:bg-orange-600">
                             <i class="mr-2 fas fa-envelope"></i>Request Quote
                         </a>
-                        <a href="{{ route('contact.index') }}"
+                        <a href="{{ route('home') }}#contact"
                            class="px-8 py-4 font-semibold text-center bg-transparent rounded-lg border-2 transition border-ami-orange text-ami-orange hover:bg-ami-orange hover:text-white">
                             <i class="mr-2 fas fa-phone"></i>Contact Sales
                         </a>
@@ -290,8 +290,7 @@
                     Get Free Quote
                 </a>
                 <a href="tel:+201223907708"
-                   class="px-8 py-3 font-semibold bg-transparent rounded-lg border-2 transition border-ami-orange text-ami-orange hover:bg-ami-orange hover:text-white"
-                   onclick="console.log('Call button clicked')">
+                   class="px-8 py-3 font-semibold bg-transparent rounded-lg border-2 transition border-ami-orange text-ami-orange hover:bg-ami-orange hover:text-white">
                     <i class="mr-2 fas fa-phone"></i>Call Now
                 </a>
             </div>
