@@ -261,7 +261,23 @@
 
         // Alpine.js initialization check (handled above)
 
-            // Navbar scroll fallback (in case Alpine.js fails)
+        // Ensure navbar is always visible
+        document.addEventListener('DOMContentLoaded', function() {
+            const header = document.querySelector('header');
+            if (header) {
+                // Remove any potential x-cloak that might be hiding the header
+                header.removeAttribute('x-cloak');
+                header.style.display = 'block';
+
+                // Ensure the header has some background if Alpine.js fails to set it
+                if (typeof Alpine === 'undefined') {
+                    header.classList.add('bg-white', 'shadow-md');
+                }
+            }
+        });
+
+        // Navbar scroll fallback (in case Alpine.js fails)
+        document.addEventListener('DOMContentLoaded', function() {
             const header = document.querySelector('header');
             if (header) {
                 const handleScroll = () => {
@@ -531,6 +547,28 @@
 
         /* Ensure navbar works without Alpine.js */
         [x-cloak] {
+            display: none !important;
+        }
+
+        /* Override x-cloak for critical elements like navbar */
+        header[x-cloak] {
+            display: block !important;
+        }
+
+        /* Ensure header is always visible */
+        header {
+            display: block !important;
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+            z-index: 50 !important;
+            background: white !important;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1) !important;
+        }
+
+        /* Only hide mobile menu with x-cloak, not the entire header */
+        .mobile-menu[x-cloak] {
             display: none !important;
         }
 
