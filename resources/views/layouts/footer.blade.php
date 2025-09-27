@@ -25,11 +25,10 @@
                 <div class="flex flex-col items-center md:items-start">
                     <h4 class="mb-4 text-xl font-bold">Products</h4>
                     <ul class="space-y-2">
-                        <li><a href="{{ route('products.index') }}" class="text-gray-300 transition hover:text-white">Generator Sets</a></li>
-                        <li><a href="#" class="text-gray-300 transition hover:text-white">Accessories</a></li>
-                        <li><a href="{{ route('products.index') }}" class="text-gray-300 transition hover:text-white">Trailers</a></li>
-                        <li><a href="{{ route('products.index') }}" class="text-gray-300 transition hover:text-white">Canopies</a></li>
-                        <li><a href="{{ route('products.index') }}" class="text-gray-300 transition hover:text-white">Low Voltage Panels</a></li>
+                        <li><a href="{{ route('products.index') }}" class="text-gray-300 transition hover:text-white">All Products</a></li>
+                        @foreach(\App\Models\Category::select(['id','name','slug'])->orderBy('name')->get() as $category)
+                            <li><a href="{{ route('category.show', $category->slug) }}" class="text-gray-300 transition hover:text-white">{{ $category->name }}</a></li>
+                        @endforeach
                     </ul>
                 </div>
 
