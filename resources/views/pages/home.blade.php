@@ -584,8 +584,8 @@
                             </div>
                             <div>
                                 <h4 class="mb-1 font-bold">Phone</h4>
-                                <a href="tel:(+2) 01223907708" class="text-gray-600" tel="(+2) 01223907708">(+2) 01223907708</a><br>
-                                <a href="tel:(+2) 01223295077" class="text-gray-600" tel="(+2) 01223295077">(+2) 01223295077</a>
+                                <a href="tel:+201223907708" class="text-gray-600">(+2) 01223907708</a><br>
+                                <a href="tel:+201223295077" class="text-gray-600">(+2) 01223295077</a>
                             </div>
                         </div>
 
@@ -605,7 +605,7 @@
                             </div>
                             <div>
                                 <h4 class="mb-1 font-bold">Fax</h4>
-                                <a href="tel:(+2) 38206210" class="text-gray-600" tel="(+2) 38206210">(+2) 38206210</a>
+                                <a href="tel:+238206210" class="text-gray-600">(+2) 38206210</a>
                             </div>
                         </div>
                     </div>

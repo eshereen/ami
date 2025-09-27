@@ -287,8 +287,7 @@
                 <a href="{{ route('home') }}#contact" class="px-8 py-3 font-semibold text-white rounded-lg transition bg-ami-orange hover:bg-orange-600">
                     Get Free Quote
                 </a>
-                <a href="tel:+201223907708
-" class="px-8 py-3 font-semibold bg-transparent rounded-lg border-2 transition border-ami-orange text-ami-orange hover:bg-ami-orange hover:text-white">
+                <a href="tel:+201223907708" class="px-8 py-3 font-semibold bg-transparent rounded-lg border-2 transition border-ami-orange text-ami-orange hover:bg-ami-orange hover:text-white">
                     <i class="mr-2 fas fa-phone"></i>Call Now
                 </a>
             </div>
