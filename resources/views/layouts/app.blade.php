@@ -260,8 +260,9 @@
             setTimeout(() => {
                 const mobileToggle = document.querySelector('[data-mobile-toggle]');
                 const mobileMenu = document.querySelector('[data-mobile-menu]');
+                const header = document.querySelector('header');
 
-                if (mobileToggle && mobileMenu) {
+                if (mobileToggle && mobileMenu && header) {
                     // Remove Alpine.js attributes that might be causing conflicts
                     mobileMenu.removeAttribute('x-cloak');
                     mobileMenu.removeAttribute('x-show');
@@ -270,6 +271,26 @@
 
                     // Ensure menu is initially hidden
                     mobileMenu.style.display = 'none';
+
+                    // Function to update mobile button color based on scroll
+                    const updateMobileButtonColor = () => {
+                        const scrolled = window.scrollY > 50;
+                        const isHomePage = window.location.pathname === '/';
+
+                        if (scrolled || !isHomePage) {
+                            mobileToggle.classList.remove('text-white');
+                            mobileToggle.classList.add('text-gray-700');
+                        } else {
+                            mobileToggle.classList.remove('text-gray-700');
+                            mobileToggle.classList.add('text-white');
+                        }
+                    };
+
+                    // Initialize button color
+                    updateMobileButtonColor();
+
+                    // Update on scroll
+                    window.addEventListener('scroll', updateMobileButtonColor, { passive: true });
 
                     // Simple toggle functionality
                     mobileToggle.addEventListener('click', function(e) {
