@@ -922,11 +922,11 @@
     // Category page fallback - show static version when Alpine.js fails
     function initializeCategoryPageFallback() {
         const staticProducts = document.getElementById('static-products');
-        const alpineSection = document.querySelector('[x-data]');
+        const alpineSection = document.getElementById('category-app') || document.querySelector('[x-data]');
 
         if (staticProducts && alpineSection) {
             // Hide Alpine.js section and show static version
-            alpineSection.style.display = 'none';
+            if (alpineSection) alpineSection.style.display = 'none';
             staticProducts.style.display = 'block';
 
             // Initialize search functionality for static version

@@ -86,7 +86,7 @@
         </div>
 
         <!-- Search, Grid and No-Results wrapped in one Alpine scope -->
-        <div x-data="{
+        <div id="category-app" x-data="{
             searchQuery: '',
             filteredProducts: @js($category->products->toArray()),
 
