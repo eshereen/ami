@@ -94,6 +94,8 @@
                 console.log('Category page Alpine.js initialized');
                 console.log('Initial filteredProducts:', this.filteredProducts);
                 console.log('Products count:', this.filteredProducts.length);
+                const staticEl = document.getElementById('static-products');
+                if (staticEl) { staticEl.style.display = 'none'; }
                 this.filterProducts();
             },
 
