@@ -31,9 +31,9 @@
                     <img :src="(scrolled || mobileMenuOpen || !onHome) ? '{{ asset('imgs/logo.png') }}' : '{{ asset('imgs/dark-logo.png') }}'"
                          alt="AMI Logo"
                          class="h-14 transition-all duration-300"
-                         width="160"
-                         height="56"
-                         style="aspect-ratio:160/56;">
+                         width="100"
+                         height="40"
+                         style="aspect-ratio:100/40;">
                 </a>
 
                 <!-- Desktop Navigation -->
