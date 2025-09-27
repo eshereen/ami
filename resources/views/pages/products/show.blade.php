@@ -284,10 +284,14 @@
             <h2 class="mb-4 text-3xl font-bold text-gray-900 md:text-4xl">Ready to Get Started?</h2>
             <p class="mx-auto mb-8 max-w-2xl text-xl text-gray-700">Contact our experts today to discuss your power generation needs and get a customized solution.</p>
             <div class="flex flex-col gap-4 justify-center sm:flex-row">
-                <a href="{{ route('home') }}#contact" class="px-8 py-3 font-semibold text-white rounded-lg transition bg-ami-orange hover:bg-orange-600">
+                <a href="{{ route('home') }}#contact"
+                   class="px-8 py-3 font-semibold text-white rounded-lg transition bg-ami-orange hover:bg-orange-600"
+                   onclick="console.log('Quote button clicked')">
                     Get Free Quote
                 </a>
-                <a href="tel:+201223907708" class="px-8 py-3 font-semibold bg-transparent rounded-lg border-2 transition border-ami-orange text-ami-orange hover:bg-ami-orange hover:text-white">
+                <a href="tel:+201223907708"
+                   class="px-8 py-3 font-semibold bg-transparent rounded-lg border-2 transition border-ami-orange text-ami-orange hover:bg-ami-orange hover:text-white"
+                   onclick="console.log('Call button clicked')">
                     <i class="mr-2 fas fa-phone"></i>Call Now
                 </a>
             </div>

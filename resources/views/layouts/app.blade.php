@@ -176,32 +176,63 @@
     <link rel="preload" href="{{ Vite::asset('resources/css/app.css') }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="{{ Vite::asset('resources/css/app.css') }}"></noscript>
 
-    <!-- Tailwind CDN with async loading -->
+    <!-- Tailwind CDN with error handling -->
     <script>
-        // Load Tailwind asynchronously
+        // Load Tailwind with error handling and fallback
         (function() {
             const script = document.createElement('script');
             script.src = 'https://cdn.tailwindcss.com';
             script.async = true;
             script.onload = function() {
-                tailwind.config = {
-                    theme: {
-                        extend: {
-                            colors: {
-                                'ami-blue': '#0056b3',
-                                'ami-orange': '#ff7700',
-                                'ami-light-blue': '#e6f2ff'
+                try {
+                    tailwind.config = {
+                        theme: {
+                            extend: {
+                                colors: {
+                                    'ami-blue': '#0056b3',
+                                    'ami-orange': '#ff7700',
+                                    'ami-light-blue': '#e6f2ff'
+                                }
                             }
                         }
-                    }
+                    };
+                } catch (e) {
+                    console.warn('Tailwind config error:', e);
                 }
+            };
+            script.onerror = function() {
+                console.warn('Tailwind CDN failed to load');
+                // Load fallback CSS
+                const fallbackCSS = document.createElement('link');
+                fallbackCSS.rel = 'stylesheet';
+                fallbackCSS.href = '{{ asset("css/fallback.css") }}';
+                document.head.appendChild(fallbackCSS);
             };
             document.head.appendChild(script);
         })();
     </script>
 
-    <!-- Alpine.js loaded with high priority but deferred -->
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.3/dist/cdn.min.js" integrity="sha384-tV8/VPwjP+hFZRwGNc0Ug5NVFL6CkjKKfGYxF5wv84p6QI/G7z5LfO8m7oEvbNJr" crossorigin="anonymous"></script>
+    <!-- Alpine.js with error handling -->
+    <script>
+        // Load Alpine.js with error handling
+        (function() {
+            const script = document.createElement('script');
+            script.src = 'https://cdn.jsdelivr.net/npm/alpinejs@3.13.3/dist/cdn.min.js';
+            script.defer = true;
+            script.onload = function() {
+                console.log('Alpine.js loaded successfully');
+            };
+            script.onerror = function() {
+                console.warn('Alpine.js CDN failed, using fallback');
+                // Simple fallback functionality
+                window.Alpine = {
+                    data: function(name, callback) { return callback; },
+                    directive: function() { return {}; }
+                };
+            };
+            document.head.appendChild(script);
+        })();
+    </script>
 
     <!-- Non-critical JavaScript loaded asynchronously -->
     <script>
@@ -546,8 +577,32 @@
 
     // Initialize notifications when page loads
     document.addEventListener('DOMContentLoaded', function() {
-        showNotification();
+        try {
+            showNotification();
+        } catch (e) {
+            console.warn('Notification system error:', e);
+        }
     });
+
+    // Global error handler to prevent white pages
+    window.addEventListener('error', function(e) {
+        console.error('JavaScript error:', e.error);
+        // Don't let errors break the page
+        e.preventDefault();
+        return false;
+    });
+
+    // Unhandled promise rejection handler
+    window.addEventListener('unhandledrejection', function(e) {
+        console.error('Unhandled promise rejection:', e.reason);
+        e.preventDefault();
+    });
+
+    // Debug information for live server
+    console.log('Page loaded successfully');
+    console.log('Alpine.js available:', typeof Alpine !== 'undefined');
+    console.log('Tailwind available:', typeof tailwind !== 'undefined');
+    console.log('Font Awesome available:', typeof FontAwesome !== 'undefined');
 
 </script>
 
