@@ -212,26 +212,39 @@
         })();
     </script>
 
-    <!-- Alpine.js with error handling -->
+    <!-- Alpine.js loaded synchronously before DOM parsing -->
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.3/dist/cdn.min.js" defer></script>
+
+    <!-- Alpine.js fallback if CDN fails -->
     <script>
-        // Load Alpine.js with error handling
-        (function() {
-            const script = document.createElement('script');
-            script.src = 'https://cdn.jsdelivr.net/npm/alpinejs@3.13.3/dist/cdn.min.js';
-            script.defer = true;
-            script.onload = function() {
-                console.log('Alpine.js loaded successfully');
-            };
-            script.onerror = function() {
-                console.warn('Alpine.js CDN failed, using fallback');
-                // Simple fallback functionality
-                window.Alpine = {
-                    data: function(name, callback) { return callback; },
-                    directive: function() { return {}; }
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if Alpine.js loaded successfully
+            if (typeof Alpine === 'undefined') {
+                console.warn('Alpine.js CDN failed, loading fallback');
+
+                // Load fallback Alpine.js
+                const script = document.createElement('script');
+                script.src = 'https://unpkg.com/alpinejs@3.13.3/dist/cdn.min.js';
+                script.defer = true;
+                script.onload = function() {
+                    console.log('Alpine.js fallback loaded successfully');
                 };
-            };
-            document.head.appendChild(script);
-        })();
+                script.onerror = function() {
+                    console.error('Both Alpine.js CDN sources failed');
+                    // Initialize manual fallback for critical functionality
+                    initializeManualFallback();
+                };
+                document.head.appendChild(script);
+            } else {
+                console.log('Alpine.js loaded successfully');
+            }
+        });
+
+        function initializeManualFallback() {
+            console.warn('Initializing manual fallback for Alpine.js');
+            document.body.classList.add('navbar-fallback');
+            // Mobile menu fallback will be handled by existing code
+        }
     </script>
 
     <!-- Non-critical JavaScript loaded asynchronously -->
@@ -246,16 +259,7 @@
             document.head.appendChild(link);
         })();
 
-        // Alpine.js fallback initialization (deferred)
-        document.addEventListener('DOMContentLoaded', function() {
-            // Ensure Alpine.js is loaded
-            if (typeof Alpine === 'undefined') {
-                console.warn('Alpine.js not loaded, loading fallback...');
-                const script = document.createElement('script');
-                script.src = 'https://cdn.jsdelivr.net/npm/alpinejs@3.13.3/dist/cdn.min.js';
-                script.defer = true;
-                document.head.appendChild(script);
-            }
+        // Alpine.js initialization check (handled above)
 
             // Navbar scroll fallback (in case Alpine.js fails)
             const header = document.querySelector('header');
