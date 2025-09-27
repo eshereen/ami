@@ -31,12 +31,12 @@
                             @if($product->image)
                                 <img src="{{ asset('storage/' . $product->image) }}"
                                      alt="{{ $product->name }}"
-                                     class="object-cover w-full h-48"
+                                     class="object-contain w-full h-48"
                                      loading="lazy" decoding="async">
                             @else
                                 <img src="{{ asset('imgs/products/G1.png') }}"
                                      alt="{{ $product->name }}"
-                                     class="object-cover w-full h-48"
+                                     class="object-contain w-full h-48"
                                      loading="lazy" decoding="async">
                             @endif
                             <div class="absolute top-4 left-4">

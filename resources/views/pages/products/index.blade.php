@@ -243,7 +243,7 @@
             <h2 class="mb-4 text-3xl font-bold text-white md:text-4xl">Need Help Finding the Right Product?</h2>
             <p class="mx-auto mb-8 max-w-2xl text-xl text-blue-100">Our expert team is here to help you choose the perfect power solution for your needs.</p>
             <div class="flex flex-col gap-4 justify-center sm:flex-row">
-                <a href="{{ route('contact.index') }}" class="px-8 py-3 font-semibold text-white rounded-lg transition bg-ami-orange hover:bg-orange-600">
+                <a href="{{ route('home') }}#contact" class="px-8 py-3 font-semibold text-white rounded-lg transition bg-ami-orange hover:bg-orange-600">
                     Contact Us
                 </a>
                 <a href="{{ route('categories.index') }}" class="px-8 py-3 font-semibold text-white bg-transparent rounded-lg border-2 border-white transition hover:bg-white hover:text-blue-600">

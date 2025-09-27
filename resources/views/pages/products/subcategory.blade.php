@@ -4,11 +4,11 @@
     <section class="relative h-96 md:h-[500px] overflow-hidden">
         <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80"
              alt="{{ $subcategory->name }}"
-             class="w-full h-full object-cover">
-        <div class="absolute inset-0 bg-gradient-to-r from-blue-900/80 to-blue-700/60 flex items-center">
-            <div class="container mx-auto px-4">
+             class="object-cover w-full h-full">
+        <div class="flex absolute inset-0 items-center bg-gradient-to-r from-blue-900/80 to-blue-700/60">
+            <div class="container px-4 mx-auto">
                 <div class="max-w-4xl">
-                    <nav class="text-sm text-blue-100 mb-4">
+                    <nav class="mb-4 text-sm text-blue-100">
                         <a href="{{ route('home') }}" class="hover:text-white">Home</a>
                         <span class="mx-2">/</span>
                         <a href="{{ route('categories.index') }}" class="hover:text-white">Categories</a>
@@ -17,8 +17,8 @@
                         <span class="mx-2">/</span>
                         <span class="text-white">{{ $subcategory->name }}</span>
                     </nav>
-                    <h1 class="text-4xl md:text-5xl font-bold text-white mb-4 fade-in">{{ $subcategory->name }}</h1>
-                    <p class="text-xl text-blue-100 max-w-2xl fade-in">
+                    <h1 class="mb-4 text-4xl font-bold text-white md:text-5xl fade-in">{{ $subcategory->name }}</h1>
+                    <p class="max-w-2xl text-xl text-blue-100 fade-in">
                         Browse all our products. Use filters to find exactly what you need.
                     </p>
                 </div>
@@ -28,8 +28,8 @@
 
     <!-- Main Content -->
     <section class="py-16">
-        <div class="container mx-auto px-4">
-            <div class="flex flex-col lg:flex-row gap-8" x-data="{
+        <div class="container px-4 mx-auto">
+            <div class="flex flex-col gap-8 lg:flex-row" x-data="{
                 activeCategory: '',
                 activeSubcategory: '',
                 searchQuery: '',
@@ -88,25 +88,25 @@
 
                 <!-- Sidebar -->
                 <div class="lg:w-1/4">
-                    <div class="bg-white rounded-xl shadow-lg p-6 sticky top-8">
-                        <h3 class="text-xl font-bold text-gray-900 mb-6">Filter Products</h3>
+                    <div class="sticky top-8 p-6 bg-white rounded-xl shadow-lg">
+                        <h3 class="mb-6 text-xl font-bold text-gray-900">Filter Products</h3>
 
                         <!-- Search -->
                         <div class="mb-6">
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Search Products</label>
+                            <label class="block mb-2 text-sm font-medium text-gray-700">Search Products</label>
                             <input type="text"
                                    x-model="searchQuery"
                                    x-on:input="filterProducts"
                                    placeholder="Search products..."
-                                   class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ami-orange focus:border-transparent">
+                                   class="px-4 py-2 w-full rounded-lg border border-gray-300 focus:ring-2 focus:ring-ami-orange focus:border-transparent">
                         </div>
 
                         <!-- Categories Filter -->
                         <div class="mb-6">
                             <button @click="expandedCategory = expandedCategory === 'categories' ? null : 'categories'"
-                                    class="flex items-center justify-between w-full text-left font-semibold text-gray-900 mb-3">
+                                    class="flex justify-between items-center mb-3 w-full font-semibold text-left text-gray-900">
                                 <span>Categories</span>
-                                <i class="fas fa-plus transition-transform duration-200"
+                                <i class="transition-transform duration-200 fas fa-plus"
                                    :class="{ 'rotate-45': expandedCategory === 'categories' }"></i>
                             </button>
                             <div x-show="expandedCategory === 'categories'"
@@ -120,10 +120,10 @@
                                 @foreach($allCategories as $category)
                                     <div class="ml-4">
                                         <button @click="selectCategory({{ $category->id }})"
-                                                class="block w-full text-left text-gray-600 hover:text-ami-orange transition py-1"
+                                                class="block py-1 w-full text-left text-gray-600 transition hover:text-ami-orange"
                                                 :class="{ 'text-ami-orange font-semibold': activeCategory === {{ $category->id }} }">
                                             {{ $category->name }}
-                                            <span class="text-xs text-gray-500 ml-1">({{ $category->subcategories->count() }})</span>
+                                            <span class="ml-1 text-xs text-gray-500">({{ $category->subcategories->count() }})</span>
                                         </button>
                                     </div>
                                 @endforeach
@@ -133,9 +133,9 @@
                         <!-- Subcategories Filter -->
                         <div class="mb-6">
                             <button @click="expandedSubcategory = expandedSubcategory === 'subcategories' ? null : 'subcategories'"
-                                    class="flex items-center justify-between w-full text-left font-semibold text-gray-900 mb-3">
+                                    class="flex justify-between items-center mb-3 w-full font-semibold text-left text-gray-900">
                                 <span>Subcategories</span>
-                                <i class="fas fa-plus transition-transform duration-200"
+                                <i class="transition-transform duration-200 fas fa-plus"
                                    :class="{ 'rotate-45': expandedSubcategory === 'subcategories' }"></i>
                             </button>
                             <div x-show="expandedSubcategory === 'subcategories'"
@@ -148,14 +148,14 @@
                                  class="space-y-2">
                                 @foreach($allCategories as $category)
                                     <div class="ml-4">
-                                        <div class="text-sm font-medium text-gray-700 mb-2">{{ $category->name }}</div>
+                                        <div class="mb-2 text-sm font-medium text-gray-700">{{ $category->name }}</div>
                                         @foreach($category->subcategories as $subcat)
                                             <div class="ml-4">
                                                 <button @click="selectSubcategory({{ $subcat->id }})"
-                                                        class="block w-full text-left text-gray-600 hover:text-ami-orange transition py-1"
+                                                        class="block py-1 w-full text-left text-gray-600 transition hover:text-ami-orange"
                                                         :class="{ 'text-ami-orange font-semibold': activeSubcategory === {{ $subcat->id }} }">
                                                     {{ $subcat->name }}
-                                                    <span class="text-xs text-gray-500 ml-1">({{ $subcat->products->count() }})</span>
+                                                    <span class="ml-1 text-xs text-gray-500">({{ $subcat->products->count() }})</span>
                                                 </button>
                                             </div>
                                         @endforeach
@@ -166,7 +166,7 @@
 
                         <!-- Reset Filters -->
                         <button @click="resetFilters"
-                                class="w-full bg-gray-100 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-200 transition">
+                                class="px-4 py-2 w-full text-gray-700 bg-gray-100 rounded-lg transition hover:bg-gray-200">
                             Reset Filters
                         </button>
                     </div>
@@ -175,13 +175,13 @@
                 <!-- Products Grid -->
                 <div class="lg:w-3/4">
                     <!-- Results Header -->
-                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6">
+                    <div class="flex flex-col justify-between items-start mb-6 sm:flex-row sm:items-center">
                         <div>
                             <h2 class="text-2xl font-bold text-gray-900">Products</h2>
                             <p class="text-gray-600" x-text="`${filteredProducts.length} products found`"></p>
                         </div>
                         <div class="mt-4 sm:mt-0">
-                            <select class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ami-orange focus:border-transparent">
+                            <select class="px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-ami-orange focus:border-transparent">
                                 <option>Sort by Name</option>
                                 <option>Sort by Model</option>
                                 <option>Sort by Date</option>
@@ -190,23 +190,23 @@
                     </div>
 
                     <!-- Products Grid -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                    <div class="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
                         <template x-for="product in filteredProducts" :key="product.id">
-                            <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 product-card">
+                            <div class="overflow-hidden bg-white rounded-xl shadow-lg transition-all duration-300 hover:shadow-xl product-card">
                                 <a :href="`/product/${product.slug}`" class="block">
                                     <div class="relative">
                                         <img :src="product.image ? `/storage/${product.image}` : '/imgs/products/G1.png'"
                                              :alt="product.name"
-                                             class="w-full h-48 object-cover">
+                                             class="object-contain w-full h-48">
                                         <div class="absolute top-4 left-4">
-                                            <span class="bg-ami-orange text-white px-3 py-1 rounded-full text-sm font-semibold" x-text="product.subcategory.name">
+                                            <span class="px-3 py-1 text-sm font-semibold text-white rounded-full bg-ami-orange" x-text="product.subcategory.name">
                                             </span>
                                         </div>
                                     </div>
                                     <div class="p-6">
-                                        <h3 class="text-lg font-bold text-gray-900 mb-2" x-text="product.name"></h3>
-                                        <p class="text-gray-600 mb-3" x-text="product.model_name"></p>
-                                        <div class="flex items-center justify-between">
+                                        <h3 class="mb-2 text-lg font-bold text-gray-900" x-text="product.name"></h3>
+                                        <p class="mb-3 text-gray-600" x-text="product.model_name"></p>
+                                        <div class="flex justify-between items-center">
                                             <span class="text-sm text-gray-500" x-text="product.fuel_type"></span>
                                             <span class="text-sm text-gray-500" x-text="product.frequency"></span>
                                         </div>
@@ -221,14 +221,14 @@
                          x-transition:enter="transition ease-out duration-200"
                          x-transition:enter-start="opacity-0"
                          x-transition:enter-end="opacity-100"
-                         class="text-center py-12">
-                        <div class="w-24 h-24 mx-auto mb-4 bg-gray-100 rounded-full flex items-center justify-center">
-                            <i class="fas fa-search text-3xl text-gray-400"></i>
+                         class="py-12 text-center">
+                        <div class="flex justify-center items-center mx-auto mb-4 w-24 h-24 bg-gray-100 rounded-full">
+                            <i class="text-3xl text-gray-400 fas fa-search"></i>
                         </div>
-                        <h3 class="text-xl font-semibold text-gray-900 mb-2">No products found</h3>
-                        <p class="text-gray-600 mb-6">Try adjusting your search criteria or browse other categories.</p>
+                        <h3 class="mb-2 text-xl font-semibold text-gray-900">No products found</h3>
+                        <p class="mb-6 text-gray-600">Try adjusting your search criteria or browse other categories.</p>
                         <button @click="resetFilters"
-                                class="bg-ami-orange text-white px-6 py-3 rounded-lg font-semibold hover:bg-orange-600 transition">
+                                class="px-6 py-3 font-semibold text-white rounded-lg transition bg-ami-orange hover:bg-orange-600">
                             Reset Filters
                         </button>
                     </div>
@@ -240,36 +240,36 @@
     @if(isset($relatedProducts) && $relatedProducts->count() > 0)
     <!-- Related Products -->
     <section class="py-16 bg-gray-50">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Related Products</h2>
-                <p class="text-xl text-gray-600 max-w-2xl mx-auto">Explore more products from {{ $subcategory->category->name }}</p>
+        <div class="container px-4 mx-auto">
+            <div class="mb-12 text-center">
+                <h2 class="mb-4 text-3xl font-bold text-gray-900 md:text-4xl">Related Products</h2>
+                <p class="mx-auto max-w-2xl text-xl text-gray-600">Explore more products from {{ $subcategory->category->name }}</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                 @foreach($relatedProducts as $product)
-                    <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 product-card">
+                    <div class="overflow-hidden bg-white rounded-xl shadow-lg transition-all duration-300 hover:shadow-xl product-card">
                         <a href="{{ route('product.show', $product->slug) }}" class="block">
                             <div class="relative">
                                 @if($product->image)
                                     <img src="{{ asset('storage/' . $product->image) }}"
                                          alt="{{ $product->name }}"
-                                         class="w-full h-48 object-cover">
+                                         class="object-contain w-full h-48">
                                 @else
                                     <img src="{{ asset('imgs/products/G1.png') }}"
                                          alt="{{ $product->name }}"
-                                         class="w-full h-48 object-cover">
+                                         class="object-contain w-full h-48">
                                 @endif
                                 <div class="absolute top-4 left-4">
-                                    <span class="bg-ami-orange text-white px-3 py-1 rounded-full text-sm font-semibold">
+                                    <span class="px-3 py-1 text-sm font-semibold text-white rounded-full bg-ami-orange">
                                         {{ $product->subcategory->name }}
                                     </span>
                                 </div>
                             </div>
                             <div class="p-6">
-                                <h3 class="text-lg font-bold text-gray-900 mb-2">{{ $product->name }}</h3>
-                                <p class="text-gray-600 mb-3">{{ $product->model_name }}</p>
-                                <div class="flex items-center justify-between">
+                                <h3 class="mb-2 text-lg font-bold text-gray-900">{{ $product->name }}</h3>
+                                <p class="mb-3 text-gray-600">{{ $product->model_name }}</p>
+                                <div class="flex justify-between items-center">
                                     <span class="text-sm text-gray-500">{{ $product->fuel_type }}</span>
                                     <span class="text-sm text-gray-500">{{ $product->frequency }}</span>
                                 </div>
@@ -284,14 +284,14 @@
 
     <!-- Call to Action -->
     <section class="py-16 bg-gradient-to-r from-blue-100 to-blue-400">
-        <div class="container mx-auto px-4 text-center">
-            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Need Help Choosing?</h2>
-            <p class="text-xl text-gray-700 mb-8 max-w-2xl mx-auto">Our experts are here to help you find the perfect {{ $subcategory->name }} solution for your needs.</p>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="{{ route('contact.index') }}" class="bg-ami-orange text-white px-8 py-3 rounded-lg font-semibold hover:bg-orange-600 transition">
+        <div class="container px-4 mx-auto text-center">
+            <h2 class="mb-4 text-3xl font-bold text-gray-900 md:text-4xl">Need Help Choosing?</h2>
+            <p class="mx-auto mb-8 max-w-2xl text-xl text-gray-700">Our experts are here to help you find the perfect {{ $subcategory->name }} solution for your needs.</p>
+            <div class="flex flex-col gap-4 justify-center sm:flex-row">
+                <a href="{{ route('home') }}#contact" class="px-8 py-3 font-semibold text-white rounded-lg transition bg-ami-orange hover:bg-orange-600">
                     Contact Our Experts
                 </a>
-                <a href="{{ route('category.show', $subcategory->category->slug) }}" class="bg-transparent border-2 border-ami-orange text-ami-orange px-8 py-3 rounded-lg font-semibold hover:bg-ami-orange hover:text-white transition">
+                <a href="{{ route('category.show', $subcategory->category->slug) }}" class="px-8 py-3 font-semibold bg-transparent rounded-lg border-2 transition border-ami-orange text-ami-orange hover:bg-ami-orange hover:text-white">
                     View All {{ $subcategory->category->name }}
                 </a>
             </div>
