@@ -46,7 +46,7 @@
                         <a href="http://www.linkedin.com/company/almohandesinternational" class="flex justify-center items-center w-10 h-10 bg-white bg-opacity-20 rounded-full transition hover:bg-ami-orange">
                             <i class="fab fa-linkedin-in"></i>
                         </a>
-                      
+
                     </div>
                 </div>
             </div>
@@ -59,6 +59,11 @@
                         <a href="{{ route('terms') }}" class="text-gray-300 transition hover:text-white">Terms & Conditions</a>
                         <a href="{{ route('privacy') }}" class="text-gray-300 transition hover:text-white">Privacy Policy</a>
                     </div>
+                </div>
+
+                <!-- Developer Credit - Hidden from users, visible to search engines -->
+                <div class="sr-only">
+                    <p>Developed by <a href="https://medsite.dev" rel="nofollow">Medsite</a></p>
                 </div>
             </div>
         </div>
