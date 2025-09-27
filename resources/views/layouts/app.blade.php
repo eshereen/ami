@@ -397,11 +397,108 @@
 
         /* Debug - remove in production */
         [x-cloak] { display: none !important; }
+
+        /* Notification Styles */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
+            max-width: 400px;
+            padding: 16px 20px;
+            border-radius: 8px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            transform: translateX(100%);
+            transition: all 0.3s ease-in-out;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        .notification.success {
+            background-color: #10b981;
+            color: white;
+        }
+
+        .notification.error {
+            background-color: #ef4444;
+            color: white;
+        }
+
+        .notification.warning {
+            background-color: #f59e0b;
+            color: white;
+        }
+
+        .notification.info {
+            background-color: #3b82f6;
+            color: white;
+        }
+
+        .notification-close {
+            position: absolute;
+            top: 8px;
+            right: 12px;
+            background: none;
+            border: none;
+            color: inherit;
+            cursor: pointer;
+            font-size: 18px;
+            opacity: 0.7;
+            transition: opacity 0.2s;
+        }
+
+        .notification-close:hover {
+            opacity: 1;
+        }
     </style>
 </head>
 <body class="smooth-scroll">
 
 @include('layouts.navbar')
+
+<!-- Flash Message Notifications -->
+@if(session('success'))
+    <div class="notification success" id="notification">
+        <button class="notification-close" onclick="closeNotification()">&times;</button>
+        <div class="flex items-center">
+            <i class="mr-3 fas fa-check-circle"></i>
+            <span>{{ session('success') }}</span>
+        </div>
+    </div>
+@endif
+
+@if(session('error'))
+    <div class="notification error" id="notification">
+        <button class="notification-close" onclick="closeNotification()">&times;</button>
+        <div class="flex items-center">
+            <i class="mr-3 fas fa-exclamation-circle"></i>
+            <span>{{ session('error') }}</span>
+        </div>
+    </div>
+@endif
+
+@if(session('warning'))
+    <div class="notification warning" id="notification">
+        <button class="notification-close" onclick="closeNotification()">&times;</button>
+        <div class="flex items-center">
+            <i class="mr-3 fas fa-exclamation-triangle"></i>
+            <span>{{ session('warning') }}</span>
+        </div>
+    </div>
+@endif
+
+@if(session('info'))
+    <div class="notification info" id="notification">
+        <button class="notification-close" onclick="closeNotification()">&times;</button>
+        <div class="flex items-center">
+            <i class="mr-3 fas fa-info-circle"></i>
+            <span>{{ session('info') }}</span>
+        </div>
+    </div>
+@endif
+
 @yield('content')
 @include('layouts.footer')
 
@@ -418,6 +515,38 @@
                 });
             }
         });
+    });
+
+    // Notification system
+    function showNotification() {
+        const notification = document.getElementById('notification');
+        if (notification) {
+            // Add show class to trigger animation
+            notification.classList.add('show');
+
+            // Auto-hide after 5 seconds
+            setTimeout(() => {
+                closeNotification();
+            }, 5000);
+        }
+    }
+
+    function closeNotification() {
+        const notification = document.getElementById('notification');
+        if (notification) {
+            notification.classList.remove('show');
+            // Remove element after animation completes
+            setTimeout(() => {
+                if (notification.parentNode) {
+                    notification.parentNode.removeChild(notification);
+                }
+            }, 300);
+        }
+    }
+
+    // Initialize notifications when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+        showNotification();
     });
 
 </script>

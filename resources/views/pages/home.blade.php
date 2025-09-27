@@ -77,7 +77,7 @@
                     <a href="#products" class="px-8 py-3 font-bold text-white rounded-full transition transform bg-ami-orange hover:bg-orange-600 hover:scale-105">
                         Explore Products
                     </a>
-                    <a href="#contact" class="px-8 py-3 font-bold text-white bg-transparent rounded-full border-2 border-white transition hover:bg-white hover:text-ami-blue">
+                    <a href="{{ route('home') }}#contact" class="px-8 py-3 font-bold text-white bg-transparent rounded-full border-2 border-white transition hover:bg-white hover:text-ami-blue">
                         Get a Quote
                     </a>
                 </div>
@@ -180,6 +180,7 @@
                 @foreach ($products->take(6) as $product)
                 <!-- Generator Sets -->
                 <div class="overflow-hidden bg-white rounded-lg shadow-md hover-lift">
+                    <a href="{{ route('product.show', $product->slug) }}">
                     <picture>
                         <source
                             media="(max-width: 480px)"
@@ -194,7 +195,7 @@
                         <img
                             src="{{ $product->image ? asset('storage/' . $product->image) : asset('imgs/products/G1.png') }}"
                             alt="{{ $product->name }}"
-                            class="object-contain w-full h-64 bg-gray-100"
+                            class="object-contain w-full h-auto bg-gray-100"
                             loading="lazy"
                             decoding="async"
                             width="400"
@@ -202,7 +203,7 @@
                             style="aspect-ratio: 400/256;"
                         >
                     </picture>
-
+                    </a>
                     <div class="p-6">
                         <h3 class="mb-2 text-xl font-bold ami-blue">{{ $product->name }}</h3>
                         @if($product->description)
@@ -498,26 +499,61 @@
                 <!-- Contact Form -->
                 <div>
                     <h3 class="mb-6 text-2xl font-bold ami-blue">Send Us a Message</h3>
+
+                    @if ($errors->any())
+                        <div class="p-4 mb-6 bg-red-50 rounded-lg border border-red-200">
+                            <div class="flex">
+                                <div class="flex-shrink-0">
+                                    <i class="text-red-400 fas fa-exclamation-circle"></i>
+                                </div>
+                                <div class="ml-3">
+                                    <h3 class="text-sm font-medium text-red-800">
+                                        There were some problems with your submission:
+                                    </h3>
+                                    <div class="mt-2 text-sm text-red-700">
+                                        <ul class="space-y-1 list-disc list-inside">
+                                            @foreach ($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+
                     <form method="post" action="{{ route('contact.store') }}" class="space-y-6">
                         @csrf
                         <div>
                             <label for="name" class="block mb-2 font-medium text-gray-700">Name</label>
-                            <input type="text" id="name" name="name" class="px-4 py-2 w-full rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-ami-blue focus:border-transparent">
+                            <input type="text" id="name" name="name" value="{{ old('name') }}" class="px-4 py-2 w-full rounded-lg border focus:outline-none focus:ring-2 focus:ring-ami-blue focus:border-transparent @error('name') border-red-500 @else border-gray-300 @enderror">
+                            @error('name')
+                                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                            @enderror
                         </div>
 
                         <div>
                             <label for="email" class="block mb-2 font-medium text-gray-700">Email</label>
-                            <input type="email" id="email" name="email" class="px-4 py-2 w-full rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-ami-blue focus:border-transparent">
+                            <input type="email" id="email" name="email" value="{{ old('email') }}" class="px-4 py-2 w-full rounded-lg border focus:outline-none focus:ring-2 focus:ring-ami-blue focus:border-transparent @error('email') border-red-500 @else border-gray-300 @enderror">
+                            @error('email')
+                                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                            @enderror
                         </div>
 
                         <div>
                             <label for="phone" class="block mb-2 font-medium text-gray-700">Phone</label>
-                            <input type="tel" id="phone" name="phone" class="px-4 py-2 w-full rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-ami-blue focus:border-transparent">
+                            <input type="tel" id="phone" name="phone" value="{{ old('phone') }}" class="px-4 py-2 w-full rounded-lg border focus:outline-none focus:ring-2 focus:ring-ami-blue focus:border-transparent @error('phone') border-red-500 @else border-gray-300 @enderror">
+                            @error('phone')
+                                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                            @enderror
                         </div>
 
                         <div>
                             <label for="message" class="block mb-2 font-medium text-gray-700">Your Message</label>
-                            <textarea id="message" name="message" rows="4" class="px-4 py-2 w-full rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-ami-blue focus:border-transparent"></textarea>
+                            <textarea id="message" name="message" rows="4" class="px-4 py-2 w-full rounded-lg border focus:outline-none focus:ring-2 focus:ring-ami-blue focus:border-transparent @error('message') border-red-500 @else border-gray-300 @enderror">{{ old('message') }}</textarea>
+                            @error('message')
+                                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                            @enderror
                         </div>
 
                         <button type="submit" class="px-8 py-3 font-bold text-white rounded-full transition transform bg-ami-orange hover:bg-orange-600 hover:scale-105">
