@@ -632,7 +632,7 @@
         'sameAs' => [
             'http://www.facebook.com/Al-Mohandes-International-AMI-469567549743548',
             'http://www.youtube.com/user/amigenset',
-            'http://www.linkedin.com/company/almohandesinternational',
+            'https://www.instagram.com/amigenset',
         ],
         'areaServed' => 'Worldwide',
         'industry' => 'Power Generation Equipment Manufacturing',
