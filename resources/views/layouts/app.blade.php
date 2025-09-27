@@ -483,6 +483,37 @@
         .notification-close:hover {
             opacity: 1;
         }
+
+        /* Navbar fallback styles */
+        .navbar-dropdown {
+            transition: opacity 0.3s ease;
+        }
+
+        .mobile-menu {
+            transition: all 0.3s ease;
+        }
+
+        /* Ensure navbar works without Alpine.js */
+        [x-cloak] {
+            display: none !important;
+        }
+
+        /* Fallback for when Alpine.js is not available */
+        .navbar-fallback .navbar-dropdown {
+            display: none;
+        }
+
+        .navbar-fallback .navbar-dropdown.show {
+            display: block;
+        }
+
+        .navbar-fallback .mobile-menu {
+            display: none;
+        }
+
+        .navbar-fallback .mobile-menu.show {
+            display: block;
+        }
     </style>
 </head>
 <body class="smooth-scroll">
@@ -603,6 +634,97 @@
     console.log('Alpine.js available:', typeof Alpine !== 'undefined');
     console.log('Tailwind available:', typeof tailwind !== 'undefined');
     console.log('Font Awesome available:', typeof FontAwesome !== 'undefined');
+
+    // Navbar fallback functionality (in case Alpine.js fails)
+    document.addEventListener('DOMContentLoaded', function() {
+        // Wait a bit for Alpine.js to initialize
+        setTimeout(function() {
+            if (typeof Alpine === 'undefined') {
+                console.warn('Alpine.js not loaded, initializing navbar fallback...');
+                document.body.classList.add('navbar-fallback');
+                initializeNavbarFallback();
+            }
+        }, 1000);
+    });
+
+    function initializeNavbarFallback() {
+        // Mobile menu toggle fallback
+        const mobileToggle = document.querySelector('[data-mobile-toggle]');
+        const mobileMenu = document.querySelector('[data-mobile-menu]');
+
+        if (mobileToggle && mobileMenu) {
+            mobileToggle.addEventListener('click', function() {
+                const isOpen = mobileMenu.classList.contains('show');
+                if (isOpen) {
+                    mobileMenu.classList.remove('show');
+                    mobileMenu.style.display = 'none';
+                } else {
+                    mobileMenu.classList.add('show');
+                    mobileMenu.style.display = 'block';
+                }
+                console.log('Mobile menu toggled via fallback');
+            });
+        }
+
+        // Mobile products dropdown fallback
+        const mobileProductsButtons = document.querySelectorAll('.mobile-menu button');
+        mobileProductsButtons.forEach(function(button) {
+            if (button.textContent.includes('Products')) {
+                button.addEventListener('click', function() {
+                    const dropdown = button.nextElementSibling;
+                    if (dropdown) {
+                        const isOpen = dropdown.classList.contains('show');
+                        if (isOpen) {
+                            dropdown.classList.remove('show');
+                            dropdown.style.display = 'none';
+                        } else {
+                            dropdown.classList.add('show');
+                            dropdown.style.display = 'block';
+                        }
+                        console.log('Mobile products dropdown toggled via fallback');
+                    }
+                });
+            }
+        });
+
+        // Desktop products dropdown fallback
+        const productsLinks = document.querySelectorAll('nav a[href*="products"]');
+        productsLinks.forEach(function(link) {
+            const dropdown = link.parentElement.querySelector('.navbar-dropdown');
+            if (dropdown) {
+                link.addEventListener('mouseenter', function() {
+                    dropdown.classList.add('show');
+                    dropdown.style.display = 'block';
+                    dropdown.style.opacity = '1';
+                });
+
+                link.addEventListener('mouseleave', function() {
+                    setTimeout(function() {
+                        dropdown.classList.remove('show');
+                        dropdown.style.display = 'none';
+                        dropdown.style.opacity = '0';
+                    }, 200);
+                });
+            }
+        });
+
+        // Header scroll effect fallback
+        const header = document.querySelector('header');
+        if (header) {
+            window.addEventListener('scroll', function() {
+                const scrolled = window.scrollY > 50;
+                if (scrolled) {
+                    header.classList.add('bg-white', 'shadow-md');
+                    header.classList.remove('bg-transparent');
+                } else {
+                    header.classList.remove('bg-white', 'shadow-md');
+                    header.classList.add('bg-transparent');
+                }
+            });
+        }
+
+        console.log('Navbar fallback initialized');
+    }
 
 </script>
 
