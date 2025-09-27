@@ -46,9 +46,7 @@
                         <a href="http://www.linkedin.com/company/almohandesinternational" class="flex justify-center items-center w-10 h-10 bg-white bg-opacity-20 rounded-full transition hover:bg-ami-orange">
                             <i class="fab fa-linkedin-in"></i>
                         </a>
-                        <a href="https://www.instagram.com/amigenset" class="flex justify-center items-center w-10 h-10 bg-white bg-opacity-20 rounded-full transition hover:bg-ami-orange">
-                            <i class="fab fa-instagram"></i>
-                        </a>
+                      
                     </div>
                 </div>
             </div>
