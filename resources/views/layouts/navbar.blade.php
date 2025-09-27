@@ -68,7 +68,8 @@
                             @mouseenter="clearTimeout(productsHoverTimeout); productsOpen = true"
                             @mouseleave="productsHoverTimeout = setTimeout(() => productsOpen = false, 300)"
                             class="absolute left-1/2 transform -translate-x-1/2 top-full w-screen max-w-6xl bg-white shadow-2xl border border-gray-200 rounded-lg p-6 z-[9999] overflow-hidden navbar-dropdown"
-                            style="margin-top: 0px; display: none;"
+                            :class="productsOpen ? 'show' : ''"
+                            style="margin-top: 0px;"
                         >
                             <?php $categories = \App\Models\Category::with(['subcategories' => function($q){ $q->withCount('products'); }])->take(4)->get(); ?>
                             <div class="mx-auto max-w-6xl">

@@ -511,6 +511,7 @@
                 position: fixed !important;
                 left: 0 !important;
                 right: 0 !important;
+                top: 72px !important; /* match header height */
                 width: 100vw !important;
                 max-width: none !important;
                 margin-left: 0 !important;
@@ -534,8 +535,9 @@
             display: none !important;
         }
 
-        .navbar-fallback .navbar-dropdown.show {
+        .navbar-dropdown.show {
             display: block !important;
+            opacity: 1 !important;
         }
 
         .navbar-fallback .mobile-menu {
@@ -925,7 +927,7 @@
         if (staticProducts && alpineSection) {
             // Hide Alpine.js section and show static version
             alpineSection.style.display = 'none';
-            staticProducts.classList.remove('hidden');
+            staticProducts.style.display = 'block';
 
             // Initialize search functionality for static version
             const searchInput = document.getElementById('static-search');

@@ -23,7 +23,7 @@
 
     @if($category->products->count() > 0)
         <!-- Fallback Static Version (when Alpine.js fails) -->
-        <div id="static-products" class="hidden">
+        <div id="static-products" style="display:none;">
             <!-- Search Input -->
             <div class="mx-auto mb-6 max-w-md">
                 <div class="relative">
@@ -85,8 +85,8 @@
             </div>
         </div>
 
-        <!-- Search and Filter Section -->
-        <div class="mb-8" x-data="{
+        <!-- Search, Grid and No-Results wrapped in one Alpine scope -->
+        <div x-data="{
             searchQuery: '',
             filteredProducts: @js($category->products->toArray()),
 
@@ -134,56 +134,56 @@
             <div class="mb-6 text-center">
                 <p class="text-gray-600" x-text="'Showing ' + filteredProducts.length + ' products'"></p>
             </div>
-        </div>
 
-        <!-- Products Grid -->
-        <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4" x-show="filteredProducts.length > 0">
-            <template x-for="product in filteredProducts" :key="product.id">
-                <div class="overflow-hidden bg-white rounded-xl shadow-lg transition-all duration-300 hover:shadow-xl product-card">
-                    <a :href="'/product/' + product.slug" class="block">
-                        <div class="relative">
-                            <img :src="product.image ? '/storage/' + product.image : '/imgs/products/G1.png'"
-                                 :alt="product.name"
-                                 class="object-contain w-full h-48"
-                                 loading="lazy" decoding="async">
-                            <div class="absolute top-4 left-4">
-                                <span class="px-3 py-1 text-sm font-semibold text-white rounded-full bg-ami-orange">
-                                    <span x-text="product.subcategory.name"></span>
-                                </span>
+            <!-- Products Grid -->
+            <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4" x-show="filteredProducts.length > 0" x-cloak>
+                <template x-for="product in filteredProducts" :key="product.id">
+                    <div class="overflow-hidden bg-white rounded-xl shadow-lg transition-all duration-300 hover:shadow-xl product-card">
+                        <a :href="'/product/' + product.slug" class="block">
+                            <div class="relative">
+                                <img :src="product.image ? '/storage/' + product.image : '/imgs/products/G1.png'"
+                                     :alt="product.name"
+                                     class="object-contain w-full h-48"
+                                     loading="lazy" decoding="async">
+                                <div class="absolute top-4 left-4">
+                                    <span class="px-3 py-1 text-sm font-semibold text-white rounded-full bg-ami-orange">
+                                        <span x-text="product.subcategory.name"></span>
+                                    </span>
+                                </div>
                             </div>
-                        </div>
-                        <div class="p-6">
-                            <h3 class="mb-2 text-lg font-bold text-gray-900" x-text="product.name"></h3>
-                            <p class="mb-3 text-gray-600" x-text="product.model_name"></p>
+                            <div class="p-6">
+                                <h3 class="mb-2 text-lg font-bold text-gray-900" x-text="product.name"></h3>
+                                <p class="mb-3 text-gray-600" x-text="product.model_name"></p>
 
-                            <p class="mb-4 text-sm text-gray-500 line-clamp-2" x-show="product.description" x-text="product.description.length > 100 ? product.description.substring(0, 100) + '...' : product.description"></p>
+                                <p class="mb-4 text-sm text-gray-500 line-clamp-2" x-show="product.description" x-text="product.description.length > 100 ? product.description.substring(0, 100) + '...' : product.description"></p>
 
-                            <div class="flex justify-between items-center mb-4">
-                                <span class="text-sm text-gray-500" x-text="product.fuel_type"></span>
-                                <span class="text-sm text-gray-500" x-text="product.frequency"></span>
+                                <div class="flex justify-between items-center mb-4">
+                                    <span class="text-sm text-gray-500" x-text="product.fuel_type"></span>
+                                    <span class="text-sm text-gray-500" x-text="product.frequency"></span>
+                                </div>
+
+                                <div class="flex justify-between items-center">
+                                    <span class="text-sm font-medium text-ami-blue">View Details</span>
+                                    <i class="fas fa-arrow-right text-ami-orange"></i>
+                                </div>
                             </div>
-
-                            <div class="flex justify-between items-center">
-                                <span class="text-sm font-medium text-ami-blue">View Details</span>
-                                <i class="fas fa-arrow-right text-ami-orange"></i>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            </template>
-        </div>
-
-        <!-- No Results Message -->
-        <div class="py-12 text-center" x-show="filteredProducts.length === 0">
-            <div class="mx-auto mb-6 w-24 h-24 text-gray-300">
-                <i class="text-6xl fas fa-search"></i>
+                        </a>
+                    </div>
+                </template>
             </div>
-            <h3 class="mb-2 text-xl font-semibold text-gray-900">No products found</h3>
-            <p class="text-gray-600" x-text="'No {{ $category->name }} products match your search criteria.'"></p>
-            <button @click="searchQuery = ''; filterProducts()"
-                    class="px-6 py-2 mt-4 text-white rounded-lg transition-colors bg-ami-blue hover:bg-blue-600">
-                Clear Search
-            </button>
+
+            <!-- No Results Message -->
+            <div class="py-12 text-center" x-show="filteredProducts.length === 0" x-cloak>
+                <div class="mx-auto mb-6 w-24 h-24 text-gray-300">
+                    <i class="text-6xl fas fa-search"></i>
+                </div>
+                <h3 class="mb-2 text-xl font-semibold text-gray-900">No products found</h3>
+                <p class="text-gray-600" x-text="'No {{ $category->name }} products match your search criteria.'"></p>
+                <button @click="searchQuery = ''; filterProducts()"
+                        class="px-6 py-2 mt-4 text-white rounded-lg transition-colors bg-ami-blue hover:bg-blue-600">
+                    Clear Search
+                </button>
+            </div>
         </div>
 
         <!-- Pagination or View All Button -->
@@ -205,7 +205,7 @@
                class="px-8 py-3 font-semibold text-white rounded-lg transition bg-ami-orange hover:bg-orange-600">
                 Browse Other Products
             </a>
-        </div>
+    </div>
     @endif
 
     <!-- Back Navigation -->
@@ -215,7 +215,7 @@
             Back to All Products
         </a>
     </div>
-</div>
+ </div>
 
 <style>
     .line-clamp-2 {
