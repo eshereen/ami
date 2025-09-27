@@ -18,11 +18,12 @@ class SubcategoryController extends Controller
                 ->firstOrFail();
         });
 
-        $allProducts = Cache::remember('subcategory_all_products_v1', 300, function () {
+        // Get products for THIS specific subcategory only
+        $products = Cache::remember("subcategory_products_{$subcategory->id}_v1", 300, function () use ($subcategory) {
             return Product::select(['id','name','slug','model_name','description','image','subcategory_id','fuel_type','frequency'])
+                ->where('subcategory_id', $subcategory->id)
                 ->with(['subcategory:id,name,category_id','subcategory.category:id,name'])
                 ->latest('id')
-                ->take(500)
                 ->get();
         });
 
@@ -48,7 +49,7 @@ class SubcategoryController extends Controller
                 ->get();
         });
 
-        return view('pages.products.subcategory', compact('subcategory', 'allProducts', 'allCategories', 'relatedProducts'));
+        return view('pages.products.subcategory', compact('subcategory', 'products', 'allCategories', 'relatedProducts'));
     }
     public function subcategories()
     {

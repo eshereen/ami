@@ -780,6 +780,107 @@
         console.log('Navbar fallback initialized');
     }
 
+    // Subcategory search fallback functionality
+    function initializeSubcategorySearchFallback() {
+        const searchInput = document.querySelector('input[x-model="searchQuery"]');
+        const productCards = document.querySelectorAll('.product-card');
+
+        if (searchInput && productCards.length > 0) {
+            searchInput.addEventListener('input', function() {
+                const query = this.value.toLowerCase().trim();
+                console.log('Search fallback triggered:', query);
+
+                productCards.forEach(function(card) {
+                    const productName = card.querySelector('h3')?.textContent?.toLowerCase() || '';
+                    const productModel = card.querySelector('p')?.textContent?.toLowerCase() || '';
+                    const productDesc = card.querySelector('.text-gray-500')?.textContent?.toLowerCase() || '';
+
+                    if (query === '' ||
+                        productName.includes(query) ||
+                        productModel.includes(query) ||
+                        productDesc.includes(query)) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+
+            console.log('Subcategory search fallback initialized');
+        }
+    }
+
+    // Products index page search fallback functionality
+    function initializeProductsIndexSearchFallback() {
+        const searchInput = document.querySelector('input[x-model="searchQuery"]');
+        const productCards = document.querySelectorAll('.product-card');
+
+        if (searchInput && productCards.length > 0) {
+            searchInput.addEventListener('input', function() {
+                const query = this.value.toLowerCase().trim();
+                console.log('Products index search fallback triggered:', query);
+
+                productCards.forEach(function(card) {
+                    const productName = card.querySelector('h3')?.textContent?.toLowerCase() || '';
+                    const productModel = card.querySelector('p')?.textContent?.toLowerCase() || '';
+                    const productDesc = card.querySelector('.text-gray-500')?.textContent?.toLowerCase() || '';
+
+                    if (query === '' ||
+                        productName.includes(query) ||
+                        productModel.includes(query) ||
+                        productDesc.includes(query)) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+
+            console.log('Products index search fallback initialized');
+        }
+    }
+
+    // Category page search fallback functionality
+    function initializeCategoryPageSearchFallback() {
+        const searchInput = document.querySelector('input[placeholder*="products"]');
+        const productCards = document.querySelectorAll('.product-card');
+
+        if (searchInput && productCards.length > 0) {
+            searchInput.addEventListener('input', function() {
+                const query = this.value.toLowerCase().trim();
+                console.log('Category page search fallback triggered:', query);
+
+                productCards.forEach(function(card) {
+                    const productName = card.querySelector('h3')?.textContent?.toLowerCase() || '';
+                    const productModel = card.querySelector('p')?.textContent?.toLowerCase() || '';
+                    const productDesc = card.querySelector('.text-gray-500')?.textContent?.toLowerCase() || '';
+
+                    if (query === '' ||
+                        productName.includes(query) ||
+                        productModel.includes(query) ||
+                        productDesc.includes(query)) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+
+            console.log('Category page search fallback initialized');
+        }
+    }
+
+    // Initialize all search fallbacks if Alpine.js fails
+    document.addEventListener('DOMContentLoaded', function() {
+        setTimeout(function() {
+            if (typeof Alpine === 'undefined' || !document.querySelector('[x-data]')) {
+                initializeSubcategorySearchFallback();
+                initializeProductsIndexSearchFallback();
+                initializeCategoryPageSearchFallback();
+            }
+        }, 2000);
+    });
+
 </script>
 
 <!-- Structured Data (JSON-LD) -->

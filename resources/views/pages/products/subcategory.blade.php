@@ -33,21 +33,25 @@
                 activeCategory: '',
                 activeSubcategory: '',
                 searchQuery: '',
-                filteredProducts: @js($allProducts),
+                filteredProducts: @js($products),
                 expandedCategory: 'categories',
                 expandedSubcategory: 'subcategories',
 
                 filterProducts() {
-                    let products = @js($allProducts);
+                    let products = @js($products);
+                    console.log('Filtering products, search query:', this.searchQuery);
 
                     // Filter by search query
-                    if (this.searchQuery) {
-                        const query = this.searchQuery.toLowerCase();
+                    if (this.searchQuery && this.searchQuery.trim()) {
+                        const query = this.searchQuery.toLowerCase().trim();
+                        console.log('Searching for:', query);
                         products = products.filter(product => {
-                            return product.name.toLowerCase().includes(query) ||
-                                   product.model_name.toLowerCase().includes(query) ||
-                                   product.description.toLowerCase().includes(query);
+                            const nameMatch = product.name && product.name.toLowerCase().includes(query);
+                            const modelMatch = product.model_name && product.model_name.toLowerCase().includes(query);
+                            const descMatch = product.description && product.description.toLowerCase().includes(query);
+                            return nameMatch || modelMatch || descMatch;
                         });
+                        console.log('Filtered products count:', products.length);
                     }
 
                     // Filter by category
@@ -71,7 +75,7 @@
                     this.searchQuery = '';
                     this.activeCategory = '';
                     this.activeSubcategory = '';
-                    this.filteredProducts = @js($allProducts);
+                    this.filteredProducts = @js($products);
                 },
 
                 selectCategory(categoryId) {
@@ -97,6 +101,8 @@
                             <input type="text"
                                    x-model="searchQuery"
                                    x-on:input="filterProducts"
+                                   x-on:keyup="filterProducts"
+                                   x-on:paste="setTimeout(() => filterProducts(), 100)"
                                    placeholder="Search products..."
                                    class="px-4 py-2 w-full rounded-lg border border-gray-300 focus:ring-2 focus:ring-ami-orange focus:border-transparent">
                         </div>

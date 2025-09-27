@@ -22,40 +22,79 @@
     </div>
 
     @if($category->products->count() > 0)
+        <!-- Search and Filter Section -->
+        <div class="mb-8" x-data="{
+            searchQuery: '',
+            filteredProducts: @js($category->products->toArray()),
+
+            init() {
+                this.filterProducts();
+            },
+
+            filterProducts() {
+                let products = @js($category->products->toArray());
+                console.log('Category page - Filtering products, search query:', this.searchQuery);
+
+                if (this.searchQuery && this.searchQuery.trim()) {
+                    const query = this.searchQuery.toLowerCase().trim();
+                    console.log('Category page - Searching for:', query);
+                    products = products.filter(product => {
+                        const nameMatch = product.name && product.name.toLowerCase().includes(query);
+                        const modelMatch = product.model_name && product.model_name.toLowerCase().includes(query);
+                        const descMatch = product.description && product.description.toLowerCase().includes(query);
+                        return nameMatch || modelMatch || descMatch;
+                    });
+                    console.log('Category page - Filtered products count:', products.length);
+                }
+
+                this.filteredProducts = products;
+            }
+        }">
+            <!-- Search Input -->
+            <div class="mx-auto mb-6 max-w-md">
+                <div class="relative">
+                    <input type="text"
+                           x-model="searchQuery"
+                           @input="filterProducts()"
+                           @keyup="filterProducts()"
+                           @paste="setTimeout(() => filterProducts(), 100)"
+                           placeholder="Search {{ $category->name }} products..."
+                           class="py-3 pr-4 pl-12 w-full text-lg rounded-lg border border-gray-300 focus:ring-2 focus:ring-ami-blue focus:border-transparent">
+                    <i class="absolute top-4 left-4 text-gray-400 fas fa-search"></i>
+                </div>
+            </div>
+
+            <!-- Products Count -->
+            <div class="mb-6 text-center">
+                <p class="text-gray-600" x-text="'Showing ' + filteredProducts.length + ' products'"></p>
+            </div>
+        </div>
+
         <!-- Products Grid -->
-        <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            @foreach ($category->products as $product)
+        <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4" x-show="filteredProducts.length > 0">
+            <template x-for="product in filteredProducts" :key="product.id">
                 <div class="overflow-hidden bg-white rounded-xl shadow-lg transition-all duration-300 hover:shadow-xl product-card">
-                    <a href="{{ route('product.show', $product->slug) }}" class="block">
+                    <a :href="'/product/' + product.slug" class="block">
                         <div class="relative">
-                            @if($product->image)
-                                <img src="{{ asset('storage/' . $product->image) }}"
-                                     alt="{{ $product->name }}"
-                                     class="object-contain w-full h-48"
-                                     loading="lazy" decoding="async">
-                            @else
-                                <img src="{{ asset('imgs/products/G1.png') }}"
-                                     alt="{{ $product->name }}"
-                                     class="object-contain w-full h-48"
-                                     loading="lazy" decoding="async">
-                            @endif
+                            <img :src="product.image ? '/storage/' + product.image : '/imgs/products/G1.png'"
+                                 :alt="product.name"
+                                 class="object-contain w-full h-48"
+                                 loading="lazy" decoding="async">
                             <div class="absolute top-4 left-4">
                                 <span class="px-3 py-1 text-sm font-semibold text-white rounded-full bg-ami-orange">
-                                    {{ $product->subcategory->name }}
+                                    <span x-text="product.subcategory.name"></span>
                                 </span>
                             </div>
                         </div>
                         <div class="p-6">
-                            <h3 class="mb-2 text-lg font-bold text-gray-900">{{ $product->name }}</h3>
-                            <p class="mb-3 text-gray-600">{{ $product->model_name }}</p>
+                            <h3 class="mb-2 text-lg font-bold text-gray-900" x-text="product.name"></h3>
+                            <p class="mb-3 text-gray-600" x-text="product.model_name"></p>
 
-                            @if($product->description)
-                                <p class="mb-4 text-sm text-gray-500 line-clamp-2">{{ Str::limit($product->description, 100) }}</p>
-                            @endif
+                            <p class="mb-4 text-sm text-gray-500 line-clamp-2" x-show="product.description" x-text="product.description.length > 100 ? product.description.substring(0, 100) + '...' : product.description"></p>
 
                             <div class="flex justify-between items-center mb-4">
-                                <span class="text-sm text-gray-500">{{ $product->fuel_type }}</span>
-                                <span class="text-sm text-gray-500">{{ $product->frequency }}</span>
+                                <span class="text-sm text-gray-500" x-text="product.fuel_type"></span>
+                                <span class="text-sm text-gray-500" x-text="product.frequency"></span>
                             </div>
 
                             <div class="flex justify-between items-center">
@@ -65,7 +104,20 @@
                         </div>
                     </a>
                 </div>
-            @endforeach
+            </template>
+        </div>
+
+        <!-- No Results Message -->
+        <div class="py-12 text-center" x-show="filteredProducts.length === 0">
+            <div class="mx-auto mb-6 w-24 h-24 text-gray-300">
+                <i class="text-6xl fas fa-search"></i>
+            </div>
+            <h3 class="mb-2 text-xl font-semibold text-gray-900">No products found</h3>
+            <p class="text-gray-600" x-text="'No {{ $category->name }} products match your search criteria.'"></p>
+            <button @click="searchQuery = ''; filterProducts()"
+                    class="px-6 py-2 mt-4 text-white rounded-lg transition-colors bg-ami-blue hover:bg-blue-600">
+                Clear Search
+            </button>
         </div>
 
         <!-- Pagination or View All Button -->

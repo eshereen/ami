@@ -38,6 +38,20 @@
 
         filterProducts() {
             let products = @js($products->toArray());
+            console.log('Products index - Filtering products, search query:', this.searchQuery);
+
+            // Filter by search query first
+            if (this.searchQuery && this.searchQuery.trim()) {
+                const query = this.searchQuery.toLowerCase().trim();
+                console.log('Products index - Searching for:', query);
+                products = products.filter(product => {
+                    const nameMatch = product.name && product.name.toLowerCase().includes(query);
+                    const modelMatch = product.model_name && product.model_name.toLowerCase().includes(query);
+                    const descMatch = product.description && product.description.toLowerCase().includes(query);
+                    return nameMatch || modelMatch || descMatch;
+                });
+                console.log('Products index - Filtered products count:', products.length);
+            }
 
             // Filter by category
             if (this.activeCategory !== 'all') {
@@ -47,16 +61,6 @@
             // Filter by subcategory
             if (this.activeSubcategory !== 'all') {
                 products = products.filter(product => product.subcategory_id == this.activeSubcategory);
-            }
-
-            // Filter by search query
-            if (this.searchQuery.trim() !== '') {
-                const query = this.searchQuery.toLowerCase();
-                products = products.filter(product =>
-                    product.name.toLowerCase().includes(query) ||
-                    product.model_name.toLowerCase().includes(query) ||
-                    product.description.toLowerCase().includes(query)
-                );
             }
 
             this.filteredProducts = products;
@@ -106,6 +110,8 @@
                             <input type="text"
                                    x-model="searchQuery"
                                    @input="filterProducts()"
+                                   @keyup="filterProducts()"
+                                   @paste="setTimeout(() => filterProducts(), 100)"
                                    placeholder="Search by name, model..."
                                    class="py-2 pr-4 pl-10 w-full rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent">
                             <i class="absolute top-3 left-3 text-gray-400 fas fa-search"></i>
