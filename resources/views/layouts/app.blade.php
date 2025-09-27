@@ -508,12 +508,14 @@
 
         @media (min-width: 769px) {
             .navbar-dropdown {
-                margin-left: -50vw;
-                margin-right: -50vw;
-                left: 50vw !important;
-                right: 50vw !important;
+                position: fixed !important;
+                left: 0 !important;
+                right: 0 !important;
                 width: 100vw !important;
-                max-width: 56rem;
+                max-width: none !important;
+                margin-left: 0 !important;
+                margin-right: 0 !important;
+                transform: none !important;
             }
         }
 

@@ -46,7 +46,7 @@
                        :class="(scrolled || !onHome) ? 'text-gray-700' : 'text-white'">About</a>
                     <div class="relative"
                          @mouseenter="clearTimeout(productsHoverTimeout); productsOpen = true"
-                         @mouseleave="productsHoverTimeout = setTimeout(() => productsOpen = false, 150)">
+                         @mouseleave="productsHoverTimeout = setTimeout(() => productsOpen = false, 300)">
                         <a href="{{ route('products.index') }}"
                            class="inline-flex items-center transition hover:text-ami-orange hover:underline"
                            :class="(scrolled || !onHome) ? 'text-gray-700' : 'text-white'">
@@ -66,14 +66,15 @@
                             x-transition:leave-start="opacity-100 translate-y-0 scale-100"
                             x-transition:leave-end="opacity-0 -translate-y-2 scale-95"
                             @mouseenter="clearTimeout(productsHoverTimeout); productsOpen = true"
-                            @mouseleave="productsHoverTimeout = setTimeout(() => productsOpen = false, 150)"
-                            class="absolute left-1/2 transform -translate-x-1/2 top-full mt-2 w-screen max-w-4xl bg-white shadow-2xl border border-gray-200 rounded-lg p-6 z-[9999] overflow-hidden navbar-dropdown"
-                            style="display: none;"
+                            @mouseleave="productsHoverTimeout = setTimeout(() => productsOpen = false, 300)"
+                            class="absolute left-1/2 transform -translate-x-1/2 top-full w-screen max-w-6xl bg-white shadow-2xl border border-gray-200 rounded-lg p-6 z-[9999] overflow-hidden navbar-dropdown"
+                            style="margin-top: 0px; display: none;"
                         >
                             <?php $categories = \App\Models\Category::with(['subcategories' => function($q){ $q->withCount('products'); }])->take(4)->get(); ?>
-                            <div class="flex divide-x divide-gray-200">
-                                @foreach ($categories as $category)
-                                    <div class="px-6 w-1/4 first:pl-0 last:pr-0">
+                            <div class="mx-auto max-w-6xl">
+                                <div class="flex divide-x divide-gray-200">
+                                    @foreach ($categories as $category)
+                                        <div class="px-6 w-1/4 first:pl-0 last:pr-0">
                                         <a href="{{ route('category.show', $category->slug) }}"
                                            class="block mb-3 text-sm font-semibold text-gray-900 transition-colors duration-200 hover:text-ami-orange">
                                             {{ $category->name }}
@@ -91,8 +92,9 @@
                                                 </li>
                                             @endforeach
                                         </ul>
-                                    </div>
-                                @endforeach
+                                        </div>
+                                    @endforeach
+                                </div>
                             </div>
                         </div>
                     </div>
