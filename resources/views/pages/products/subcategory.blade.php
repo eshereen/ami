@@ -1,242 +1,114 @@
 @extends('layouts.app')
+
+@section('title', $subcategory->name . ' - AMI GenSet')
+@section('description', 'Explore ' . $subcategory->name . ' products from AMI GenSet. High-quality power generation solutions for your needs.')
+@section('keywords', $subcategory->name . ', power generators, AMI GenSet, ' . $subcategory->category->name)
+
 @section('content')
-    <!-- Hero Section -->
-    <section class="relative h-96 md:h-[500px] overflow-hidden">
-        <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80"
-             alt="{{ $subcategory->name }}"
-             class="object-cover w-full h-full">
-        <div class="flex absolute inset-0 items-center bg-gradient-to-r from-blue-900/80 to-blue-700/60">
-            <div class="container px-4 mx-auto">
-                <div class="max-w-4xl">
-                    <nav class="mb-4 text-sm text-blue-100">
-                        <a href="{{ route('home') }}" class="hover:text-white">Home</a>
-                        <span class="mx-2">/</span>
-                        <a href="{{ route('categories.index') }}" class="hover:text-white">Categories</a>
-                        <span class="mx-2">/</span>
-                        <a href="{{ route('category.show', $subcategory->category->slug) }}" class="hover:text-white">{{ $subcategory->category->name }}</a>
-                        <span class="mx-2">/</span>
-                        <span class="text-white">{{ $subcategory->name }}</span>
-                    </nav>
-                    <h1 class="mb-4 text-4xl font-bold text-white md:text-5xl fade-in">{{ $subcategory->name }}</h1>
-                    <p class="max-w-2xl text-xl text-blue-100 fade-in">
-                        Browse all our products. Use filters to find exactly what you need.
-                    </p>
-                </div>
+    <!-- Breadcrumb -->
+    <section class="py-4 bg-gray-100">
+        <div class="container px-4 mx-auto">
+            <nav class="flex" aria-label="Breadcrumb">
+                <ol class="flex items-center space-x-2">
+                    <li><a href="{{ route('home') }}" class="text-gray-500 hover:text-ami-orange">Home</a></li>
+                    <li><i class="mx-2 text-gray-400 fas fa-chevron-right"></i></li>
+                    <li><a href="{{ route('products.index') }}" class="text-gray-500 hover:text-ami-orange">Products</a></li>
+                    <li><i class="mx-2 text-gray-400 fas fa-chevron-right"></i></li>
+                    <li><a href="{{ route('category.show', $subcategory->category->slug) }}" class="text-gray-500 hover:text-ami-orange">{{ $subcategory->category->name }}</a></li>
+                    <li><i class="mx-2 text-gray-400 fas fa-chevron-right"></i></li>
+                    <li class="text-gray-900">{{ $subcategory->name }}</li>
+                </ol>
+            </nav>
+        </div>
+    </section>
+
+    <!-- Header -->
+    <section class="py-16 bg-gradient-to-r to-blue-600 from-ami-blue">
+        <div class="container px-4 mx-auto text-center">
+            <div class="flex justify-center items-center mx-auto mb-6 w-24 h-24 bg-white bg-opacity-20 rounded-full">
+                <i class="text-3xl text-white fas fa-cogs"></i>
             </div>
+            <h1 class="mb-4 text-4xl font-bold text-white md:text-5xl">{{ $subcategory->name }}</h1>
+            <p class="mx-auto max-w-2xl text-xl text-blue-100">{{ $subcategory->description }}</p>
         </div>
     </section>
 
     <!-- Main Content -->
     <section class="py-16">
         <div class="container px-4 mx-auto">
-            <div class="flex flex-col gap-8 lg:flex-row" x-data="{
-                activeCategory: '',
-                activeSubcategory: '',
-                searchQuery: '',
-                filteredProducts: @js($products),
-                expandedCategory: 'categories',
-                expandedSubcategory: 'subcategories',
+            <div class="flex flex-col gap-8 lg:flex-row">
 
-                filterProducts() {
-                    let products = @js($products);
-                    console.log('Filtering products, search query:', this.searchQuery);
-
-                    // Filter by search query
-                    if (this.searchQuery && this.searchQuery.trim()) {
-                        const query = this.searchQuery.toLowerCase().trim();
-                        console.log('Searching for:', query);
-                        products = products.filter(product => {
-                            const nameMatch = product.name && product.name.toLowerCase().includes(query);
-                            const modelMatch = product.model_name && product.model_name.toLowerCase().includes(query);
-                            const descMatch = product.description && product.description.toLowerCase().includes(query);
-                            return nameMatch || modelMatch || descMatch;
-                        });
-                        console.log('Filtered products count:', products.length);
-                    }
-
-                    // Filter by category
-                    if (this.activeCategory) {
-                        products = products.filter(product => {
-                            return product.subcategory.category_id == this.activeCategory;
-                        });
-                    }
-
-                    // Filter by subcategory
-                    if (this.activeSubcategory) {
-                        products = products.filter(product => {
-                            return product.subcategory_id == this.activeSubcategory;
-                        });
-                    }
-
-                    this.filteredProducts = products;
-                },
-
-                resetFilters() {
-                    this.searchQuery = '';
-                    this.activeCategory = '';
-                    this.activeSubcategory = '';
-                    this.filteredProducts = @js($products);
-                },
-
-                selectCategory(categoryId) {
-                    this.activeCategory = this.activeCategory === categoryId ? '' : categoryId;
-                    this.activeSubcategory = ''; // Reset subcategory when category changes
-                    this.filterProducts();
-                },
-
-                selectSubcategory(subcategoryId) {
-                    this.activeSubcategory = this.activeSubcategory === subcategoryId ? '' : subcategoryId;
-                    this.filterProducts();
-                }
-            }">
-
-                <!-- Sidebar -->
+                <!-- Left Sidebar -->
                 <div class="lg:w-1/4">
                     <div class="sticky top-8 p-6 bg-white rounded-xl shadow-lg">
                         <h3 class="mb-6 text-xl font-bold text-gray-900">Filter Products</h3>
-
-                        <!-- Search -->
-                        <div class="mb-6">
-                            <label class="block mb-2 text-sm font-medium text-gray-700">Search Products</label>
-                            <input type="text"
-                                   x-model="searchQuery"
-                                   x-on:input="filterProducts"
-                                   x-on:keyup="filterProducts"
-                                   x-on:paste="setTimeout(() => filterProducts(), 100)"
-                                   placeholder="Search products..."
-                                   class="px-4 py-2 w-full rounded-lg border border-gray-300 focus:ring-2 focus:ring-ami-orange focus:border-transparent">
-                        </div>
-
-                        <!-- Categories Filter -->
-                        <div class="mb-6">
-                            <button @click="expandedCategory = expandedCategory === 'categories' ? null : 'categories'"
-                                    class="flex justify-between items-center mb-3 w-full font-semibold text-left text-gray-900">
-                                <span>Categories</span>
-                                <i class="transition-transform duration-200 fas fa-plus"
-                                   :class="{ 'rotate-45': expandedCategory === 'categories' }"></i>
-                            </button>
-                            <div x-show="expandedCategory === 'categories'"
-                                 x-transition:enter="transition ease-out duration-200"
-                                 x-transition:enter-start="opacity-0 -translate-y-2"
-                                 x-transition:enter-end="opacity-100 translate-y-0"
-                                 x-transition:leave="transition ease-in duration-150"
-                                 x-transition:leave-start="opacity-100 translate-y-0"
-                                 x-transition:leave-end="opacity-0 -translate-y-2"
-                                 class="space-y-2">
-                                @foreach($allCategories as $category)
-                                    <div class="ml-4">
-                                        <button @click="selectCategory({{ $category->id }})"
-                                                class="block py-1 w-full text-left text-gray-600 transition hover:text-ami-orange"
-                                                :class="{ 'text-ami-orange font-semibold': activeCategory === {{ $category->id }} }">
-                                            {{ $category->name }}
-                                            <span class="ml-1 text-xs text-gray-500">({{ $category->subcategories->count() }})</span>
-                                        </button>
-                                    </div>
-                                @endforeach
-                            </div>
-                        </div>
-
-                        <!-- Subcategories Filter -->
-                        <div class="mb-6">
-                            <button @click="expandedSubcategory = expandedSubcategory === 'subcategories' ? null : 'subcategories'"
-                                    class="flex justify-between items-center mb-3 w-full font-semibold text-left text-gray-900">
-                                <span>Subcategories</span>
-                                <i class="transition-transform duration-200 fas fa-plus"
-                                   :class="{ 'rotate-45': expandedSubcategory === 'subcategories' }"></i>
-                            </button>
-                            <div x-show="expandedSubcategory === 'subcategories'"
-                                 x-transition:enter="transition ease-out duration-200"
-                                 x-transition:enter-start="opacity-0 -translate-y-2"
-                                 x-transition:enter-end="opacity-100 translate-y-0"
-                                 x-transition:leave="transition ease-in duration-150"
-                                 x-transition:leave-start="opacity-100 translate-y-0"
-                                 x-transition:leave-end="opacity-0 -translate-y-2"
-                                 class="space-y-2">
-                                @foreach($allCategories as $category)
-                                    <div class="ml-4">
-                                        <div class="mb-2 text-sm font-medium text-gray-700">{{ $category->name }}</div>
-                                        @foreach($category->subcategories as $subcat)
-                                            <div class="ml-4">
-                                                <button @click="selectSubcategory({{ $subcat->id }})"
-                                                        class="block py-1 w-full text-left text-gray-600 transition hover:text-ami-orange"
-                                                        :class="{ 'text-ami-orange font-semibold': activeSubcategory === {{ $subcat->id }} }">
-                                                    {{ $subcat->name }}
-                                                    <span class="ml-1 text-xs text-gray-500">({{ $subcat->products->count() }})</span>
-                                                </button>
-                                            </div>
-                                        @endforeach
-                                    </div>
-                                @endforeach
-                            </div>
-                        </div>
-
-                        <!-- Reset Filters -->
-                        <button @click="resetFilters"
-                                class="px-4 py-2 w-full text-gray-700 bg-gray-100 rounded-lg transition hover:bg-gray-200">
-                            Reset Filters
-                        </button>
+                        @include('partials.product-filter', [
+                            'products' => $products,
+                            'placeholder' => 'Search all products...',
+                            'showCategories' => true,
+                            'showSubcategories' => true,
+                            'categories' => \App\Models\Category::withCount('products')->get(),
+                            'subcategories' => \App\Models\Subcategory::withCount('products')->get(),
+                            'currentSubcategory' => $subcategory
+                        ])
                     </div>
                 </div>
 
-                <!-- Products Grid -->
+                <!-- Main Content -->
                 <div class="lg:w-3/4">
-                    <!-- Results Header -->
-                    <div class="flex flex-col justify-between items-start mb-6 sm:flex-row sm:items-center">
-                        <div>
-                            <h2 class="text-2xl font-bold text-gray-900">Products</h2>
-                            <p class="text-gray-600" x-text="`${filteredProducts.length} products found`"></p>
-                        </div>
-                        <div class="mt-4 sm:mt-0">
-                            <select class="px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-ami-orange focus:border-transparent">
-                                <option>Sort by Name</option>
-                                <option>Sort by Model</option>
-                                <option>Sort by Date</option>
-                            </select>
-                        </div>
-                    </div>
-
                     <!-- Products Grid -->
-                    <div class="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
-                        <template x-for="product in filteredProducts" :key="product.id">
+                    <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3" id="products-grid">
+                        @foreach ($products as $product)
                             <div class="overflow-hidden bg-white rounded-xl shadow-lg transition-all duration-300 hover:shadow-xl product-card">
-                                <a :href="`/product/${product.slug}`" class="block">
+                                <a href="{{ route('product.show', $product->slug) }}" class="block">
                                     <div class="relative">
-                                        <img :src="product.image ? `/storage/${product.image}` : '/imgs/products/G1.png'"
-                                             :alt="product.name"
-                                             class="object-contain w-full h-48">
+                                        @if($product->image)
+                                            <img src="{{ asset('storage/' . $product->image) }}"
+                                                 alt="{{ $product->name }}"
+                                                 class="object-contain w-full h-48"
+                                                 loading="lazy" decoding="async">
+                                        @else
+                                            <img src="{{ asset('imgs/products/G1.png') }}"
+                                                 alt="{{ $product->name }}"
+                                                 class="object-contain w-full h-48"
+                                                 loading="lazy" decoding="async">
+                                        @endif
                                         <div class="absolute top-4 left-4">
-                                            <span class="px-3 py-1 text-sm font-semibold text-white rounded-full bg-ami-orange" x-text="product.subcategory.name">
+                                            <span class="px-3 py-1 text-sm font-semibold text-white rounded-full bg-ami-orange">
+                                                {{ $product->subcategory->name }}
                                             </span>
                                         </div>
                                     </div>
                                     <div class="p-6">
-                                        <h3 class="mb-2 text-lg font-bold text-gray-900" x-text="product.name"></h3>
-                                        <p class="mb-3 text-gray-600" x-text="product.model_name"></p>
+                                        <h3 class="mb-2 text-lg font-bold text-gray-900">{{ $product->name }}</h3>
+                                        <p class="mb-3 text-gray-600">{{ $product->model_name }}</p>
+
+                                        @if($product->description)
+                                            <p class="mb-4 text-sm text-gray-500 line-clamp-2">{{ Str::limit($product->description, 100) }}</p>
+                                        @endif
+
+                                        <div class="flex justify-between items-center mb-4">
+                                            <span class="text-sm text-gray-500">{{ $product->fuel_type }}</span>
+                                            <span class="text-sm text-gray-500">{{ $product->frequency }}</span>
+                                        </div>
+
                                         <div class="flex justify-between items-center">
-                                            <span class="text-sm text-gray-500" x-text="product.fuel_type"></span>
-                                            <span class="text-sm text-gray-500" x-text="product.frequency"></span>
+                                            <span class="text-sm font-medium text-ami-blue">View Details</span>
+                                            <i class="fas fa-arrow-right text-ami-orange"></i>
                                         </div>
                                     </div>
                                 </a>
                             </div>
-                        </template>
+                        @endforeach
                     </div>
 
-                    <!-- Empty State -->
-                    <div x-show="filteredProducts.length === 0"
-                         x-transition:enter="transition ease-out duration-200"
-                         x-transition:enter-start="opacity-0"
-                         x-transition:enter-end="opacity-100"
-                         class="py-12 text-center">
-                        <div class="flex justify-center items-center mx-auto mb-4 w-24 h-24 bg-gray-100 rounded-full">
-                            <i class="text-3xl text-gray-400 fas fa-search"></i>
+                    <!-- No Results Message -->
+                    <div class="py-12 text-center" id="no-results" style="display: none;">
+                        <div class="mx-auto mb-6 w-24 h-24 text-gray-300">
+                            <i class="text-6xl fas fa-search"></i>
                         </div>
                         <h3 class="mb-2 text-xl font-semibold text-gray-900">No products found</h3>
-                        <p class="mb-6 text-gray-600">Try adjusting your search criteria or browse other categories.</p>
-                        <button @click="resetFilters"
-                                class="px-6 py-3 font-semibold text-white rounded-lg transition bg-ami-orange hover:bg-orange-600">
-                            Reset Filters
-                        </button>
+                        <p class="text-gray-600">No products match your search criteria.</p>
                     </div>
                 </div>
             </div>
@@ -304,3 +176,20 @@
         </div>
     </section>
 @endsection
+
+<style>
+    .line-clamp-2 {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .product-card {
+        transition: all 0.3s ease;
+    }
+
+    .product-card:hover {
+        transform: translateY(-5px);
+    }
+</style>

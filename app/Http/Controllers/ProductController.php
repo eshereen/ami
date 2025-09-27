@@ -26,7 +26,15 @@ class ProductController extends Controller
                 ->orderBy('name')
                 ->get();
         });
-        return view('pages.products.index', compact('products', 'subcategories'));
+
+        $categories = Cache::remember('products_index_categories_v1', 300, function () {
+            return Category::select(['id','name','slug'])
+                ->withCount('products')
+                ->orderBy('name')
+                ->get();
+        });
+
+        return view('pages.products.index', compact('products', 'subcategories', 'categories'));
     }
 
     public function categories()
