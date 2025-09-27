@@ -489,6 +489,34 @@
             transition: opacity 0.3s ease;
         }
 
+        /* Enhanced dropdown positioning and behavior */
+        .navbar-dropdown {
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        @media (max-width: 768px) {
+            .navbar-dropdown {
+                position: fixed !important;
+                left: 1rem !important;
+                right: 1rem !important;
+                top: 5rem !important;
+                transform: none !important;
+                width: auto !important;
+                max-width: none !important;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .navbar-dropdown {
+                margin-left: -50vw;
+                margin-right: -50vw;
+                left: 50vw !important;
+                right: 50vw !important;
+                width: 100vw !important;
+                max-width: 56rem;
+            }
+        }
+
         .mobile-menu {
             transition: all 0.2s ease;
             transform-origin: top;
@@ -874,30 +902,30 @@
     function initializeCategoryPageFallback() {
         const staticProducts = document.getElementById('static-products');
         const alpineSection = document.querySelector('[x-data]');
-        
+
         if (staticProducts && alpineSection) {
             // Hide Alpine.js section and show static version
             alpineSection.style.display = 'none';
             staticProducts.classList.remove('hidden');
-            
+
             // Initialize search functionality for static version
             const searchInput = document.getElementById('static-search');
             const productCards = staticProducts.querySelectorAll('.product-card');
             const productsCount = document.getElementById('products-count');
-            
+
             if (searchInput && productCards.length > 0) {
                 searchInput.addEventListener('input', function() {
                     const query = this.value.toLowerCase().trim();
                     let visibleCount = 0;
-                    
+
                     productCards.forEach(function(card) {
                         const productName = card.querySelector('h3')?.textContent?.toLowerCase() || '';
                         const productModel = card.querySelector('p')?.textContent?.toLowerCase() || '';
                         const productDesc = card.querySelector('.text-gray-500')?.textContent?.toLowerCase() || '';
-                        
-                        if (query === '' || 
-                            productName.includes(query) || 
-                            productModel.includes(query) || 
+
+                        if (query === '' ||
+                            productName.includes(query) ||
+                            productModel.includes(query) ||
                             productDesc.includes(query)) {
                             card.style.display = 'block';
                             visibleCount++;
@@ -905,13 +933,13 @@
                             card.style.display = 'none';
                         }
                     });
-                    
+
                     if (productsCount) {
                         productsCount.textContent = 'Showing ' + visibleCount + ' products';
                     }
                 });
             }
-            
+
             console.log('Category page fallback initialized - showing static version');
         }
     }

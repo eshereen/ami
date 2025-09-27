@@ -6,6 +6,7 @@
                 scrolled: false,
                 mobileMenuOpen: false,
                 productsOpen: false,
+                productsHoverTimeout: null,
                 onHome: {{ request()->routeIs('home') ? 'true' : 'false' }}
             }"
             x-init="
@@ -36,54 +37,62 @@
                 </a>
 
                 <!-- Desktop Navigation -->
-                <nav class="hidden relative space-x-8 md:flex" @mouseleave="productsOpen = false">
+                <nav class="hidden relative space-x-8 md:flex">
                     <a href="{{ route('home') }}"
                        class="transition hover:text-ami-orange hover:underline"
                        :class="(scrolled || !onHome) ? 'text-gray-700' : 'text-white'">Home</a>
                     <a href="{{ route('about') }}"
                        class="transition hover:text-ami-orange hover:underline"
                        :class="(scrolled || !onHome) ? 'text-gray-700' : 'text-white'">About</a>
-                    <div class="relative" @mouseenter="productsOpen = true">
+                    <div class="relative"
+                         @mouseenter="clearTimeout(productsHoverTimeout); productsOpen = true"
+                         @mouseleave="productsHoverTimeout = setTimeout(() => productsOpen = false, 150)">
                         <a href="{{ route('products.index') }}"
                            class="inline-flex items-center transition hover:text-ami-orange hover:underline"
                            :class="(scrolled || !onHome) ? 'text-gray-700' : 'text-white'">
                             Products
-                            <svg class="ml-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.21 8.29a.75.75 0 01.02-1.08z" clip-rule="evenodd"/></svg>
+                            <svg class="ml-1 w-4 h-4 transition-transform duration-200"
+                                 :class="productsOpen ? 'rotate-180' : ''"
+                                 fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.21 8.29a.75.75 0 01.02-1.08z" clip-rule="evenodd"/></svg>
                         </a>
 
                         <div
                             x-cloak
                             x-show="productsOpen"
-                            x-transition:enter="transition ease-out duration-300"
-                            x-transition:enter-start="opacity-0 -translate-y-4 scale-95"
+                            x-transition:enter="transition ease-out duration-200"
+                            x-transition:enter-start="opacity-0 -translate-y-2 scale-95"
                             x-transition:enter-end="opacity-100 translate-y-0 scale-100"
-                            x-transition:leave="transition ease-in duration-200"
+                            x-transition:leave="transition ease-in duration-150"
                             x-transition:leave-start="opacity-100 translate-y-0 scale-100"
-                            x-transition:leave-end="opacity-0 -translate-y-4 scale-95"
-                            @mouseenter="productsOpen = true"
-                            @mouseleave="productsOpen = false"
-                            class="fixed left-0 right-0 top-[72px] bg-white shadow-2xl border-t border-gray-200 p-8 z-[9999] overflow-x-hidden navbar-dropdown"
+                            x-transition:leave-end="opacity-0 -translate-y-2 scale-95"
+                            @mouseenter="clearTimeout(productsHoverTimeout); productsOpen = true"
+                            @mouseleave="productsHoverTimeout = setTimeout(() => productsOpen = false, 150)"
+                            class="absolute left-1/2 transform -translate-x-1/2 top-full mt-2 w-screen max-w-4xl bg-white shadow-2xl border border-gray-200 rounded-lg p-6 z-[9999] overflow-hidden navbar-dropdown"
                             style="display: none;"
                         >
                             <?php $categories = \App\Models\Category::with(['subcategories' => function($q){ $q->withCount('products'); }])->take(4)->get(); ?>
-                            <div class="px-4 mx-auto max-w-7xl">
-                                <div class="flex divide-x">
+                            <div class="flex divide-x divide-gray-200">
                                 @foreach ($categories as $category)
-                                    <div class="px-6 w-1/4">
-                                        <a href="{{ route('category.show', $category->slug) }}" class="text-sm font-semibold text-gray-900 hover:text-ami-orange">{{ $category->name }}</a>
-                                        <ul class="mt-3 space-y-2">
+                                    <div class="px-6 w-1/4 first:pl-0 last:pr-0">
+                                        <a href="{{ route('category.show', $category->slug) }}"
+                                           class="block mb-3 text-sm font-semibold text-gray-900 transition-colors duration-200 hover:text-ami-orange">
+                                            {{ $category->name }}
+                                        </a>
+                                        <ul class="space-y-2">
                                             @foreach ($category->subcategories as $subcategory)
                                                 <li>
-                                                    <a href="{{ route('subcategory.show', $subcategory->slug) }}" class="flex justify-between items-center text-gray-700 hover:text-ami-orange">
+                                                    <a href="{{ route('subcategory.show', $subcategory->slug) }}"
+                                                       class="flex justify-between items-center text-gray-700 transition-colors duration-200 hover:text-ami-orange group">
                                                         <span class="text-sm">{{ $subcategory->name }}</span>
-                                                        <span class="ml-2 text-xs text-gray-500">({{ $subcategory->products_count }})</span>
+                                                        <span class="ml-2 text-xs text-gray-500 transition-colors duration-200 group-hover:text-ami-orange">
+                                                            ({{ $subcategory->products_count }})
+                                                        </span>
                                                     </a>
                                                 </li>
                                             @endforeach
                                         </ul>
                                     </div>
                                 @endforeach
-                                </div>
                             </div>
                         </div>
                     </div>
