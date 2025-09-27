@@ -35,11 +35,6 @@ Route::get('/blog/{slug}',[BlogController::class,'show'])->name('blog.show');
 Route::get('/services',[ServiceController::class,'index'])->name('services.index');
 Route::get('/service/{slug}',[ServiceController::class,'show'])->name('service.show');
 
-// Alpine.js test route (development only)
-Route::get('/test-alpine', function () {
-    return view('test-alpine');
-})->name('test.alpine');
-
 // XML Sitemap
 Route::get('/sitemap.xml', function () {
     $products = Product::select(['slug', 'updated_at'])->get();

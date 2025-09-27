@@ -212,38 +212,34 @@
         })();
     </script>
 
-    <!-- Alpine.js loaded synchronously before DOM parsing -->
-    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.3/dist/cdn.min.js" defer></script>
-
-    <!-- Alpine.js fallback if CDN fails -->
+    <!-- Alpine.js with optimized loading -->
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Check if Alpine.js loaded successfully
-            if (typeof Alpine === 'undefined') {
-                console.warn('Alpine.js CDN failed, loading fallback');
-
-                // Load fallback Alpine.js
-                const script = document.createElement('script');
-                script.src = 'https://unpkg.com/alpinejs@3.13.3/dist/cdn.min.js';
-                script.defer = true;
-                script.onload = function() {
-                    console.log('Alpine.js fallback loaded successfully');
-                };
-                script.onerror = function() {
-                    console.error('Both Alpine.js CDN sources failed');
-                    // Initialize manual fallback for critical functionality
-                    initializeManualFallback();
-                };
-                document.head.appendChild(script);
-            } else {
+        // Load Alpine.js with performance optimization
+        (function() {
+            const script = document.createElement('script');
+            script.src = 'https://cdn.jsdelivr.net/npm/alpinejs@3.13.3/dist/cdn.min.js';
+            script.defer = true;
+            script.onload = function() {
                 console.log('Alpine.js loaded successfully');
-            }
-        });
+            };
+            script.onerror = function() {
+                console.warn('Primary Alpine.js CDN failed, trying fallback');
+                // Try fallback CDN
+                const fallbackScript = document.createElement('script');
+                fallbackScript.src = 'https://unpkg.com/alpinejs@3.13.3/dist/cdn.min.js';
+                fallbackScript.defer = true;
+                fallbackScript.onerror = function() {
+                    console.error('All Alpine.js CDN sources failed');
+                    initializeNavbarFallback();
+                };
+                document.head.appendChild(fallbackScript);
+            };
+            document.head.appendChild(script);
+        })();
 
-        function initializeManualFallback() {
-            console.warn('Initializing manual fallback for Alpine.js');
+        function initializeNavbarFallback() {
+            console.warn('Initializing navbar fallback');
             document.body.classList.add('navbar-fallback');
-            // Mobile menu fallback will be handled by existing code
         }
     </script>
 
@@ -259,56 +255,15 @@
             document.head.appendChild(link);
         })();
 
-        // Alpine.js initialization check (handled above)
-
-        // Ensure navbar is always visible
+        // Performance-optimized navbar fallback
         document.addEventListener('DOMContentLoaded', function() {
-            const header = document.querySelector('header');
-            if (header) {
-                // Remove any potential x-cloak that might be hiding the header
-                header.removeAttribute('x-cloak');
-                header.style.display = 'block';
-
-                // Ensure the header has some background if Alpine.js fails to set it
-                if (typeof Alpine === 'undefined') {
-                    header.classList.add('bg-white', 'shadow-md');
-                }
-            }
-        });
-
-        // Navbar scroll fallback (in case Alpine.js fails)
-        document.addEventListener('DOMContentLoaded', function() {
-            const header = document.querySelector('header');
-            if (header) {
-                const handleScroll = () => {
-                    const scrolled = window.scrollY > 50;
-                    if (scrolled) {
-                        header.classList.add('bg-white', 'shadow-md');
-                        header.classList.remove('bg-transparent');
-                    } else {
-                        header.classList.remove('bg-white', 'shadow-md');
-                        header.classList.add('bg-transparent');
-                    }
-                };
-
-                // Initialize state
-                handleScroll();
-
-                // Add scroll listener
-                window.addEventListener('scroll', handleScroll, { passive: true });
-            }
-
-            // Fallback mobile menu toggle (in case Alpine.js fails)
+            // Only initialize fallback if Alpine.js is not available
             setTimeout(() => {
-                const mobileToggle = document.querySelector('[data-mobile-toggle]');
-                const mobileMenu = document.querySelector('[data-mobile-menu]');
-
-                if (mobileToggle && mobileMenu) {
-                    mobileToggle.addEventListener('click', function() {
-                        mobileMenu.classList.toggle('active');
-                    });
+                if (typeof Alpine === 'undefined') {
+                    console.warn('Alpine.js not available, initializing fallback');
+                    initializeNavbarFallback();
                 }
-            }, 1000);
+            }, 100);
         });
     </script>
 
@@ -550,25 +505,13 @@
             display: none !important;
         }
 
-        /* Override x-cloak for critical elements like navbar */
-        header[x-cloak] {
-            display: block !important;
-        }
-
-        /* Ensure header is always visible */
-        header {
-            display: block !important;
-            position: fixed !important;
-            top: 0 !important;
-            left: 0 !important;
-            right: 0 !important;
-            z-index: 50 !important;
-            background: white !important;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1) !important;
-        }
-
         /* Only hide mobile menu with x-cloak, not the entire header */
         .mobile-menu[x-cloak] {
+            display: none !important;
+        }
+
+        /* Ensure navbar dropdowns are hidden with x-cloak */
+        .navbar-dropdown[x-cloak] {
             display: none !important;
         }
 
@@ -756,15 +699,40 @@
     });
 
     function initializeNavbarFallback() {
-        // Mobile menu toggle fallback
+        console.log('Initializing performance-optimized navbar fallback');
+
+        const header = document.querySelector('header');
         const mobileToggle = document.querySelector('[data-mobile-toggle]');
         const mobileMenu = document.querySelector('[data-mobile-menu]');
 
+        // Handle scroll-based header styling (maintains original behavior)
+        if (header) {
+            const isHomePage = window.location.pathname === '/';
+
+            const handleScroll = () => {
+                const scrolled = window.scrollY > 50;
+
+                if (scrolled) {
+                    header.classList.add('bg-white', 'shadow-md');
+                    header.classList.remove('bg-transparent');
+                } else if (isHomePage) {
+                    header.classList.remove('bg-white', 'shadow-md');
+                    header.classList.add('bg-transparent');
+                }
+            };
+
+            // Initialize scroll state
+            handleScroll();
+
+            // Add optimized scroll listener
+            window.addEventListener('scroll', handleScroll, { passive: true });
+        }
+
+        // Mobile menu fallback
         if (mobileToggle && mobileMenu) {
-            // Remove Alpine-specific attributes if present (defensive)
+            // Remove Alpine-specific attributes
             mobileToggle.removeAttribute('@click');
             mobileMenu.removeAttribute('@click.away');
-            // Ensure x-cloak does not keep it hidden in fallback
             mobileMenu.removeAttribute('x-cloak');
 
             mobileToggle.addEventListener('click', function(e) {
@@ -783,7 +751,6 @@
                     mobileMenu.classList.add('show');
                     mobileMenu.setAttribute('aria-hidden', 'false');
                 }
-                console.log('Mobile menu toggled via fallback');
             });
 
             // Close menu when clicking outside
