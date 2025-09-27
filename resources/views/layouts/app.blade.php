@@ -255,13 +255,42 @@
             document.head.appendChild(link);
         })();
 
-        // Performance-optimized navbar fallback
+        // Simple mobile menu fix
         document.addEventListener('DOMContentLoaded', function() {
-            // Only initialize fallback if Alpine.js is not available
             setTimeout(() => {
-                if (typeof Alpine === 'undefined') {
-                    console.warn('Alpine.js not available, initializing fallback');
-                    initializeNavbarFallback();
+                const mobileToggle = document.querySelector('[data-mobile-toggle]');
+                const mobileMenu = document.querySelector('[data-mobile-menu]');
+
+                if (mobileToggle && mobileMenu) {
+                    // Remove Alpine.js attributes that might be causing conflicts
+                    mobileMenu.removeAttribute('x-cloak');
+                    mobileMenu.removeAttribute('x-show');
+                    mobileMenu.removeAttribute('x-transition:enter');
+                    mobileMenu.removeAttribute('x-transition:leave');
+
+                    // Ensure menu is initially hidden
+                    mobileMenu.style.display = 'none';
+
+                    // Simple toggle functionality
+                    mobileToggle.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+
+                        if (mobileMenu.style.display === 'none') {
+                            mobileMenu.style.display = 'block';
+                            mobileMenu.style.opacity = '1';
+                            mobileMenu.style.transform = 'scale(1)';
+                        } else {
+                            mobileMenu.style.display = 'none';
+                        }
+                    });
+
+                    // Close menu when clicking outside
+                    document.addEventListener('click', function(e) {
+                        if (!mobileMenu.contains(e.target) && !mobileToggle.contains(e.target)) {
+                            mobileMenu.style.display = 'none';
+                        }
+                    });
                 }
             }, 100);
         });
@@ -515,6 +544,33 @@
             display: none !important;
         }
 
+        /* Mobile menu positioning and visibility */
+        .mobile-menu {
+            position: absolute !important;
+            top: 100% !important;
+            left: 1rem !important;
+            right: 1rem !important;
+            z-index: 1000 !important;
+            background: white !important;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
+            border-radius: 0.5rem !important;
+            border: 1px solid rgba(0, 0, 0, 0.1) !important;
+        }
+
+        /* Ensure header has proper positioning */
+        header {
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+            z-index: 50 !important;
+        }
+
+        /* Override Alpine.js x-cloak for mobile menu */
+        .mobile-menu[x-cloak] {
+            display: none !important;
+        }
+
         /* Fallback for when Alpine.js is not available */
         .navbar-fallback .navbar-dropdown {
             display: none !important;
@@ -728,16 +784,23 @@
             window.addEventListener('scroll', handleScroll, { passive: true });
         }
 
-        // Mobile menu fallback
+        // Mobile menu fallback - Enhanced version
         if (mobileToggle && mobileMenu) {
-            // Remove Alpine-specific attributes
+            console.log('Setting up mobile menu fallback');
+
+            // Remove Alpine-specific attributes to prevent conflicts
             mobileToggle.removeAttribute('@click');
             mobileMenu.removeAttribute('@click.away');
             mobileMenu.removeAttribute('x-cloak');
+            mobileMenu.removeAttribute('x-show');
+
+            // Ensure mobile menu is initially hidden
+            mobileMenu.style.display = 'none';
 
             mobileToggle.addEventListener('click', function(e) {
                 e.preventDefault();
                 e.stopPropagation();
+                console.log('Mobile toggle clicked (fallback)');
 
                 const isOpen = mobileMenu.style.display === 'block' ||
                               mobileMenu.classList.contains('show');
@@ -746,10 +809,12 @@
                     mobileMenu.style.display = 'none';
                     mobileMenu.classList.remove('show');
                     mobileMenu.setAttribute('aria-hidden', 'true');
+                    console.log('Mobile menu closed');
                 } else {
                     mobileMenu.style.display = 'block';
                     mobileMenu.classList.add('show');
                     mobileMenu.setAttribute('aria-hidden', 'false');
+                    console.log('Mobile menu opened');
                 }
             });
 

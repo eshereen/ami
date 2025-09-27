@@ -112,33 +112,22 @@
                 </nav>
 
                 <!-- Mobile Menu Button -->
-                <button @click="mobileMenuOpen = !mobileMenuOpen"
-                        data-mobile-toggle
-                        class="transition-colors duration-300 md:hidden focus:outline-none"
-                        :class="(scrolled || !onHome) ? 'text-gray-700' : 'text-white'">
+                <button data-mobile-toggle
+                        class="text-gray-700 transition-colors duration-300 md:hidden focus:outline-none">
                     <i class="text-2xl fas fa-bars"></i>
                 </button>
             </div>
+        </div>
 
-            <!-- Mobile Navigation -->
-            <div x-cloak
-                 x-show="mobileMenuOpen"
-                 x-transition:enter="transition ease-out duration-200"
-                 x-transition:enter-start="opacity-0 transform scale-95"
-                 x-transition:enter-end="opacity-100 transform scale-100"
-                 x-transition:leave="transition ease-in duration-150"
-                 x-transition:leave-start="opacity-100 transform scale-100"
-                 x-transition:leave-end="opacity-0 transform scale-95"
-                 data-mobile-menu
-                 class="p-4 mt-4 bg-white rounded-md md:hidden mobile-menu"
-                 @click.away="mobileMenuOpen = false">
+        <!-- Mobile Navigation - Moved outside flex container -->
+        <div data-mobile-menu
+             class="p-4 mt-4 bg-white rounded-md md:hidden mobile-menu"
+             style="display: none;">
                 <div class="flex flex-col space-y-3">
                     <a href="{{ route('home') }}"
-                       class="text-gray-700 transition hover:text-ami-orange"
-                       @click="mobileMenuOpen = false">Home</a>
+                       class="text-gray-700 transition hover:text-ami-orange">Home</a>
                     <a href="{{ route('about') }}"
-                       class="text-gray-700 transition hover:text-ami-orange"
-                       @click="mobileMenuOpen = false">About</a>
+                       class="text-gray-700 transition hover:text-ami-orange">About</a>
 
                     <!-- Products with Mobile Mega Menu -->
                     <div class="relative">
