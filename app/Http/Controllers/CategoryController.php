@@ -9,8 +9,8 @@ class CategoryController extends Controller
     public function show(string $slug)
     {
         $category = Category::where('slug', $slug)
-            ->with(['subcategories' => function ($q) {
-                $q->withCount('products');
+            ->with(['products' => function ($query) {
+                $query->with(['subcategory', 'features', 'applications', 'powertypes']);
             }])
             ->firstOrFail();
 
