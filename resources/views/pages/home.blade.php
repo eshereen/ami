@@ -443,7 +443,7 @@
     </section>
 
     <!-- Case Studies / Environments Section -->
-
+@if ($blogs->count()) > 0
     <section class="py-20 bg-gray-50">
         <div class="container px-4 mx-auto">
             <div class="mb-16 text-center">
@@ -454,6 +454,7 @@
 
             <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
                 <!-- Rugged Terrains -->
+                @foreach($blogs as $blog)
                 <div class="overflow-hidden bg-white rounded-lg shadow-md hover-lift">
                     <img src="https://cdn.pixabay.com/photo/2016/09/02/18/38/factory-1639990_1280.jpg" alt="Rugged Terrains" class="object-cover w-full h-56" loading="lazy" decoding="async" width="400" height="224">
                     <div class="p-6">
@@ -462,30 +463,11 @@
                         <a href="#" class="font-medium text-ami-orange hover:underline">View Rugged Terrain Generator Case Study <i class="ml-1 fas fa-arrow-right"></i></a>
                     </div>
                 </div>
-
-                <!-- Urban Setups -->
-                <div class="overflow-hidden bg-white rounded-lg shadow-md hover-lift">
-                    <img src="https://cdn.pixabay.com/photo/2019/12/22/07/45/trailer-4711979_1280.jpg" alt="Urban Setups" class="object-cover w-full h-56" loading="lazy" decoding="async" width="400" height="224">
-                    <div class="p-6">
-                        <h3 class="mb-2 text-xl font-bold ami-blue">Urban Setups</h3>
-                        <p class="mb-4 text-gray-600">Providing backup power for hospitals, data centers, and commercial buildings in densely populated urban areas with strict noise regulations.</p>
-                        <a href="#" class="font-medium text-ami-orange hover:underline">View Urban Setup Generator Case Study <i class="ml-1 fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
-
-                <!-- Marine Environments -->
-                <div class="overflow-hidden bg-white rounded-lg shadow-md hover-lift">
-                    <img src="https://cdn.pixabay.com/photo/2015/10/28/12/31/motor-1010495_1280.jpg" alt="Marine Environments" class="object-cover w-full h-56" loading="lazy" decoding="async" width="400" height="224">
-                    <div class="p-6">
-                        <h3 class="mb-2 text-xl font-bold ami-blue">Marine Environments</h3>
-                        <p class="mb-4 text-gray-600">Specialized generators for offshore platforms, ports, and marine vessels with corrosion-resistant materials and saltwater protection.</p>
-                        <a href="#" class="font-medium text-ami-orange hover:underline">View Marine Generator Case Study <i class="ml-1 fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
+              @endforeach
             </div>
         </div>
     </section>
-
+@endif
     <!-- Contact & Inquiry Section -->
     <section id="contact" class="py-20 bg-white">
         <div class="container px-4 mx-auto">
