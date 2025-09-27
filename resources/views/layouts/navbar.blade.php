@@ -111,10 +111,14 @@
             <!-- Mobile Navigation -->
             <div x-cloak
                  x-show="mobileMenuOpen"
-                 x-transition
+                 x-transition:enter="transition ease-out duration-200"
+                 x-transition:enter-start="opacity-0 transform scale-95"
+                 x-transition:enter-end="opacity-100 transform scale-100"
+                 x-transition:leave="transition ease-in duration-150"
+                 x-transition:leave-start="opacity-100 transform scale-100"
+                 x-transition:leave-end="opacity-0 transform scale-95"
                  data-mobile-menu
                  class="p-4 mt-4 bg-white rounded-md md:hidden mobile-menu"
-                 style="display: none;"
                  @click.away="mobileMenuOpen = false">
                 <div class="flex flex-col space-y-3">
                     <a href="{{ route('home') }}"

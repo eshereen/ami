@@ -490,7 +490,8 @@
         }
 
         .mobile-menu {
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
+            transform-origin: top;
         }
 
         /* Ensure navbar works without Alpine.js */
@@ -500,19 +501,35 @@
 
         /* Fallback for when Alpine.js is not available */
         .navbar-fallback .navbar-dropdown {
-            display: none;
+            display: none !important;
         }
 
         .navbar-fallback .navbar-dropdown.show {
-            display: block;
+            display: block !important;
         }
 
         .navbar-fallback .mobile-menu {
-            display: none;
+            display: none !important;
         }
 
         .navbar-fallback .mobile-menu.show {
-            display: block;
+            display: block !important;
+        }
+
+        /* Fix mobile menu flashing */
+        .mobile-menu[x-cloak] {
+            display: none !important;
+        }
+
+        /* Prevent mobile menu from showing initially */
+        @media (max-width: 767px) {
+            .mobile-menu {
+                display: none;
+            }
+
+            .mobile-menu.show {
+                display: block;
+            }
         }
     </style>
 </head>
@@ -637,14 +654,31 @@
 
     // Navbar fallback functionality (in case Alpine.js fails)
     document.addEventListener('DOMContentLoaded', function() {
-        // Wait a bit for Alpine.js to initialize
-        setTimeout(function() {
-            if (typeof Alpine === 'undefined') {
-                console.warn('Alpine.js not loaded, initializing navbar fallback...');
-                document.body.classList.add('navbar-fallback');
-                initializeNavbarFallback();
-            }
-        }, 1000);
+        // Check if Alpine.js is available immediately
+        if (typeof Alpine === 'undefined') {
+            console.warn('Alpine.js not loaded, initializing navbar fallback...');
+            document.body.classList.add('navbar-fallback');
+            initializeNavbarFallback();
+        } else {
+            // Alpine.js is available, but add a safety net
+            setTimeout(function() {
+                const mobileToggle = document.querySelector('[data-mobile-toggle]');
+                const mobileMenu = document.querySelector('[data-mobile-menu]');
+
+                if (mobileToggle && mobileMenu) {
+                    // Check if Alpine.js is actually working
+                    mobileToggle.addEventListener('click', function() {
+                        setTimeout(function() {
+                            if (mobileMenu.style.display === 'none' && !mobileMenu.hasAttribute('x-show')) {
+                                console.warn('Alpine.js not working properly, switching to fallback');
+                                document.body.classList.add('navbar-fallback');
+                                initializeNavbarFallback();
+                            }
+                        }, 100);
+                    });
+                }
+            }, 500);
+        }
     });
 
     function initializeNavbarFallback() {
@@ -653,16 +687,36 @@
         const mobileMenu = document.querySelector('[data-mobile-menu]');
 
         if (mobileToggle && mobileMenu) {
-            mobileToggle.addEventListener('click', function() {
-                const isOpen = mobileMenu.classList.contains('show');
+            // Remove existing Alpine.js listeners to prevent conflicts
+            mobileToggle.removeAttribute('@click');
+            mobileMenu.removeAttribute('@click.away');
+
+            mobileToggle.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+
+                const isOpen = mobileMenu.style.display === 'block' ||
+                              mobileMenu.classList.contains('show');
+
                 if (isOpen) {
-                    mobileMenu.classList.remove('show');
                     mobileMenu.style.display = 'none';
+                    mobileMenu.classList.remove('show');
+                    mobileMenu.setAttribute('aria-hidden', 'true');
                 } else {
-                    mobileMenu.classList.add('show');
                     mobileMenu.style.display = 'block';
+                    mobileMenu.classList.add('show');
+                    mobileMenu.setAttribute('aria-hidden', 'false');
                 }
                 console.log('Mobile menu toggled via fallback');
+            });
+
+            // Close menu when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!mobileMenu.contains(e.target) && !mobileToggle.contains(e.target)) {
+                    mobileMenu.style.display = 'none';
+                    mobileMenu.classList.remove('show');
+                    mobileMenu.setAttribute('aria-hidden', 'true');
+                }
             });
         }
 
