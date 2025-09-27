@@ -22,12 +22,78 @@
     </div>
 
     @if($category->products->count() > 0)
+        <!-- Fallback Static Version (when Alpine.js fails) -->
+        <div id="static-products" class="hidden">
+            <!-- Search Input -->
+            <div class="mx-auto mb-6 max-w-md">
+                <div class="relative">
+                    <input type="text" id="static-search" placeholder="Search {{ $category->name }} products..."
+                           class="py-3 pr-4 pl-12 w-full text-lg rounded-lg border border-gray-300 focus:ring-2 focus:ring-ami-blue focus:border-transparent">
+                    <i class="absolute top-4 left-4 text-gray-400 fas fa-search"></i>
+                </div>
+            </div>
+
+            <!-- Products Count -->
+            <div class="mb-6 text-center">
+                <p class="text-gray-600" id="products-count">Showing {{ $category->products->count() }} products</p>
+            </div>
+
+            <!-- Products Grid -->
+            <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                @foreach ($category->products as $product)
+                    <div class="overflow-hidden bg-white rounded-xl shadow-lg transition-all duration-300 hover:shadow-xl product-card">
+                        <a href="{{ route('product.show', $product->slug) }}" class="block">
+                            <div class="relative">
+                                @if($product->image)
+                                    <img src="{{ asset('storage/' . $product->image) }}"
+                                         alt="{{ $product->name }}"
+                                         class="object-contain w-full h-48"
+                                         loading="lazy" decoding="async">
+                                @else
+                                    <img src="{{ asset('imgs/products/G1.png') }}"
+                                         alt="{{ $product->name }}"
+                                         class="object-contain w-full h-48"
+                                         loading="lazy" decoding="async">
+                                @endif
+                                <div class="absolute top-4 left-4">
+                                    <span class="px-3 py-1 text-sm font-semibold text-white rounded-full bg-ami-orange">
+                                        {{ $product->subcategory->name }}
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="mb-2 text-lg font-bold text-gray-900">{{ $product->name }}</h3>
+                                <p class="mb-3 text-gray-600">{{ $product->model_name }}</p>
+
+                                @if($product->description)
+                                    <p class="mb-4 text-sm text-gray-500 line-clamp-2">{{ Str::limit($product->description, 100) }}</p>
+                                @endif
+
+                                <div class="flex justify-between items-center mb-4">
+                                    <span class="text-sm text-gray-500">{{ $product->fuel_type }}</span>
+                                    <span class="text-sm text-gray-500">{{ $product->frequency }}</span>
+                                </div>
+
+                                <div class="flex justify-between items-center">
+                                    <span class="text-sm font-medium text-ami-blue">View Details</span>
+                                    <i class="fas fa-arrow-right text-ami-orange"></i>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+
         <!-- Search and Filter Section -->
         <div class="mb-8" x-data="{
             searchQuery: '',
             filteredProducts: @js($category->products->toArray()),
 
             init() {
+                console.log('Category page Alpine.js initialized');
+                console.log('Initial filteredProducts:', this.filteredProducts);
+                console.log('Products count:', this.filteredProducts.length);
                 this.filterProducts();
             },
 

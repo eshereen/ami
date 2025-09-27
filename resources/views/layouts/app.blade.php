@@ -870,6 +870,52 @@
         }
     }
 
+    // Category page fallback - show static version when Alpine.js fails
+    function initializeCategoryPageFallback() {
+        const staticProducts = document.getElementById('static-products');
+        const alpineSection = document.querySelector('[x-data]');
+        
+        if (staticProducts && alpineSection) {
+            // Hide Alpine.js section and show static version
+            alpineSection.style.display = 'none';
+            staticProducts.classList.remove('hidden');
+            
+            // Initialize search functionality for static version
+            const searchInput = document.getElementById('static-search');
+            const productCards = staticProducts.querySelectorAll('.product-card');
+            const productsCount = document.getElementById('products-count');
+            
+            if (searchInput && productCards.length > 0) {
+                searchInput.addEventListener('input', function() {
+                    const query = this.value.toLowerCase().trim();
+                    let visibleCount = 0;
+                    
+                    productCards.forEach(function(card) {
+                        const productName = card.querySelector('h3')?.textContent?.toLowerCase() || '';
+                        const productModel = card.querySelector('p')?.textContent?.toLowerCase() || '';
+                        const productDesc = card.querySelector('.text-gray-500')?.textContent?.toLowerCase() || '';
+                        
+                        if (query === '' || 
+                            productName.includes(query) || 
+                            productModel.includes(query) || 
+                            productDesc.includes(query)) {
+                            card.style.display = 'block';
+                            visibleCount++;
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                    
+                    if (productsCount) {
+                        productsCount.textContent = 'Showing ' + visibleCount + ' products';
+                    }
+                });
+            }
+            
+            console.log('Category page fallback initialized - showing static version');
+        }
+    }
+
     // Initialize all search fallbacks if Alpine.js fails
     document.addEventListener('DOMContentLoaded', function() {
         setTimeout(function() {
@@ -877,6 +923,7 @@
                 initializeSubcategorySearchFallback();
                 initializeProductsIndexSearchFallback();
                 initializeCategoryPageSearchFallback();
+                initializeCategoryPageFallback();
             }
         }, 2000);
     });
