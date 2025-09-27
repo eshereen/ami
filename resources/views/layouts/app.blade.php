@@ -717,9 +717,11 @@
         const mobileMenu = document.querySelector('[data-mobile-menu]');
 
         if (mobileToggle && mobileMenu) {
-            // Remove existing Alpine.js listeners to prevent conflicts
+            // Remove Alpine-specific attributes if present (defensive)
             mobileToggle.removeAttribute('@click');
             mobileMenu.removeAttribute('@click.away');
+            // Ensure x-cloak does not keep it hidden in fallback
+            mobileMenu.removeAttribute('x-cloak');
 
             mobileToggle.addEventListener('click', function(e) {
                 e.preventDefault();
@@ -771,25 +773,40 @@
             }
         });
 
-        // Desktop products dropdown fallback
+        // Desktop products dropdown fallback (keep open when hovering dropdown)
         const productsLinks = document.querySelectorAll('nav a[href*="products"]');
         productsLinks.forEach(function(link) {
-            const dropdown = link.parentElement.querySelector('.navbar-dropdown');
-            if (dropdown) {
-                link.addEventListener('mouseenter', function() {
-                    dropdown.classList.add('show');
-                    dropdown.style.display = 'block';
-                    dropdown.style.opacity = '1';
-                });
+            const parent = link.parentElement;
+            const dropdown = parent ? parent.querySelector('.navbar-dropdown') : null;
+            if (!dropdown) return;
 
-                link.addEventListener('mouseleave', function() {
-                    setTimeout(function() {
-                        dropdown.classList.remove('show');
-                        dropdown.style.display = 'none';
-                        dropdown.style.opacity = '0';
-                    }, 200);
-                });
-            }
+            const openDropdown = () => {
+                dropdown.classList.add('show');
+                dropdown.style.display = 'block';
+                dropdown.style.opacity = '1';
+            };
+            const closeDropdown = () => {
+                dropdown.classList.remove('show');
+                dropdown.style.display = 'none';
+                dropdown.style.opacity = '0';
+            };
+
+            let hoverTimeout;
+
+            link.addEventListener('mouseenter', function() {
+                clearTimeout(hoverTimeout);
+                openDropdown();
+            });
+            link.addEventListener('mouseleave', function() {
+                hoverTimeout = setTimeout(closeDropdown, 300);
+            });
+            dropdown.addEventListener('mouseenter', function() {
+                clearTimeout(hoverTimeout);
+                openDropdown();
+            });
+            dropdown.addEventListener('mouseleave', function() {
+                hoverTimeout = setTimeout(closeDropdown, 300);
+            });
         });
 
         // Header scroll effect fallback
