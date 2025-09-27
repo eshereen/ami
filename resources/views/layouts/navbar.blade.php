@@ -109,6 +109,12 @@
                     <a href="{{ route('home') }}#contact"
                        class="transition hover:text-ami-orange hover:underline"
                        :class="(scrolled || !onHome) ? 'text-gray-700' : 'text-white'">Contact</a>
+                    <a href="/admin"
+                       class="transition hover:text-ami-orange hover:underline"
+                       :class="(scrolled || !onHome) ? 'text-gray-700' : 'text-white'"
+                       title="Admin Login">
+                        <i class="fas fa-sign-in-alt"></i>
+                    </a>
                 </nav>
 
                 <!-- Mobile Menu Button -->
@@ -128,6 +134,7 @@
                        class="text-gray-700 transition hover:text-ami-orange">Home</a>
                     <a href="{{ route('about') }}"
                        class="text-gray-700 transition hover:text-ami-orange">About</a>
+
 
                     <!-- Products with Mobile Mega Menu -->
                     <div class="relative">
@@ -184,6 +191,11 @@
                     <a href="{{ route('home') }}#contact"
                        class="text-gray-700 transition hover:text-ami-orange"
                        @click="mobileMenuOpen = false">Contact</a>
+                       <a href="/admin"
+                       class="text-gray-700 transition hover:text-ami-orange"
+                       title="Admin Login">
+                        <i class="mr-2 fas fa-sign-in-alt"></i>Login
+                    </a>
                 </div>
             </div>
         </div>

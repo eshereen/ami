@@ -117,7 +117,6 @@
         /* Essential performance */
         .bg-black{background-color:#000}
         .bg-opacity-50{background-color:rgba(0,0,0,0.5)}
-        header{z-index:1000;position:sticky;top:0}
 
         /* Desktop only */
         @media(min-width:769px){
@@ -136,15 +135,9 @@
             .mb-8{margin-bottom:2rem}
             .bg-black{background-color:#000}
             .bg-opacity-50{background-color:rgba(0,0,0,0.5)}
-            header{z-index:1000;position:sticky;top:0}
             /* Prevent CLS */
             img,picture{height:auto;max-width:100%}
             [style*="aspect-ratio"]{contain:layout}
-            .mobile-menu{display:none}
-            .mobile-menu.active{display:block}
-            @media(max-width:767px){
-                .mobile-menu-toggle{display:block}
-            }
         }
     </style>
 
@@ -212,36 +205,8 @@
         })();
     </script>
 
-    <!-- Alpine.js with optimized loading -->
-    <script>
-        // Load Alpine.js with performance optimization
-        (function() {
-            const script = document.createElement('script');
-            script.src = 'https://cdn.jsdelivr.net/npm/alpinejs@3.13.3/dist/cdn.min.js';
-            script.defer = true;
-            script.onload = function() {
-                console.log('Alpine.js loaded successfully');
-            };
-            script.onerror = function() {
-                console.warn('Primary Alpine.js CDN failed, trying fallback');
-                // Try fallback CDN
-                const fallbackScript = document.createElement('script');
-                fallbackScript.src = 'https://unpkg.com/alpinejs@3.13.3/dist/cdn.min.js';
-                fallbackScript.defer = true;
-                fallbackScript.onerror = function() {
-                    console.error('All Alpine.js CDN sources failed');
-                    initializeNavbarFallback();
-                };
-                document.head.appendChild(fallbackScript);
-            };
-            document.head.appendChild(script);
-        })();
-
-        function initializeNavbarFallback() {
-            console.warn('Initializing navbar fallback');
-            document.body.classList.add('navbar-fallback');
-        }
-    </script>
+    <!-- Alpine.js -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.3/dist/cdn.min.js"></script>
 
     <!-- Non-critical JavaScript loaded asynchronously -->
     <script>
@@ -415,10 +380,6 @@
             will-change: transform, opacity;
         }
 
-        /* Ensure proper z-index stacking */
-        header {
-            z-index: 1000 !important;
-        }
 
         .navbar-dropdown {
             z-index: 1001 !important;
@@ -565,34 +526,28 @@
             display: none !important;
         }
 
-        /* Mobile menu positioning and visibility */
-        .mobile-menu {
-            position: absolute !important;
-            top: 100% !important;
-            left: 1rem !important;
-            right: 1rem !important;
-            z-index: 1000 !important;
-            background: white !important;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
-            border-radius: 0.5rem !important;
-            border: 1px solid rgba(0, 0, 0, 0.1) !important;
+        /* Mobile menu positioning and visibility - only on mobile */
+        @media (max-width: 767px) {
+            .mobile-menu {
+                position: absolute !important;
+                top: 100% !important;
+                left: 1rem !important;
+                right: 1rem !important;
+                z-index: 1000 !important;
+                background: white !important;
+                box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
+                border-radius: 0.5rem !important;
+                border: 1px solid rgba(0, 0, 0, 0.1) !important;
+            }
         }
 
-        /* Ensure header has proper positioning */
-        header {
-            position: fixed !important;
-            top: 0 !important;
-            left: 0 !important;
-            right: 0 !important;
-            z-index: 50 !important;
-        }
 
         /* Override Alpine.js x-cloak for mobile menu */
         .mobile-menu[x-cloak] {
             display: none !important;
         }
 
-        /* Fallback for when Alpine.js is not available */
+        /* Fallback for when Alpine.js is not available - respect responsive breakpoints */
         .navbar-fallback .navbar-dropdown {
             display: none !important;
         }
@@ -602,12 +557,22 @@
             opacity: 1 !important;
         }
 
-        .navbar-fallback .mobile-menu {
-            display: none !important;
+        /* Mobile menu fallback - only affect mobile screens */
+        @media (max-width: 767px) {
+            .navbar-fallback .mobile-menu {
+                display: none !important;
+            }
+
+            .navbar-fallback .mobile-menu.show {
+                display: block !important;
+            }
         }
 
-        .navbar-fallback .mobile-menu.show {
-            display: block !important;
+        /* Ensure mobile menu is hidden on desktop even in fallback mode */
+        @media (min-width: 768px) {
+            .navbar-fallback .mobile-menu {
+                display: none !important;
+            }
         }
 
         /* Fix mobile menu flashing */
@@ -615,7 +580,7 @@
             display: none !important;
         }
 
-        /* Prevent mobile menu from showing initially */
+        /* Mobile menu visibility - only on mobile */
         @media (max-width: 767px) {
             .mobile-menu {
                 display: none;
@@ -623,6 +588,13 @@
 
             .mobile-menu.show {
                 display: block;
+            }
+        }
+
+        /* Hide mobile menu on desktop */
+        @media (min-width: 768px) {
+            .mobile-menu {
+                display: none !important;
             }
         }
     </style>
