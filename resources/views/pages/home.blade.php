@@ -291,7 +291,7 @@
                         <li class="flex items-start">
                             <i class="mt-1 mr-3 fas fa-check-circle text-ami-orange"></i>
                             <div>
-                                <h4 class="font-bold capitalize">Diesel Generating Set
+                                <h4 class="text-lg font-bold text-gray-900 capitalize">Diesel Generating Set
                                 </h4>
                                 <p class="text-gray-600">Full range of reliable diesel generator power solutions.</p>
                             </div>
@@ -299,7 +299,7 @@
                         <li class="flex items-start">
                             <i class="mt-1 mr-3 fas fa-check-circle text-ami-orange"></i>
                             <div>
-                                <h4 class="font-bold capitalize">Fuel Storage Tanks
+                                <h4 class="text-lg font-bold text-gray-900 capitalize">Fuel Storage Tanks
                                 </h4>
                                 <p class="text-gray-600">Distant job site location is no longer an issue with our storage tank solutions.</p>
                             </div>
@@ -307,14 +307,14 @@
                         <li class="flex items-start">
                             <i class="mt-1 mr-3 fas fa-check-circle text-ami-orange"></i>
                             <div>
-                                <h4 class="font-bold capitalize">Marine Gensets</h4>
+                                <h4 class="text-lg font-bold text-gray-900 capitalize">Marine Gensets</h4>
                                 <p class="text-gray-600">Where performance & reliability are critical the most.</p>
                             </div>
                         </li>
                         <li class="flex items-start">
                             <i class="mt-1 mr-3 fas fa-check-circle text-ami-orange"></i>
                             <div>
-                                <h4 class="font-bold capitalize">Trailers
+                                <h4 class="text-lg font-bold text-gray-900 capitalize">Trailers
                                 </h4>
                                 <p class="text-gray-600">On the Job site, rough terrain or on a boat, various accessories to meet your application requirement perfectly.</p>
                             </div>
@@ -322,7 +322,7 @@
                         <li class="flex items-start">
                             <i class="mt-1 mr-3 fas fa-check-circle text-ami-orange"></i>
                             <div>
-                                <h4 class="font-bold capitalize">Flood Light
+                                <h4 class="font-bold text-gray-900 capitalize">Flood Light
                                 </h4>
                                 <p class="text-gray-600">Ease your night working days with the right Flood Light Set.</p>
                             </div>
@@ -330,7 +330,7 @@
                         <li class="flex items-start">
                             <i class="mt-1 mr-3 fas fa-check-circle text-ami-orange"></i>
                             <div>
-                                <h4 class="font-bold capitalize">Low Voltage Panels
+                                <h4 class="font-bold text-gray-900 capitalize">Low Voltage Panels
                                 </h4>
                                 <p class="text-gray-600">LCompatible, High-Quality Low Voltage panels Distribution Switchgear, Lighting panels, Synchronization panels and ATS.
                                 </p>

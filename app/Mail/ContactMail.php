@@ -8,6 +8,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+use App\Models\Contact;
 
 class ContactMail extends Mailable
 {
@@ -16,9 +17,9 @@ class ContactMail extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public function __construct(public Contact $contact)
     {
-        //
+        $this->contact = $contact;
     }
 
     /**

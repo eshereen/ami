@@ -198,7 +198,6 @@
                             <i class="mr-2 fas fa-phone"></i>Contact Sales
                         </a>
                     </div>
-
                     <!-- Additional Information -->
                     <div class="p-6 bg-blue-50 rounded-xl">
                         <h4 class="mb-3 text-lg font-semibold text-gray-900">Need More Information?</h4>
