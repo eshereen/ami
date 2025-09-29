@@ -108,7 +108,7 @@
                        :class="(scrolled || !onHome) ? 'text-gray-700' : 'text-white'">Blog</a>
                        <a href="{{ route('gallaries.index') }}"
                        class="text-gray-700 transition hover:text-ami-orange"
-                       @click="mobileMenuOpen = false">Gallary</a>
+                       :class="(scrolled || !onHome) ? 'text-gray-700' : 'text-white'">Gallary</a>
                     <a href="{{ route('home') }}#contact"
                        class="transition hover:text-ami-orange hover:underline"
                        :class="(scrolled || !onHome) ? 'text-gray-700' : 'text-white'">Contact</a>
