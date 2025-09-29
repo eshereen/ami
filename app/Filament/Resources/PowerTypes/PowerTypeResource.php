@@ -9,7 +9,7 @@ use App\Filament\Resources\PowerTypes\Pages\ViewPowerType;
 use App\Filament\Resources\PowerTypes\Schemas\PowerTypeForm;
 use App\Filament\Resources\PowerTypes\Schemas\PowerTypeInfolist;
 use App\Filament\Resources\PowerTypes\Tables\PowerTypesTable;
-use App\Models\PowerType;
+use App\Models\Powertype;
 use BackedEnum;
 use UnitEnum;
 use Filament\Resources\Resource;
@@ -19,7 +19,7 @@ use Filament\Tables\Table;
 
 class PowerTypeResource extends Resource
 {
-    protected static ?string $model = PowerType::class;
+    protected static ?string $model = Powertype::class;
     protected static string | UnitEnum   | null $navigationGroup = 'Products Details';
 
 

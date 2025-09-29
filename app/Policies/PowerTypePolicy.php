@@ -5,19 +5,19 @@ declare(strict_types=1);
 namespace App\Policies;
 
 use Illuminate\Foundation\Auth\User as AuthUser;
-use App\Models\PowerType;
+use App\Models\Powertype;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class PowerTypePolicy
 {
     use HandlesAuthorization;
-    
+
     public function viewAny(AuthUser $authUser): bool
     {
         return $authUser->can('ViewAny:PowerType');
     }
 
-    public function view(AuthUser $authUser, PowerType $powerType): bool
+    public function view(AuthUser $authUser, Powertype $powerType): bool
     {
         return $authUser->can('View:PowerType');
     }
@@ -27,22 +27,22 @@ class PowerTypePolicy
         return $authUser->can('Create:PowerType');
     }
 
-    public function update(AuthUser $authUser, PowerType $powerType): bool
+    public function update(AuthUser $authUser, Powertype $powerType): bool
     {
         return $authUser->can('Update:PowerType');
     }
 
-    public function delete(AuthUser $authUser, PowerType $powerType): bool
+    public function delete(AuthUser $authUser, Powertype $powerType): bool
     {
         return $authUser->can('Delete:PowerType');
     }
 
-    public function restore(AuthUser $authUser, PowerType $powerType): bool
+    public function restore(AuthUser $authUser, Powertype $powerType): bool
     {
         return $authUser->can('Restore:PowerType');
     }
 
-    public function forceDelete(AuthUser $authUser, PowerType $powerType): bool
+    public function forceDelete(AuthUser $authUser, Powertype $powerType): bool
     {
         return $authUser->can('ForceDelete:PowerType');
     }
@@ -57,7 +57,7 @@ class PowerTypePolicy
         return $authUser->can('RestoreAny:PowerType');
     }
 
-    public function replicate(AuthUser $authUser, PowerType $powerType): bool
+    public function replicate(AuthUser $authUser, Powertype $powerType): bool
     {
         return $authUser->can('Replicate:PowerType');
     }
