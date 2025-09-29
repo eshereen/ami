@@ -16,7 +16,7 @@ class GallaryForm
             ->components([
                 Section::make('Gallary Details')
                 ->schema([
-                Select::make('product.name')
+                Select::make('product_id')
                     ->required()
                     ->relationship('product', 'name'),
                 TextInput::make('name'),
@@ -24,7 +24,7 @@ class GallaryForm
                 TextInput::make('description'),
 
                 WebPFileUpload::make('image')
-                    ->gallery()
+                    ->thumbnail()
                     ->webpQuality(85)
                     ->required(),
                 Toggle::make('status')
