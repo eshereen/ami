@@ -193,7 +193,7 @@
                            class="px-8 py-4 font-semibold text-center text-white rounded-lg transition bg-ami-orange hover:bg-orange-600">
                             <i class="mr-2 fas fa-envelope"></i>Request Quote
                         </a>
-                        <a href="{{ route('home') }}#contact"
+                        <a href="tel:+201223907708"
                            class="px-8 py-4 font-semibold text-center bg-transparent rounded-lg border-2 transition border-ami-orange text-ami-orange hover:bg-ami-orange hover:text-white">
                             <i class="mr-2 fas fa-phone"></i>Contact Sales
                         </a>
@@ -278,22 +278,5 @@
     </section>
     @endif
 
-    <!-- Call to Action -->
-    <section class="py-16 bg-gradient-to-r from-blue-100 to-blue-400">
-        <div class="container px-4 mx-auto text-center">
-            <h2 class="mb-4 text-3xl font-bold text-gray-900 md:text-4xl">Ready to Get Started?</h2>
-            <p class="mx-auto mb-8 max-w-2xl text-xl text-gray-700">Contact our experts today to discuss your power generation needs and get a customized solution.</p>
-            <div class="flex flex-col gap-4 justify-center sm:flex-row">
-                <a href="{{ route('home') }}#contact"
-                   class="px-8 py-3 font-semibold text-white rounded-lg transition bg-ami-orange hover:bg-orange-600"
-                   onclick="console.log('Quote button clicked')">
-                    Get Free Quote
-                </a>
-                <a href="tel:+201223907708"
-                   class="px-8 py-3 font-semibold bg-transparent rounded-lg border-2 transition border-ami-orange text-ami-orange hover:bg-ami-orange hover:text-white">
-                    <i class="mr-2 fas fa-phone"></i>Call Now
-                </a>
-            </div>
-        </div>
-    </section>
+
 @endsection
