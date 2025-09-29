@@ -18,8 +18,7 @@ class ProductsTable
             ->columns([
                 TextColumn::make('name')
                     ->searchable(),
-                TextColumn::make('slug')
-                    ->searchable(),
+              
                 TextColumn::make('model_name')
                     ->searchable(),
                 TextColumn::make('subcategory.name')

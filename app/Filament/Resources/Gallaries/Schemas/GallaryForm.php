@@ -17,7 +17,7 @@ class GallaryForm
                 Section::make('Gallary Details')
                 ->schema([
                 Select::make('product_id')
-                    ->required()
+
                     ->relationship('product', 'name'),
                 TextInput::make('name'),
 

@@ -18,11 +18,10 @@ class ServicesTable
                 ImageColumn::make('image'),
                 TextColumn::make('name')
                     ->searchable(),
-                TextColumn::make('slug')
-                    ->searchable(),
+               
                 TextColumn::make('description')
                     ->searchable(),
-             
+
                 TextColumn::make('status')
                     ->searchable(),
                 TextColumn::make('created_at')
