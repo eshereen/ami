@@ -15,7 +15,7 @@ class ApplicationForm
             ->components([
                 Section::make('Application Details')
                 ->schema([
-                Select::make('product.name')
+                Select::make('product_id')
                     ->required()
                     ->relationship('product', 'name'),
                 TextInput::make('name'),
