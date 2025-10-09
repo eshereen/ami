@@ -313,6 +313,12 @@
                         <a href="https://www.iveco.com" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-40 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
                             <img src="{{ asset('imgs/iveco.png') }}" alt="Iveco" class="object-contain w-full h-full">
                         </a>
+                        <a href="#" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-40 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
+                            <img src="{{ asset('imgs/Schneider.png') }}" alt="Schneider" class="object-contain w-full h-full">
+                        </a>
+                        <a href="#" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-40 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
+                            <img src="{{ asset('imgs/ABB.png') }}" alt="ABB" class="object-contain w-full h-full">
+                        </a>
                         <a href="https://www.marathonelectric.com" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-40 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
                             <img src="{{ asset('imgs/marathon.png') }}" alt="Marathon" class="object-contain w-full h-full">
                         </a>
