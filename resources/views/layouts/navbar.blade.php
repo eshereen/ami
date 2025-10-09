@@ -28,12 +28,10 @@
         <div class="container px-4 py-3 mx-auto">
             <div class="flex justify-between items-center">
                 <a href="{{ route('home') }}" class="flex items-center">
-                    <img :src="(scrolled || mobileMenuOpen || !onHome) ? '{{ asset('imgs/logo.png') }}' : '{{ asset('imgs/dark-logo.png') }}'"
+                    <img :src="(scrolled || mobileMenuOpen || !onHome) ? '{{ asset('imgs/logo.png') }}' : '{{ asset('imgs/logo.png') }}'"
                          alt="AMI Logo"
                          class="h-14 transition-all duration-300"
-                         width="100"
-                         height="40"
-                         style="aspect-ratio:100/40;">
+                        >
                 </a>
 
                 <!-- Desktop Navigation -->

@@ -42,7 +42,7 @@
                         <a href="http://www.youtube.com/user/amigenset" class="flex justify-center items-center w-10 h-10 bg-white bg-opacity-20 rounded-full transition hover:bg-ami-orange">
                             <i class="fab fa-youtube"></i>
                         </a>
-                        <a href="http://www.linkedin.com/company/almohandesinternational" class="flex justify-center items-center w-10 h-10 bg-white bg-opacity-20 rounded-full transition hover:bg-ami-orange">
+                        <a href="https://www.linkedin.com/company/almohandesinternationalgenerators/?originalSubdomain=eg" class="flex justify-center items-center w-10 h-10 bg-white bg-opacity-20 rounded-full transition hover:bg-ami-orange">
                             <i class="fab fa-linkedin-in"></i>
                         </a>
 

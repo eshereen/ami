@@ -159,7 +159,7 @@
         .shadow-md { box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); }
         .text-white { color: white; }
         .text-gray-700 { color: #374151; }
-        .hover\:text-ami-orange:hover { color: #ff7700; }
+        .hover\:text-ami-orange:hover { color: #ec2600; }
         .h-14 { height: 3.5rem; }
         .transition-all { transition: all 0.3s ease; }
         .duration-300 { transition-duration: 300ms; }
@@ -183,7 +183,7 @@
                             extend: {
                                 colors: {
                                     'ami-blue': '#0056b3',
-                                    'ami-orange': '#ff7700',
+                                    'ami-orange': '#ec2600',
                                     'ami-light-blue': '#e6f2ff'
                                 }
                             }
@@ -286,7 +286,7 @@
     <style>
         :root {
             --ami-blue: #0056b3;
-            --ami-orange: #ff7700;
+            --ami-orange: #ec2600;
             --ami-light-blue: #e6f2ff;
         }
 

@@ -9,7 +9,7 @@ export default {
     extend: {
       colors: {
         'ami-blue': '#0056b3',
-        'ami-orange': '#ff7700',
+        'ami-orange': '#ec2600',
         'ami-light-blue': '#e6f2ff',
       },
       fontFamily: {
