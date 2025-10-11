@@ -74,7 +74,7 @@
                 <h1 class="mb-4 text-4xl font-bold md:text-6xl text-shadow">Powering Reliability Since 1983</h1>
                 <p class="mb-8 text-xl md:text-2xl text-shadow">Engineering Excellence in Diesel Generator Solutions</p>
                 <div class="flex flex-col gap-4 justify-center sm:flex-row">
-                    <a href="#products" class="px-8 py-3 font-bold text-white rounded-full transition transform bg-ami-orange hover:bg-orange-600 hover:scale-105">
+                    <a href="#products" class="px-8 py-3 font-bold text-white rounded-full transition transform bg-ami-orange hover:bg-blue-600 hover:scale-105">
                         Explore Products
                     </a>
                     <a href="{{ route('home') }}#contact" class="px-8 py-3 font-bold text-white bg-transparent rounded-full border-2 border-white transition hover:bg-white hover:text-ami-blue">
