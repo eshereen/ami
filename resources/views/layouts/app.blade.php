@@ -47,9 +47,10 @@
     <link rel="dns-prefetch" href="//cdn.tailwindcss.com">
     <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
 
-    <!-- Preload LCP hero images with mobile optimization -->
-    <link rel="preload" as="image" href="{{ asset('imgs/slide-mobile.webp') }}" media="(max-width: 768px)" fetchpriority="high">
-    <link rel="preload" as="image" href="{{ asset('imgs/slide.webp') }}" media="(min-width: 769px)" fetchpriority="high">
+    <!-- Preload first slider image for better LCP with responsive images -->
+    <link rel="preload" as="image" href="{{ asset('imgs/slider-1-mobile.webp') }}" media="(max-width: 640px)" fetchpriority="high">
+    <link rel="preload" as="image" href="{{ asset('imgs/slider-1-tablet.webp') }}" media="(min-width: 641px) and (max-width: 1024px)" fetchpriority="high">
+    <link rel="preload" as="image" href="{{ asset('imgs/slider-1.webp') }}" media="(min-width: 1025px)" fetchpriority="high">
 
     <!-- Optimized font loading with font-display swap -->
     <link rel="preconnect" href="https://fonts.googleapis.com">

@@ -18,10 +18,7 @@ class SubcategoriesTable
             ->columns([
                 TextColumn::make('name')
                     ->searchable(),
-                TextColumn::make('slug')
-                    ->searchable(),
                 TextColumn::make('category.name')
-                  
                     ->sortable(),
                 ImageColumn::make('image'),
                 TextColumn::make('status')

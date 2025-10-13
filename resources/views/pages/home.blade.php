@@ -19,19 +19,19 @@
             currentSlide: 0,
             slides: [
                 {
-                    desktop: '{{ asset('imgs/slide.webp') }}',
-                    mobile: '{{ asset('imgs/slide-mobile.webp') }}',
-                    mobileSmall: '{{ asset('imgs/slide-mobile-sm.webp') }}'
+                    desktop: '{{ asset('imgs/slider-1.webp') }}',
+                    tablet: '{{ asset('imgs/slider-1-tablet.webp') }}',
+                    mobile: '{{ asset('imgs/slider-1-mobile.webp') }}'
                 },
                 {
-                    desktop: '{{ asset('imgs/slide-1.webp') }}',
-                    mobile: '{{ asset('imgs/slide-1-mobile.webp') }}',
-                    mobileSmall: '{{ asset('imgs/slide-1-mobile-sm.webp') }}'
+                    desktop: '{{ asset('imgs/slider-2.webp') }}',
+                    tablet: '{{ asset('imgs/slider-2-tablet.webp') }}',
+                    mobile: '{{ asset('imgs/slider-2-mobile.webp') }}'
                 },
                 {
-                    desktop: '{{ asset('imgs/slide-2.webp') }}',
-                    mobile: '{{ asset('imgs/slide-2-mobile.webp') }}',
-                    mobileSmall: '{{ asset('imgs/slide-2-mobile-sm.webp') }}'
+                    desktop: '{{ asset('imgs/slider-3.webp') }}',
+                    tablet: '{{ asset('imgs/slider-3-tablet.webp') }}',
+                    mobile: '{{ asset('imgs/slider-3-mobile.webp') }}'
                 }
             ]
         }" x-init="() => {
@@ -54,8 +54,8 @@
                     style="width: 100%; height: 100vh;"
                 >
                     <img :src="slide.desktop"
-                         :srcset="slide.mobileSmall + ' 480w, ' + slide.mobile + ' 768w, ' + slide.desktop + ' 1920w'"
-                         sizes="(max-width: 480px) 100vw, (max-width: 768px) 100vw, (max-width: 1024px) 90vw, 1920px"
+                         :srcset="slide.mobile + ' 640w, ' + slide.tablet + ' 1024w, ' + slide.desktop + ' 1920w'"
+                         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 1920px"
                          alt="AMI Power Generation Solutions"
                          class="object-cover w-full h-full"
                          width="1920"
@@ -63,11 +63,10 @@
                          :fetchpriority="index === 0 ? 'high' : 'low'"
                          decoding="async"
                          loading="eager"
-                         style="aspect-ratio: 16/9;"
-                         :onerror="console.error('Failed to load image:', slide.desktop)">
+                         style="aspect-ratio: 16/9;">
                 </div>
             </template>
-            <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+            <div class="absolute inset-0 z-10 bg-gray-900/60"></div>
         </div>
 
         <div class="flex relative z-10 justify-center items-center px-4 h-full text-center text-white" style="contain:layout;"><div class="max-w-3xl fade-in">
@@ -108,7 +107,7 @@
 
             <div class="grid grid-cols-1 gap-12 items-center mb-16 md:grid-cols-2">
                 <div>
-                    <img src="{{ asset('imgs/products.webp') }}" alt="Manufacturing Facility" class="w-full rounded-lg shadow-lg" loading="lazy" decoding="async" width="900" height="600">
+                    <img src="{{ asset('imgs/ATS.jpg') }}" alt="Manufacturing Facility" class="w-full rounded-lg shadow-lg" loading="lazy" decoding="async" width="900" height="600">
                 </div>
                 <div>
                     <h3 class="mb-6 text-2xl font-bold ami-blue">In-House Production Excellence</h3>
@@ -135,14 +134,14 @@
                         <li class="flex items-start">
                             <i class="mt-1 mr-3 fas fa-check-circle text-ami-orange"></i>
                             <div>
-                                <h4 class="text-lg font-bold text-gray-900 capitalize">Marine Gensets</h4>
+                                <h4 class="text-lg font-bold text-gray-900 capitalize">Marine generator set</h4>
                                 <p class="text-gray-600">Where performance & reliability are critical the most.</p>
                             </div>
                         </li>
                         <li class="flex items-start">
                             <i class="mt-1 mr-3 fas fa-check-circle text-ami-orange"></i>
                             <div>
-                                <h4 class="text-lg font-bold text-gray-900 capitalize">Trailers
+                                <h4 class="text-lg font-bold text-gray-900 capitalize">Trailer generator set
                                 </h4>
                                 <p class="text-gray-600">On the Job site, rough terrain or on a boat, various accessories to meet your application requirement perfectly.</p>
                             </div>
@@ -196,24 +195,20 @@
 
                 </div>
 
-                <div class="md:w-1/2">
-                    <picture>
-                        <source
-                            media="(max-width: 768px)"
-                            srcset="{{ asset('imgs/about-mobile.webp') }} 768w, {{ asset('imgs/about-mobile-sm.webp') }} 480w"
-                            sizes="100vw"
-                        >
+                <div class="bg-transparent md:w-1/2">
+
+
                         <img
-                            src="{{ asset('imgs/about.webp') }}"
+                            src="{{ asset('imgs/trailer.jpg') }}"
                             alt="AMI Manufacturing Facility"
-                            class="w-full rounded-lg shadow-lg"
+                            class="object-contain w-full rounded-md"
                             loading="lazy"
                             decoding="async"
                             width="900"
-                            height="600"
+height="600"
                             style="aspect-ratio: 3/2;"
                         >
-                    </picture>
+
                 </div>
             </div>
         </div>
@@ -347,6 +342,12 @@
                         </a>
 
                         <!-- Duplicate Same 5 Partners for Seamless Loop -->
+                        <a href="#" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-40 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
+                            <img src="{{ asset('imgs/Schneider.png') }}" alt="Schneider" class="object-contain w-full h-full">
+                        </a>
+                        <a href="#" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-40 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
+                            <img src="{{ asset('imgs/ABB.png') }}" alt="ABB" class="object-contain w-full h-full">
+                        </a>
                         <a href="https://www.mtu-online.com" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-40 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
                             <img src="{{ asset('imgs/mtu.png') }}" alt="MTU" class="object-contain w-full h-full">
                         </a>
@@ -550,7 +551,6 @@
                             </div>
                         </div>
                     @endif
-
                     <form method="post" action="{{ route('contact.store') }}" class="space-y-6">
                         @csrf
                         <div>
@@ -647,7 +647,7 @@
                             </div>
                             <div>
                                 <h4 class="mb-1 font-bold">WhatsApp </h4>
-                                <a href="tel:+201223907708" class="text-gray-600">(+2) 01223907708</a>
+                                <a href="tel:+201211692434" class="text-gray-600">+20 1211692434</a>
                             </div>
 
                         </div>
