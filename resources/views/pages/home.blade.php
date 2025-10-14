@@ -15,7 +15,7 @@
 @section('content')
 
     <!-- Hero Section -->
-    <section id="home" class="relative hero-section" style="height: calc(110vh - 72px); margin-top: -72px;" x-data="{
+    <section id="home" class="relative hero-section" style="height: calc(100vh - 72px); margin-top: -72px; min-height: 500px;" x-data="{
             currentSlide: 0,
             slides: [
                 {
@@ -50,14 +50,14 @@
             <template x-for="(slide, index) in slides" :key="index">
                 <div
                     x-show="currentSlide === index"
-                    x-transition:enter="transition ease-in-out duration-1000"
+                    x-transition:enter="transition ease-in-out duration-700"
                     x-transition:enter-start="opacity-0"
                     x-transition:enter-end="opacity-100"
-                    x-transition:leave="transition ease-in-out duration-1000"
+                    x-transition:leave="transition ease-in-out duration-700"
                     x-transition:leave-start="opacity-100"
                     x-transition:leave-end="opacity-0"
                     class="absolute inset-0 hero-slider"
-                    style="width: 100%; height: 120vh;"
+                    style="width: 100%; height: 100%; min-height: 500px;"
                 >
                     <img :src="slide.mobile"
                          :srcset="slide.mobile + ' 640w, ' + slide.tablet + ' 1024w, ' + slide.desktop + ' 1920w'"
@@ -77,13 +77,13 @@
 
         <div class="relative z-10 flex items-center justify-center h-full text-center text-white" >
             <div class="w-full max-w-5xl px-4 fade-in">
-                <div class="relative min-h-[280px] md:min-h-[320px] flex flex-col justify-center items-center">
+                <div class="relative" style="min-height: 280px; height: 280px;" class="md:min-h-[320px] flex flex-col justify-center items-center">
                   <template x-for="(slide, index) in slides" :key="index">
                     <div x-show="currentSlide === index"
-                         x-transition:enter="transition ease-in-out duration-1000"
+                         x-transition:enter="transition ease-in-out duration-600"
                          x-transition:enter-start="opacity-0"
                          x-transition:enter-end="opacity-100"
-                         x-transition:leave="transition ease-in-out duration-1000"
+                         x-transition:leave="transition ease-in-out duration-600"
                          x-transition:leave-start="opacity-100"
                          x-transition:leave-end="opacity-0"
                          class="absolute inset-0 flex flex-col items-center justify-center">
@@ -417,6 +417,7 @@
 
                     .animate-scroll-left {
                         animation: scroll-left 30s linear infinite;
+                        will-change: transform;
                     }
 
                     .animate-scroll-left:hover {
@@ -425,10 +426,21 @@
 
                     .animate-scroll-right {
                         animation: scroll-right 25s linear infinite;
+                        will-change: transform;
                     }
 
                     .animate-scroll-right:hover {
                         animation-play-state: paused;
+                    }
+                    
+                    /* Reduce animations on mobile for better performance */
+                    @media (max-width: 768px) {
+                        .animate-scroll-left {
+                            animation-duration: 40s;
+                        }
+                        .animate-scroll-right {
+                            animation-duration: 35s;
+                        }
                     }
                 </style>
             </div>

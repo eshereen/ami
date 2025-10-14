@@ -44,6 +44,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="dns-prefetch" href="//cdn.jsdelivr.net">
     <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
+    <link rel="dns-prefetch" href="//cdn.tailwindcss.com">
 
     <!-- Preload first slider image for better LCP - mobile-first -->
     <link rel="preload" as="image" href="{{ asset('imgs/1-mobile.webp') }}" media="(max-width: 640px)" fetchpriority="high" imagesrcset="{{ asset('imgs/1-mobile.webp') }} 640w" imagesizes="100vw">
@@ -164,10 +165,20 @@
     <link rel="preload" href="{{ Vite::asset('resources/css/app.css') }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="{{ Vite::asset('resources/css/app.css') }}"></noscript>
 
-    <!-- Tailwind CDN - deferred for mobile performance -->
+    <!-- Tailwind CDN - deferred after page load to reduce TBT -->
     <script>
-        // Defer Tailwind loading for better mobile performance
-        window.addEventListener('DOMContentLoaded', function() {
+        // Defer Tailwind loading after page is interactive
+        if ('requestIdleCallback' in window) {
+            requestIdleCallback(function() {
+                loadTailwind();
+            });
+        } else {
+            setTimeout(function() {
+                loadTailwind();
+            }, 200);
+        }
+        
+        function loadTailwind() {
             const script = document.createElement('script');
             script.src = 'https://cdn.tailwindcss.com';
             script.onload = function() {
@@ -194,7 +205,7 @@
                 document.head.appendChild(fallbackCSS);
             };
             document.head.appendChild(script);
-        });
+        }
     </script>
 
     <!-- Alpine.js - deferred -->
@@ -202,15 +213,25 @@
 
     <!-- Non-critical JavaScript loaded asynchronously -->
     <script>
-        // Load Font Awesome asynchronously - optimized for mobile
-        window.addEventListener('load', function() {
+        // Load Font Awesome with requestIdleCallback to reduce TBT
+        if ('requestIdleCallback' in window) {
+            requestIdleCallback(function() {
+                loadFontAwesome();
+            });
+        } else {
+            window.addEventListener('load', function() {
+                setTimeout(loadFontAwesome, 100);
+            });
+        }
+        
+        function loadFontAwesome() {
             const link = document.createElement('link');
             link.rel = 'stylesheet';
             link.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css';
             link.media = 'print';
             link.onload = function() { this.media = 'all'; };
             document.head.appendChild(link);
-        })();
+        }
 
         // Simple mobile menu fix
         document.addEventListener('DOMContentLoaded', function() {
@@ -302,6 +323,20 @@
             
             img {
                 image-rendering: -webkit-optimize-contrast;
+            }
+        }
+        
+        /* Prevent CLS - reserve space for images */
+        img[width][height] {
+            height: auto;
+        }
+        
+        /* Optimize animations for performance */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
             }
         }
 
