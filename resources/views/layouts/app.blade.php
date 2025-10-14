@@ -40,25 +40,19 @@
     <meta name="theme-color" content="#0056b3">
     <meta name="msapplication-TileColor" content="#0056b3">
     <meta name="format-detection" content="telephone=no">
-    <!-- Critical Resource Hints -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <!-- Critical Resource Hints - Optimized for mobile -->
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-    <link rel="dns-prefetch" href="//cdn.tailwindcss.com">
+    <link rel="dns-prefetch" href="//cdn.jsdelivr.net">
     <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
 
-    <!-- Preload first slider image for better LCP with responsive images -->
-    <link rel="preload" as="image" href="{{ asset('imgs/slider-1-mobile.webp') }}" media="(max-width: 640px)" fetchpriority="high">
-    <link rel="preload" as="image" href="{{ asset('imgs/slider-1-tablet.webp') }}" media="(min-width: 641px) and (max-width: 1024px)" fetchpriority="high">
-    <link rel="preload" as="image" href="{{ asset('imgs/slider-1.webp') }}" media="(min-width: 1025px)" fetchpriority="high">
+    <!-- Preload first slider image for better LCP - mobile-first -->
+    <link rel="preload" as="image" href="{{ asset('imgs/1-mobile.webp') }}" media="(max-width: 640px)" fetchpriority="high" imagesrcset="{{ asset('imgs/1-mobile.webp') }} 640w" imagesizes="100vw">
 
-    <!-- Optimized font loading with font-display swap -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Optimized font loading - deferred for mobile performance -->
     <link rel="preload" href="https://fonts.gstatic.com/s/roboto/v30/KFOmCnqEu92Fr1Mu4mxKKTU1Kg.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="https://fonts.gstatic.com/s/montserrat/v25/JTUSjIg1_i6t8kCHKm459WlhyyTh89Y.woff2" as="font" type="font/woff2" crossorigin>
 
-    <!-- Font CSS with font-display swap -->
+    <!-- Font CSS with font-display swap - inline for performance -->
     <style>
         @font-face {
             font-family: 'Roboto';
@@ -102,10 +96,10 @@
         .text-white{color:#fff}
         .overflow-hidden{overflow:hidden}
 
-        /* Hero image optimization */
-        .hero-section{contain:layout style paint}
-        .hero-slider{width:100%;height:100%;position:absolute;top:0;left:0;contain:layout}
-        .hero-slider img{width:100%;height:100%;object-fit:cover;object-position:center}
+        /* Hero image optimization - mobile-first */
+        .hero-section{contain:layout style paint;will-change:auto}
+        .hero-slider{width:100%;height:100%;position:absolute;top:0;left:0;contain:layout;transform:translateZ(0)}
+        .hero-slider img{width:100%;height:100%;object-fit:cover;object-position:center;transform:translateZ(0)}
 
         /* Critical typography only */
         .text-4xl{font-size:2rem;line-height:1.1;font-weight:700}
@@ -170,13 +164,12 @@
     <link rel="preload" href="{{ Vite::asset('resources/css/app.css') }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="{{ Vite::asset('resources/css/app.css') }}"></noscript>
 
-    <!-- Tailwind CDN with error handling -->
+    <!-- Tailwind CDN - deferred for mobile performance -->
     <script>
-        // Load Tailwind with error handling and fallback
-        (function() {
+        // Defer Tailwind loading for better mobile performance
+        window.addEventListener('DOMContentLoaded', function() {
             const script = document.createElement('script');
             script.src = 'https://cdn.tailwindcss.com';
-            script.async = true;
             script.onload = function() {
                 try {
                     tailwind.config = {
@@ -195,24 +188,22 @@
                 }
             };
             script.onerror = function() {
-                console.warn('Tailwind CDN failed to load');
-                // Load fallback CSS
                 const fallbackCSS = document.createElement('link');
                 fallbackCSS.rel = 'stylesheet';
                 fallbackCSS.href = '{{ asset("css/fallback.css") }}';
                 document.head.appendChild(fallbackCSS);
             };
             document.head.appendChild(script);
-        })();
+        });
     </script>
 
-    <!-- Alpine.js -->
+    <!-- Alpine.js - deferred -->
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.3/dist/cdn.min.js"></script>
 
     <!-- Non-critical JavaScript loaded asynchronously -->
     <script>
-        // Load Font Awesome asynchronously
-        (function() {
+        // Load Font Awesome asynchronously - optimized for mobile
+        window.addEventListener('load', function() {
             const link = document.createElement('link');
             link.rel = 'stylesheet';
             link.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css';
@@ -294,10 +285,24 @@
         body {
             font-family: 'Roboto', sans-serif;
             padding-top: 72px; /* Account for fixed header */
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
         h1, h2, h3, h4, h5, h6 {
             font-family: 'Montserrat', sans-serif;
+            font-display: swap;
+        }
+        
+        /* Mobile performance optimizations */
+        @media (max-width: 768px) {
+            .hover-lift:hover {
+                transform: none; /* Disable transforms on mobile for better performance */
+            }
+            
+            img {
+                image-rendering: -webkit-optimize-contrast;
+            }
         }
 
         .ami-blue {
