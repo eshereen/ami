@@ -10,6 +10,7 @@ use Filament\Actions\ViewAction;
 use Filament\Tables\Table;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ImageColumn;
+use Filament\Tables\Columns\BadgeColumn;
 class ServicesTable
 {
     public static function configure(Table $table): Table
@@ -23,7 +24,12 @@ class ServicesTable
                 TextColumn::make('description')
                     ->searchable(),
 
-                TextColumn::make('status')
+                BadgeColumn::make('status')
+                    ->colors([
+                        'success' => 1,
+                        'danger' => 0,
+                    ])
+                    ->formatStateUsing(fn ($state): string => $state ? 'Active' : 'Inactive')
                     ->searchable(),
                 TextColumn::make('created_at')
                     ->dateTime()
