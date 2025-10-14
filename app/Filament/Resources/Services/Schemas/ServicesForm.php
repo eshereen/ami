@@ -28,9 +28,13 @@ class ServicesForm
                     ->imageEditor()
                     ->disk('public'),
                 Toggle::make('status')
-                ->boolean()
-                ->default(Service::STATUS_ACTIVE)
-
+                    ->label('Status')
+                    ->onColor('success')
+                    ->offColor('danger')
+                    ->onIcon('heroicon-o-check-circle')
+                    ->offIcon('heroicon-o-x-circle')
+                    ->inline(false)
+                    ->default(Service::STATUS_ACTIVE)
                     ->required(),
             ])->columns(2)->columnSpanFull(),
         ]);
