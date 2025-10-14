@@ -98,9 +98,9 @@
         .overflow-hidden{overflow:hidden}
 
         /* Hero image optimization - mobile-first */
-        .hero-section{contain:layout style paint;will-change:auto}
+        .hero-section{contain:layout style paint;will-change:auto;overflow:hidden}
         .hero-slider{width:100%;height:100%;position:absolute;top:0;left:0;contain:layout;transform:translateZ(0)}
-        .hero-slider img{width:100%;height:100%;object-fit:cover;object-position:center;transform:translateZ(0)}
+        .hero-slider img{width:100%;height:100%;min-height:100%;object-fit:cover;object-position:center;transform:translateZ(0)}
 
         /* Critical typography only */
         .text-4xl{font-size:2rem;line-height:1.1;font-weight:700}
@@ -140,9 +140,9 @@
     <!-- Critical CSS inline for immediate rendering -->
     <style>
         /* Critical above-the-fold styles */
-        .hero-section { height: calc(100vh - 72px); margin-top: -72px; }
+        .hero-section { height: 100vh; margin-top: -72px; min-height: 600px; overflow: hidden; }
         .hero-slider { width: 100%; height: 100%; position: absolute; top: 0; left: 0; }
-        .hero-slider img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
+        .hero-slider img { width: 100%; height: 100%; min-height: 100%; object-fit: cover; object-position: center; }
         .fixed { position: fixed; }
         .top-0 { top: 0; }
         .left-0 { left: 0; }

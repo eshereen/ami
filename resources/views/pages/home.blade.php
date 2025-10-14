@@ -15,7 +15,7 @@
 @section('content')
 
     <!-- Hero Section -->
-    <section id="home" class="relative hero-section" style="height: calc(100vh - 72px); margin-top: -72px; min-height: 500px;" x-data="{
+    <section id="home" class="relative hero-section" style="height: 100vh; margin-top: -72px; min-height: 600px;" x-data="{
             currentSlide: 0,
             slides: [
                 {
@@ -57,11 +57,11 @@
                     x-transition:leave-start="opacity-100"
                     x-transition:leave-end="opacity-0"
                     class="absolute inset-0 hero-slider"
-                    style="width: 100%; height: 100%; min-height: 500px;"
+                    style="width: 100%; height: 100%;"
                 >
                     <img :src="slide.mobile"
                          :srcset="slide.mobile + ' 640w, ' + slide.tablet + ' 1024w, ' + slide.desktop + ' 1920w'"
-                         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 1920px"
+                         sizes="100vw"
                          alt="AMI Power Generation Solutions"
                          class="object-cover w-full h-full"
                          width="1920"
@@ -69,7 +69,7 @@
                          :fetchpriority="index === 0 ? 'high' : 'low'"
                          decoding="async"
                          :loading="index === 0 ? 'eager' : 'lazy'"
-                         style="aspect-ratio: 16/9; object-position: center;">
+                         style="object-position: center; min-height: 100%;">
                 </div>
             </template>
             <div class="absolute inset-0 z-10 bg-gray-800/50"></div>
@@ -432,7 +432,7 @@
                     .animate-scroll-right:hover {
                         animation-play-state: paused;
                     }
-                    
+
                     /* Reduce animations on mobile for better performance */
                     @media (max-width: 768px) {
                         .animate-scroll-left {
