@@ -2,15 +2,16 @@
 
 namespace App\Filament\Resources\Blogs\Tables;
 
-use Filament\Actions\BulkActionGroup;
-use Filament\Actions\DeleteBulkAction;
-use Filament\Actions\DeleteAction;
+use Filament\Tables\Table;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteBulkAction;
 use Filament\Tables\Columns\IconColumn;
-use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Table;
+use Filament\Tables\Columns\BadgeColumn;
+use Filament\Tables\Columns\ImageColumn;
 
 class BlogsTable
 {
@@ -25,8 +26,13 @@ class BlogsTable
                 TextColumn::make('title')
                     ->searchable(),
 
-                IconColumn::make('status')
-                    ->boolean(),
+               BadgeColumn::make('status')
+                    ->colors([
+                        'success' => 1,
+                        'danger' => 0,
+                    ])
+                    ->formatStateUsing(fn ($state): string => $state ? 'Active' : 'Inactive')
+                    ->searchable(),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

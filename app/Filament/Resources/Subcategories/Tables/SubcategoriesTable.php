@@ -9,6 +9,7 @@ use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\BadgeColumn;
 use Filament\Tables\Table;
 
 class SubcategoriesTable
@@ -22,7 +23,12 @@ class SubcategoriesTable
                 TextColumn::make('category.name')
                     ->sortable(),
                 ImageColumn::make('image'),
-                TextColumn::make('status')
+                BadgeColumn::make('status')
+                    ->colors([
+                        'success' => 1,
+                        'danger' => 0,
+                    ])
+                    ->formatStateUsing(fn ($state): string => $state ? 'Active' : 'Inactive')
                     ->searchable(),
                 TextColumn::make('created_at')
                     ->dateTime()
