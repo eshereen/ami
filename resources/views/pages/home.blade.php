@@ -63,7 +63,7 @@
                          :srcset="slide.mobile + ' 640w, ' + slide.tablet + ' 1024w, ' + slide.desktop + ' 1920w'"
                          sizes="(max-width: 640px) 120vw, (max-width: 1024px) 100vw, 1920px"
                          alt="AMI Power Generation Solutions"
-                         class="object-cover w-full h-full"
+                         class="object-contain w-full h-full md:object-cover"
                          width="1920"
                          height="1080"
                          :fetchpriority="index === 0 ? 'high' : 'low'"
@@ -76,8 +76,8 @@
         </div>
 
         <div class="relative z-10 flex items-center justify-center h-full text-center text-white" >
-            <div class="max-w-7xl fade-in">
-                <div class="relative min-h-[320px] md:min-h-[390px] flex flex-col justify-center items-center">
+            <div class="w-full max-w-5xl px-4 fade-in">
+                <div class="relative min-h-[280px] md:min-h-[320px] flex flex-col justify-center items-center">
                   <template x-for="(slide, index) in slides" :key="index">
                     <div x-show="currentSlide === index"
                          x-transition:enter="transition ease-in-out duration-1000"
@@ -88,11 +88,11 @@
                          x-transition:leave-end="opacity-0"
                          class="absolute inset-0 flex flex-col items-center justify-center">
                       <h1
-                        class="w-full max-w-4xl px-4 mb-4 text-3xl font-bold leading-relaxed text-center text-shadow md:text-4xl lg:text-5xl "
+                        class="w-full mb-4 text-3xl font-bold leading-tight text-center text-shadow md:text-4xl lg:text-5xl"
                         x-text="slide.title">
                       </h1>
                       <p
-                        class="w-full max-w-3xl px-4 mb-8 text-lg leading-relaxed text-center text-shadow md:text-xl lg:text-2xl "
+                        class="w-full max-w-4xl mx-auto mb-8 text-lg leading-relaxed text-center text-shadow md:text-xl lg:text-2xl"
                         x-text="slide.description">
                       </p>
                     </div>
@@ -100,11 +100,11 @@
                 </div>
 
 
-                <div class="flex flex-col justify-center gap-4 sm:flex-row">
-                    <a href="#products" class="px-8 py-3 font-bold text-white transition transform rounded-full bg-ami-orange hover:bg-blue-600 hover:scale-105">
+                <div class="flex flex-col justify-center max-w-md gap-4 mx-auto sm:flex-row">
+                    <a href="#products" class="px-8 py-3 font-bold text-white transition transform rounded-lg bg-ami-orange hover:bg-blue-600 hover:scale-105">
                         Explore Products
                     </a>
-                    <a href="{{ route('home') }}#contact" class="px-8 py-3 font-bold text-white transition bg-transparent border-2 border-white rounded-full hover:bg-white hover:text-ami-blue">
+                    <a href="{{ route('home') }}#contact" class="px-8 py-3 font-bold text-white transition bg-transparent border-2 border-white rounded-lg hover:bg-white hover:text-ami-blue">
                         Get a Quote
                     </a>
                 </div>
