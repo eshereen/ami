@@ -136,7 +136,7 @@
 
             <div class="grid items-center grid-cols-1 gap-12 mb-16 md:grid-cols-2">
                 <div>
-                    <img src="{{ asset('imgs/3.png') }}" alt="Manufacturing Facility" class="w-full rounded-lg shadow-lg" loading="lazy" decoding="async" width="900" height="600" style="aspect-ratio: 3/2;">
+                    <img src="{{ asset('imgs/3.png') }}" alt="Manufacturing Facility" class="w-full rounded-lg shadow-lg" loading="lazy" decoding="async" width="900" height="600">
                 </div>
                 <div>
                     <h3 class="mb-6 text-2xl font-bold ami-blue">In-House Production Excellence</h3>
@@ -235,7 +235,7 @@
                             decoding="async"
                             width="900"
                             height="600"
-                            style="aspect-ratio: 3/2;"
+
                         >
 
                 </div>
