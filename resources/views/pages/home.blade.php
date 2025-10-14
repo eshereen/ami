@@ -15,23 +15,29 @@
 @section('content')
 
     <!-- Hero Section -->
-    <section id="home" class="relative hero-section" style="height: calc(100vh - 72px); margin-top: -72px;" x-data="{
+    <section id="home" class="relative hero-section" style="height: calc(110vh - 72px); margin-top: -72px;" x-data="{
             currentSlide: 0,
             slides: [
                 {
-                    desktop: '{{ asset('imgs/slider-1.webp') }}',
-                    tablet: '{{ asset('imgs/slider-1-tablet.webp') }}',
-                    mobile: '{{ asset('imgs/slider-1-mobile.webp') }}'
+                    desktop: '{{ asset('imgs/1-desktop.webp') }}',
+                    tablet: '{{ asset('imgs/1-tablet.webp') }}',
+                    mobile: '{{ asset('imgs/1-mobile.webp') }}',
+                    title: 'Powering Reliability Since 1983',
+                    description: 'Engineering Excellence in Diesel Generator Solutions'
                 },
                 {
-                    desktop: '{{ asset('imgs/slider-2.webp') }}',
-                    tablet: '{{ asset('imgs/slider-2-tablet.webp') }}',
-                    mobile: '{{ asset('imgs/slider-2-mobile.webp') }}'
+                    desktop: '{{ asset('imgs/2-desktop.webp') }}',
+                    tablet: '{{ asset('imgs/2-tablet.webp') }}',
+                    mobile: '{{ asset('imgs/2-mobile.webp') }}',
+                    title: 'Engineered for Silence. Built by AMI.',
+                    description: 'Precision-made soundproof enclosures for reliable generator performance.'
                 },
                 {
-                    desktop: '{{ asset('imgs/slider-3.webp') }}',
-                    tablet: '{{ asset('imgs/slider-3-tablet.webp') }}',
-                    mobile: '{{ asset('imgs/slider-3-mobile.webp') }}'
+                    desktop: '{{ asset('imgs/3-desktop.webp') }}',
+                    tablet: '{{ asset('imgs/3-tablet.webp') }}',
+                    mobile: '{{ asset('imgs/3-mobile.webp') }}',
+                    title: 'Genuine Parts. Guaranteed Performance.',
+                    description: 'Every component is tested, trusted, and AMI-certified.'
                 }
             ]
         }" x-init="() => {
@@ -40,7 +46,7 @@
             setInterval(() => { currentSlide = (currentSlide + 1) % slides.length }, 5000);
         }">
         <!-- Mobile optimized hero images with explicit dimensions -->
-        <div class="overflow-hidden absolute inset-0">
+        <div class="absolute inset-0 overflow-hidden">
             <template x-for="(slide, index) in slides" :key="index">
                 <div
                     x-show="currentSlide === index"
@@ -51,11 +57,11 @@
                     x-transition:leave-start="opacity-100"
                     x-transition:leave-end="opacity-0"
                     class="absolute inset-0 hero-slider"
-                    style="width: 100%; height: 100vh;"
+                    style="width: 100%; height: 120vh;"
                 >
                     <img :src="slide.desktop"
                          :srcset="slide.mobile + ' 640w, ' + slide.tablet + ' 1024w, ' + slide.desktop + ' 1920w'"
-                         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 1920px"
+                         sizes="(max-width: 640px) 120vw, (max-width: 1024px) 100vw, 1920px"
                          alt="AMI Power Generation Solutions"
                          class="object-cover w-full h-full"
                          width="1920"
@@ -63,28 +69,51 @@
                          :fetchpriority="index === 0 ? 'high' : 'low'"
                          decoding="async"
                          loading="eager"
-                         style="aspect-ratio: 16/9;">
+                         style="aspect-ratio: 16/9; position:center">
                 </div>
             </template>
-            <div class="absolute inset-0 z-10 bg-gray-900/60"></div>
+            <div class="absolute inset-0 z-10 bg-gray-800/50"></div>
         </div>
 
-        <div class="flex relative z-10 justify-center items-center px-4 h-full text-center text-white" style="contain:layout;"><div class="max-w-3xl fade-in">
-                <h1 class="mb-4 text-4xl font-bold md:text-6xl text-shadow">Powering Reliability Since 1983</h1>
-                <p class="mb-8 text-xl md:text-2xl text-shadow">Engineering Excellence in Diesel Generator Solutions</p>
-                <div class="flex flex-col gap-4 justify-center sm:flex-row">
-                    <a href="#products" class="px-8 py-3 font-bold text-white rounded-full transition transform bg-ami-orange hover:bg-blue-600 hover:scale-105">
+        <div class="relative z-10 flex items-center justify-center h-full text-center text-white" >
+            <div class="max-w-7xl fade-in">
+                <div class="relative min-h-[320px] md:min-h-[390px] flex flex-col justify-center items-center">
+                  <template x-for="(slide, index) in slides" :key="index">
+                    <div x-show="currentSlide === index"
+                         x-transition:enter="transition ease-in-out duration-1000"
+                         x-transition:enter-start="opacity-0"
+                         x-transition:enter-end="opacity-100"
+                         x-transition:leave="transition ease-in-out duration-1000"
+                         x-transition:leave-start="opacity-100"
+                         x-transition:leave-end="opacity-0"
+                         class="absolute inset-0 flex flex-col items-center justify-center">
+                      <h1
+                        class="w-full max-w-4xl px-4 mb-4 text-3xl font-bold leading-relaxed text-center text-shadow md:text-4xl lg:text-5xl "
+                        x-text="slide.title">
+                      </h1>
+                      <p
+                        class="w-full max-w-3xl px-4 mb-8 text-lg leading-relaxed text-center text-shadow md:text-xl lg:text-2xl "
+                        x-text="slide.description">
+                      </p>
+                    </div>
+                  </template>
+                </div>
+
+
+                <div class="flex flex-col justify-center gap-4 sm:flex-row">
+                    <a href="#products" class="px-8 py-3 font-bold text-white transition transform rounded-full bg-ami-orange hover:bg-blue-600 hover:scale-105">
                         Explore Products
                     </a>
-                    <a href="{{ route('home') }}#contact" class="px-8 py-3 font-bold text-white bg-transparent rounded-full border-2 border-white transition hover:bg-white hover:text-ami-blue">
+                    <a href="{{ route('home') }}#contact" class="px-8 py-3 font-bold text-white transition bg-transparent border-2 border-white rounded-full hover:bg-white hover:text-ami-blue">
                         Get a Quote
                     </a>
                 </div>
             </div>
+            </div>
         </div>
 
         <!-- Slider Indicators -->
-        <div class="flex absolute bottom-8 left-1/2 z-10 space-x-2 transform -translate-x-1/2">
+        <div class="absolute z-10 flex space-x-2 transform -translate-x-1/2 bottom-8 left-1/2">
             <template x-for="(slide, index) in slides" :key="index">
                 <button
                     @click="currentSlide = index"
@@ -101,13 +130,13 @@
         <div class="container px-4 mx-auto">
             <div class="mb-16 text-center">
                 <h2 class="mb-4 text-3xl font-bold md:text-4xl ami-blue">Manufacturing Capabilities</h2>
-                <div class="mx-auto w-24 h-1 bg-ami-orange"></div>
-                <p class="mx-auto mt-4 max-w-2xl text-gray-600">State-of-the-art facilities and in-house production capabilities for quality control and customization.</p>
+                <div class="w-24 h-1 mx-auto bg-ami-orange"></div>
+                <p class="max-w-2xl mx-auto mt-4 text-gray-600">State-of-the-art facilities and in-house production capabilities for quality control and customization.</p>
             </div>
 
-            <div class="grid grid-cols-1 gap-12 items-center mb-16 md:grid-cols-2">
+            <div class="grid items-center grid-cols-1 gap-12 mb-16 md:grid-cols-2">
                 <div>
-                    <img src="{{ asset('imgs/ATS.jpg') }}" alt="Manufacturing Facility" class="w-full rounded-lg shadow-lg" loading="lazy" decoding="async" width="900" height="600">
+                    <img src="{{ asset('imgs/3.png') }}" alt="Manufacturing Facility" class="w-full rounded-lg shadow-lg" loading="lazy" decoding="async" width="900" height="600">
                 </div>
                 <div>
                     <h3 class="mb-6 text-2xl font-bold ami-blue">In-House Production Excellence</h3>
@@ -176,10 +205,10 @@
         <div class="container px-4 mx-auto">
             <div class="mb-16 text-center">
                 <h2 class="mb-4 text-3xl font-bold md:text-4xl ami-blue">About Al Mohandes International</h2>
-                <div class="mx-auto w-24 h-1 bg-ami-orange"></div>
+                <div class="w-24 h-1 mx-auto bg-ami-orange"></div>
             </div>
 
-            <div class="flex flex-col gap-12 items-center md:flex-row">
+            <div class="flex flex-col items-center gap-12 md:flex-row">
                 <div class="md:w-1/2">
                     <h3 class="mb-6 text-2xl font-bold">Our Legacy of Excellence</h3>
                     <p class="mb-6 text-gray-700">
@@ -199,14 +228,15 @@
 
 
                         <img
-                            src="{{ asset('imgs/trailer.jpg') }}"
+                            src="{{ asset('imgs/2.png') }}"
                             alt="AMI Manufacturing Facility"
-                            class="object-contain w-full rounded-md"
+                            class="w-full rounded-md"
                             loading="lazy"
                             decoding="async"
                             width="900"
-height="600"
-                            style="aspect-ratio: 3/2;"
+                            height="600"
+
+
                         >
 
                 </div>
@@ -219,8 +249,8 @@ height="600"
         <div class="container px-4 mx-auto">
             <div class="mb-16 text-center">
                 <h2 class="mb-4 text-3xl font-bold md:text-4xl ami-blue">Our Products</h2>
-                <div class="mx-auto w-24 h-1 bg-ami-orange"></div>
-                <p class="mx-auto mt-4 max-w-2xl text-gray-600">Explore our comprehensive range of power solutions designed for reliability and performance.</p>
+                <div class="w-24 h-1 mx-auto bg-ami-orange"></div>
+                <p class="max-w-2xl mx-auto mt-4 text-gray-600">Explore our comprehensive range of power solutions designed for reliability and performance.</p>
             </div>
  @if ($products->count() > 0)
             <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
@@ -268,56 +298,56 @@ height="600"
     </section>
     <!--Partners Section -->
         <section id="partners" class="py-20 bg-white">
-            <div class="flex relative flex-col justify-center items-center py-10 w-full" >
+            <div class="relative flex flex-col items-center justify-center w-full py-10" >
 
 
                 <!-- Continuous Slider Container -->
-                <div class="overflow-hidden relative py-6 w-full">
+                <div class="relative w-full py-6 overflow-hidden">
                     <!-- Row 1 - Moving Left (6 Partners) -->
                     <div class="flex gap-8 mb-8 whitespace-nowrap animate-scroll-left">
                         <!-- First Set - 6 Unique Partners -->
-                        <a href="https://www.avk.com" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-40 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
+                        <a href="https://www.avk.com" class="flex items-center justify-center flex-shrink-0 w-64 h-40 p-6 transition-transform duration-300 bg-white shadow-lg rounded-xl hover:scale-105">
                             <img src="{{ asset('imgs/avk.png') }}" alt="AVK" class="object-contain w-full h-full">
                         </a>
-                        <a href="https://www.detuz.com" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-40 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
+                        <a href="https://www.detuz.com" class="flex items-center justify-center flex-shrink-0 w-64 h-40 p-6 transition-transform duration-300 bg-white shadow-lg rounded-xl hover:scale-105">
                             <img src="{{ asset('imgs/detuz.png') }}" alt="Detuz" class="object-contain w-full h-full">
                         </a>
-                        <a href="https://www.doosan.com" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-40 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
+                        <a href="https://www.doosan.com" class="flex items-center justify-center flex-shrink-0 w-64 h-40 p-6 transition-transform duration-300 bg-white shadow-lg rounded-xl hover:scale-105">
                             <img src="{{ asset('imgs/doosan.png') }}" alt="Doosan" class="object-contain w-full h-full">
                         </a>
-                        <a href="https://www.iveco.com" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-40 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
+                        <a href="https://www.iveco.com" class="flex items-center justify-center flex-shrink-0 w-64 h-40 p-6 transition-transform duration-300 bg-white shadow-lg rounded-xl hover:scale-105">
                             <img src="{{ asset('imgs/iveco.png') }}" alt="Iveco" class="object-contain w-full h-full">
                         </a>
-                        <a href="https://www.marathonelectric.com" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-40 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
+                        <a href="https://www.marathonelectric.com" class="flex items-center justify-center flex-shrink-0 w-64 h-40 p-6 transition-transform duration-300 bg-white shadow-lg rounded-xl hover:scale-105">
                             <img src="{{ asset('imgs/marathon.png') }}" alt="Marathon" class="object-contain w-full h-full">
                         </a>
-                        <a href="https://www.volvopenta.com" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-40 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
+                        <a href="https://www.volvopenta.com" class="flex items-center justify-center flex-shrink-0 w-64 h-40 p-6 transition-transform duration-300 bg-white shadow-lg rounded-xl hover:scale-105">
                             <img src="{{ asset('imgs/volvo.png') }}" alt="Volvo" class="object-contain w-full h-full">
                         </a>
 
                         <!-- Duplicate Same 6 Partners for Seamless Loop -->
-                        <a href="https://www.avk.com" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-40 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
+                        <a href="https://www.avk.com" class="flex items-center justify-center flex-shrink-0 w-64 h-40 p-6 transition-transform duration-300 bg-white shadow-lg rounded-xl hover:scale-105">
                             <img src="{{ asset('imgs/avk.png') }}" alt="AVK" class="object-contain w-full h-full">
                         </a>
-                        <a href="https://www.detuz.com" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-40 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
+                        <a href="https://www.detuz.com" class="flex items-center justify-center flex-shrink-0 w-64 h-40 p-6 transition-transform duration-300 bg-white shadow-lg rounded-xl hover:scale-105">
                             <img src="{{ asset('imgs/detuz.png') }}" alt="Detuz" class="object-contain w-full h-full">
                         </a>
-                        <a href="https://www.doosan.com" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-40 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
+                        <a href="https://www.doosan.com" class="flex items-center justify-center flex-shrink-0 w-64 h-40 p-6 transition-transform duration-300 bg-white shadow-lg rounded-xl hover:scale-105">
                             <img src="{{ asset('imgs/doosan.png') }}" alt="Doosan" class="object-contain w-full h-full">
                         </a>
-                        <a href="https://www.iveco.com" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-40 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
+                        <a href="https://www.iveco.com" class="flex items-center justify-center flex-shrink-0 w-64 h-40 p-6 transition-transform duration-300 bg-white shadow-lg rounded-xl hover:scale-105">
                             <img src="{{ asset('imgs/iveco.png') }}" alt="Iveco" class="object-contain w-full h-full">
                         </a>
-                        <a href="#" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-40 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
+                        <a href="#" class="flex items-center justify-center flex-shrink-0 w-64 h-40 p-6 transition-transform duration-300 bg-white shadow-lg rounded-xl hover:scale-105">
                             <img src="{{ asset('imgs/Schneider.png') }}" alt="Schneider" class="object-contain w-full h-full">
                         </a>
-                        <a href="#" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-40 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
+                        <a href="#" class="flex items-center justify-center flex-shrink-0 w-64 h-40 p-6 transition-transform duration-300 bg-white shadow-lg rounded-xl hover:scale-105">
                             <img src="{{ asset('imgs/ABB.png') }}" alt="ABB" class="object-contain w-full h-full">
                         </a>
-                        <a href="https://www.marathonelectric.com" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-40 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
+                        <a href="https://www.marathonelectric.com" class="flex items-center justify-center flex-shrink-0 w-64 h-40 p-6 transition-transform duration-300 bg-white shadow-lg rounded-xl hover:scale-105">
                             <img src="{{ asset('imgs/marathon.png') }}" alt="Marathon" class="object-contain w-full h-full">
                         </a>
-                        <a href="https://www.volvopenta.com" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-40 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
+                        <a href="https://www.volvopenta.com" class="flex items-center justify-center flex-shrink-0 w-64 h-40 p-6 transition-transform duration-300 bg-white shadow-lg rounded-xl hover:scale-105">
                             <img src="{{ asset('imgs/volvo.png') }}" alt="Volvo" class="object-contain w-full h-full">
                         </a>
                     </div>
@@ -325,42 +355,42 @@ height="600"
                     <!-- Row 2 - Moving Right (Remaining 5 Partners) -->
                     <div class="flex gap-8 whitespace-nowrap animate-scroll-right">
                         <!-- First Set - 5 Unique Partners -->
-                        <a href="https://www.mtu-online.com" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-40 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
+                        <a href="https://www.mtu-online.com" class="flex items-center justify-center flex-shrink-0 w-64 h-40 p-6 transition-transform duration-300 bg-white shadow-lg rounded-xl hover:scale-105">
                             <img src="{{ asset('imgs/mtu.png') }}" alt="MTU" class="object-contain w-full h-full">
                         </a>
-                        <a href="https://www.stamford-avk.com" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-40 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
+                        <a href="https://www.stamford-avk.com" class="flex items-center justify-center flex-shrink-0 w-64 h-40 p-6 transition-transform duration-300 bg-white shadow-lg rounded-xl hover:scale-105">
                             <img src="{{ asset('imgs/stamford.png') }}" alt="Stamford" class="object-contain w-full h-full">
                         </a>
-                        <a href="https://www.perkins.com" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-40 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
+                        <a href="https://www.perkins.com" class="flex items-center justify-center flex-shrink-0 w-64 h-40 p-6 transition-transform duration-300 bg-white shadow-lg rounded-xl hover:scale-105">
                             <img src="{{ asset('imgs/perkins.png') }}" alt="Perkins" class="object-contain w-full h-full">
                         </a>
-                        <a href="https://www.meccalte.com" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-40 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
+                        <a href="https://www.meccalte.com" class="flex items-center justify-center flex-shrink-0 w-64 h-40 p-6 transition-transform duration-300 bg-white shadow-lg rounded-xl hover:scale-105">
                             <img src="{{ asset('imgs/mecc-alta.png') }}" alt="Mecc Alte" class="object-contain w-full h-full">
                         </a>
-                        <a href="https://acim.nidec.com/en-US/motors/leroy-somer" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-40 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
+                        <a href="https://acim.nidec.com/en-US/motors/leroy-somer" class="flex items-center justify-center flex-shrink-0 w-64 h-40 p-6 transition-transform duration-300 bg-white shadow-lg rounded-xl hover:scale-105">
                             <img src="{{ asset('imgs/leroysomer.png') }}" alt="Leroy Somer" class="object-contain w-full h-full">
                         </a>
 
                         <!-- Duplicate Same 5 Partners for Seamless Loop -->
-                        <a href="#" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-40 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
+                        <a href="#" class="flex items-center justify-center flex-shrink-0 w-64 h-40 p-6 transition-transform duration-300 bg-white shadow-lg rounded-xl hover:scale-105">
                             <img src="{{ asset('imgs/Schneider.png') }}" alt="Schneider" class="object-contain w-full h-full">
                         </a>
-                        <a href="#" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-40 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
+                        <a href="#" class="flex items-center justify-center flex-shrink-0 w-64 h-40 p-6 transition-transform duration-300 bg-white shadow-lg rounded-xl hover:scale-105">
                             <img src="{{ asset('imgs/ABB.png') }}" alt="ABB" class="object-contain w-full h-full">
                         </a>
-                        <a href="https://www.mtu-online.com" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-40 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
+                        <a href="https://www.mtu-online.com" class="flex items-center justify-center flex-shrink-0 w-64 h-40 p-6 transition-transform duration-300 bg-white shadow-lg rounded-xl hover:scale-105">
                             <img src="{{ asset('imgs/mtu.png') }}" alt="MTU" class="object-contain w-full h-full">
                         </a>
-                        <a href="https://www.stamford-avk.com" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-40 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
+                        <a href="https://www.stamford-avk.com" class="flex items-center justify-center flex-shrink-0 w-64 h-40 p-6 transition-transform duration-300 bg-white shadow-lg rounded-xl hover:scale-105">
                             <img src="{{ asset('imgs/stamford.png') }}" alt="Stamford" class="object-contain w-full h-full">
                         </a>
-                        <a href="https://www.perkins.com" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-40 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
+                        <a href="https://www.perkins.com" class="flex items-center justify-center flex-shrink-0 w-64 h-40 p-6 transition-transform duration-300 bg-white shadow-lg rounded-xl hover:scale-105">
                             <img src="{{ asset('imgs/perkins.png') }}" alt="Perkins" class="object-contain w-full h-full">
                         </a>
-                        <a href="https://www.meccalte.com" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-40 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
+                        <a href="https://www.meccalte.com" class="flex items-center justify-center flex-shrink-0 w-64 h-40 p-6 transition-transform duration-300 bg-white shadow-lg rounded-xl hover:scale-105">
                             <img src="{{ asset('imgs/mecc-alta.png') }}" alt="Mecc Alte" class="object-contain w-full h-full">
                         </a>
-                        <a href="https://acim.nidec.com/en-US/motors/leroy-somer" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-40 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
+                        <a href="https://acim.nidec.com/en-US/motors/leroy-somer" class="flex items-center justify-center flex-shrink-0 w-64 h-40 p-6 transition-transform duration-300 bg-white shadow-lg rounded-xl hover:scale-105">
                             <img src="{{ asset('imgs/leroysomer.png') }}" alt="Leroy Somer" class="object-contain w-full h-full">
                         </a>
                     </div>
@@ -410,14 +440,14 @@ height="600"
         <div class="container px-4 mx-auto">
             <div class="mb-16 text-center">
                 <h2 class="mb-4 text-3xl font-bold md:text-4xl ami-blue">Our Services</h2>
-                <div class="mx-auto w-24 h-1 bg-ami-orange"></div>
-                <p class="mx-auto mt-4 max-w-2xl text-gray-600">Comprehensive services to support your power needs from installation to maintenance.</p>
+                <div class="w-24 h-1 mx-auto bg-ami-orange"></div>
+                <p class="max-w-2xl mx-auto mt-4 text-gray-600">Comprehensive services to support your power needs from installation to maintenance.</p>
             </div>
 
             <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
                 <!-- Custom Solutions -->
                 <div class="p-8 text-center bg-white rounded-lg hover-lift">
-                    <div class="flex justify-center items-center mx-auto mb-4 w-16 h-16 rounded-full transition-all duration-300 bg-ami-blue hover:bg-ami-orange">
+                    <div class="flex items-center justify-center w-16 h-16 mx-auto mb-4 transition-all duration-300 rounded-full bg-ami-blue hover:bg-ami-orange">
                         <i class="text-2xl text-white fas fa-cogs"></i>
                     </div>
                     <h3 class="mb-3 text-xl font-bold ami-blue">Custom Solutions</h3>
@@ -426,7 +456,7 @@ height="600"
 
                 <!-- Maintenance -->
                 <div class="p-8 text-center bg-white rounded-lg hover-lift">
-                    <div class="flex justify-center items-center mx-auto mb-4 w-16 h-16 rounded-full transition-all duration-300 bg-ami-blue hover:bg-ami-orange">
+                    <div class="flex items-center justify-center w-16 h-16 mx-auto mb-4 transition-all duration-300 rounded-full bg-ami-blue hover:bg-ami-orange">
                         <i class="text-2xl text-white fas fa-tools"></i>
                     </div>
                     <h3 class="mb-3 text-xl font-bold ami-blue">Maintenance</h3>
@@ -435,7 +465,7 @@ height="600"
 
                 <!-- Spare Parts -->
                 <div class="p-8 text-center bg-white rounded-lg hover-lift">
-                    <div class="flex justify-center items-center mx-auto mb-4 w-16 h-16 rounded-full transition-all duration-300 bg-ami-blue hover:bg-ami-orange">
+                    <div class="flex items-center justify-center w-16 h-16 mx-auto mb-4 transition-all duration-300 rounded-full bg-ami-blue hover:bg-ami-orange">
                         <i class="text-2xl text-white fas fa-box-open"></i>
                     </div>
                     <h3 class="mb-3 text-xl font-bold ami-blue">Spare Parts</h3>
@@ -444,7 +474,7 @@ height="600"
 
                 <!-- Technical Support -->
                 <div class="p-8 text-center bg-white rounded-lg hover-lift">
-                    <div class="flex justify-center items-center mx-auto mb-4 w-16 h-16 rounded-full transition-all duration-300 bg-ami-blue hover:bg-ami-orange">
+                    <div class="flex items-center justify-center w-16 h-16 mx-auto mb-4 transition-all duration-300 rounded-full bg-ami-blue hover:bg-ami-orange">
                         <i class="text-2xl text-white fas fa-headset"></i>
                     </div>
                     <h3 class="mb-3 text-xl font-bold ami-blue">Technical Support</h3>
@@ -461,15 +491,15 @@ height="600"
         <div class="container px-4 mx-auto world-map-content">
             <div class="mb-8 text-center">
                 <h2 class="mb-4 text-3xl font-bold md:text-4xl text-">Global Reach</h2>
-                <div class="mx-auto w-24 h-1 bg-ami-orange"></div>
-                <p class="mx-auto mt-4 max-w-2xl text-gray-800">Serving clients across continents with reliable power solutions and trusted partnerships.</p>
+                <div class="w-24 h-1 mx-auto bg-ami-orange"></div>
+                <p class="max-w-2xl mx-auto mt-4 text-gray-800">Serving clients across continents with reliable power solutions and trusted partnerships.</p>
             </div>
 
-            <div class="grid grid-cols-1 gap-12 items-center mb-8 md:grid-cols-2">
+            <div class="grid items-center grid-cols-1 gap-12 mb-8 md:grid-cols-2">
                 <div>
                     <img src="{{ asset('imgs/ami-world.png') }}" alt="worldwide presence">
                    </div>
-               <div class="p-8 bg-white bg-opacity-90 rounded-lg">
+               <div class="p-8 bg-white rounded-lg bg-opacity-90">
                     <h3 class="mb-6 text-2xl font-bold ami-blue">Worldwide Presence</h3>
                     <p class="mb-6 text-gray-700">
                         Over the years, Al Mohandes International Co. (AMI) has proudly expanded its reach beyond Egypt, exporting high-quality diesel generator sets to several countries across the globe.
@@ -496,8 +526,8 @@ height="600"
         <div class="container px-4 mx-auto">
             <div class="mb-16 text-center">
                 <h2 class="mb-4 text-3xl font-bold md:text-4xl ami-blue">Case Studies & Environments</h2>
-                <div class="mx-auto w-24 h-1 bg-ami-orange"></div>
-                <p class="mx-auto mt-4 max-w-2xl text-gray-600">Our generators excel in diverse environments, demonstrating adaptability and reliability.</p>
+                <div class="w-24 h-1 mx-auto bg-ami-orange"></div>
+                <p class="max-w-2xl mx-auto mt-4 text-gray-600">Our generators excel in diverse environments, demonstrating adaptability and reliability.</p>
             </div>
 
             <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
@@ -521,8 +551,8 @@ height="600"
         <div class="container px-4 mx-auto">
             <div class="mb-16 text-center">
                 <h2 class="mb-4 text-3xl font-bold md:text-4xl ami-blue">Contact & Inquiry</h2>
-                <div class="mx-auto w-24 h-1 bg-ami-orange"></div>
-                <p class="mx-auto mt-4 max-w-2xl text-gray-600">Get in touch with our team for inquiries, quotes, or support.</p>
+                <div class="w-24 h-1 mx-auto bg-ami-orange"></div>
+                <p class="max-w-2xl mx-auto mt-4 text-gray-600">Get in touch with our team for inquiries, quotes, or support.</p>
             </div>
 
             <div class="grid grid-cols-1 gap-12 lg:grid-cols-2">
@@ -531,7 +561,7 @@ height="600"
                     <h3 class="mb-6 text-2xl font-bold ami-blue">Send Us a Message</h3>
 
                     @if ($errors->any())
-                        <div class="p-4 mb-6 bg-red-50 rounded-lg border border-red-200">
+                        <div class="p-4 mb-6 border border-red-200 rounded-lg bg-red-50">
                             <div class="flex">
                                 <div class="flex-shrink-0">
                                     <i class="text-red-400 fas fa-exclamation-circle"></i>
@@ -585,7 +615,7 @@ height="600"
                             @enderror
                         </div>
 
-                        <button type="submit" class="px-8 py-3 font-bold text-white rounded-full transition transform bg-ami-orange hover:bg-orange-600 hover:scale-105">
+                        <button type="submit" class="px-8 py-3 font-bold text-white transition transform rounded-full bg-ami-orange hover:bg-orange-600 hover:scale-105">
                             Submit Inquiry
                         </button>
                     </form>
@@ -597,7 +627,7 @@ height="600"
 
                     <div class="mb-8 space-y-6">
                         <div class="flex items-start">
-                            <div class="flex flex-shrink-0 justify-center items-center mr-4 w-12 h-12 rounded-full transition-all duration-300 bg-ami-blue hover:bg-ami-orange">
+                            <div class="flex items-center justify-center flex-shrink-0 w-12 h-12 mr-4 transition-all duration-300 rounded-full bg-ami-blue hover:bg-ami-orange">
                                 <i class="text-white fas fa-map-marker-alt"></i>
                             </div>
                             <div>
@@ -608,7 +638,7 @@ height="600"
                         </div>
 
                         <div class="flex items-start">
-                            <div class="flex flex-shrink-0 justify-center items-center mr-4 w-12 h-12 rounded-full transition-all duration-300 bg-ami-blue hover:bg-ami-orange">
+                            <div class="flex items-center justify-center flex-shrink-0 w-12 h-12 mr-4 transition-all duration-300 rounded-full bg-ami-blue hover:bg-ami-orange">
                                 <i class="text-white fas fa-phone"></i>
                             </div>
                             <div>
@@ -619,7 +649,7 @@ height="600"
                         </div>
 
                         <div class="flex items-start">
-                            <div class="flex flex-shrink-0 justify-center items-center mr-4 w-12 h-12 rounded-full transition-all duration-300 bg-ami-blue hover:bg-ami-orange">
+                            <div class="flex items-center justify-center flex-shrink-0 w-12 h-12 mr-4 transition-all duration-300 rounded-full bg-ami-blue hover:bg-ami-orange">
                                 <i class="text-white fas fa-envelope"></i>
                             </div>
                             <div>
@@ -632,7 +662,7 @@ height="600"
                         </div>
 
                         <div class="flex items-start">
-                            <div class="flex flex-shrink-0 justify-center items-center mr-4 w-12 h-12 rounded-full transition-all duration-300 bg-ami-blue hover:bg-ami-orange">
+                            <div class="flex items-center justify-center flex-shrink-0 w-12 h-12 mr-4 transition-all duration-300 rounded-full bg-ami-blue hover:bg-ami-orange">
                                 <i class="text-white fa-solid fa-fax"></i>
                             </div>
                             <div>
@@ -642,7 +672,7 @@ height="600"
 
                         </div>
                         <div class="flex items-start">
-                            <div class="flex flex-shrink-0 justify-center items-center mr-4 w-12 h-12 rounded-full transition-all duration-300 bg-ami-blue hover:bg-ami-orange">
+                            <div class="flex items-center justify-center flex-shrink-0 w-12 h-12 mr-4 transition-all duration-300 rounded-full bg-ami-blue hover:bg-ami-orange">
                                 <i class="text-xl text-white fa-brands fa-whatsapp"></i>
                             </div>
                             <div>
@@ -658,7 +688,7 @@ height="600"
     </section>
 
     <!-- Full-Width Google Map Section -->
-    <section class="pb-px w-full">
+    <section class="w-full pb-px">
         <div class="relative w-full h-96">
             <iframe
                 src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d432.287205513475!2d30.9042049!3d29.9133322!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1458ff7ba2422dcb%3A0xf9fee2c4c3a60b12!2sAMI%20-%20Al%20Mohandes%20International%20Co.!5e0!3m2!1sen!2seg!4v1760003246511!5m2!1sen!2seg"

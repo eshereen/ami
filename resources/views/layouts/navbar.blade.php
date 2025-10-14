@@ -1,5 +1,5 @@
     <!-- Header -->
-    <header class="fixed top-0 right-0 left-0 z-50 transition-all duration-300"
+    <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
             :class="scrolled ? 'bg-white shadow-md' : 'bg-transparent'"
             style="min-height:72px;"
             x-data="{
@@ -26,16 +26,16 @@
                 });
             ">
         <div class="container px-4 py-3 mx-auto">
-            <div class="flex justify-between items-center">
+            <div class="flex items-center justify-between">
                 <a href="{{ route('home') }}" class="flex items-center">
                     <img :src="(scrolled || mobileMenuOpen || !onHome) ? '{{ asset('imgs/logo.png') }}' : '{{ asset('imgs/logo.png') }}'"
                          alt="AMI Logo"
-                         class="h-14 transition-all duration-300"
+                         class="transition-all duration-300 h-14"
                         >
                 </a>
 
                 <!-- Desktop Navigation -->
-                <nav class="hidden relative space-x-8 md:flex">
+                <nav class="relative hidden space-x-8 md:flex">
                     <a href="{{ route('home') }}"
                        class="transition hover:text-ami-orange hover:underline"
                        :class="(scrolled || !onHome) ? 'text-gray-700' : 'text-white'">Home</a>
@@ -49,7 +49,7 @@
                            class="inline-flex items-center transition hover:text-ami-orange hover:underline"
                            :class="(scrolled || !onHome) ? 'text-gray-700' : 'text-white'">
                             Products
-                            <svg class="ml-1 w-4 h-4 transition-transform duration-200"
+                            <svg class="w-4 h-4 ml-1 transition-transform duration-200"
                                  :class="productsOpen ? 'rotate-180' : ''"
                                  fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.21 8.29a.75.75 0 01.02-1.08z" clip-rule="evenodd"/></svg>
                         </a>
@@ -70,10 +70,10 @@
                             style="margin-top: 0px;"
                         >
                             <?php $categories = \App\Models\Category::with(['subcategories' => function($q){ $q->withCount('products'); }])->take(4)->get(); ?>
-                            <div class="mx-auto max-w-6xl">
+                            <div class="max-w-6xl mx-auto">
                                 <div class="flex divide-x divide-gray-200">
                                     @foreach ($categories as $category)
-                                        <div class="px-6 w-1/4 first:pl-0 last:pr-0">
+                                        <div class="w-1/4 px-6 first:pl-0 last:pr-0">
                                         <a href="{{ route('category.show', $category->slug) }}"
                                            class="block mb-3 text-sm font-semibold text-gray-900 transition-colors duration-200 hover:text-ami-orange">
                                             {{ $category->name }}
@@ -82,7 +82,7 @@
                                             @foreach ($category->subcategories as $subcategory)
                                                 <li>
                                                     <a href="{{ route('subcategory.show', $subcategory->slug) }}"
-                                                       class="flex justify-between items-center text-gray-700 transition-colors duration-200 hover:text-ami-orange group">
+                                                       class="flex items-center justify-between text-gray-700 transition-colors duration-200 hover:text-ami-orange group">
                                                         <span class="text-sm">{{ $subcategory->name }}</span>
                                                         <span class="ml-2 text-xs text-gray-500 transition-colors duration-200 group-hover:text-ami-orange">
                                                             ({{ $subcategory->products_count }})
@@ -140,7 +140,7 @@
                     <!-- Products with Mobile Mega Menu -->
                     <div class="relative">
                         <button @click="productsOpen = !productsOpen"
-                                class="flex justify-between items-center w-full text-gray-700 transition hover:text-ami-orange">
+                                class="flex items-center justify-between w-full text-gray-700 transition hover:text-ami-orange">
                             <span>Products</span>
                             <svg class="w-4 h-4 transition-transform duration-200"
                                  :class="productsOpen ? 'rotate-180' : ''"
