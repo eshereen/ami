@@ -28,10 +28,9 @@ class ServicesForm
                     ->imageEditor()
                     ->disk('public'),
                 Toggle::make('status')
-                ->options([
-                    Service::STATUS_ACTIVE => 'Active',
-                    Service::STATUS_INACTIVE => 'Inactive',
-                ])
+                ->boolean()
+                ->default(Service::STATUS_ACTIVE)
+
                     ->required(),
             ])->columns(2)->columnSpanFull(),
         ]);
