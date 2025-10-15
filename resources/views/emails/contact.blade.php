@@ -1,15 +1,30 @@
 <x-mail::message>
-Contact Message
+# New Contact Inquiry
 
-<p>Name: {{ $contact->name }}</p>
-<p>Email: {{ $contact->email }}</p>
-<p>Phone: {{ $contact->phone }}</p>
-<p>Message: {{ $contact->message }}</p>
+<div style="text-align: center; margin-bottom: 30px;">
+    <img src="{{ asset('imgs/logo.png') }}" alt="AMI Logo" style="max-width: 200px; height: auto;">
+</div>
 
-<x-mail::button :url="''">
-Button Text
+You have received a new contact inquiry from your website.
+
+## Contact Details
+
+**Name:** {{ $contact->name }}
+
+**Email:** {{ $contact->email }}
+
+**Phone:** {{ $contact->phone }}
+
+## Message
+
+{{ $contact->message }}
+
+---
+
+<x-mail::button :url="'mailto:' . $contact->email">
+Reply to Customer
 </x-mail::button>
 
-Thanks,<br>
-{{ config('app.name') }}
+Best regards,<br>
+{{ config('app.name') }} Website
 </x-mail::message>
