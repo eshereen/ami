@@ -459,7 +459,7 @@
         /* Notification Styles */
         .notification {
             position: fixed;
-            top: 20px;
+            top: 80px;
             right: 20px;
             max-width: 400px;
             width: calc(100% - 40px);
@@ -467,11 +467,13 @@
             padding: 16px 40px 16px 16px;
             border-radius: 8px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-            transform: translateX(calc(100% + 40px));
-            transition: all 0.3s ease-in-out;
+            opacity: 0;
+            transform: translateX(100%);
+            transition: all 0.4s ease-in-out;
         }
 
         .notification.show {
+            opacity: 1;
             transform: translateX(0);
         }
 
@@ -708,13 +710,15 @@
     function showNotification() {
         const notification = document.getElementById('notification');
         if (notification) {
-            // Add show class to trigger animation
-            notification.classList.add('show');
+            // Small delay to ensure CSS is loaded, then add show class
+            setTimeout(() => {
+                notification.classList.add('show');
+            }, 100);
 
             // Auto-hide after 3 seconds
             setTimeout(() => {
                 closeNotification();
-            }, 3000);
+            }, 3100);
         }
     }
 
