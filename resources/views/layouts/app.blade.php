@@ -461,12 +461,13 @@
             position: fixed;
             top: 20px;
             right: 20px;
-            z-index: 9999;
             max-width: 400px;
-            padding: 16px 20px;
+            width: calc(100% - 40px);
+            z-index: 9999;
+            padding: 16px 40px 16px 16px;
             border-radius: 8px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-            transform: translateX(100%);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            transform: translateX(calc(100% + 40px));
             transition: all 0.3s ease-in-out;
         }
 
@@ -710,10 +711,10 @@
             // Add show class to trigger animation
             notification.classList.add('show');
 
-            // Auto-hide after 5 seconds
+            // Auto-hide after 3 seconds
             setTimeout(() => {
                 closeNotification();
-            }, 5000);
+            }, 3000);
         }
     }
 
