@@ -304,97 +304,224 @@
     <!--Partners Section -->
         <section id="partners" class="py-20 bg-white">
             <div class="flex relative flex-col justify-center items-center py-10 w-full" >
+              <!--  <h2 class="mb-4 text-3xl font-bold md:text-4xl ami-blue">Firms & Customers</h2>
+                <div class="mx-auto w-24 h-1 bg-ami-orange"></div>-->
                 <!-- Continuous Slider Container -->
                 <div class="overflow-hidden relative py-6 w-full">
-                    <!-- Row 1 - Moving Left (6 Partners) -->
+                    <!-- Row 1 - Moving Left  -->
                     <div class="flex gap-8 mb-8 whitespace-nowrap animate-scroll-left">
-                        <!-- First Set - 6 Unique Partners -->
-                        <a href="https://www.avk.com" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-40 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
-                            <img src="{{ asset('imgs/avk.png') }}" alt="AVK" class="object-contain w-full h-full" loading="lazy" decoding="async" width="256" height="160">
+                        <!-- First Set - -->
+                        <a href="#" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-64 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
+                            <img src="{{ asset('imgs/ami-brands/1.png') }}" alt="veolia" class="object-contain w-full h-full" loading="lazy" decoding="async" width="256" height="160">
                         </a>
-                        <a href="https://www.detuz.com" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-40 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
-                            <img src="{{ asset('imgs/detuz.png') }}" alt="Detuz" class="object-contain w-full h-full" loading="lazy" decoding="async" width="256" height="160">
+                        <a href="#" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-64 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
+                            <img src="{{ asset('imgs/ami-brands/2.png') }}" alt="o2a" class="object-contain w-full h-full" loading="lazy" decoding="async" width="256" height="160">
                         </a>
-                        <a href="https://www.doosan.com" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-40 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
-                            <img src="{{ asset('imgs/doosan.png') }}" alt="Doosan" class="object-contain w-full h-full" loading="lazy" decoding="async" width="256" height="160">
+                        <a href="#" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-64 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
+                            <img src="{{ asset('imgs/ami-brands/3.png') }}" alt="metito" class="object-contain w-full h-full" loading="lazy" decoding="async" width="256" height="160">
                         </a>
-                        <a href="https://www.iveco.com" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-40 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
-                            <img src="{{ asset('imgs/iveco.png') }}" alt="Iveco" class="object-contain w-full h-full" loading="lazy" decoding="async" width="256" height="160">
+                        <a href="#" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-64 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
+                            <img src="{{ asset('imgs/ami-brands/4.png') }}" alt="concord" class="object-contain w-full h-full" loading="lazy" decoding="async" width="256" height="160">
                         </a>
-                        <a href="https://www.marathonelectric.com" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-40 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
-                            <img src="{{ asset('imgs/marathon.png') }}" alt="Marathon" class="object-contain w-full h-full" loading="lazy" decoding="async" width="256" height="160">
+                        <a href="#" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-64 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
+                            <img src="{{ asset('imgs/ami-brands/5.png') }}" alt="militray production" class="object-contain w-full h-full" loading="lazy" decoding="async" width="256" height="160">
                         </a>
-                        <a href="https://www.volvopenta.com" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-40 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
-                            <img src="{{ asset('imgs/volvo.png') }}" alt="Volvo" class="object-contain w-full h-full" loading="lazy" decoding="async" width="256" height="160">
+                        <a href="#" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-64 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
+                            <img src="{{ asset('imgs/ami-brands/6.png') }}" alt="suez canal" class="object-contain w-full h-full" loading="lazy" decoding="async" width="256" height="160">
+                        </a>
+                        <a href="#" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-64 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
+                            <img src="{{ asset('imgs/ami-brands/7.png') }}" alt="mostaqeble misr" class="object-contain w-full h-full" loading="lazy" decoding="async" width="256" height="160">
+                        </a>
+                        <a href="#" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-64 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
+                            <img src="{{ asset('imgs/ami-brands/8.png') }}" alt="nopwasd" class="object-contain w-full h-full" loading="lazy" decoding="async" width="256" height="160">
+                        </a>
+                        <a href="#" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-64 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
+                            <img src="{{ asset('imgs/ami-brands/9.png') }}" alt="tmg" class="object-contain w-full h-full" loading="lazy" decoding="async" width="256" height="160">
+                        </a>
+                        <a href="#" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-64 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
+                            <img src="{{ asset('imgs/ami-brands/10.png') }}" alt="hassan allam" class="object-contain w-full h-full" loading="lazy" decoding="async" width="256" height="160">
+                        </a>
+                        <a href="#" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-64 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
+                            <img src="{{ asset('imgs/ami-brands/11.jpeg') }}" alt="the arab constructor" class="object-contain w-full h-full" loading="lazy" decoding="async" width="256" height="160">
+                        </a>
+                        <a href="#" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-64 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
+                            <img src="{{ asset('imgs/ami-brands/12.jpeg') }}" alt="elswedy" class="object-contain w-full h-full" loading="lazy" decoding="async" width="256" height="160">
+                        </a>
+                        <a href="#" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-64 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
+                            <img src="{{ asset('imgs/ami-brands/13.jpeg') }}" alt="petrojet" class="object-contain w-full h-full" loading="lazy" decoding="async" width="256" height="160">
+                        </a>
+                        <a href="#" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-64 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
+                            <img src="{{ asset('imgs/ami-brands/14.jpeg') }}" alt="petroluim" class="object-contain w-full h-full" loading="lazy" decoding="async" width="256" height="160">
+                        </a>
+                        <a href="#" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-64 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
+                            <img src="{{ asset('imgs/ami-brands/15.jpeg') }}" alt="sodic" class="object-contain w-full h-full" loading="lazy" decoding="async" width="256" height="160">
+                        </a>
+                        <a href="#" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-64 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
+                            <img src="{{ asset('imgs/ami-brands/16.jpeg') }}" alt="waterway" class="object-contain w-full h-full" loading="lazy" decoding="async" width="256" height="160">
+                        </a>
+                        <a href="#" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-64 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
+                            <img src="{{ asset('imgs/ami-brands/17.jpeg') }}" alt="intech" class="object-contain w-full h-full" loading="lazy" decoding="async" width="256" height="160">
+                        </a>
+                        <a href="#" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-64 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
+                            <img src="{{ asset('imgs/ami-brands/18.jpeg') }}" alt="nextep" class="object-contain w-full h-full" loading="lazy" decoding="async" width="256" height="160">
                         </a>
 
-                        <!-- Duplicate Same 6 Partners for Seamless Loop -->
-                        <a href="https://www.avk.com" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-40 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
-                            <img src="{{ asset('imgs/avk.png') }}" alt="AVK" class="object-contain w-full h-full" loading="lazy" decoding="async" width="256" height="160">
+
+
+                        <!-- Duplicate for Seamless Loop -->
+                        <a href="#" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-64 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
+                            <img src="{{ asset('imgs/ami-brands/1.png') }}" alt="veolia" class="object-contain w-full h-full" loading="lazy" decoding="async" width="256" height="160">
                         </a>
-                        <a href="https://www.detuz.com" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-40 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
-                            <img src="{{ asset('imgs/detuz.png') }}" alt="Detuz" class="object-contain w-full h-full" loading="lazy" decoding="async" width="256" height="160">
+                        <a href="#" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-64 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
+                            <img src="{{ asset('imgs/ami-brands/2.png') }}" alt="o2a" class="object-contain w-full h-full" loading="lazy" decoding="async" width="256" height="160">
                         </a>
-                        <a href="https://www.doosan.com" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-40 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
-                            <img src="{{ asset('imgs/doosan.png') }}" alt="Doosan" class="object-contain w-full h-full" loading="lazy" decoding="async" width="256" height="160">
+                        <a href="#" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-64 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
+                            <img src="{{ asset('imgs/ami-brands/3.png') }}" alt="metito" class="object-contain w-full h-full" loading="lazy" decoding="async" width="256" height="160">
                         </a>
-                        <a href="https://www.iveco.com" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-40 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
-                            <img src="{{ asset('imgs/iveco.png') }}" alt="Iveco" class="object-contain w-full h-full" loading="lazy" decoding="async" width="256" height="160">
+                        <a href="#" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-64 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
+                            <img src="{{ asset('imgs/ami-brands/4.png') }}" alt="concord" class="object-contain w-full h-full" loading="lazy" decoding="async" width="256" height="160">
                         </a>
-                        <a href="#" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-40 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
-                            <img src="{{ asset('imgs/Schneider.png') }}" alt="Schneider" class="object-contain w-full h-full" loading="lazy" decoding="async" width="256" height="160">
+                        <a href="#" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-64 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
+                            <img src="{{ asset('imgs/ami-brands/5.png') }}" alt="militray production" class="object-contain w-full h-full" loading="lazy" decoding="async" width="256" height="160">
                         </a>
-                        <a href="#" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-40 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
-                            <img src="{{ asset('imgs/ABB.png') }}" alt="ABB" class="object-contain w-full h-full" loading="lazy" decoding="async" width="256" height="160">
+                        <a href="#" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-64 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
+                            <img src="{{ asset('imgs/ami-brands/6.png') }}" alt="suez canal" class="object-contain w-full h-full" loading="lazy" decoding="async" width="256" height="160">
                         </a>
-                        <a href="https://www.marathonelectric.com" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-40 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
-                            <img src="{{ asset('imgs/marathon.png') }}" alt="Marathon" class="object-contain w-full h-full" loading="lazy" decoding="async" width="256" height="160">
+                        <a href="#" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-64 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
+                            <img src="{{ asset('imgs/ami-brands/7.png') }}" alt="mostaqeble misr" class="object-contain w-full h-full" loading="lazy" decoding="async" width="256" height="160">
                         </a>
-                        <a href="https://www.volvopenta.com" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-40 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
-                            <img src="{{ asset('imgs/volvo.png') }}" alt="Volvo" class="object-contain w-full h-full" loading="lazy" decoding="async" width="256" height="160">
+                        <a href="#" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-64 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
+                            <img src="{{ asset('imgs/ami-brands/8.png') }}" alt="nopwasd" class="object-contain w-full h-full" loading="lazy" decoding="async" width="256" height="160">
                         </a>
+                        <a href="#" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-64 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
+                            <img src="{{ asset('imgs/ami-brands/9.png') }}" alt="tmg" class="object-contain w-full h-full" loading="lazy" decoding="async" width="256" height="160">
+                        </a>
+                        <a href="#" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-64 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
+                            <img src="{{ asset('imgs/ami-brands/10.png') }}" alt="hassan allam" class="object-contain w-full h-full" loading="lazy" decoding="async" width="256" height="160">
+                        </a>
+                        <a href="#" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-64 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
+                            <img src="{{ asset('imgs/ami-brands/11.jpeg') }}" alt="the arab constructor" class="object-contain w-full h-full" loading="lazy" decoding="async" width="256" height="160">
+                        </a>
+                        <a href="#" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-64 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
+                            <img src="{{ asset('imgs/ami-brands/12.jpeg') }}" alt="elswedy" class="object-contain w-full h-full" loading="lazy" decoding="async" width="256" height="160">
+                        </a>
+                        <a href="#" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-64 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
+                            <img src="{{ asset('imgs/ami-brands/13.jpeg') }}" alt="petrojet" class="object-contain w-full h-full" loading="lazy" decoding="async" width="256" height="160">
+                        </a>
+                        <a href="#" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-64 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
+                            <img src="{{ asset('imgs/ami-brands/14.jpeg') }}" alt="petroluim" class="object-contain w-full h-full" loading="lazy" decoding="async" width="256" height="160">
+                        </a>
+                        <a href="#" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-64 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
+                            <img src="{{ asset('imgs/ami-brands/15.jpeg') }}" alt="sodic" class="object-contain w-full h-full" loading="lazy" decoding="async" width="256" height="160">
+                        </a>
+                        <a href="#" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-64 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
+                            <img src="{{ asset('imgs/ami-brands/16.jpeg') }}" alt="waterway" class="object-contain w-full h-full" loading="lazy" decoding="async" width="256" height="160">
+                        </a>
+                        <a href="#" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-64 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
+                            <img src="{{ asset('imgs/ami-brands/17.jpeg') }}" alt="intech" class="object-contain w-full h-full" loading="lazy" decoding="async" width="256" height="160">
+                        </a>
+                        <a href="#" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-64 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
+                            <img src="{{ asset('imgs/ami-brands/18.jpeg') }}" alt="nextep" class="object-contain w-full h-full" loading="lazy" decoding="async" width="256" height="160">
+                        </a>
+
+
                     </div>
 
-                    <!-- Row 2 - Moving Right (Remaining 5 Partners) -->
+                    <!-- Row 2 - Moving Right  -->
                     <div class="flex gap-8 whitespace-nowrap animate-scroll-right">
-                        <!-- First Set - 5 Unique Partners -->
-                        <a href="https://www.mtu-online.com" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-40 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
+                        <!-- First Set -  -->
+                        <a href="https://www.mtu-online.com" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-64 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
                             <img src="{{ asset('imgs/mtu.png') }}" alt="MTU" class="object-contain w-full h-full" loading="lazy" decoding="async" width="256" height="160">
                         </a>
-                        <a href="https://www.stamford-avk.com" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-40 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
+                        <a href="https://www.stamford-avk.com" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-64 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
                             <img src="{{ asset('imgs/stamford.png') }}" alt="Stamford" class="object-contain w-full h-full" loading="lazy" decoding="async" width="256" height="160">
                         </a>
-                        <a href="https://www.perkins.com" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-40 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
+                        <a href="https://www.perkins.com" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-64 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
                             <img src="{{ asset('imgs/perkins.png') }}" alt="Perkins" class="object-contain w-full h-full" loading="lazy" decoding="async" width="256" height="160">
                         </a>
-                        <a href="https://www.meccalte.com" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-40 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
+                        <a href="https://www.meccalte.com" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-64 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
                             <img src="{{ asset('imgs/mecc-alta.png') }}" alt="Mecc Alte" class="object-contain w-full h-full" loading="lazy" decoding="async" width="256" height="160">
                         </a>
-                        <a href="https://acim.nidec.com/en-US/motors/leroy-somer" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-40 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
+                        <a href="https://acim.nidec.com/en-US/motors/leroy-somer" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-64 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
                             <img src="{{ asset('imgs/leroysomer.png') }}" alt="Leroy Somer" class="object-contain w-full h-full" loading="lazy" decoding="async" width="256" height="160">
                         </a>
-
-                        <!-- Duplicate Same 5 Partners for Seamless Loop -->
-                        <a href="#" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-40 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
+                        <a href="#" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-64 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
+                            <img src="{{ asset('imgs/ami-logos/4.png') }}" alt="jhon deer" class="object-contain w-full h-full" loading="lazy" decoding="async" width="256" height="160">
+                        </a>
+                        <a href="#" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-64 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
+                            <img src="{{ asset('imgs/ami-logos/1.png') }}" alt="fbt" class="object-contain w-full h-full" loading="lazy" decoding="async" width="256" height="160">
+                        </a>
+                        <a href="#" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-64 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
+                            <img src="{{ asset('imgs/ami-logos/2.png') }}" alt="disgenset" class="object-contain w-full h-full" loading="lazy" decoding="async" width="256" height="160">
+                        </a>
+                        <a href="#" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-64 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
+                            <img src="{{ asset('imgs/ami-logos/3.png') }}" alt="cummins" class="object-contain w-full h-full" loading="lazy" decoding="async" width="256" height="160">
+                        </a>
+                        <a href="#" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-64 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
                             <img src="{{ asset('imgs/Schneider.png') }}" alt="Schneider" class="object-contain w-full h-full" loading="lazy" decoding="async" width="256" height="160">
                         </a>
-                        <a href="#" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-40 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
+                        <a href="#" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-64 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
                             <img src="{{ asset('imgs/ABB.png') }}" alt="ABB" class="object-contain w-full h-full" loading="lazy" decoding="async" width="256" height="160">
                         </a>
-                        <a href="https://www.mtu-online.com" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-40 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
+
+                        <a href="#" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-64 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
+                            <img src="{{ asset('imgs/ami-logos/5.png') }}" alt="hyundai" class="object-contain w-full h-full" loading="lazy" decoding="async" width="256" height="160">
+                        </a>
+                        <a href="#" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-64 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
+                            <img src="{{ asset('imgs/ami-logos/6.png') }}" alt="Mitsubishi" class="object-contain w-full h-full" loading="lazy" decoding="async" width="256" height="160">
+                        </a>
+                        <a href="#" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-64 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
+                            <img src="{{ asset('imgs/ami-logos/7.png') }}" alt="comap company" class="object-contain w-full h-full" loading="lazy" decoding="async" width="256" height="160">
+                        </a>
+                        <a href="https://www.volvopenta.com" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-64 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
+                            <img src="{{ asset('imgs/volvo.png') }}" alt="Volvo" class="object-contain w-full h-full" loading="lazy" decoding="async" width="256" height="160">
+                        </a>
+
+                        <!-- Duplicate First Set for Seamless Loop -->
+                        <a href="https://www.mtu-online.com" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-64 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
                             <img src="{{ asset('imgs/mtu.png') }}" alt="MTU" class="object-contain w-full h-full" loading="lazy" decoding="async" width="256" height="160">
                         </a>
-                        <a href="https://www.stamford-avk.com" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-40 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
+                        <a href="https://www.stamford-avk.com" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-64 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
                             <img src="{{ asset('imgs/stamford.png') }}" alt="Stamford" class="object-contain w-full h-full" loading="lazy" decoding="async" width="256" height="160">
                         </a>
-                        <a href="https://www.perkins.com" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-40 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
+                        <a href="https://www.perkins.com" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-64 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
                             <img src="{{ asset('imgs/perkins.png') }}" alt="Perkins" class="object-contain w-full h-full" loading="lazy" decoding="async" width="256" height="160">
                         </a>
-                        <a href="https://www.meccalte.com" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-40 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
+                        <a href="https://www.meccalte.com" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-64 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
                             <img src="{{ asset('imgs/mecc-alta.png') }}" alt="Mecc Alte" class="object-contain w-full h-full" loading="lazy" decoding="async" width="256" height="160">
                         </a>
-                        <a href="https://acim.nidec.com/en-US/motors/leroy-somer" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-40 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
+                        <a href="https://acim.nidec.com/en-US/motors/leroy-somer" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-64 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
                             <img src="{{ asset('imgs/leroysomer.png') }}" alt="Leroy Somer" class="object-contain w-full h-full" loading="lazy" decoding="async" width="256" height="160">
+                        </a>
+                        <a href="#" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-64 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
+                            <img src="{{ asset('imgs/ami-logos/4.png') }}" alt="jhon deer" class="object-contain w-full h-full" loading="lazy" decoding="async" width="256" height="160">
+                        </a>
+                        <a href="#" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-64 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
+                            <img src="{{ asset('imgs/ami-logos/1.png') }}" alt="fbt" class="object-contain w-full h-full" loading="lazy" decoding="async" width="256" height="160">
+                        </a>
+                        <a href="#" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-64 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
+                            <img src="{{ asset('imgs/ami-logos/2.png') }}" alt="disgenset" class="object-contain w-full h-full" loading="lazy" decoding="async" width="256" height="160">
+                        </a>
+                        <a href="#" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-64 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
+                            <img src="{{ asset('imgs/ami-logos/3.png') }}" alt="cummins" class="object-contain w-full h-full" loading="lazy" decoding="async" width="256" height="160">
+                        </a>
+                        <a href="#" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-64 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
+                            <img src="{{ asset('imgs/Schneider.png') }}" alt="Schneider" class="object-contain w-full h-full" loading="lazy" decoding="async" width="256" height="160">
+                        </a>
+                        <a href="#" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-64 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
+                            <img src="{{ asset('imgs/ABB.png') }}" alt="ABB" class="object-contain w-full h-full" loading="lazy" decoding="async" width="256" height="160">
+                        </a>
+                        <a href="#" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-64 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
+                            <img src="{{ asset('imgs/ami-logos/5.png') }}" alt="hyundai" class="object-contain w-full h-full" loading="lazy" decoding="async" width="256" height="160">
+                        </a>
+                        <a href="#" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-64 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
+                            <img src="{{ asset('imgs/ami-logos/6.png') }}" alt="Mitsubishi" class="object-contain w-full h-full" loading="lazy" decoding="async" width="256" height="160">
+                        </a>
+                        <a href="#" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-64 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
+                            <img src="{{ asset('imgs/ami-logos/7.png') }}" alt="comap company" class="object-contain w-full h-full" loading="lazy" decoding="async" width="256" height="160">
+                        </a>
+                        <a href="https://www.volvopenta.com" class="flex flex-shrink-0 justify-center items-center p-6 w-64 h-64 bg-white rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
+                            <img src="{{ asset('imgs/volvo.png') }}" alt="Volvo" class="object-contain w-full h-full" loading="lazy" decoding="async" width="256" height="160">
                         </a>
                     </div>
                 </div>
@@ -406,13 +533,15 @@
                             transform: translateX(0);
                         }
                         100% {
-                            transform: translateX(-50%);
+                            /* Move exactly the width of 18 items: (256px width + 32px gap) × 18 = 5184px */
+                            transform: translateX(calc(-288px * 18));
                         }
                     }
 
                     @keyframes scroll-right {
                         0% {
-                            transform: translateX(-50%);
+                            /* Start from the width of 15 items: (256px width + 32px gap) × 15 = 4320px */
+                            transform: translateX(calc(-288px * 15));
                         }
                         100% {
                             transform: translateX(0);
@@ -420,7 +549,7 @@
                     }
 
                     .animate-scroll-left {
-                        animation: scroll-left 15s linear infinite;
+                        animation: scroll-left 55s linear infinite;
                         will-change: transform;
                     }
 
@@ -429,7 +558,7 @@
                     }
 
                     .animate-scroll-right {
-                        animation: scroll-right 15s linear infinite;
+                        animation: scroll-right 50s linear infinite;
                         will-change: transform;
                     }
 
@@ -440,10 +569,10 @@
                     /* Reduce animations on mobile for better performance */
                     @media (max-width: 768px) {
                         .animate-scroll-left {
-                            animation-duration: 40s;
+                            animation-duration: 60s;
                         }
                         .animate-scroll-right {
-                            animation-duration: 35s;
+                            animation-duration: 55s;
                         }
                     }
                 </style>
