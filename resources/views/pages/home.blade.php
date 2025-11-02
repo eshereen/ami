@@ -787,7 +787,6 @@
                             </div>
                             <div>
                                 <h4 class="mb-1 font-bold">Phone</h4>
-                                <a href="tel:+201223907708" class="text-gray-600">(+2) 01223907708</a><br>
                                 <a href="tel:+201223295077" class="text-gray-600">(+2) 01223295077</a>
                             </div>
                         </div>
@@ -821,7 +820,7 @@
                             </div>
                             <div>
                                 <h4 class="mb-1 font-bold">WhatsApp </h4>
-                                <a href="tel:+201211692434" class="text-gray-600">+20 1211692434</a>
+                                <a href="https://wa.me/201211692434"class="text-gray-600">+20 1211692434</a>
                             </div>
 
                         </div>

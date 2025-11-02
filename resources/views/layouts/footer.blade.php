@@ -45,6 +45,9 @@
                         <a href="https://www.linkedin.com/company/almohandesinternationalgenerators/?originalSubdomain=eg" class="flex justify-center items-center w-10 h-10 bg-white bg-opacity-20 rounded-full transition hover:bg-ami-orange">
                             <i class="fab fa-linkedin-in"></i>
                         </a>
+                        <a href="https://wa.me/201211692434" class="flex justify-center items-center w-10 h-10 bg-white bg-opacity-20 rounded-full transition hover:bg-ami-orange" target="_blank" rel="noopener noreferrer">
+                            <i class="fa-brands fa-whatsapp"></i>
+                        </a>
 
                     </div>
                 </div>
