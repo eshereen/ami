@@ -80,18 +80,26 @@
                 <div class="relative" style="min-height: 280px; height: 280px;" class="md:min-h-[320px] flex flex-col justify-center items-center">
                   <template x-for="(slide, index) in slides" :key="index">
                     <div x-show="currentSlide === index"
-                         x-transition:enter="transition ease-in-out duration-600"
-                         x-transition:enter-start="opacity-0"
-                         x-transition:enter-end="opacity-100"
-                         x-transition:leave="transition ease-in-out duration-600"
-                         x-transition:leave-start="opacity-100"
-                         x-transition:leave-end="opacity-0"
                          class="flex absolute inset-0 flex-col justify-center items-center">
                       <h1
+                        x-show="currentSlide === index"
+                        x-transition:enter="transition ease-out duration-700 delay-100"
+                        x-transition:enter-start="opacity-0 transform -translate-x-full"
+                        x-transition:enter-end="opacity-100 transform translate-x-0"
+                        x-transition:leave="transition ease-in duration-500"
+                        x-transition:leave-start="opacity-100 transform translate-x-0"
+                        x-transition:leave-end="opacity-0 transform translate-x-full"
                         class="mb-4 w-full text-3xl font-bold leading-tight text-center text-shadow md:text-4xl lg:text-5xl"
                         x-text="slide.title">
                       </h1>
                       <p
+                        x-show="currentSlide === index"
+                        x-transition:enter="transition ease-out duration-700 delay-300"
+                        x-transition:enter-start="opacity-0 transform -translate-x-full"
+                        x-transition:enter-end="opacity-100 transform translate-x-0"
+                        x-transition:leave="transition ease-in duration-500"
+                        x-transition:leave-start="opacity-100 transform translate-x-0"
+                        x-transition:leave-end="opacity-0 transform translate-x-full"
                         class="mx-auto mb-8 w-full max-w-4xl text-lg leading-relaxed text-center text-shadow md:text-xl lg:text-2xl"
                         x-text="slide.description">
                       </p>
@@ -123,126 +131,6 @@
             </template>
         </div>
     </section>
-
-
-     <!-- Manufacturing Capabilities Section -->
-     <section id="manufacturing" class="py-20 bg-white">
-        <div class="container px-4 mx-auto">
-            <div class="mb-16 text-center">
-                <h2 class="mb-4 text-3xl font-bold md:text-4xl ami-blue">Manufacturing Capabilities</h2>
-                <div class="mx-auto w-24 h-1 bg-ami-orange"></div>
-                <p class="mx-auto mt-4 max-w-2xl text-gray-600">State-of-the-art facilities and in-house production capabilities for quality control and customization.</p>
-            </div>
-
-            <div class="grid grid-cols-1 gap-12 items-center mb-16 md:grid-cols-2">
-                <div>
-                    <img src="{{ asset('imgs/3.png') }}" alt="Manufacturing Facility" class="w-full rounded-lg shadow-lg" loading="lazy" decoding="async" width="900" height="600">
-                </div>
-                <div>
-                    <h3 class="mb-6 text-2xl font-bold ami-blue">In-House Production Excellence</h3>
-                    <p class="mb-6 text-gray-700">
-                        Our vertically integrated manufacturing process allows us to maintain strict quality control and deliver customized solutions efficiently. We produce a wide range of components in-house:
-                    </p>
-                    <ul class="space-y-4">
-                        <li class="flex items-start">
-                            <i class="mt-1 mr-3 fas fa-check-circle text-ami-orange"></i>
-                            <div>
-                                <h4 class="text-lg font-bold text-gray-900 capitalize">Diesel Generating Set
-                                </h4>
-                                <p class="text-gray-600">Full range of reliable diesel generator power solutions.</p>
-                            </div>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="mt-1 mr-3 fas fa-check-circle text-ami-orange"></i>
-                            <div>
-                                <h4 class="text-lg font-bold text-gray-900 capitalize">Fuel Storage Tanks
-                                </h4>
-                                <p class="text-gray-600">Distant job site location is no longer an issue with our storage tank solutions.</p>
-                            </div>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="mt-1 mr-3 fas fa-check-circle text-ami-orange"></i>
-                            <div>
-                                <h4 class="text-lg font-bold text-gray-900 capitalize">Marine generator set</h4>
-                                <p class="text-gray-600">Where performance & reliability are critical the most.</p>
-                            </div>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="mt-1 mr-3 fas fa-check-circle text-ami-orange"></i>
-                            <div>
-                                <h4 class="text-lg font-bold text-gray-900 capitalize">Trailer generator set
-                                </h4>
-                                <p class="text-gray-600">On the Job site, rough terrain or on a boat, various accessories to meet your application requirement perfectly.</p>
-                            </div>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="mt-1 mr-3 fas fa-check-circle text-ami-orange"></i>
-                            <div>
-                                <h4 class="font-bold text-gray-900 capitalize"> Light Towers
-
-                                </h4>
-                                <p class="text-gray-600">Ease your night working days with the right Light Towers
-                                    Set.</p>
-                            </div>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="mt-1 mr-3 fas fa-check-circle text-ami-orange"></i>
-                            <div>
-                                <h4 class="font-bold text-gray-900 capitalize">Low Voltage Panels
-                                </h4>
-                                <p class="text-gray-600">Compatible, High-Quality Low Voltage panels Distribution Switchgear, Lighting panels, Synchronization panels and ATS.
-                                </p>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-        </div>
-    </section>
-      <!-- About AMI Section -->
-      <section id="about" class="py-20 bg-gray-50" style="content-visibility:auto; contain-intrinsic-size: 1px 1000px;">
-        <div class="container px-4 mx-auto">
-            <div class="mb-16 text-center">
-                <h2 class="mb-4 text-3xl font-bold md:text-4xl ami-blue">About Al Mohandes International</h2>
-                <div class="mx-auto w-24 h-1 bg-ami-orange"></div>
-            </div>
-
-            <div class="flex flex-col gap-12 items-center md:flex-row">
-                <div class="md:w-1/2">
-                    <h3 class="mb-6 text-2xl font-bold">Our Legacy of Excellence</h3>
-                    <p class="mb-6 text-gray-700">
-                        Founded in 1983, Al Mohandes International (AMI) is a leading diesel generator manufacturer in Egypt, providing integrated power solutions to global markets. We specialize in designing and manufacturing gensets, backup power systems, and custom electrical solutions for industrial, commercial, and marine applications.
-
-                    </p>
-                    <p class="mb-6 text-gray-700">
-                        With a proven reputation for reliability, performance, and durability, our diesel gensets are engineered to meet the highest international standards. We also provide generator accessories, including canopies, fuel tanks, and control systems, ensuring complete and efficient power generation solutions.
-                    </p>
-                    <p class="mb-6 text-gray-700">
-                        At AMI, we combine technical expertise, quality engineering, and a customer-focused approach to deliver sustainable energy solutions and unmatched after-sales service. Our mission is to ensure reliable energy supply for businesses, industries, and communities worldwide.
-                    </p>
-
-                </div>
-
-                <div class="bg-transparent md:w-1/2">
-
-
-                        <img
-                            src="{{ asset('imgs/2.png') }}"
-                            alt="AMI Manufacturing Facility"
-                            class="w-full rounded-md"
-                            loading="lazy"
-                            decoding="async"
-                            width="900"
-                            height="600"
-
-                        >
-
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Products Section -->
     <section id="products" class="py-20 bg-white" style="content-visibility:auto; contain-intrinsic-size: 1px 1200px;">
         <div class="container px-4 mx-auto">
@@ -578,6 +466,126 @@
                 </style>
             </div>
         </section>
+
+     <!-- Manufacturing Capabilities Section -->
+     <section id="manufacturing" class="py-20 bg-white">
+        <div class="container px-4 mx-auto">
+            <div class="mb-16 text-center">
+                <h2 class="mb-4 text-3xl font-bold md:text-4xl ami-blue">Manufacturing Capabilities</h2>
+                <div class="mx-auto w-24 h-1 bg-ami-orange"></div>
+                <p class="mx-auto mt-4 max-w-2xl text-gray-600">State-of-the-art facilities and in-house production capabilities for quality control and customization.</p>
+            </div>
+
+            <div class="grid grid-cols-1 gap-12 items-center mb-16 md:grid-cols-2">
+                <div>
+                    <img src="{{ asset('imgs/3.png') }}" alt="Manufacturing Facility" class="w-full rounded-lg shadow-lg" loading="lazy" decoding="async" width="900" height="600">
+                </div>
+                <div>
+                    <h3 class="mb-6 text-2xl font-bold ami-blue">In-House Production Excellence</h3>
+                    <p class="mb-6 text-gray-700">
+                        Our vertically integrated manufacturing process allows us to maintain strict quality control and deliver customized solutions efficiently. We produce a wide range of components in-house:
+                    </p>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <i class="mt-1 mr-3 fas fa-check-circle text-ami-orange"></i>
+                            <div>
+                                <h4 class="text-lg font-bold text-gray-900 capitalize">Diesel Generating Set
+                                </h4>
+                                <p class="text-gray-600">Full range of reliable diesel generator power solutions.</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="mt-1 mr-3 fas fa-check-circle text-ami-orange"></i>
+                            <div>
+                                <h4 class="text-lg font-bold text-gray-900 capitalize">Fuel Storage Tanks
+                                </h4>
+                                <p class="text-gray-600">Distant job site location is no longer an issue with our storage tank solutions.</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="mt-1 mr-3 fas fa-check-circle text-ami-orange"></i>
+                            <div>
+                                <h4 class="text-lg font-bold text-gray-900 capitalize">Marine generator set</h4>
+                                <p class="text-gray-600">Where performance & reliability are critical the most.</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="mt-1 mr-3 fas fa-check-circle text-ami-orange"></i>
+                            <div>
+                                <h4 class="text-lg font-bold text-gray-900 capitalize">Trailer generator set
+                                </h4>
+                                <p class="text-gray-600">On the Job site, rough terrain or on a boat, various accessories to meet your application requirement perfectly.</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="mt-1 mr-3 fas fa-check-circle text-ami-orange"></i>
+                            <div>
+                                <h4 class="font-bold text-gray-900 capitalize"> Light Towers
+
+                                </h4>
+                                <p class="text-gray-600">Ease your night working days with the right Light Towers
+                                    Set.</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="mt-1 mr-3 fas fa-check-circle text-ami-orange"></i>
+                            <div>
+                                <h4 class="font-bold text-gray-900 capitalize">Low Voltage Panels
+                                </h4>
+                                <p class="text-gray-600">Compatible, High-Quality Low Voltage panels Distribution Switchgear, Lighting panels, Synchronization panels and ATS.
+                                </p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </section>
+      <!-- About AMI Section -->
+      <section id="about" class="py-20 bg-gray-50" style="content-visibility:auto; contain-intrinsic-size: 1px 1000px;">
+        <div class="container px-4 mx-auto">
+            <div class="mb-16 text-center">
+                <h2 class="mb-4 text-3xl font-bold md:text-4xl ami-blue">About Al Mohandes International</h2>
+                <div class="mx-auto w-24 h-1 bg-ami-orange"></div>
+            </div>
+
+            <div class="flex flex-col gap-12 items-center md:flex-row">
+                <div class="md:w-1/2">
+                    <h3 class="mb-6 text-2xl font-bold">Our Legacy of Excellence</h3>
+                    <p class="mb-6 text-gray-700">
+                        Founded in 1983, Al Mohandes International (AMI) is a leading diesel generator manufacturer in Egypt, providing integrated power solutions to global markets. We specialize in designing and manufacturing gensets, backup power systems, and custom electrical solutions for industrial, commercial, and marine applications.
+
+                    </p>
+                    <p class="mb-6 text-gray-700">
+                        With a proven reputation for reliability, performance, and durability, our diesel gensets are engineered to meet the highest international standards. We also provide generator accessories, including canopies, fuel tanks, and control systems, ensuring complete and efficient power generation solutions.
+                    </p>
+                    <p class="mb-6 text-gray-700">
+                        At AMI, we combine technical expertise, quality engineering, and a customer-focused approach to deliver sustainable energy solutions and unmatched after-sales service. Our mission is to ensure reliable energy supply for businesses, industries, and communities worldwide.
+                    </p>
+
+                </div>
+
+                <div class="bg-transparent md:w-1/2">
+
+
+                        <img
+                            src="{{ asset('imgs/2.png') }}"
+                            alt="AMI Manufacturing Facility"
+                            class="w-full rounded-md"
+                            loading="lazy"
+                            decoding="async"
+                            width="900"
+                            height="600"
+
+                        >
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+
 
     <!-- Services Section -->
     <section id="services" class="py-20 bg-ami-light-blue">
