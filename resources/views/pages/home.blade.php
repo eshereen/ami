@@ -192,8 +192,8 @@
     <!--Partners Section -->
         <section id="partners" class="py-20 bg-white">
             <div class="flex relative flex-col justify-center items-center py-10 w-full" >
-              <!--  <h2 class="mb-4 text-3xl font-bold md:text-4xl ami-blue">Firms & Customers</h2>
-                <div class="mx-auto w-24 h-1 bg-ami-orange"></div>-->
+               <h2 class="mb-4 text-3xl font-bold md:text-4xl ami-blue">Firms & Consultants</h2>
+                <div class="mx-auto w-24 h-1 bg-ami-orange"></div>
                 <!-- Continuous Slider Container -->
                 <div class="overflow-hidden relative py-6 w-full">
                     <!-- Row 1 - Moving Left  -->
