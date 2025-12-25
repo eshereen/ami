@@ -52,21 +52,21 @@
     <!-- Optimized font loading - deferred for mobile performance -->
    
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600&family=Red+Hat+Display:wght@500;600;700;800;900&display=swap" rel="stylesheet">
 
     <!-- Font CSS with font-display swap - inline for performance -->
     <style>
 
-.cinzel {
-  font-family: "Cinzel", serif;
+.open-sans {
+  font-family: "Open Sans", sans-serif;
   font-optical-sizing: auto;
-  font-weight: 600;
+  font-weight: 400;
   font-style: normal;
 }
 .red-hat-display {
   font-family: "Red Hat Display", sans-serif;
   font-optical-sizing: auto;
-  font-weight: 600;
+  font-weight: 900;
   font-style: normal;
 }
       
@@ -305,14 +305,14 @@
         }
 
         body {
-            font-family: 'roboto', sans-serif;
+            font-family: 'Open Sans', sans-serif;
             padding-top: 72px; /* Account for fixed header */
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
 
         h1, h2, h3, h4, h5, h6 {
-            font-family: 'red-hat-display', sans-serif;
+            font-family: 'Red Hat Display', sans-serif;
             font-display: swap;
         }
         

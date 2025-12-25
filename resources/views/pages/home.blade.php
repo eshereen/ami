@@ -555,7 +555,6 @@
                     </picture>
                 </div>
             </div>
-
         </div>
     </section>
       <!-- About AMI Section -->
