@@ -548,8 +548,11 @@
                 </div>
                 <!-- Image - shows second on mobile, first on desktop -->
                 <div class="flex order-2 md:order-1">
-                    <img src="{{ asset('imgs/2.png') }}" alt="Manufacturing Facility" class="object-cover w-full h-full rounded-lg shadow-lg 
-                    max-h-[600px]" loading="lazy" decoding="async">
+                    <picture>
+                        <source srcset="{{ asset('imgs/2.webp') }}" type="image/webp">
+                        <img src="{{ asset('imgs/2.png') }}" alt="Manufacturing Facility" class="object-cover w-full h-full rounded-lg shadow-lg 
+                        max-h-[600px]" loading="lazy" decoding="async">
+                    </picture>
                 </div>
             </div>
 
@@ -582,20 +585,20 @@
                 <div class="flex bg-transparent md:w-1/2">
 
 
-                        <img
-                            src="{{ asset('imgs/3.png') }}"
-                            alt="AMI Manufacturing Facility"
-                            class="object-cover w-full h-full rounded-md max-h-[500px]"
-                            loading="lazy"
-                            decoding="async"
-                        >
+                        <picture>
+                            <source srcset="{{ asset('imgs/3.webp') }}" type="image/webp">
+                            <img
+                                src="{{ asset('imgs/3.png') }}"
+                                alt="AMI Manufacturing Facility"
+                                class="object-cover w-full h-full rounded-md max-h-[500px]"
+                                loading="lazy"
+                                decoding="async"
+                            >
+                        </picture>
                 </div>
             </div>
         </div>
     </section>
-
-
-
     <!-- Services Section -->
     <section id="services" class="py-20 bg-ami-light-blue">
         <div class="container px-4 mx-auto">
