@@ -548,7 +548,7 @@
                 </div>
                 <!-- Image - shows second on mobile, first on desktop -->
                 <div class="flex order-2 md:order-1">
-                    <picture>
+                    <picture class="w-full h-full">
                         <source srcset="{{ asset('imgs/2.webp') }}" type="image/webp">
                         <img src="{{ asset('imgs/2.png') }}" alt="Manufacturing Facility" class="object-cover w-full h-full rounded-lg shadow-lg 
                         max-h-[600px]" loading="lazy" decoding="async">
@@ -585,7 +585,7 @@
                 <div class="flex bg-transparent md:w-1/2">
 
 
-                        <picture>
+                        <picture class="w-full h-full">
                             <source srcset="{{ asset('imgs/3.webp') }}" type="image/webp">
                             <img
                                 src="{{ asset('imgs/3.png') }}"
