@@ -50,10 +50,10 @@
             <template x-for="(slide, index) in slides" :key="index">
                 <div
                     x-show="currentSlide === index"
-                    x-transition:enter="transition ease-in-out duration-700"
+                    x-transition:enter="transition ease-in-out duration-2000"
                     x-transition:enter-start="opacity-0"
                     x-transition:enter-end="opacity-100"
-                    x-transition:leave="transition ease-in-out duration-700"
+                    x-transition:leave="transition ease-in-out duration-2000"
                     x-transition:leave-start="opacity-100"
                     x-transition:leave-end="opacity-0"
                     class="absolute inset-0 hero-slider"
@@ -63,7 +63,7 @@
                          :srcset="slide.mobile + ' 640w, ' + slide.tablet + ' 1024w, ' + slide.desktop + ' 1920w'"
                          sizes="100vw"
                          alt="AMI Power Generation Solutions"
-                         class="object-cover w-full h-full"
+                         class="object-cover w-full h-full smooth-zoom"
                          width="1920"
                          height="1080"
                          :fetchpriority="index === 0 ? 'high' : 'low'"
@@ -72,6 +72,15 @@
                          style="object-position: center; min-height: 100%;">
                 </div>
             </template>
+            <style>
+                @keyframes zoomEffect {
+                    0% { transform: scale(1); }
+                    100% { transform: scale(1.1); }
+                }
+                .smooth-zoom {
+                    animation: zoomEffect 8s ease-out forwards;
+                }
+            </style>
             <div class="absolute inset-0 z-10 bg-gray-800/50"></div>
         </div>
 
@@ -135,8 +144,8 @@
     <section id="products" class="py-20 bg-white" style="content-visibility:auto; contain-intrinsic-size: 1px 1200px;">
         <div class="container px-4 mx-auto">
             <div class="mb-16 text-center">
-                <h2 class="mb-4 text-3xl font-bold md:text-4xl ami-blue">Our Products</h2>
-                <div class="mx-auto w-24 h-1 bg-ami-orange"></div>
+                <h2 class="mb-4 text-3xl font-bold md:text-4xl ami-blue scroll-animate">Our Products</h2>
+                <div class="mx-auto w-24 h-1 bg-ami-orange scroll-animate delay-100"></div>
                 <p class="mx-auto mt-4 max-w-2xl text-gray-600">Explore our comprehensive range of power solutions designed for reliability and performance.</p>
             </div>
  @if ($products->count() > 0)
@@ -144,29 +153,30 @@
                 @foreach ($products->take(6) as $product)
                 <!-- Generator Sets -->
                 <div class="overflow-hidden bg-white rounded-lg shadow-md hover-lift">
-                    <a href="{{ route('product.show', $product->slug) }}">
-                    <picture>
-                        <source
-                            media="(max-width: 480px)"
-                            srcset="{{ $product->image ? asset('storage/' . $product->image) : asset('imgs/products/G1.png') }}"
-                            sizes="(max-width: 480px) 100vw"
-                        >
-                        <source
-                            media="(max-width: 768px)"
-                            srcset="{{ $product->image ? asset('storage/' . $product->image) : asset('imgs/products/G1.png') }}"
-                            sizes="(max-width: 768px) 50vw"
-                        >
-                        <img
-                            src="{{ $product->image ? asset('storage/' . $product->image) : asset('imgs/products/G1.png') }}"
-                            alt="{{ $product->name }}"
-                            class="object-contain w-full h-auto bg-gray-100"
-                            loading="lazy"
-                            decoding="async"
-                            width="400"
-                            height="256"
-                            style="aspect-ratio: 400/256; content-visibility: auto;"
-                        >
-                    </picture>
+                    <a href="{{ route('product.show', $product->slug) }}" class="block relative overflow-hidden group">
+                        <div class="absolute inset-0 z-10 bg-ami-orange opacity-60 transition-transform duration-500 ease-in-out transform -translate-x-full -translate-y-full group-hover:translate-x-0 group-hover:translate-y-0"></div>
+                        <picture>
+                            <source
+                                media="(max-width: 480px)"
+                                srcset="{{ $product->image ? asset('storage/' . $product->image) : asset('imgs/products/G1.png') }}"
+                                sizes="(max-width: 480px) 100vw"
+                            >
+                            <source
+                                media="(max-width: 768px)"
+                                srcset="{{ $product->image ? asset('storage/' . $product->image) : asset('imgs/products/G1.png') }}"
+                                sizes="(max-width: 768px) 50vw"
+                            >
+                            <img
+                                src="{{ $product->image ? asset('storage/' . $product->image) : asset('imgs/products/G1.png') }}"
+                                alt="{{ $product->name }}"
+                                class="object-contain w-full h-auto"
+                                loading="lazy"
+                                decoding="async"
+                                width="400"
+                                height="256"
+                                style="aspect-ratio: 400/256; content-visibility: auto;"
+                            >
+                        </picture>
                     </a>
                     <div class="p-6">
                         <h3 class="mb-2 text-xl font-bold ami-blue">{{ $product->name }}</h3>
@@ -192,8 +202,8 @@
     <!--Partners Section -->
         <section id="partners" class="py-20 bg-white">
             <div class="flex relative flex-col justify-center items-center py-10 w-full" >
-               <h2 class="mb-4 text-3xl font-bold md:text-4xl ami-blue">Firms & Consultants</h2>
-                <div class="mx-auto w-24 h-1 bg-ami-orange"></div>
+               <h2 class="mb-4 text-3xl font-bold md:text-4xl ami-blue scroll-animate">Firms & Consultants</h2>
+                <div class="mx-auto w-24 h-1 bg-ami-orange scroll-animate delay-100"></div>
                 <!-- Continuous Slider Container -->
                 <div class="overflow-hidden relative py-6 w-full">
                     <!-- Row 1 - Moving Left  -->
@@ -468,19 +478,17 @@
         </section>
 
      <!-- Manufacturing Capabilities Section -->
-     <section id="manufacturing" class="py-20 bg-white">
+     <section id="manufacturing" class="py-20 bg-white" style="content-visibility:auto; contain-intrinsic-size: 1px 1000px;">
         <div class="container px-4 mx-auto">
             <div class="mb-16 text-center">
-                <h2 class="mb-4 text-3xl font-bold md:text-4xl ami-blue">Manufacturing Capabilities</h2>
-                <div class="mx-auto w-24 h-1 bg-ami-orange"></div>
+                <h2 class="mb-4 text-3xl font-bold md:text-4xl ami-blue scroll-animate">Manufacturing Capabilities</h2>
+                <div class="mx-auto w-24 h-1 bg-ami-orange scroll-animate delay-100"></div>
                 <p class="mx-auto mt-4 max-w-2xl text-gray-600">State-of-the-art facilities and in-house production capabilities for quality control and customization.</p>
             </div>
 
-            <div class="grid grid-cols-1 gap-12 items-center mb-16 md:grid-cols-2">
-                <div>
-                    <img src="{{ asset('imgs/3.png') }}" alt="Manufacturing Facility" class="w-full rounded-lg shadow-lg" loading="lazy" decoding="async" width="900" height="600">
-                </div>
-                <div>
+            <div class="grid grid-cols-1 gap-12 items-stretch mb-16 pb-20 md:grid-cols-2 ">
+                <!-- Text content - shows first on mobile, second on desktop -->
+                <div class="overflow-y-auto order-1 md:order-2">
                     <h3 class="mb-6 text-2xl font-bold ami-blue">In-House Production Excellence</h3>
                     <p class="mb-6 text-gray-700">
                         Our vertically integrated manufacturing process allows us to maintain strict quality control and deliver customized solutions efficiently. We produce a wide range of components in-house:
@@ -538,6 +546,11 @@
                         </li>
                     </ul>
                 </div>
+                <!-- Image - shows second on mobile, first on desktop -->
+                <div class="flex order-2 md:order-1">
+                    <img src="{{ asset('imgs/2.png') }}" alt="Manufacturing Facility" class="object-cover w-full h-full rounded-lg shadow-lg 
+                    max-h-[600px]" loading="lazy" decoding="async">
+                </div>
             </div>
 
         </div>
@@ -546,11 +559,11 @@
       <section id="about" class="py-20 bg-gray-50" style="content-visibility:auto; contain-intrinsic-size: 1px 1000px;">
         <div class="container px-4 mx-auto">
             <div class="mb-16 text-center">
-                <h2 class="mb-4 text-3xl font-bold md:text-4xl ami-blue">About Al Mohandes International</h2>
-                <div class="mx-auto w-24 h-1 bg-ami-orange"></div>
+                <h2 class="mb-4 text-3xl font-bold md:text-4xl ami-blue scroll-animate">About Al Mohandes International</h2>
+                <div class="mx-auto w-24 h-1 bg-ami-orange scroll-animate delay-100"></div>
             </div>
 
-            <div class="flex flex-col gap-12 items-center md:flex-row">
+            <div class="flex flex-col gap-12 items-stretch md:flex-row ">
                 <div class="md:w-1/2">
                     <h3 class="mb-6 text-2xl font-bold">Our Legacy of Excellence</h3>
                     <p class="mb-6 text-gray-700">
@@ -566,20 +579,16 @@
 
                 </div>
 
-                <div class="bg-transparent md:w-1/2">
+                <div class="flex bg-transparent md:w-1/2">
 
 
                         <img
-                            src="{{ asset('imgs/2.png') }}"
+                            src="{{ asset('imgs/3.png') }}"
                             alt="AMI Manufacturing Facility"
-                            class="w-full rounded-md"
+                            class="object-cover w-full h-full rounded-md max-h-[500px]"
                             loading="lazy"
                             decoding="async"
-                            width="900"
-                            height="600"
-
                         >
-
                 </div>
             </div>
         </div>
@@ -591,46 +600,58 @@
     <section id="services" class="py-20 bg-ami-light-blue">
         <div class="container px-4 mx-auto">
             <div class="mb-16 text-center">
-                <h2 class="mb-4 text-3xl font-bold md:text-4xl ami-blue">Our Services</h2>
-                <div class="mx-auto w-24 h-1 bg-ami-orange"></div>
+                <h2 class="mb-4 text-3xl font-bold md:text-4xl ami-blue scroll-animate">Our Services</h2>
+                <div class="mx-auto w-24 h-1 bg-ami-orange scroll-animate delay-100"></div>
                 <p class="mx-auto mt-4 max-w-2xl text-gray-600">Comprehensive services to support your power needs from installation to maintenance.</p>
             </div>
 
             <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
                 <!-- Custom Solutions -->
-                <div class="p-8 text-center bg-white rounded-lg hover-lift">
-                    <div class="flex justify-center items-center mx-auto mb-4 w-16 h-16 rounded-full transition-all duration-300 bg-ami-blue hover:bg-ami-orange">
-                        <i class="text-2xl text-white fas fa-cogs"></i>
+                <div class="relative p-8 text-center bg-white rounded-lg overflow-hidden group cursor-pointer">
+                    <div class="absolute inset-0 bg-ami-orange transform translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-in-out"></div>
+                    <div class="relative z-10">
+                        <div class="flex justify-center items-center mx-auto mb-4 w-16 h-16 rounded-full transition-all duration-300 bg-ami-blue group-hover:bg-white">
+                            <i class="text-2xl text-white group-hover:text-ami-orange transition-colors duration-300 fas fa-cogs"></i>
+                        </div>
+                        <h3 class="mb-3 text-xl font-bold ami-blue group-hover:text-white transition-colors duration-300">Custom Solutions</h3>
+                        <p class="text-gray-600 group-hover:text-white transition-colors duration-300">Tailored power solutions designed to meet specific requirements and challenging environments.</p>
                     </div>
-                    <h3 class="mb-3 text-xl font-bold ami-blue">Custom Solutions</h3>
-                    <p class="text-gray-600">Tailored power solutions designed to meet specific requirements and challenging environments.</p>
                 </div>
 
                 <!-- Maintenance -->
-                <div class="p-8 text-center bg-white rounded-lg hover-lift">
-                    <div class="flex justify-center items-center mx-auto mb-4 w-16 h-16 rounded-full transition-all duration-300 bg-ami-blue hover:bg-ami-orange">
-                        <i class="text-2xl text-white fas fa-tools"></i>
+                <div class="relative p-8 text-center bg-white rounded-lg overflow-hidden group cursor-pointer">
+                    <div class="absolute inset-0 bg-ami-orange transform translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-in-out"></div>
+                    <div class="relative z-10">
+                        <div class="flex justify-center items-center mx-auto mb-4 w-16 h-16 rounded-full transition-all duration-300 bg-ami-blue group-hover:bg-white">
+                            <i class="text-2xl text-white group-hover:text-ami-orange transition-colors duration-300 fas fa-tools"></i>
+                        </div>
+                        <h3 class="mb-3 text-xl font-bold ami-blue group-hover:text-white transition-colors duration-300">Maintenance</h3>
+                        <p class="text-gray-600 group-hover:text-white transition-colors duration-300">Preventive and corrective maintenance services to ensure optimal performance and longevity.</p>
                     </div>
-                    <h3 class="mb-3 text-xl font-bold ami-blue">Maintenance</h3>
-                    <p class="text-gray-600">Preventive and corrective maintenance services to ensure optimal performance and longevity.</p>
                 </div>
 
                 <!-- Spare Parts -->
-                <div class="p-8 text-center bg-white rounded-lg hover-lift">
-                    <div class="flex justify-center items-center mx-auto mb-4 w-16 h-16 rounded-full transition-all duration-300 bg-ami-blue hover:bg-ami-orange">
-                        <i class="text-2xl text-white fas fa-box-open"></i>
+                <div class="relative p-8 text-center bg-white rounded-lg overflow-hidden group cursor-pointer">
+                    <div class="absolute inset-0 bg-ami-orange transform translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-in-out"></div>
+                    <div class="relative z-10">
+                        <div class="flex justify-center items-center mx-auto mb-4 w-16 h-16 rounded-full transition-all duration-300 bg-ami-blue group-hover:bg-white">
+                            <i class="text-2xl text-white group-hover:text-ami-orange transition-colors duration-300 fas fa-box-open"></i>
+                        </div>
+                        <h3 class="mb-3 text-xl font-bold ami-blue group-hover:text-white transition-colors duration-300">Spare Parts</h3>
+                        <p class="text-gray-600 group-hover:text-white transition-colors duration-300">Genuine spare parts and components for all our products to maintain reliability and performance.</p>
                     </div>
-                    <h3 class="mb-3 text-xl font-bold ami-blue">Spare Parts</h3>
-                    <p class="text-gray-600">Genuine spare parts and components for all our products to maintain reliability and performance.</p>
                 </div>
 
                 <!-- Technical Support -->
-                <div class="p-8 text-center bg-white rounded-lg hover-lift">
-                    <div class="flex justify-center items-center mx-auto mb-4 w-16 h-16 rounded-full transition-all duration-300 bg-ami-blue hover:bg-ami-orange">
-                        <i class="text-2xl text-white fas fa-headset"></i>
+                <div class="relative p-8 text-center bg-white rounded-lg overflow-hidden group cursor-pointer">
+                    <div class="absolute inset-0 bg-ami-orange transform translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-in-out"></div>
+                    <div class="relative z-10">
+                        <div class="flex justify-center items-center mx-auto mb-4 w-16 h-16 rounded-full transition-all duration-300 bg-ami-blue group-hover:bg-white">
+                            <i class="text-2xl text-white group-hover:text-ami-orange transition-colors duration-300 fas fa-headset"></i>
+                        </div>
+                        <h3 class="mb-3 text-xl font-bold ami-blue group-hover:text-white transition-colors duration-300">Technical Support</h3>
+                        <p class="text-gray-600 group-hover:text-white transition-colors duration-300">24/7 technical support and assistance from our team of experienced engineers.</p>
                     </div>
-                    <h3 class="mb-3 text-xl font-bold ami-blue">Technical Support</h3>
-                    <p class="text-gray-600">24/7 technical support and assistance from our team of experienced engineers.</p>
                 </div>
             </div>
         </div>
@@ -642,8 +663,8 @@
     <section id="global" class="py-20 world-map">
         <div class="container px-4 mx-auto world-map-content">
             <div class="mb-8 text-center">
-                <h2 class="mb-4 text-3xl font-bold md:text-4xl text-">Global Reach</h2>
-                <div class="mx-auto w-24 h-1 bg-ami-orange"></div>
+                <h2 class="mb-4 text-3xl font-bold md:text-4xl text- scroll-animate">Global Reach</h2>
+                <div class="mx-auto w-24 h-1 bg-ami-orange scroll-animate delay-100"></div>
                 <p class="mx-auto mt-4 max-w-2xl text-gray-800">Serving clients across continents with reliable power solutions and trusted partnerships.</p>
             </div>
 
@@ -677,8 +698,8 @@
     <section class="py-10 bg-gray-50">
         <div class="container px-4 mx-auto">
             <div class="mb-16 text-center">
-                <h2 class="mb-4 text-3xl font-bold md:text-4xl ami-blue">Case Studies & Environments</h2>
-                <div class="mx-auto w-24 h-1 bg-ami-orange"></div>
+                <h2 class="mb-4 text-3xl font-bold md:text-4xl ami-blue scroll-animate">Case Studies & Environments</h2>
+                <div class="mx-auto w-24 h-1 bg-ami-orange scroll-animate delay-100"></div>
                 <p class="mx-auto mt-4 max-w-2xl text-gray-600">Our generators excel in diverse environments, demonstrating adaptability and reliability.</p>
             </div>
 
@@ -702,14 +723,14 @@
     <section id="contact" class="py-5 bg-white">
         <div class="container px-4 mx-auto">
             <div class="mb-16 text-center">
-                <h2 class="mb-4 text-3xl font-bold md:text-4xl ami-blue">Contact & Inquiry</h2>
-                <div class="mx-auto w-24 h-1 bg-ami-orange"></div>
-                <p class="mx-auto mt-4 max-w-2xl text-gray-600">Get in touch with our team for inquiries, quotes, or support.</p>
+                <h2 class="mb-4 text-3xl font-bold md:text-4xl ami-blue scroll-animate">Contact & Inquiry</h2>
+                <div class="mx-auto w-24 h-1 bg-ami-orange scroll-animate delay-100"></div>
+                <p class="mx-auto mt-4 max-w-2xl text-gray-600 scroll-animate delay-200">Get in touch with our team for inquiries, quotes, or support.</p>
             </div>
 
             <div class="grid grid-cols-1 gap-12 lg:grid-cols-2">
                 <!-- Contact Form -->
-                <div>
+                <div class="scroll-animate delay-300">
                     <h3 class="mb-6 text-2xl font-bold ami-blue">Send Us a Message</h3>
 
                     @if ($errors->any())
@@ -774,11 +795,12 @@
                 </div>
 
                 <!-- Contact Information -->
+                <!-- Contact Information -->
                 <div>
-                    <h3 class="mb-6 text-2xl font-bold ami-blue">Get in Touch</h3>
+                    <h3 class="mb-6 text-2xl font-bold ami-blue scroll-animate">Get in Touch</h3>
 
                     <div class="mb-8 space-y-6">
-                        <div class="flex items-start">
+                        <div class="flex items-start scroll-animate delay-100">
                             <div class="flex flex-shrink-0 justify-center items-center mr-4 w-12 h-12 rounded-full transition-all duration-300 bg-ami-blue hover:bg-ami-orange">
                                 <i class="text-white fas fa-map-marker-alt"></i>
                             </div>
@@ -789,7 +811,7 @@
                             </div>
                         </div>
 
-                        <div class="flex items-start">
+                        <div class="flex items-start scroll-animate delay-200">
                             <div class="flex flex-shrink-0 justify-center items-center mr-4 w-12 h-12 rounded-full transition-all duration-300 bg-ami-blue hover:bg-ami-orange">
                                 <i class="text-white fas fa-phone"></i>
                             </div>
@@ -799,7 +821,7 @@
                             </div>
                         </div>
 
-                        <div class="flex items-start">
+                        <div class="flex items-start scroll-animate delay-300">
                             <div class="flex flex-shrink-0 justify-center items-center mr-4 w-12 h-12 rounded-full transition-all duration-300 bg-ami-blue hover:bg-ami-orange">
                                 <i class="text-white fas fa-envelope"></i>
                             </div>
@@ -812,7 +834,7 @@
                             </div>
                         </div>
 
-                        <div class="flex items-start">
+                        <div class="flex items-start scroll-animate delay-400">
                             <div class="flex flex-shrink-0 justify-center items-center mr-4 w-12 h-12 rounded-full transition-all duration-300 bg-ami-blue hover:bg-ami-orange">
                                 <i class="text-white fa-solid fa-fax"></i>
                             </div>
@@ -822,7 +844,7 @@
                             </div>
 
                         </div>
-                        <div class="flex items-start">
+                        <div class="flex items-start scroll-animate delay-500">
                             <div class="flex flex-shrink-0 justify-center items-center mr-4 w-12 h-12 rounded-full transition-all duration-300 bg-ami-blue hover:bg-ami-orange">
                                 <i class="text-xl text-white fa-brands fa-whatsapp"></i>
                             </div>
@@ -853,4 +875,48 @@
             </iframe>
         </div>
     </section>
+    <!-- Scroll Animation Script & Styles -->
+    <style>
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(80px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            will-change: opacity, transform;
+        }
+        
+        .scroll-animate.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Staggered delays for elements in the same container if needed */
+        .delay-100 { transition-delay: 0.1s; }
+        .delay-200 { transition-delay: 0.2s; }
+        .delay-300 { transition-delay: 0.3s; }
+        .delay-400 { transition-delay: 0.4s; }
+        .delay-500 { transition-delay: 0.5s; }
+    </style>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px 0px -50px 0px', // Trigger slightly before the bottom
+                threshold: 0.2 // Trigger when 20% of the element is visible
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target); // Only animate once
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.scroll-animate').forEach(el => {
+                observer.observe(el);
+            });
+        });
+    </script>
 @endsection

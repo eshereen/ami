@@ -43,8 +43,15 @@
                        class="transition hover:text-ami-orange hover:underline"
                        :class="(scrolled || !onHome) ? 'text-gray-700' : 'text-white'">About</a>
                     <div class="relative"
-                         @mouseenter="clearTimeout(productsHoverTimeout); productsOpen = true"
-                         @mouseleave="productsHoverTimeout = setTimeout(() => productsOpen = false, 300)">
+                         x-data="{ 
+                             productsOpen: false, 
+                             activeCategory: null,
+                             toggleCategory(id) {
+                                 this.activeCategory = this.activeCategory === id ? null : id;
+                             }
+                         }"
+                         @mouseenter="productsOpen = true"
+                         @mouseleave="productsOpen = false; activeCategory = null">
                         <a href="{{ route('products.index') }}"
                            class="inline-flex items-center transition hover:text-ami-orange hover:underline"
                            :class="(scrolled || !onHome) ? 'text-gray-700' : 'text-white'">
@@ -53,60 +60,70 @@
                                  :class="productsOpen ? 'rotate-180' : ''"
                                  fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.21 8.29a.75.75 0 01.02-1.08z" clip-rule="evenodd"/></svg>
                         </a>
-
                         <div
                             x-cloak
                             x-show="productsOpen"
                             x-transition:enter="transition ease-out duration-200"
-                            x-transition:enter-start="opacity-0 -translate-y-2 scale-95"
-                            x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+                            x-transition:enter-start="opacity-0 translate-y-2"
+                            x-transition:enter-end="opacity-100 translate-y-0"
                             x-transition:leave="transition ease-in duration-150"
-                            x-transition:leave-start="opacity-100 translate-y-0 scale-100"
-                            x-transition:leave-end="opacity-0 -translate-y-2 scale-95"
-                            @mouseenter="clearTimeout(productsHoverTimeout); productsOpen = true"
-                            @mouseleave="productsHoverTimeout = setTimeout(() => productsOpen = false, 300)"
-                            class="absolute left-1/2 transform -translate-x-1/2 top-full w-screen max-w-6xl bg-white shadow-2xl border border-gray-200 rounded-lg p-6 z-[9999] overflow-hidden navbar-dropdown"
-                            :class="productsOpen ? 'show' : ''"
-                            style="margin-top: 0px;"
+                            x-transition:leave-start="opacity-100 translate-y-0"
+                            x-transition:leave-end="opacity-0 translate-y-2"
+                            class="absolute top-full text-left left-0 w-64 mt-2 bg-white shadow-xl border border-gray-100 rounded-lg overflow-hidden z-[100]"
                         >
-                            <?php $categories = \App\Models\Category::with(['subcategories' => function($q){ $q->withCount('products'); }])->take(4)->get(); ?>
-                            <div class="max-w-6xl mx-auto">
-                                <div class="flex divide-x divide-gray-200">
-                                    @foreach ($categories as $category)
-                                        <div class="w-1/4 px-6 first:pl-0 last:pr-0">
-                                        <a href="{{ route('category.show', $category->slug) }}"
-                                           class="block mb-3 text-sm font-semibold text-gray-900 transition-colors duration-200 hover:text-ami-orange">
-                                            {{ $category->name }}
-                                        </a>
-                                        <ul class="space-y-2">
-                                            @foreach ($category->subcategories as $subcategory)
+                            <?php $categories = \App\Models\Category::with(['subcategories' => function($q){ $q->withCount('products'); }])->take(6)->get(); ?>
+                            <div class="py-2">
+                                @foreach ($categories as $category)
+                                    <div class="relative border-b border-gray-50 last:border-0">
+                                        <button 
+                                            @click.prevent="toggleCategory({{ $category->id }})"
+                                            class="flex items-center justify-between w-full px-4 py-3 text-sm font-medium text-gray-700 hover:bg-ami-orange hover:text-white transition-colors duration-200"
+                                            :class="activeCategory === {{ $category->id }} ? 'bg-ami-orange text-white' : ''"
+                                        >
+                                            <span class="truncate">{{ $category->name }}</span>
+                                            <div class="flex items-center justify-center w-5 h-5">
+                                                <!-- Plus Icon -->
+                                                <svg x-show="activeCategory !== {{ $category->id }}" class="w-3 h-3 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
+                                                <!-- Minus Icon -->
+                                                <svg x-show="activeCategory === {{ $category->id }}" class="w-3 h-3 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"></path></svg>
+                                            </div>
+                                        </button>
+                                        
+                                        <!-- Subcategories Accordion -->
+                                        <div 
+                                            x-show="activeCategory === {{ $category->id }}"
+                                            x-collapse
+                                            class="bg-ami-light-blue/50"
+                                        >
+                                            <ul class="py-1 px-4 pb-2 space-y-1">
+                                                <!-- Category Link -->
                                                 <li>
-                                                    <a href="{{ route('subcategory.show', $subcategory->slug) }}"
-                                                       class="flex items-center justify-between text-gray-700 transition-colors duration-200 hover:text-ami-orange group">
-                                                        <span class="text-sm">{{ $subcategory->name }}</span>
-                                                        <span class="ml-2 text-xs text-gray-500 transition-colors duration-200 group-hover:text-ami-orange">
-                                                            ({{ $subcategory->products_count }})
-                                                        </span>
+                                                    <a href="{{ route('category.show', $category->slug) }}" class="block py-1 text-xs font-semibold text-ami-orange hover:underline">
+                                                        View All {{ $category->name }}
                                                     </a>
                                                 </li>
-                                            @endforeach
-                                        </ul>
+                                                @foreach ($category->subcategories as $subcategory)
+                                                    <li>
+                                                        <a href="{{ route('subcategory.show', $subcategory->slug) }}"
+                                                           class="flex items-center justify-between px-3 py-2 text-xs text-gray-700 transition-all duration-300 ease-in-out rounded hover:bg-ami-orange hover:text-white hover:shadow-md transform hover:-translate-y-0.5">
+                                                            <span>{{ $subcategory->name }}</span>
+                                                            <span class="text-[10px] opacity-70">({{ $subcategory->products_count }})</span>
+                                                        </a>
+                                                    </li>
+                                                @endforeach
+                                            </ul>
                                         </div>
-                                    @endforeach
-                                </div>
+                                    </div>
+                                @endforeach
                             </div>
                         </div>
                     </div>
-
                     <a href="{{ route('services.index') }}"
                        class="transition hover:text-ami-orange hover:underline"
                        :class="(scrolled || !onHome) ? 'text-gray-700' : 'text-white'">Services</a>
-                    <a href="{{ route('blog.index') }}"
-                       class="transition hover:text-ami-orange hover:underline"
-                       :class="(scrolled || !onHome) ? 'text-gray-700' : 'text-white'">Blog</a>
                        <a href="{{ route('gallaries.index') }}"
-                       class="text-gray-700 transition hover:text-ami-orange"
-                       :class="(scrolled || !onHome) ? 'text-gray-700' : 'text-white'">Gallary</a>
+                       class="text-gray-700 transition hover:text-ami-orange hover:underline"
+                       :class="(scrolled || !onHome) ? 'text-gray-700' : 'text-white'">Projects</a>
                     <a href="{{ route('home') }}#contact"
                        class="transition hover:text-ami-orange hover:underline"
                        :class="(scrolled || !onHome) ? 'text-gray-700' : 'text-white'">Contact</a>
@@ -128,7 +145,7 @@
 
         <!-- Mobile Navigation - Moved outside flex container -->
         <div data-mobile-menu
-             class="p-4 mt-4 bg-white rounded-md md:hidden mobile-menu"
+             class="p-4 mt-4 bg-white rounded-md border border-gray-100 shadow-xl md:hidden mobile-menu"
              style="display: none;">
                 <div class="flex flex-col space-y-3">
                     <a href="{{ route('home') }}"
@@ -138,7 +155,7 @@
 
 
                     <!-- Products with Mobile Mega Menu -->
-                    <div class="relative">
+                    <div class="relative" x-data="{ productsOpen: false, activeCategory: null, toggleCategory(id) { this.activeCategory = this.activeCategory === id ? null : id; } }">
                         <button @click="productsOpen = !productsOpen"
                                 class="flex items-center justify-between w-full text-gray-700 transition hover:text-ami-orange">
                             <span>Products</span>
@@ -151,33 +168,40 @@
 
                         <!-- Mobile Products Dropdown -->
                         <div x-show="productsOpen"
-                             x-transition:enter="transition ease-out duration-200"
-                             x-transition:enter-start="opacity-0 transform scale-95"
-                             x-transition:enter-end="opacity-100 transform scale-100"
-                             x-transition:leave="transition ease-in duration-150"
-                             x-transition:leave-start="opacity-100 transform scale-100"
-                             x-transition:leave-end="opacity-0 transform scale-95"
-                             class="mt-3 ml-4 space-y-3">
-                            <?php $categories = \App\Models\Category::with(['subcategories' => function($q){ $q->withCount('products'); }])->take(4)->get(); ?>
+                             x-collapse
+                             class="mt-2 ml-2 space-y-1">
+                            <?php $categories = \App\Models\Category::with(['subcategories' => function($q){ $q->withCount('products'); }])->take(6)->get(); ?>
                             @foreach ($categories as $category)
-                                <div class="pl-3 border-l-2 border-ami-orange">
-                                    <a href="{{ route('category.show', $category->slug) }}"
-                                       class="block mb-2 text-sm font-semibold text-gray-900 hover:text-ami-orange"
-                                       @click="mobileMenuOpen = false">
-                                        {{ $category->name }}
-                                    </a>
-                                    <ul class="space-y-1">
-                                        @foreach ($category->subcategories as $subcategory)
-                                            <li>
-                                                <a href="{{ route('subcategory.show', $subcategory->slug) }}"
-                                                   class="block text-sm text-gray-600 hover:text-ami-orange"
-                                                   @click="mobileMenuOpen = false">
-                                                    {{ $subcategory->name }}
-                                                    <span class="text-xs text-gray-400">({{ $subcategory->products_count }})</span>
-                                                </a>
-                                            </li>
-                                        @endforeach
-                                    </ul>
+                                <div class="border-b border-gray-100 last:border-0">
+                                    <button 
+                                        @click.prevent="toggleCategory({{ $category->id }})"
+                                        class="flex items-center justify-between w-full py-2 text-sm font-medium text-gray-700 hover:text-ami-orange transition-colors duration-200"
+                                        :class="activeCategory === {{ $category->id }} ? 'text-ami-orange' : ''"
+                                    >
+                                        <span>{{ $category->name }}</span>
+                                        <div class="flex items-center justify-center w-5 h-5">
+                                            <svg x-show="activeCategory !== {{ $category->id }}" class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
+                                            <svg x-show="activeCategory === {{ $category->id }}" class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"></path></svg>
+                                        </div>
+                                    </button>
+                                    
+                                    <div x-show="activeCategory === {{ $category->id }}" x-collapse class="pl-2 pb-2">
+                                        <a href="{{ route('category.show', $category->slug) }}" class="block py-1 text-xs font-semibold text-ami-orange hover:underline mb-1">
+                                            View All {{ $category->name }}
+                                        </a>
+                                        <ul class="space-y-1">
+                                            @foreach ($category->subcategories as $subcategory)
+                                                <li>
+                                                    <a href="{{ route('subcategory.show', $subcategory->slug) }}"
+                                                       class="block text-xs text-gray-600 hover:text-ami-orange"
+                                                       @click="mobileMenuOpen = false">
+                                                        {{ $subcategory->name }}
+                                                        <span class="text-[10px] text-gray-400">({{ $subcategory->products_count }})</span>
+                                                    </a>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
                                 </div>
                             @endforeach
                         </div>
@@ -189,11 +213,8 @@
 
                        <a href="{{ route('gallaries.index') }}"
                        class="text-gray-700 transition hover:text-ami-orange"
-                       @click="mobileMenuOpen = false">Gallary</a>
-
-                    <a href="{{ route('blog.index') }}"
-                       class="text-gray-700 transition hover:text-ami-orange"
-                       @click="mobileMenuOpen = false">Blog</a>
+                       @click="mobileMenuOpen = false">Projects</a>
+                       
                     <a href="{{ route('home') }}#contact"
                        class="text-gray-700 transition hover:text-ami-orange"
                        @click="mobileMenuOpen = false">Contact</a>

@@ -50,25 +50,26 @@
     <link rel="preload" as="image" href="{{ asset('imgs/1-mobile.webp') }}" media="(max-width: 640px)" fetchpriority="high" imagesrcset="{{ asset('imgs/1-mobile.webp') }} 640w" imagesizes="100vw">
 
     <!-- Optimized font loading - deferred for mobile performance -->
-    <link rel="preload" href="https://fonts.gstatic.com/s/roboto/v30/KFOmCnqEu92Fr1Mu4mxKKTU1Kg.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="https://fonts.gstatic.com/s/montserrat/v25/JTUSjIg1_i6t8kCHKm459WlhyyTh89Y.woff2" as="font" type="font/woff2" crossorigin>
+   
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
 
     <!-- Font CSS with font-display swap - inline for performance -->
     <style>
-        @font-face {
-            font-family: 'Roboto';
-            font-style: normal;
-            font-weight: 300;
-            font-display: swap;
-            src: url('https://fonts.gstatic.com/s/roboto/v30/KFOmCnqEu92Fr1Mu4mxKKTU1Kg.woff2') format('woff2');
-        }
-        @font-face {
-            font-family: 'Montserrat';
-            font-style: normal;
-            font-weight: 400;
-            font-display: swap;
-            src: url('https://fonts.gstatic.com/s/montserrat/v25/JTUSjIg1_i6t8kCHKm459WlhyyTh89Y.woff2') format('woff2');
-        }
+
+.cinzel {
+  font-family: "Cinzel", serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+}
+.red-hat-display {
+  font-family: "Red Hat Display", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+}
+      
     </style>
     <!--Favicons-->
     <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
@@ -304,14 +305,14 @@
         }
 
         body {
-            font-family: 'Roboto', sans-serif;
+            font-family: 'roboto', sans-serif;
             padding-top: 72px; /* Account for fixed header */
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
 
         h1, h2, h3, h4, h5, h6 {
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'red-hat-display', sans-serif;
             font-display: swap;
         }
         
@@ -644,6 +645,114 @@
     </style>
 </head>
 <body class="smooth-scroll">
+
+<!-- Preloader -->
+<div id="preloader" class="preloader">
+    <div class="preloader-content">
+        <img src="{{ asset('imgs/logo.png') }}" alt="AMI Logo" class="preloader-logo ">
+        <div class="preloader-spinner"></div>
+       
+    </div>
+</div>
+
+<style>
+    /* Preloader Styles */
+    .preloader {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, #f5f6f6ff 0%, #adcff6ff 100%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 99999;
+        transition: opacity 0.5s ease, visibility 0.5s ease;
+    }
+    
+    .preloader.hide {
+        opacity: 0;
+        visibility: hidden;
+    }
+    
+    .preloader-content {
+        text-align: center;
+        position: relative;
+    }
+    
+    .preloader-logo {
+        width: 600px;
+        height: auto;
+        margin-bottom: 30px;
+        animation: logoFade 1.5s ease-in-out infinite;
+    }
+    
+    .preloader-spinner {
+        width: 60px;
+        height: 60px;
+        border: 4px solid rgba(255, 255, 255, 0.2);
+        border-top-color: #ec2600;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin: 0 auto 20px;
+    }
+    
+    .preloader-text {
+        color: white;
+        font-size: 16px;
+        font-weight: 500;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+    }
+    
+    @keyframes spin {
+        to { transform: rotate(360deg); }
+    }
+    
+    @keyframes logoFade {
+        0%, 100% { opacity: 1; transform: scale(1); }
+        50% { opacity: 0.7; transform: scale(0.95); }
+    }
+    
+    /* Ensure body doesn't scroll while loading */
+    body.loading {
+        overflow: hidden;
+    }
+</style>
+
+<script>
+    // Add loading class to body
+    document.body.classList.add('loading');
+    
+    // Hide preloader when page is fully loaded
+    window.addEventListener('load', function() {
+        const preloader = document.getElementById('preloader');
+        if (preloader) {
+            setTimeout(function() {
+                preloader.classList.add('hide');
+                document.body.classList.remove('loading');
+                
+                // Remove preloader from DOM after animation
+                setTimeout(function() {
+                    preloader.style.display = 'none';
+                }, 500);
+            }, 500); // Small delay to ensure smooth transition
+        }
+    });
+    
+    // Fallback: Hide preloader after max 5 seconds
+    setTimeout(function() {
+        const preloader = document.getElementById('preloader');
+        if (preloader && !preloader.classList.contains('hide')) {
+            preloader.classList.add('hide');
+            document.body.classList.remove('loading');
+            setTimeout(function() {
+                preloader.style.display = 'none';
+            }, 500);
+        }
+    }, 5000);
+</script>
 
 @include('layouts.navbar')
 
