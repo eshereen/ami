@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\User;
 use App\Models\Category;
 use App\Models\Subcategory;
+use App\Models\Power;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -17,65 +18,69 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::factory()->create([
-            'name' => 'Admin',
-            'email' => 'admin@admin.com',
-            'password' => bcrypt('password'),
-            'is_admin' => true,
-        ]);
-        $categoryNames = [
-            'AMI Products',
-            'Power Capacity',
-            'Diesel Engine',
-            'Ac Elternator',
-        ];
+        // User::factory()->create([
+        //     'name' => 'Admin',
+        //     'email' => 'admin@admin.com',
+        //     'password' => bcrypt('password'),
+        //     'is_admin' => true,
+        // ]);
 
-        foreach ($categoryNames as $categoryName) {
-            Category::factory()->create([
-                'name' => $categoryName,
-            ]);
-        }
+        // Seed Power table
+        Power::create(['name' => 'Standby Power']);
+        Power::create(['name' => 'Prime Power']);
 
-        $amiCategory = Category::where('name', 'AMI Products')->first();
-        $powerCategory = Category::where('name', 'Power Capacity')->first();
-        $dieselCategory = Category::where('name', 'Diesel Engine')->first();
-        $acCategory = Category::where('name', 'Ac Elternator')->first();
+        // $categoryNames = [
+        //     'AMI Products',
+        //     'Power Capacity',
+        //     'Diesel Engine',
+        //     'Ac Elternator',
+        // ];
 
-        if ($amiCategory) {
-            foreach (['Diesel Generating set', 'Spare Parts', 'Trailer'] as $name) {
-                Subcategory::firstOrCreate([
-                    'name' => $name,
-                    'category_id' => $amiCategory->id,
-                ]);
-            }
-        }
+        // foreach ($categoryNames as $categoryName) {
+        //     Category::factory()->create([
+        //         'name' => $categoryName,
+        //     ]);
+        // }
 
-        if ($powerCategory) {
-            foreach (['0-50 KVA', '60-250 KVA'] as $name) {
-                Subcategory::firstOrCreate([
-                    'name' => $name,
-                    'category_id' => $powerCategory->id,
-                ]);
-            }
-        }
-        if ($dieselCategory) {
-            foreach (['Doosan', 'Perkins'] as $name) {
-                Subcategory::firstOrCreate([
-                    'name' => $name,
-                    'category_id' => $dieselCategory->id,
-                ]);
-            }
-        }
-        if ($acCategory) {
-            foreach (['Marti', 'Stamford'] as $name) {
-                Subcategory::firstOrCreate([
-                    'name' => $name,
-                    'category_id' => $acCategory->id,
-                ]);
-            }
-        }
+        // $amiCategory = Category::where('name', 'AMI Products')->first();
+        // $powerCategory = Category::where('name', 'Power Capacity')->first();
+        // $dieselCategory = Category::where('name', 'Diesel Engine')->first();
+        // $acCategory = Category::where('name', 'Ac Elternator')->first();
+
+        // if ($amiCategory) {
+        //     foreach (['Diesel Generating set', 'Spare Parts', 'Trailer'] as $name) {
+        //         Subcategory::firstOrCreate([
+        //             'name' => $name,
+        //             'category_id' => $amiCategory->id,
+        //         ]);
+        //     }
+        // }
+
+        // if ($powerCategory) {
+        //     foreach (['0-50 KVA', '60-250 KVA'] as $name) {
+        //         Subcategory::firstOrCreate([
+        //             'name' => $name,
+        //             'category_id' => $powerCategory->id,
+        //         ]);
+        //     }
+        // }
+        // if ($dieselCategory) {
+        //     foreach (['Doosan', 'Perkins'] as $name) {
+        //         Subcategory::firstOrCreate([
+        //             'name' => $name,
+        //             'category_id' => $dieselCategory->id,
+        //         ]);
+        //     }
+        // }
+        // if ($acCategory) {
+        //     foreach (['Marti', 'Stamford'] as $name) {
+        //         Subcategory::firstOrCreate([
+        //             'name' => $name,
+        //             'category_id' => $acCategory->id,
+        //         ]);
+        //     }
+        // }
   
-
 
 
 
