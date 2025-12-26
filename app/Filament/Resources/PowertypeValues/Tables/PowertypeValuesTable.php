@@ -1,36 +1,26 @@
 <?php
 
-namespace App\Filament\Resources\Subcategories\Tables;
+namespace App\Filament\Resources\PowertypeValues\Tables;
 
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
-use Filament\Actions\DeleteAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
-use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Columns\BadgeColumn;
 use Filament\Tables\Table;
 
-class SubcategoriesTable
+class PowertypeValuesTable
 {
     public static function configure(Table $table): Table
     {
         return $table
             ->columns([
-                TextColumn::make('brand')
-                    ->label('Brand')
-                    ->searchable(),
-                TextColumn::make('category.name')
+                TextColumn::make('powertype_id')
+                    ->numeric()
                     ->sortable(),
-                ImageColumn::make('image'),
-                BadgeColumn::make('status')
-                    ->colors([
-                        'success' => 1,
-                        'danger' => 0,
-                    ])
-                    ->formatStateUsing(fn ($state): string => $state ? 'Active' : 'Inactive')
-                    ->searchable(),
+                TextColumn::make('value')
+                    ->numeric()
+                    ->sortable(),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -39,6 +29,9 @@ class SubcategoriesTable
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('product.ami_model')
+                    ->numeric()
+                    ->sortable(),
             ])
             ->filters([
                 //
@@ -46,7 +39,6 @@ class SubcategoriesTable
             ->recordActions([
                 ViewAction::make(),
                 EditAction::make(),
-                DeleteAction::make(),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

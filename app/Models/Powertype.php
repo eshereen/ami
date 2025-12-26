@@ -9,12 +9,7 @@ class Powertype extends Model
 {
     /** @use HasFactory<\Database\Factories\PowertypeFactory> */
     use HasFactory;
-    protected $fillable = ['product_id', 'power_id', 'name', 'note'];
-
-    public function product()
-    {
-        return $this->belongsTo(Product::class);
-    }
+    protected $fillable = ['power_id', 'name', 'note'];
 
     public function power()
     {

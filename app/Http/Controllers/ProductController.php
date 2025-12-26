@@ -13,17 +13,17 @@ class ProductController extends Controller
     public function index()
     {
         $products = Cache::remember('products_index_products_v1', 300, function () {
-            return Product::select(['id','name','slug','model_name','description','image','subcategory_id','fuel_type','frequency'])
-                ->with(['subcategory:id,name,category_id'])
+            return Product::select(['id','name','slug','ami_model','description','image','subcategory_id','fuel_type','frequency'])
+                ->with(['subcategory:id,brand,category_id'])
                 ->latest('id')
                 ->take(300)
                 ->get();
         });
 
         $subcategories = Cache::remember('products_index_subcategories_v1', 300, function () {
-            return Subcategory::select(['id','name','category_id'])
+            return Subcategory::select(['id','brand','category_id'])
                 ->with(['category:id,name'])
-                ->orderBy('name')
+                ->orderBy('brand')
                 ->get();
         });
 
@@ -42,7 +42,7 @@ class ProductController extends Controller
         $categories = Cache::remember('products_categories_v1', 300, function () {
             return Category::select(['id','name','slug'])
                 ->with(['subcategories' => function ($q) {
-                    $q->select('id','name','slug','category_id')->withCount('products');
+                    $q->select('id','brand','slug','category_id')->withCount('products');
                 }])
                 ->orderBy('name')
                 ->get();
@@ -55,10 +55,10 @@ class ProductController extends Controller
     public function show($slug)
     {
         $product = Cache::remember("product_show_{$slug}_v1", 300, function () use ($slug) {
-            return Product::select(['id','name','slug','model_name','description','image','subcategory_id','fuel_type','frequency'])
+            return Product::select(['id','name','slug','ami_model','description','image','subcategory_id','fuel_type','frequency'])
                 ->where('slug', $slug)
                 ->with([
-                    'subcategory:id,name,slug,category_id',
+                    'subcategory:id,brand,slug,category_id',
                     'subcategory.category:id,name,slug',
                     'applications:id,name,description,product_id',
                     'features:id,name,description,product_id',
@@ -68,14 +68,29 @@ class ProductController extends Controller
         });
 
         $relatedProducts = Cache::remember("related_products_{$product->id}_v1", 300, function () use ($product) {
-            return Product::select(['id','name','slug','model_name','image','fuel_type','frequency','subcategory_id'])
+            return Product::select(['id','name','slug','ami_model','image','fuel_type','frequency','subcategory_id'])
                 ->where('subcategory_id', $product->subcategory_id)
                 ->where('id', '!=', $product->id)
-                ->with(['subcategory:id,name'])
+                ->with(['subcategory:id,brand'])
                 ->latest('id')
                 ->take(4)
                 ->get();
         });
         return view('pages.products.show', compact('product', 'relatedProducts'));
+    }
+
+    public function genset()
+    {
+        $products = Product::select(['id','name','slug','ami_model','engine','description','image','subcategory_id'])
+            ->with([
+                'subcategory:id,brand',
+                'powertype_values' => function($query) {
+                    $query->with(['powertype:id,name,power_id']);
+                }
+            ])
+            ->latest('id')
+            ->paginate(20);
+
+        return view('pages.genset', compact('products'));
     }
 }

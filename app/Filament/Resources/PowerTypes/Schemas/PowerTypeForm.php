@@ -15,11 +15,11 @@ class PowerTypeForm
             ->components([
                 Section::make('Power Type Details')
                 ->schema([
-                Select::make('product_id')
-                    ->required()
-                    ->relationship('product', 'name'),
+                Select::make('power_id')
+                ->relationship('power', 'name')
+                ->searchable()
+                ->preload(),
                 TextInput::make('name'),
-                TextInput::make('value'),
                 Textarea::make('note')
                     ->columnSpanFull(),
             ])->columns(3)->columnSpanFull(),

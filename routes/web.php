@@ -20,6 +20,7 @@ Route::get('/',[FrontendController::class,'index'])->name(name: 'home');
 Route::get('/about',[FrontendController::class,'about'])->name('about');
 Route::get('/services',[FrontendController::class,'services'])->name('services');
 Route::get('/products',[ProductController::class,'index'])->name('products.index');
+Route::get('/genset',[ProductController::class,'genset'])->name('genset.index');
 
 Route::get('/product/{slug}',[ProductController::class,'show'])->name('product.show');
 Route::get('/categories',[ProductController::class,'categories'])->name('categories.index');

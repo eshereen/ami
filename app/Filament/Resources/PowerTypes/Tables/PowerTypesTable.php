@@ -16,8 +16,7 @@ class PowerTypesTable
     {
         return $table
             ->columns([
-                TextColumn::make('product.name')
-
+                TextColumn::make('power.name')
                     ->sortable(),
                 TextColumn::make('name')
                     ->searchable(),

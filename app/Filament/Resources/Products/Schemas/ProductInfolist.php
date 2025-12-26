@@ -14,7 +14,11 @@ class ProductInfolist
             ->components([
                 TextEntry::make('name'),
                 TextEntry::make('slug'),
-                TextEntry::make('model_name'),
+                TextEntry::make('ami_model')
+                    ->label('AMI Model'),
+                TextEntry::make('engine')
+                    ->label('Engine')
+                    ->placeholder('N/A'),
                 TextEntry::make('subcategory.name'),
 
 

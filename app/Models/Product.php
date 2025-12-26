@@ -10,7 +10,7 @@ class Product extends Model
     /** @use HasFactory<\Database\Factories\ProductFactory> */
     use HasFactory, Sluggable;
 
-    protected $fillable = ['name','model_name','slug','subcategory_id','image','description','fuel_type','frequency','status'];
+    protected $fillable = ['name','ami_model','slug','subcategory_id','engine','image','description','fuel_type','frequency','status'];
 
     public function subcategory()
     {
@@ -28,9 +28,9 @@ class Product extends Model
         return $this->hasMany(Application::class);
     }
 
-    public function powertypes()
+    public function powertype_values()
     {
-        return $this->hasMany(Powertype::class);
+        return $this->hasMany(PowertypeValue::class);
     }
 
     public function gallaries()

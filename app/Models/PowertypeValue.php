@@ -10,6 +10,7 @@ class PowertypeValue extends Model
     use HasFactory;
 
     protected $fillable = [
+        'product_id',
         'powertype_id',
         'value',
     ];
@@ -20,5 +21,10 @@ class PowertypeValue extends Model
     public function powertype()
     {
         return $this->belongsTo(Powertype::class);
+    }
+
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
     }
 }

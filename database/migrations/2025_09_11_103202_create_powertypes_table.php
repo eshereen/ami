@@ -13,9 +13,8 @@ return new class extends Migration
     {
         Schema::create('powertypes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('product_id')->constrained('products')->nullable();
+          $table->foreignId('power_id')->constrained('powers')->nullable();
             $table->string('name')->nullable();
-            $table->string('value')->nullable();
             $table->text('note')->nullable();
             $table->timestamps();
         });

@@ -2,7 +2,7 @@
 
 namespace App\Filament\Resources\Subcategories\Schemas;
 
-use Filament\Forms\Components\FileUpload;
+use App\Filament\Forms\Components\WebPFileUpload;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Schemas\Schema;
@@ -17,14 +17,20 @@ class SubcategoryForm
             ->components([
                 Section::make('Subcategory Details')
                 ->schema([
-                TextInput::make('name')
+                TextInput::make('brand')
+                    ->label('Brand')
                     ->required(),
 
                 Select::make('category.name')
                     ->required()
                     ->relationship('category', 'name'),
-                FileUpload::make('image')
-                    ->image()->imageEditor()->disk('public')->columnSpanFull(),
+                WebPFileUpload::make('image')
+                    ->label('Subcategory Image')
+                    ->image()
+                    ->imageEditor()
+                    ->disk('public')
+                    ->webpQuality(90)
+                    ->columnSpanFull(),
                 Textarea::make('description')
                     ->columnSpanFull(),
                 Textarea::make('overview')

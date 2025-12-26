@@ -5,6 +5,7 @@ namespace App\Filament\Resources\Categories\Schemas;
 use Filament\Schemas\Schema;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Section;
+use App\Filament\Forms\Components\WebPFileUpload;
 
 class CategoryForm
 {
@@ -13,12 +14,17 @@ class CategoryForm
         return $schema
             ->components([
                 Section::make('Category Details')
-
-    ->schema([
-                TextInput::make('name')
-                    ->required(),
-               
-            ])->columns(2)->columnSpanFull(),
+                ->schema([
+                    TextInput::make('name')
+                        ->required(),
+                    WebPFileUpload::make('image')
+                        ->label('Category Image')
+                        ->image()
+                        ->imageEditor()
+                        ->disk('public')
+                        ->webpQuality(90)
+                        ->columnSpanFull(),
+                ])->columns(2)->columnSpanFull(),
         ]);
     }
 }

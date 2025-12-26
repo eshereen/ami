@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('powertype_values', function (Blueprint $table) {
             $table->id();
             $table->foreignId('powertype_id')->constrained('powertypes')->onDelete('cascade');
+            $table->foreignId('product_id')->constrained('products')->onDelete('cascade');
             $table->integer('value')->nullable();
             $table->timestamps();
         });

@@ -43,15 +43,9 @@
                        class="transition hover:text-ami-orange hover:underline"
                        :class="(scrolled || !onHome) ? 'text-gray-700' : 'text-white'">About</a>
                     <div class="relative"
-                         x-data="{ 
-                             productsOpen: false, 
-                             activeCategory: null,
-                             toggleCategory(id) {
-                                 this.activeCategory = this.activeCategory === id ? null : id;
-                             }
-                         }"
+                         x-data="{ productsOpen: false }"
                          @mouseenter="productsOpen = true"
-                         @mouseleave="productsOpen = false; activeCategory = null">
+                         @mouseleave="productsOpen = false">
                         <a href="{{ route('products.index') }}"
                            class="inline-flex items-center transition hover:text-ami-orange hover:underline"
                            :class="(scrolled || !onHome) ? 'text-gray-700' : 'text-white'">
@@ -71,49 +65,13 @@
                             x-transition:leave-end="opacity-0 translate-y-2"
                             class="absolute top-full text-left left-0 w-64 mt-2 bg-white shadow-xl border border-gray-100 rounded-lg overflow-hidden z-[100]"
                         >
-                            <?php $categories = \App\Models\Category::with(['subcategories' => function($q){ $q->withCount('products'); }])->take(6)->get(); ?>
+                            <?php $categories = \App\Models\Category::take(6)->get(); ?>
                             <div class="py-2">
                                 @foreach ($categories as $category)
-                                    <div class="relative border-b border-gray-50 last:border-0">
-                                        <button 
-                                            @click.prevent="toggleCategory({{ $category->id }})"
-                                            class="flex items-center justify-between w-full px-4 py-3 text-sm font-medium text-gray-700 hover:bg-ami-orange hover:text-white transition-colors duration-200"
-                                            :class="activeCategory === {{ $category->id }} ? 'bg-ami-orange text-white' : ''"
-                                        >
-                                            <span class="truncate">{{ $category->name }}</span>
-                                            <div class="flex items-center justify-center w-5 h-5">
-                                                <!-- Plus Icon -->
-                                                <svg x-show="activeCategory !== {{ $category->id }}" class="w-3 h-3 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
-                                                <!-- Minus Icon -->
-                                                <svg x-show="activeCategory === {{ $category->id }}" class="w-3 h-3 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"></path></svg>
-                                            </div>
-                                        </button>
-                                        
-                                        <!-- Subcategories Accordion -->
-                                        <div 
-                                            x-show="activeCategory === {{ $category->id }}"
-                                            x-collapse
-                                            class="bg-ami-light-blue/50"
-                                        >
-                                            <ul class="py-1 px-4 pb-2 space-y-1">
-                                                <!-- Category Link -->
-                                                <li>
-                                                    <a href="{{ route('category.show', $category->slug) }}" class="block py-1 text-xs font-semibold text-ami-orange hover:underline">
-                                                        View All {{ $category->name }}
-                                                    </a>
-                                                </li>
-                                                @foreach ($category->subcategories as $subcategory)
-                                                    <li>
-                                                        <a href="{{ route('subcategory.show', $subcategory->slug) }}"
-                                                           class="flex items-center justify-between px-3 py-2 text-xs text-gray-700 transition-all duration-300 ease-in-out rounded hover:bg-ami-orange hover:text-white hover:shadow-md transform hover:-translate-y-0.5">
-                                                            <span>{{ $subcategory->name }}</span>
-                                                            <span class="text-[10px] opacity-70">({{ $subcategory->products_count }})</span>
-                                                        </a>
-                                                    </li>
-                                                @endforeach
-                                            </ul>
-                                        </div>
-                                    </div>
+                                    <a href="{{ $category->name === 'Diesel Generator Sets' ? route('genset.index') : route('category.show', $category->slug) }}"
+                                       class="block px-4 py-3 text-sm font-medium text-gray-700 hover:bg-ami-orange hover:text-white transition-colors duration-200 border-b border-gray-50 last:border-0">
+                                        {{ $category->name }}
+                                    </a>
                                 @endforeach
                             </div>
                         </div>
@@ -155,7 +113,7 @@
 
 
                     <!-- Products with Mobile Mega Menu -->
-                    <div class="relative" x-data="{ productsOpen: false, activeCategory: null, toggleCategory(id) { this.activeCategory = this.activeCategory === id ? null : id; } }">
+                    <div class="relative" x-data="{ productsOpen: false }">
                         <button @click="productsOpen = !productsOpen"
                                 class="flex items-center justify-between w-full text-gray-700 transition hover:text-ami-orange">
                             <span>Products</span>
@@ -170,39 +128,13 @@
                         <div x-show="productsOpen"
                              x-collapse
                              class="mt-2 ml-2 space-y-1">
-                            <?php $categories = \App\Models\Category::with(['subcategories' => function($q){ $q->withCount('products'); }])->take(6)->get(); ?>
+                            <?php $categories = \App\Models\Category::take(6)->get(); ?>
                             @foreach ($categories as $category)
-                                <div class="border-b border-gray-100 last:border-0">
-                                    <button 
-                                        @click.prevent="toggleCategory({{ $category->id }})"
-                                        class="flex items-center justify-between w-full py-2 text-sm font-medium text-gray-700 hover:text-ami-orange transition-colors duration-200"
-                                        :class="activeCategory === {{ $category->id }} ? 'text-ami-orange' : ''"
-                                    >
-                                        <span>{{ $category->name }}</span>
-                                        <div class="flex items-center justify-center w-5 h-5">
-                                            <svg x-show="activeCategory !== {{ $category->id }}" class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
-                                            <svg x-show="activeCategory === {{ $category->id }}" class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"></path></svg>
-                                        </div>
-                                    </button>
-                                    
-                                    <div x-show="activeCategory === {{ $category->id }}" x-collapse class="pl-2 pb-2">
-                                        <a href="{{ route('category.show', $category->slug) }}" class="block py-1 text-xs font-semibold text-ami-orange hover:underline mb-1">
-                                            View All {{ $category->name }}
-                                        </a>
-                                        <ul class="space-y-1">
-                                            @foreach ($category->subcategories as $subcategory)
-                                                <li>
-                                                    <a href="{{ route('subcategory.show', $subcategory->slug) }}"
-                                                       class="block text-xs text-gray-600 hover:text-ami-orange"
-                                                       @click="mobileMenuOpen = false">
-                                                        {{ $subcategory->name }}
-                                                        <span class="text-[10px] text-gray-400">({{ $subcategory->products_count }})</span>
-                                                    </a>
-                                                </li>
-                                            @endforeach
-                                        </ul>
-                                    </div>
-                                </div>
+                                <a href="{{ $category->name === 'Diesel Generator Sets' ? route('genset.index') : route('category.show', $category->slug) }}"
+                                   class="block py-2 text-sm font-medium text-gray-700 hover:text-ami-orange transition-colors duration-200 border-b border-gray-100 last:border-0"
+                                   @click="mobileMenuOpen = false">
+                                    {{ $category->name }}
+                                </a>
                             @endforeach
                         </div>
                     </div>

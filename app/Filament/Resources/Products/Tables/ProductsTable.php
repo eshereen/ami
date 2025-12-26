@@ -21,8 +21,13 @@ class ProductsTable
                 TextColumn::make('name')
                     ->searchable(),
 
-                TextColumn::make('model_name')
+                TextColumn::make('ami_model')
+                    ->label('AMI Model')
                     ->searchable(),
+                TextColumn::make('engine')
+                    ->label('Engine')
+                    ->searchable()
+                    ->default('N/A'),
                 TextColumn::make('subcategory.name')
 
                     ->sortable(),

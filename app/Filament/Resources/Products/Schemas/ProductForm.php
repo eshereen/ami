@@ -17,16 +17,21 @@ class ProductForm
             ->components([
                 Section::make('Product Details')
                 ->schema([
-                TextInput::make('name')
-                    ->required(),
-                TextInput::make('model_name')
-                    ->required(),
-                Select::make('subcategory_id')
+                 Select::make('subcategory_id')
                     ->required()
-                    ->relationship('subcategory', 'name')
+                    ->relationship('subcategory', 'brand')
                     ->searchable()
                     ->preload(),
-                ])->columns(3)->columnSpanFull(),
+                       
+                TextInput::make('name'),
+                  
+                TextInput::make('ami_model')
+                    ->label('AMI Model'),
+                TextInput::make('engine')
+                    ->label('Engine')
+                    ->placeholder('e.g., Perkins, Doosan'),
+               
+                ])->columns(4)->columnSpanFull(),
                 Section::make('Product Images')
                 ->schema([
                 Textarea::make('description')
