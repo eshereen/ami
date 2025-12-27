@@ -60,7 +60,8 @@
                     <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3" id="products-grid">
                         @foreach ($products as $product)
                             <div class="overflow-hidden bg-white rounded-xl shadow-lg transition-all duration-300 hover:shadow-xl product-card">
-                                <a href="{{ route('product.show', $product->slug) }}" class="block">
+                                <a href="{{ route('product.show', $product->slug) }}" class="block relative overflow-hidden group">
+                                    <div class="absolute inset-0 z-10 bg-ami-orange opacity-60 transition-transform duration-500 ease-in-out transform -translate-x-full -translate-y-full group-hover:translate-x-0 group-hover:translate-y-0"></div>
                                     <div class="relative">
                                         @if($product->image)
                                             <img src="{{ asset('storage/' . $product->image) }}"
@@ -80,16 +81,20 @@
                                         </div>
                                     </div>
                                     <div class="p-6">
-                                        <h3 class="mb-2 text-lg font-bold text-gray-900">{{ $product->name }}</h3>
-                                        <p class="mb-3 text-gray-600">{{ $product->model_name }}</p>
+                                        <h3 class="mb-2 text-lg font-bold text-gray-900">{{ $product->name ?? $product->ami_model }}</h3>
+                                        <p class="mb-3 text-gray-600">{{ $product->engine }}</p>
 
                                         @if($product->description)
                                             <p class="mb-4 text-sm text-gray-500 line-clamp-2">{{ Str::limit($product->description, 100) }}</p>
                                         @endif
 
                                         <div class="flex justify-between items-center mb-4">
+                                            @if($product->fuel_type)
                                             <span class="text-sm text-gray-500">{{ $product->fuel_type }}</span>
+                                            @endif
+                                            @if($product->frequency)
                                             <span class="text-sm text-gray-500">{{ $product->frequency }}</span>
+                                            @endif
                                         </div>
 
                                         <div class="flex justify-between items-center">
@@ -127,7 +132,8 @@
             <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                 @foreach($relatedProducts as $product)
                     <div class="overflow-hidden bg-white rounded-xl shadow-lg transition-all duration-300 hover:shadow-xl product-card">
-                        <a href="{{ route('product.show', $product->slug) }}" class="block">
+                        <a href="{{ route('product.show', $product->slug) }}" class="block relative overflow-hidden group">
+                            <div class="absolute inset-0 z-10 bg-ami-orange opacity-60 transition-transform duration-500 ease-in-out transform -translate-x-full -translate-y-full group-hover:translate-x-0 group-hover:translate-y-0"></div>
                             <div class="relative">
                                 @if($product->image)
                                     <img src="{{ asset('storage/' . $product->image) }}"
@@ -145,11 +151,15 @@
                                 </div>
                             </div>
                             <div class="p-6">
-                                <h3 class="mb-2 text-lg font-bold text-gray-900">{{ $product->name }}</h3>
-                                <p class="mb-3 text-gray-600">{{ $product->model_name }}</p>
+                                <h3 class="mb-2 text-lg font-bold text-gray-900">{{ $product->name ?? $product->ami_model    }}</h3>
+                                <p class="mb-3 text-gray-600">{{ $product->engine }}</p>
                                 <div class="flex justify-between items-center">
+                                    @if($product->fuel_type)
                                     <span class="text-sm text-gray-500">{{ $product->fuel_type }}</span>
+                                    @endif
+                                    @if($product->frequency)
                                     <span class="text-sm text-gray-500">{{ $product->frequency }}</span>
+                                    @endif
                                 </div>
                             </div>
                         </a>

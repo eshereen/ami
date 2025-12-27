@@ -21,8 +21,10 @@ class CategoriesTable
                     ->searchable(),
                 ImageColumn::make('image')
                     ->disk('public')
-                    ->width(80)
-                    ->height(80),
+                    ->visibility('public')
+                    ->width(50)
+                    ->height(50)
+                    ->circular(),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

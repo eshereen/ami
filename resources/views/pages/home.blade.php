@@ -179,12 +179,16 @@
                         </picture>
                     </a>
                     <div class="p-6">
-                        <h3 class="mb-2 text-xl font-bold ami-blue">{{ $product->name }}</h3>
+                      
+                        <h3 class="mb-2 text-xl font-bold ami-blue">{{ $product->name ?? $product->ami_model }}</h3>
                         @if($product->description)
-                        <p class="mb-4 text-gray-600">{{ $product->description }}</p>
+                        <p class="mb-4 text-gray-600">{{ Str::limit($product->description, 100)  }}</p>
+                        @endif
+                        @if($product->engine)
+                        <p class="mb-4 text-gray-600">{{ $product->engine }}</p>
                         @endif
                         <a href="{{ route('product.show', $product->slug) }}" class="font-medium text-ami-orange hover:underline">
-                            View {{ $product->name }} Details <i class="ml-1 fas fa-arrow-right"></i>
+                            View Details <i class="ml-1 fas fa-arrow-right"></i>
                         </a>
                     </div>
                 </div>
@@ -672,7 +676,10 @@
 
             <div class="grid grid-cols-1 gap-12 items-center mb-8 md:grid-cols-2">
                 <div>
-                    <img src="{{ asset('imgs/ami-world.png') }}" alt="worldwide presence" loading="lazy" decoding="async" width="600" height="400" style="aspect-ratio: 3/2;">
+                    <picture>
+                        <source srcset="{{ asset('imgs/ami-world.webp') }}" type="image/webp">
+                        <img src="{{ asset('imgs/ami-world.png') }}" alt="worldwide presence" loading="lazy" decoding="async" width="1024" height="1024" style="aspect-ratio: 16/12;" class="w-full h-auto">
+                    </picture>
                    </div>
                <div class="p-8 bg-white bg-opacity-90 rounded-lg">
                     <h3 class="mb-6 text-2xl font-bold ami-blue">Worldwide Presence</h3>
@@ -695,32 +702,7 @@
         </div>
     </section>
 
-    <!-- Case Studies / Environments Section -->
-@if ($blogs->count()) > 0
-    <section class="py-10 bg-gray-50">
-        <div class="container px-4 mx-auto">
-            <div class="mb-16 text-center">
-                <h2 class="mb-4 text-3xl font-bold md:text-4xl ami-blue scroll-animate">Case Studies & Environments</h2>
-                <div class="mx-auto w-24 h-1 bg-ami-orange scroll-animate delay-100"></div>
-                <p class="mx-auto mt-4 max-w-2xl text-gray-600">Our generators excel in diverse environments, demonstrating adaptability and reliability.</p>
-            </div>
 
-            <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
-                <!-- Rugged Terrains -->
-                @foreach($blogs as $blog)
-                <div class="overflow-hidden bg-white rounded-lg shadow-md hover-lift">
-                    <img src="https://cdn.pixabay.com/photo/2016/09/02/18/38/factory-1639990_1280.jpg" alt="Rugged Terrains" class="object-cover w-full h-56" loading="lazy" decoding="async" width="400" height="224">
-                    <div class="p-6">
-                        <h3 class="mb-2 text-xl font-bold ami-blue">Rugged Terrains</h3>
-                        <p class="mb-4 text-gray-600">Powering mining operations and remote construction sites in challenging environments with extreme temperatures and difficult access.</p>
-                        <a href="#" class="font-medium text-ami-orange hover:underline">View Rugged Terrain Generator Case Study <i class="ml-1 fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
-              @endforeach
-            </div>
-        </div>
-    </section>
-@endif
     <!-- Contact & Inquiry Section -->
     <section id="contact" class="py-5 bg-white">
         <div class="container px-4 mx-auto">

@@ -5,7 +5,7 @@
 
 @section('content')
 <!-- Hero Section -->
-<section class="relative h-[400px] bg-cover bg-center" style="background-image: linear-gradient(rgba(0, 51, 102, 0.7), rgba(0, 51, 102, 0.7)), url('{{ asset('imgs/hero-genset.jpg') }}');">
+<section class="relative h-[400px] bg-cover bg-center" style="background-image: linear-gradient(rgba(0, 51, 102, 0.7), rgba(0, 51, 102, 0.7)), url('{{ $category && $category->image ? asset('storage/' . $category->image) : asset('imgs/hero-genset.jpg') }}');">
     <div class="container px-4 mx-auto h-full flex items-center">
         <div class="text-white">
             <nav class="text-sm mb-4">
@@ -26,16 +26,16 @@
 <section class="py-12 bg-gray-50" x-data="{ selectedBrand: '' }">
     <div class="container px-4 mx-auto">
         <!-- Brand Filter -->
-        <div class="mb-6 bg-white p-6 rounded-lg shadow-md">
-            <div class="flex items-center justify-between">
-                <div class="flex items-center gap-6">
+        <div class="mb-6 bg-white p-4 md:p-6 rounded-lg shadow-md">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                <div class="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6">
                     <label class="text-base font-bold text-gray-800 whitespace-nowrap">Filter by Brand:</label>
                     
                     <!-- Custom Dropdown -->
-                    <div x-data="{ open: false }" class="relative" @click.away="open = false">
+                    <div x-data="{ open: false }" class="relative w-full sm:w-auto" @click.away="open = false">
                         <!-- Dropdown Button -->
                         <button @click="open = !open" 
-                                class="min-w-[280px] px-6 py-3 text-base font-medium border-2 border-gray-300 rounded-lg 
+                                class="w-full sm:min-w-[280px] px-4 sm:px-6 py-3 text-sm sm:text-base font-medium border-2 border-gray-300 rounded-lg 
                                        focus:ring-4 focus:ring-ami-blue/20 focus:border-ami-blue 
                                        hover:border-ami-blue/50
                                        transition-all duration-300 ease-in-out
@@ -59,7 +59,7 @@
                             
                             <!-- All Brands Option -->
                             <button @click="selectedBrand = ''; open = false"
-                                    class="w-full px-6 py-3 text-left text-base font-medium text-gray-800 
+                                    class="w-full px-4 sm:px-6 py-3 text-left text-sm sm:text-base font-medium text-gray-800 
                                            hover:bg-ami-orange hover:text-white
                                            transition-all duration-200 ease-in-out
                                            border-b border-gray-100 first:rounded-t-lg"
@@ -77,7 +77,7 @@
                             <!-- Brand Options -->
                             @foreach($brands as $brand)
                                 <button @click="selectedBrand = '{{ $brand }}'; open = false"
-                                        class="w-full px-6 py-3 text-left text-base font-medium text-gray-800 
+                                        class="w-full px-4 sm:px-6 py-3 text-left text-sm sm:text-base font-medium text-gray-800 
                                                hover:bg-ami-orange hover:text-white
                                                transition-all duration-200 ease-in-out
                                                border-b border-gray-100 last:border-0 last:rounded-b-lg"
@@ -89,7 +89,7 @@
                     </div>
                 </div>
                 
-                <div class="text-base text-gray-700 font-medium">
+                <div class="text-sm sm:text-base text-gray-700 font-medium text-center md:text-right">
                     <span x-text="selectedBrand ? 'Showing: ' + selectedBrand : 'Showing all products'" 
                           class="transition-all duration-300"></span>
                 </div>
@@ -101,25 +101,25 @@
             <table class="w-full bg-white rounded-lg shadow-sm border-collapse">
                 <thead>
                     <tr class="bg-ami-blue text-white">
-                        <th class="py-4 px-4 text-center w-12"></th> <!-- Checkbox -->
-                        <th class="py-4 px-4 text-left w-24"></th>
-                        <th class="py-4 px-4 text-center border-l border-white/20">AMI Model</th>
-                          <th class="py-4 px-4 text-center border-l border-white/20">
+                      <!-- Checkbox -->
+                        <th class="py-4 px-4 text-left w-20"></th>
+                        <th class="py-4 px-2 text-center border-l border-white/20">AMI Model</th>
+                          <th class="py-4 px-2 text-center border-l border-white/20">
                             Prime Power<br><span class="text-xs font-normal">KVA</span>
                         </th>
-                        <th class="py-4 px-4 text-center ">
+                        <th class="py-4 px-2 text-center">
                             Prime Power<br><span class="text-xs font-normal">KW</span>
                         </th>
-                        <th class="py-4 px-4 text-center border-l border-white/20">
+                        <th class="py-4 px-2 text-center border-l border-white/20">
                             Standby Power<br><span class="text-xs font-normal">KVA</span>
                         </th>
-                        <th class="py-4 px-4 text-center ">
+                        <th class="py-4 px-2 text-center ">
                             Standby Power<br><span class="text-xs font-normal">KW</span>
                         </th>   
-                        <th class="py-4 px-4 text-center border-l border-white/20">HZ</th>
+                        <th class="py-4 px-2 text-center border-l border-white/20">HZ</th>
                         <th class="py-4 px-4 text-center border-l border-white/20">Engine</th>
-                        <th class="py-4 px-4 text-center border-l border-white/20">Brand</th>
-                        <th class="py-4 px-4 text-center border-l border-white/20">Actions</th>
+                        <th class="py-4 px-2 text-center border-l border-white/20">Brand</th>
+                        <th class="py-4 px-2 text-center border-l border-white/20"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -127,10 +127,7 @@
                     <tr class="border-b border-gray-200 hover:bg-gray-50 transition-colors"
                         x-show="!selectedBrand || '{{ $product->subcategory->name ?? '' }}' === selectedBrand"
                         x-transition>
-                        <!-- Checkbox -->
-                        <td class="py-4 px-4 text-center">
-                            <input type="checkbox" class="w-5 h-5 text-ami-blue border-gray-300 rounded focus:ring-ami-blue">
-                        </td>
+                   
                         
                         <!-- Image -->
                         <td class="py-4 px-4">
@@ -185,8 +182,8 @@
                         <td class="py-4 px-4 border-l border-gray-200">
                             <div class="flex items-center justify-center gap-2">
                                 <a href="{{ route('contact.index') }}" 
-                                   class="px-6 py-2 bg-green-500 text-white rounded-full font-semibold hover:bg-green-600 transition whitespace-nowrap">
-                                    Get Quote
+                                   class="px-6 py-2 bg-green-500 text-white rounded-full text-sm font-semibold hover:bg-green-600 transition whitespace-nowrap">
+                                    Get an Offer
                                 </a>
                             </div>
                         </td>
@@ -267,7 +264,7 @@
                     
                     <!-- Actions -->
                     <div class="flex gap-2 pt-3">
-                        <a href="{{ route('product.show', $product->slug) }}" 
+                        <a href="{{ route('contact.index') }}" 
                            class="flex-1 bg-ami-blue text-white text-center py-2 px-4 rounded-lg hover:bg-ami-blue/90 transition">
                             <i class="fas fa-envelope mr-2"></i>Sent an Offer
                         </a>
@@ -288,7 +285,7 @@
 
         <!-- Pagination -->
         @if($products->hasPages())
-        <div class="mt-8">
+        <div class=" mt-8 text-center">
             {{ $products->links() }}
         </div>
         @endif
@@ -313,5 +310,8 @@
             opacity: 1;
         }
     }
+
+ 
+
 </style>
 @endsection

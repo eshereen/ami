@@ -53,14 +53,14 @@
                              x-transition:leave="transition ease-in duration-150"
                              x-transition:leave-start="opacity-100 translate-y-0"
                              x-transition:leave-end="opacity-0 translate-y-2"
-                             class="absolute top-full text-left left-0 w-72 mt-2 bg-white shadow-xl border border-gray-100 rounded-lg overflow-hidden z-[100]">
+                             class="absolute top-full text-left left-0 w-72 mt-2 bg-white shadow-xl border  rounded uppercase -lg overflow-hidden z-[100]">
                             
                             <?php $categories = \App\Models\Category::get(); ?>
                             
-                            <div class="py-2">
+                            <div class="py-0 lg:py-2">
                                 @foreach ($categories as $category)
                                     <a href="{{ $category->name === 'Diesel Generator Sets' ? route('genset.index') : route('category.show', $category->slug) }}"
-                                       class="block w-full px-4 py-3 text-sm font-medium text-gray-700 transition-colors duration-200 hover:bg-[#ec2600] hover:text-white border-b border-gray-50 last:border-0">
+                                       class="block w-full px-4 py-3 text-sm font-medium text-gray-700 transition-colors duration-200 hover:bg-[#ec2600] hover:text-white border-b-2  p-3 border-gray-50 last:border-0">
                                         {{ $category->name }}
                                     </a>
                                 @endforeach
@@ -96,31 +96,32 @@
         <!-- Mobile Navigation -->
         <div x-show="mobileMenuOpen"
              x-collapse
-             class="bg-white border-t border-gray-100 shadow-xl md:hidden overflow-y-auto max-h-[80vh]">
-            <div class="flex flex-col p-4 space-y-3">
+             class="bg-white border-t  shadow-xl md:hidden overflow-y-auto max-h-[80vh]">
+            <div class="flex flex-col p-4">
                 <a href="{{ route('home') }}"
-                   class="font-medium text-gray-700 transition hover:text-ami-orange">Home</a>
+                   class="font-medium text-gray-700 transition hover:bg-gray-200 border-b-2  p-3 rounded uppercase  ">Home</a>
                 <a href="{{ route('about') }}"
-                   class="font-medium text-gray-700 transition hover:text-ami-orange">About</a>
+                   class="font-medium text-gray-700 transition hover:bg-gray-200 border-b-2  p-3 rounded uppercase ">About</a>
 
                 <!-- Products Mobile Dropdown -->
                 <div x-data="{ productsExpanded: false }">
                     <button @click="productsExpanded = !productsExpanded"
-                            class="flex items-center justify-between w-full font-medium text-gray-700 transition hover:text-ami-orange">
-                        <span>Products</span>
-                        <svg class="w-4 h-4 transition-transform duration-200"
-                             :class="productsExpanded ? 'rotate-180' : ''"
-                             fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.21 8.29a.75.75 0 01.02-1.08z" clip-rule="evenodd"/>
-                        </svg>
+                            class="flex items-center justify-between w-full font-medium text-gray-700 transition hover:text-ami-orange border-b-2  p-3 uppercase">
+                        <span class="uppercase">Products</span>
+                        <div class="relative w-4 h-4">
+                            <i class="fas fa-plus absolute inset-0 transition-all duration-300 ease-in-out"
+                               :class="productsExpanded ? 'opacity-0 rotate-90' : 'opacity-100 rotate-0'"></i>
+                            <i class="fas fa-minus absolute inset-0 transition-all duration-300 ease-in-out"
+                               :class="productsExpanded ? 'opacity-100 rotate-0' : 'opacity-0 -rotate-90'"></i>
+                        </div>
                     </button>
 
                     <div x-show="productsExpanded"
                          x-collapse
-                         class="mt-2 space-y-1">
+                         class="px-3">
                         @foreach ($categories as $category)
                             <a href="{{ $category->name === 'Diesel Generator Sets' ? route('genset.index') : route('category.show', $category->slug) }}"
-                               class="block w-full px-4 py-3 text-sm font-medium text-gray-700 transition-colors duration-200 hover:bg-[#ec2600] hover:text-white active:bg-[#ec2600] active:text-white border-b border-gray-100 last:border-0">
+                               class="block w-full px-4 py-3 text-sm font-medium text-gray-700 transition-colors duration-200 hover:bg-[#ec2600] hover:text-white active:bg-[#ec2600] active:text-white border-b-2  p-3  last:border-b-2 ">
                                 {{ $category->name }}
                             </a>
                         @endforeach
@@ -128,13 +129,13 @@
                 </div>
 
                 <a href="{{ route('services.index') }}"
-                   class="font-medium text-gray-700 transition hover:text-ami-orange">Services</a>
+                   class="font-medium text-gray-700 transition hover:bg-gray-200 border-b-2  p-3 rounded uppercase ">Services</a>
                 <a href="{{ route('gallaries.index') }}"
-                   class="font-medium text-gray-700 transition hover:text-ami-orange">Projects</a>
+                   class="font-medium text-gray-700 transition hover:bg-gray-200 border-b-2  p-3 rounded uppercase ">Projects</a>
                 <a href="{{ route('home') }}#contact"
-                   class="font-medium text-gray-700 transition hover:text-ami-orange">Contact</a>
+                   class="font-medium text-gray-700 transition hover:bg-gray-200 border-b-2  p-3 rounded uppercase ">Contact</a>
                 <a href="/admin"
-                   class="font-medium text-gray-700 transition hover:text-ami-orange flex items-center">
+                   class="font-medium text-gray-700 transition hover:bg-gray-200 flex items-center border-b-2  p-3 rounded uppercase ">
                     <i class="mr-2 fas fa-sign-in-alt"></i>Login
                 </a>
             </div>

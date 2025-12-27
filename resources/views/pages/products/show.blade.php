@@ -119,8 +119,8 @@
                                 {{ $product->subcategory->category->name }}
                             </span>
                         </div>
-                        <h2 class="mb-2 text-3xl font-bold text-gray-900">{{ $product->name }}</h2>
-                        <p class="text-xl text-gray-600">{{ $product->ami_model }}</p>
+                        <h2 class="mb-2 text-3xl font-bold text-gray-900">{{ $product->name ?? $product->ami_model }}</h2>
+                        <p class="text-xl text-gray-600">{{ $product->engine }}</p>
                     </div>
 
                     <!-- Product Specifications -->
@@ -128,12 +128,16 @@
                         <h3 class="mb-4 text-xl font-bold text-gray-900">Specifications</h3>
                         <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
                             <div class="flex justify-between py-2 border-b border-gray-200">
+                                @if($product->fuel_type)
                                 <span class="font-medium text-gray-700">Fuel Type:</span>
                                 <span class="text-gray-900">{{ $product->fuel_type }}</span>
+                                @endif
                             </div>
                             <div class="flex justify-between py-2 border-b border-gray-200">
+                                @if($product->frequency)
                                 <span class="font-medium text-gray-700">Frequency:</span>
                                 <span class="text-gray-900">{{ $product->frequency }}</span>
+                                @endif
                             </div>
                             @if($product->powertype_values->count() > 0)
                                 @foreach($product->powertype_values as $powertype)

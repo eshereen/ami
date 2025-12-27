@@ -10,7 +10,7 @@ class Category extends Model
 {
     /** @use HasFactory<\Database\Factories\CategoryFactory> */
     use HasFactory, Sluggable;
-    protected $fillable = ['name', 'slug'];
+    protected $fillable = ['name', 'slug','image'];
 
     public function subcategories()
     {

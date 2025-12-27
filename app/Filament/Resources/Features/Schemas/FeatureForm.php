@@ -17,7 +17,9 @@ class FeatureForm
                 ->schema([
                 Select::make('product_id')
                     ->required()
-                    ->relationship('product', 'name'),
+                    ->relationship('product', 'ami_model')
+                    ->searchable()
+                    ->preload(),
                 TextInput::make('name'),
                 Textarea::make('description')
                     ->columnSpanFull(),

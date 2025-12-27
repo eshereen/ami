@@ -15,8 +15,8 @@ class PowertypeValuesTable
     {
         return $table
             ->columns([
-                TextColumn::make('powertype_id')
-                    ->numeric()
+                TextColumn::make('powertype.name')
+                   
                     ->sortable(),
                 TextColumn::make('value')
                     ->numeric()

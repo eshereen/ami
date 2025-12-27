@@ -23,7 +23,8 @@ class ProductForm
                     ->label('Subcategory / Brand')
                     ->required()
                     ->relationship('subcategory', 'name')
-                    ->searchable(),
+                    ->searchable()
+                    ->preload(),
                        
                 TextInput::make('name'),
                   
