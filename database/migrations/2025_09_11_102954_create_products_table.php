@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name')->nullable();
             $table->string('slug');
-            $table->string('model_name')->nullable();
+            $table->string('ami_model')->nullable();
             $table->string('engine')->nullable();
             $table->foreignId('subcategory_id')->constrained('subcategories')->nullable();
             $table->text('description')->nullable();

@@ -18,8 +18,8 @@ class SubcategoriesTable
     {
         return $table
             ->columns([
-                TextColumn::make('brand')
-                    ->label('Brand')
+                TextColumn::make('name')
+                    ->label('Name')
                     ->searchable(),
                 TextColumn::make('category.name')
                     ->sortable(),

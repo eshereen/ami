@@ -55,7 +55,7 @@ class DatabaseSeeder extends Seeder
         $dieselCategory = Category::where('name', 'Diesel Generator Sets')->first();
         
         if ($dieselCategory) {
-            $brands = [
+            $names = [
                 'PERKINS',
                 'HYUNDAI',
                 'CUMMINS',
@@ -65,13 +65,13 @@ class DatabaseSeeder extends Seeder
                 'MTU',
             ];
 
-            foreach ($brands as $brand) {
+            foreach ($names as $name) {
                 Subcategory::firstOrCreate([
-                    'brand' => $brand,
+                    'name' => $name,
                     'category_id' => $dieselCategory->id,
                 ], [
-                    'name' => null,
-                    'slug' => \Illuminate\Support\Str::slug($brand),
+                   
+                    'slug' => \Illuminate\Support\Str::slug($name),
                 ]);
             }
         }

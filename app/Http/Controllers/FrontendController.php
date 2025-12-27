@@ -10,7 +10,7 @@ class FrontendController extends Controller
     public function index()
     {
         $products = Cache::remember('home_products_v1', 300, function () {
-            return Product::select(['id','name','slug','model_name','description','image','subcategory_id','fuel_type','frequency'])
+            return Product::select(['id','name','slug','ami_model','description','image','subcategory_id','fuel_type','frequency'])
                 ->with(['subcategory:id,name,category_id'])
                 ->latest('id')
                 ->take(60)

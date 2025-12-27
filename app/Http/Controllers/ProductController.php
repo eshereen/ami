@@ -14,7 +14,7 @@ class ProductController extends Controller
     {
         $products = Cache::remember('products_index_products_v1', 300, function () {
             return Product::select(['id','name','slug','ami_model','description','image','subcategory_id','fuel_type','frequency'])
-                ->with(['subcategory:id,brand,category_id'])
+                ->with(['subcategory:id,name,category_id'])
                 ->latest('id')
                 ->take(300)
                 ->get();
@@ -58,11 +58,11 @@ class ProductController extends Controller
             return Product::select(['id','name','slug','ami_model','description','image','subcategory_id','fuel_type','frequency'])
                 ->where('slug', $slug)
                 ->with([
-                    'subcategory:id,brand,slug,category_id',
+                    'subcategory:id,name,slug,category_id',
                     'subcategory.category:id,name,slug',
                     'applications:id,name,description,product_id',
                     'features:id,name,description,product_id',
-                    'powertypes:id,name,value,product_id'
+                    'powertype_values.powertype.power'
                 ])
                 ->firstOrFail();
         });
@@ -71,7 +71,7 @@ class ProductController extends Controller
             return Product::select(['id','name','slug','ami_model','image','fuel_type','frequency','subcategory_id'])
                 ->where('subcategory_id', $product->subcategory_id)
                 ->where('id', '!=', $product->id)
-                ->with(['subcategory:id,brand'])
+                ->with(['subcategory:id,name'])
                 ->latest('id')
                 ->take(4)
                 ->get();
@@ -81,15 +81,36 @@ class ProductController extends Controller
 
     public function genset()
     {
-        $products = Product::select(['id','name','slug','ami_model','engine','description','image','subcategory_id'])
+        $products = Product::select(['id','name','slug','ami_model','engine','description','image','subcategory_id','frequency'])
             ->with([
-                'subcategory:id,brand',
+                'subcategory:id,name',
                 'powertype_values' => function($query) {
                     $query->with(['powertype:id,name,power_id']);
                 }
             ])
             ->latest('id')
             ->paginate(20);
+
+        // Process power values for each product to avoid repeated filtering in view
+        $products->getCollection()->transform(function ($product) {
+            $product->standby_kva = $product->powertype_values->first(function($item) {
+                return $item->powertype && $item->powertype->power_id == 1 && $item->powertype->name == 'KVA';
+            });
+            
+            $product->standby_kw = $product->powertype_values->first(function($item) {
+                return $item->powertype && $item->powertype->power_id == 1 && $item->powertype->name == 'KW';
+            });
+            
+            $product->prime_kva = $product->powertype_values->first(function($item) {
+                return $item->powertype && $item->powertype->power_id == 2 && $item->powertype->name == 'KVA';
+            });
+            
+            $product->prime_kw = $product->powertype_values->first(function($item) {
+                return $item->powertype && $item->powertype->power_id == 2 && $item->powertype->name == 'KW';
+            });
+            
+            return $product;
+        });
 
         return view('pages.genset', compact('products'));
     }

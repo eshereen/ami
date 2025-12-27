@@ -20,8 +20,7 @@ class PowerTypesTable
                     ->sortable(),
                 TextColumn::make('name')
                     ->searchable(),
-                TextColumn::make('value')
-                    ->searchable(),
+             
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

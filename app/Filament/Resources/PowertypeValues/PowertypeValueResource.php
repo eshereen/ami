@@ -10,17 +10,15 @@ use App\Filament\Resources\PowertypeValues\Schemas\PowertypeValueForm;
 use App\Filament\Resources\PowertypeValues\Schemas\PowertypeValueInfolist;
 use App\Filament\Resources\PowertypeValues\Tables\PowertypeValuesTable;
 use App\Models\PowertypeValue;
-use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
-use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 
 class PowertypeValueResource extends Resource
 {
     protected static ?string $model = PowertypeValue::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static \UnitEnum|string|null $navigationGroup = 'Products Details';
 
     public static function form(Schema $schema): Schema
     {

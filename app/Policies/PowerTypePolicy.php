@@ -8,63 +8,63 @@ use Illuminate\Foundation\Auth\User as AuthUser;
 use App\Models\Powertype;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class PowerTypePolicy
+class PowertypePolicy
 {
     use HandlesAuthorization;
-
+    
     public function viewAny(AuthUser $authUser): bool
     {
-        return $authUser->can('ViewAny:PowerType');
+        return $authUser->can('ViewAny:Powertype');
     }
 
-    public function view(AuthUser $authUser, Powertype $powerType): bool
+    public function view(AuthUser $authUser, Powertype $powertype): bool
     {
-        return $authUser->can('View:PowerType');
+        return $authUser->can('View:Powertype');
     }
 
     public function create(AuthUser $authUser): bool
     {
-        return $authUser->can('Create:PowerType');
+        return $authUser->can('Create:Powertype');
     }
 
-    public function update(AuthUser $authUser, Powertype $powerType): bool
+    public function update(AuthUser $authUser, Powertype $powertype): bool
     {
-        return $authUser->can('Update:PowerType');
+        return $authUser->can('Update:Powertype');
     }
 
-    public function delete(AuthUser $authUser, Powertype $powerType): bool
+    public function delete(AuthUser $authUser, Powertype $powertype): bool
     {
-        return $authUser->can('Delete:PowerType');
+        return $authUser->can('Delete:Powertype');
     }
 
-    public function restore(AuthUser $authUser, Powertype $powerType): bool
+    public function restore(AuthUser $authUser, Powertype $powertype): bool
     {
-        return $authUser->can('Restore:PowerType');
+        return $authUser->can('Restore:Powertype');
     }
 
-    public function forceDelete(AuthUser $authUser, Powertype $powerType): bool
+    public function forceDelete(AuthUser $authUser, Powertype $powertype): bool
     {
-        return $authUser->can('ForceDelete:PowerType');
+        return $authUser->can('ForceDelete:Powertype');
     }
 
     public function forceDeleteAny(AuthUser $authUser): bool
     {
-        return $authUser->can('ForceDeleteAny:PowerType');
+        return $authUser->can('ForceDeleteAny:Powertype');
     }
 
     public function restoreAny(AuthUser $authUser): bool
     {
-        return $authUser->can('RestoreAny:PowerType');
+        return $authUser->can('RestoreAny:Powertype');
     }
 
-    public function replicate(AuthUser $authUser, Powertype $powerType): bool
+    public function replicate(AuthUser $authUser, Powertype $powertype): bool
     {
-        return $authUser->can('Replicate:PowerType');
+        return $authUser->can('Replicate:Powertype');
     }
 
     public function reorder(AuthUser $authUser): bool
     {
-        return $authUser->can('Reorder:PowerType');
+        return $authUser->can('Reorder:Powertype');
     }
 
 }

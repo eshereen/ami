@@ -17,6 +17,7 @@ use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 
+
 class PowerTypeResource extends Resource
 {
     protected static ?string $model = Powertype::class;

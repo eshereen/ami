@@ -26,10 +26,19 @@
             @foreach ($categories as $category)
             <div class="overflow-hidden bg-white rounded-xl border border-blue-100 shadow-lg hover-lift">
                 <a href="{{ route('category.show', $category->slug) }}">
-                <div class="flex justify-center items-center h-48 bg-gradient-to-br from-blue-300 to-blue-700">
-                    <div class="text-center text-white">
-                        <i class="mb-4 text-4xl fas fa-cogs"></i>
-                        <h3 class="text-xl font-bold">{{ $category->name }}</h3>
+                <div class="relative h-48 overflow-hidden bg-gradient-to-br from-blue-300 to-blue-700">
+                    @if($category->image)
+                        <img src="{{ asset('storage/' . $category->image) }}" 
+                             alt="{{ $category->name }}" 
+                             class="object-cover w-full h-full transition-transform duration-300 hover:scale-110">
+                    @else
+                        <img src="{{ asset('imgs/category-placeholder.jpg') }}" 
+                             alt="{{ $category->name }}" 
+                             class="object-cover w-full h-full transition-transform duration-300 hover:scale-110"
+                             onerror="this.onerror=null; this.src='{{ asset('imgs/products/G1.png') }}';">
+                    @endif
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end">
+                        <h3 class="text-xl font-bold text-white p-4">{{ $category->name }}</h3>
                     </div>
                 </div>
                 <div class="p-6">

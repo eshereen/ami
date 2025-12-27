@@ -12,18 +12,30 @@ class PowertypeValueForm
     {
         return $schema
             ->components([
+                
                 Select::make('powertype_id')
+                    ->label('Power Type')
                     ->required()
-                  ->relationship('powertype', 'name')
-                  ->searchable()
-                  ->preload(),
+                    ->relationship('powertype', 'name', function ($query) {
+                        return $query->with('power');
+                    })
+                    ->getOptionLabelFromRecordUsing(fn ($record) => "{$record->power->name} - {$record->name}")
+                    ->searchable()
+                    ->preload()
+                    ->helperText('Select the power category (Standby/Prime) and type (KVA/KW)'),
                   
                 TextInput::make('value')
-                    ->numeric(),
+                    ->label('Value')
+                    ->numeric()
+                    ->required()
+                    ->helperText('Enter the numeric value for this power type'),
                 Select::make('product_id')
+                    ->label('Product')
                     ->relationship('product', 'ami_model')
                     ->searchable()
-                    ->preload(),
+                    ->preload()
+                    ->required()
+                    ->helperText('Select the product this power value belongs to'),
             ]);
     }
 }

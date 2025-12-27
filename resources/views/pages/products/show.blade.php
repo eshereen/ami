@@ -1,15 +1,15 @@
 @extends('layouts.app')
 
-@section('title', $product->name . ' - ' . $product->model_name . ' | Al Mohandes International')
-@section('description', $product->description ? Str::limit($product->description, 160) : 'Professional ' . $product->name . ' (' . $product->model_name . ') diesel generator by Al Mohandes International. Reliable power solutions for industrial and commercial applications.')
-@section('keywords', $product->name . ', ' . $product->model_name . ', diesel generator, ' . $product->fuel_type . ', ' . $product->frequency . ', ' . $product->subcategory->name . ', power generation, AMI')
+@section('title', $product->name . ' - ' . $product->ami_model . ' | Al Mohandes International')
+@section('description', $product->description ? Str::limit($product->description, 160) : 'Professional ' . $product->name . ' (' . $product->ami_model . ') diesel generator by Al Mohandes International. Reliable power solutions for industrial and commercial applications.')
+@section('keywords', $product->name . ', ' . $product->ami_model . ', diesel generator, ' . $product->fuel_type . ', ' . $product->frequency . ', ' . $product->subcategory->name . ', power generation, AMI')
 
 @section('og_type', 'product')
-@section('og_title', $product->name . ' - ' . $product->model_name . ' | Al Mohandes International')
+@section('og_title', $product->name . ' - ' . $product->ami_model . ' | Al Mohandes International')
 @section('og_description', $product->description ? Str::limit($product->description, 160) : 'Professional ' . $product->name . ' diesel generator by Al Mohandes International.')
 @section('og_image', $product->image ? asset('storage/' . $product->image) : asset('imgs/products/G1.png'))
 
-@section('twitter_title', $product->name . ' - ' . $product->model_name . ' | AMI')
+@section('twitter_title', $product->name . ' - ' . $product->ami_model . ' | AMI')
 @section('twitter_description', $product->description ? Str::limit($product->description, 160) : 'Professional ' . $product->name . ' diesel generator by Al Mohandes International.')
 @section('twitter_image', $product->image ? asset('storage/' . $product->image) : asset('imgs/products/G1.png'))
 
@@ -31,7 +31,7 @@
         ],
         'category' => $product->subcategory->category->name,
         'subcategory' => $product->subcategory->name,
-        'model' => $product->model_name,
+        'model' => $product->ami_model,
         'fuelType' => $product->fuel_type,
         'frequency' => $product->frequency,
         'url' => route('product.show', $product->slug),
@@ -81,7 +81,7 @@
                         <span class="text-white">{{ $product->name }}</span>
                     </nav>
                     <h1 class="mb-4 text-4xl font-bold text-white md:text-5xl fade-in">{{ $product->name }}</h1>
-                    <p class="max-w-2xl text-xl text-blue-100 fade-in">{{ $product->model_name }}</p>
+                    <p class="max-w-2xl text-xl text-blue-100 fade-in">{{ $product->ami_model }}</p>
                 </div>
             </div>
         </div>
@@ -120,7 +120,7 @@
                             </span>
                         </div>
                         <h2 class="mb-2 text-3xl font-bold text-gray-900">{{ $product->name }}</h2>
-                        <p class="text-xl text-gray-600">{{ $product->model_name }}</p>
+                        <p class="text-xl text-gray-600">{{ $product->ami_model }}</p>
                     </div>
 
                     <!-- Product Specifications -->
@@ -135,19 +135,13 @@
                                 <span class="font-medium text-gray-700">Frequency:</span>
                                 <span class="text-gray-900">{{ $product->frequency }}</span>
                             </div>
-                            @if($product->powertypes->count() > 0)
-                                @foreach($product->powertypes as $powertype)
+                            @if($product->powertype_values->count() > 0)
+                                @foreach($product->powertype_values as $powertype)
                                     <div class="flex justify-between py-2 border-b border-gray-200">
-                                        <span class="font-medium text-gray-700">{{ $powertype->name }}:</span>
+                                        <span class="font-medium text-gray-700">{{ $powertype->powertype->power->name }} - {{ $powertype->powertype->name }}:</span>
                                         <span class="text-gray-900">{{ $powertype->value }}</span>
                                     </div>
                                 @endforeach
-                            @endif
-                            @if($product->powertypes->count() > 0 && $product->powertypes->name)
-                            <div class="flex justify-between py-2 border-b border-gray-200">
-                                <span class="font-medium text-gray-700">{{ $product->powertypes->name }}:</span>
-                                <span class="text-gray-900 capitalize">{{ $product->powertypes->name }}</span>
-                            </div>
                             @endif
                         </div>
                     </div>
@@ -198,7 +192,7 @@
                             <i class="mr-2 fas fa-phone"></i>Contact Sales
                         </a>
                     </div>
-                    <!-- Additional Information -->
+                    <!-- Additional Information 
                     <div class="p-6 bg-blue-50 rounded-xl">
                         <h4 class="mb-3 text-lg font-semibold text-gray-900">Need More Information?</h4>
                         <p class="mb-4 text-gray-600">Our technical experts are available to provide detailed specifications, pricing, and delivery information.</p>
@@ -216,7 +210,7 @@
                                 <span>Installation Support</span>
                             </div>
                         </div>
-                    </div>
+                    </div>-->
                 </div>
             </div>
 
@@ -256,7 +250,7 @@
                             </div>
                             <div class="p-6">
                                 <h3 class="mb-2 text-lg font-bold text-gray-900">{{ $relatedProduct->name }}</h3>
-                                <p class="mb-3 text-gray-600">{{ $relatedProduct->model_name }}</p>
+                                <p class="mb-3 text-gray-600">{{ $relatedProduct->ami_model }}</p>
                                 <div class="flex justify-between items-center">
                                     <span class="text-sm text-gray-500">{{ $relatedProduct->fuel_type }}</span>
                                     <span class="text-sm text-gray-500">{{ $relatedProduct->frequency }}</span>

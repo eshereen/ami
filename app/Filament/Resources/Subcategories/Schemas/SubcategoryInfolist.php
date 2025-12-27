@@ -12,8 +12,8 @@ class SubcategoryInfolist
     {
         return $schema
             ->components([
-                TextEntry::make('brand')
-                    ->label('Brand'),
+                TextEntry::make('name')
+                    ->label('Name'),
                 TextEntry::make('category.name'),
                 ImageEntry::make('image')
                     ->placeholder('-'),

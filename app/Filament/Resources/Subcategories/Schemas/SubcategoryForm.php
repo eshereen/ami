@@ -17,8 +17,8 @@ class SubcategoryForm
             ->components([
                 Section::make('Subcategory Details')
                 ->schema([
-                TextInput::make('brand')
-                    ->label('Brand')
+                TextInput::make('name')
+                    ->label('Name')
                     ->required(),
 
                 Select::make('category.name')

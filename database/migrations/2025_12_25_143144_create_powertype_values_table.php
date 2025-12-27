@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('powertype_id')->constrained('powertypes')->onDelete('cascade');
             $table->foreignId('product_id')->constrained('products')->onDelete('cascade');
-            $table->integer('value')->nullable();
+            $table->decimal('value', 10, 2)->nullable();
             $table->timestamps();
         });
     }
