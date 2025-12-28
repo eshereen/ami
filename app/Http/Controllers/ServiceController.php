@@ -10,7 +10,11 @@ class ServiceController extends Controller
     public function index()
     {
         $services = Service::where('status', true)->get();
-        return view('pages.services.index', compact('services'));
+        
+        // Get first service image for hero, or use default
+        $heroImage = $services->first()?->image ?? null;
+        
+        return view('pages.services.index', compact('services', 'heroImage'));
     }
 
     public function show($slug)

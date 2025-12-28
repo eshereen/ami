@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function() {
              class="object-cover w-full h-full">
         <div class="absolute inset-0 flex items-center bg-gradient-to-r from-blue-900/80 to-blue-700/60">
             <div class="container px-4 mx-auto">
-                <h1 class="mb-4 text-4xl font-bold text-white md:text-5xl fade-in">Product Gallery</h1>
+                <h1 class="mb-4 text-4xl font-bold text-white md:text-5xl fade-in">Our Projects</h1>
                 <p class="max-w-2xl text-xl text-blue-100 fade-in">Explore our comprehensive collection of power generation solutions and installations</p>
             </div>
         </div>
@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function() {
     <section class="py-16 bg-gray-50">
         <div class="container px-4 mx-auto">
             <div class="mb-16 text-center">
-                <h2 class="mb-4 text-3xl font-bold md:text-4xl ami-blue">Our Work Gallery</h2>
+                <h2 class="mb-4 text-3xl font-bold md:text-4xl ami-blue">Our Projects</h2>
                 <div class="w-24 h-1 mx-auto bg-ami-orange"></div>
                 <p class="max-w-3xl mx-auto mt-4 text-gray-600">
                     Discover our extensive portfolio of power generation solutions, installations, and projects.
@@ -114,8 +114,8 @@ document.addEventListener('DOMContentLoaded', function() {
             @else
             <div class="py-16 text-center">
                 <i class="mb-4 text-6xl text-gray-300 fas fa-images"></i>
-                <h3 class="mb-2 text-xl font-semibold text-gray-600">Gallery Coming Soon</h3>
-                <p class="text-gray-500">Our comprehensive gallery will be available here soon.</p>
+                <h3 class="mb-2 text-xl font-semibold text-gray-600">Our Projects Coming Soon</h3>
+                <p class="text-gray-500">Our comprehensive projects will be available here soon.</p>
             </div>
             @endif
         </div>

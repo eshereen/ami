@@ -54,7 +54,7 @@ class SubcategoryController extends Controller
     public function subcategories()
     {
         $subcategories = Cache::remember('subcategories_index_subcategories_v1', 300, function () {
-            return Subcategory::select(['id','name','slug','category_id'])
+            return Subcategory::select(['id','name','slug','category_id','image'])
                 ->with(['category:id,name'])
                 ->withCount('products')
                 ->latest('id')
@@ -70,7 +70,11 @@ class SubcategoryController extends Controller
                 ->orderBy('name')
                 ->get();
         });
-        return view('pages.subcategories.index', compact('subcategories', 'categories'));
+        
+        // Get first subcategory image for hero, or use default
+        $heroImage = $subcategories->first()?->image ?? null;
+        
+        return view('pages.subcategories.index', compact('subcategories', 'categories', 'heroImage'));
     }
 }
 

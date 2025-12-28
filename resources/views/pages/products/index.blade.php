@@ -5,13 +5,151 @@
 @section('keywords', 'products, generators, power equipment, AMI GenSet, engines, power solutions')
 
 @section('content')
-    <!-- Hero Section -->
-    <section class="py-20 bg-gradient-to-r to-blue-600 from-ami-blue">
-        <div class="container px-4 mx-auto text-center">
-            <h1 class="mb-6 text-4xl font-bold text-white md:text-5xl">Our Products</h1>
-            <p class="mx-auto max-w-3xl text-xl text-blue-100">Explore our comprehensive range of power generation solutions designed for reliability, efficiency, and performance.</p>
+    <!-- Hero Section with Animations -->
+    <section class="relative h-96 md:h-[500px] overflow-hidden" id="products-hero">
+        <!-- Animated Background Image with Parallax -->
+        <div class="absolute inset-0 bg-black">
+            <img src="{{ asset('imgs/call.webp') }}"
+                 alt="Our Products"
+                 class="object-cover w-full h-full transition-transform duration-700 ease-out scale-110 hero-parallax">
         </div>
+        
+        <!-- Animated Gradient Overlay -->
+        <div class="absolute inset-0 bg-gradient-to-r from-blue-900/85 via-blue-800/75 to-blue-700/65 animate-gradient"></div>
+        
+        <!-- Content with Staggered Animations -->
+        <div class="flex absolute inset-0 items-center z-10">
+            <div class="container px-4 mx-auto text-center">
+                <h1 class="mb-6 text-4xl font-bold text-white md:text-5xl opacity-0 translate-y-8 hero-title">
+                    Our Products
+                </h1>
+                <p class="mx-auto max-w-3xl text-xl text-blue-100 opacity-0 translate-y-8 hero-description">
+                    Explore our comprehensive range of power generation solutions designed for reliability, efficiency, and performance.
+                </p>
+            </div>
+        </div>
+        
+        <!-- Decorative Animated Elements -->
+        <div class="absolute top-0 right-0 w-64 h-64 bg-ami-orange/10 rounded-full blur-3xl animate-pulse-slow"></div>
+        <div class="absolute bottom-0 left-0 w-48 h-48 bg-ami-blue/10 rounded-full blur-3xl animate-pulse-slower"></div>
     </section>
+
+    <style>
+        /* Hero Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes gradientShift {
+            0%, 100% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+
+        @keyframes pulseSlow {
+            0%, 100% {
+                opacity: 0.3;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.5;
+                transform: scale(1.1);
+            }
+        }
+
+        @keyframes pulseSlower {
+            0%, 100% {
+                opacity: 0.2;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.4;
+                transform: scale(1.15);
+            }
+        }
+
+        /* Apply animations on page load */
+        #products-hero .hero-title {
+            animation: fadeInUp 1s ease-out 0.3s forwards;
+        }
+
+        #products-hero .hero-description {
+            animation: fadeInUp 1s ease-out 0.6s forwards;
+        }
+
+        #products-hero .hero-parallax {
+            animation: fadeInUp 1.2s ease-out forwards;
+        }
+
+        #products-hero .animate-gradient {
+            background-size: 200% 200%;
+            animation: gradientShift 8s ease infinite;
+        }
+
+        #products-hero .animate-pulse-slow {
+            animation: pulseSlow 4s ease-in-out infinite;
+        }
+
+        #products-hero .animate-pulse-slower {
+            animation: pulseSlower 6s ease-in-out infinite;
+        }
+
+        /* Reduced motion for accessibility */
+        @media (prefers-reduced-motion: reduce) {
+            #products-hero .hero-title,
+            #products-hero .hero-description,
+            #products-hero .hero-parallax,
+            #products-hero .animate-gradient,
+            #products-hero .animate-pulse-slow,
+            #products-hero .animate-pulse-slower {
+                animation: none !important;
+                opacity: 1 !important;
+                transform: none !important;
+            }
+        }
+    </style>
+
+    <script>
+        // Parallax scroll effect for hero section
+        document.addEventListener('DOMContentLoaded', function() {
+            const hero = document.getElementById('products-hero');
+            const parallaxImage = hero?.querySelector('.hero-parallax');
+            
+            if (parallaxImage && window.matchMedia('(min-width: 768px)').matches) {
+                let ticking = false;
+                
+                window.addEventListener('scroll', function() {
+                    if (!ticking) {
+                        window.requestAnimationFrame(function() {
+                            const scrolled = window.pageYOffset;
+                            const heroHeight = hero.offsetHeight;
+                            
+                            // Only apply parallax while hero is in view
+                            if (scrolled < heroHeight) {
+                                const parallaxSpeed = 0.5;
+                                const yPos = -(scrolled * parallaxSpeed);
+                                parallaxImage.style.transform = `translateY(${yPos}px) scale(1.1)`;
+                            }
+                            
+                            ticking = false;
+                        });
+                        
+                        ticking = true;
+                    }
+                }, { passive: true });
+            }
+        });
+    </script>
 
     <!-- Main Content with Sidebar -->
     <section class="container px-4 py-8 mx-auto">
