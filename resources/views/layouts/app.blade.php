@@ -66,7 +66,7 @@
 .red-hat-display {
   font-family: "Red Hat Display", sans-serif;
   font-optical-sizing: auto;
-  font-weight: 900;
+  font-weight: 600;
   font-style: normal;
 }
       
@@ -315,7 +315,7 @@
             -moz-osx-font-smoothing: grayscale;
         }
 
-        h1, h2, h3, h4, h5, h6 {
+        h1, h2, h3, h4, h5, h6,ul,li,a,button,span {
             font-family: 'Red Hat Display', sans-serif !important;
             font-display: swap;
         }
