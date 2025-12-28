@@ -83,7 +83,7 @@
         /* Essential mobile-first critical CSS only */
         *{box-sizing:border-box;margin:0;padding:0}
         html{font-size:16px;-webkit-text-size-adjust:100%;overflow-x:hidden}
-        body{margin:0;font-family:system-ui,-apple-system,sans-serif;line-height:1.6;overflow-x:hidden}
+        body{margin:0;font-family:'Open Sans',system-ui,-apple-system,sans-serif;line-height:1.6;overflow-x:hidden}
 
         /* Hero section - absolute minimum */
         .relative{position:relative}
@@ -191,6 +191,10 @@
                                     'ami-blue': '#0056b3',
                                     'ami-orange': '#ec2600',
                                     'ami-light-blue': '#e6f2ff'
+                                },
+                                fontFamily: {
+                                    'sans': ['Open Sans', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+                                    'heading': ['Red Hat Display', 'ui-sans-serif', 'system-ui', 'sans-serif']
                                 }
                             }
                         }
@@ -312,9 +316,33 @@
         }
 
         h1, h2, h3, h4, h5, h6 {
-            font-family: 'Red Hat Display', sans-serif;
+            font-family: 'Red Hat Display', sans-serif !important;
             font-display: swap;
         }
+
+        /* Specific font-weight for each heading level */
+        h1 {
+            font-weight: 900 !important;
+        }
+
+        h2 {
+            font-weight: 800 !important;
+        }
+
+        h3 {
+            font-weight: 700 !important;
+        }
+
+        h4, h5, h6 {
+            font-weight: 600 !important;
+        }
+        
+        /* Override any Tailwind font-family utilities for headings */
+        .font-sans h1, .font-sans h2, .font-sans h3, 
+        .font-sans h4, .font-sans h5, .font-sans h6 {
+            font-family: 'Red Hat Display', sans-serif !important;
+        }
+        
         
         /* Mobile performance optimizations */
         @media (max-width: 768px) {

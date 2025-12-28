@@ -13,8 +13,8 @@ export default {
         'ami-light-blue': '#e6f2ff',
       },
       fontFamily: {
-        'sans': ['Roboto', 'ui-sans-serif', 'system-ui'],
-        'display': ['Montserrat', 'ui-sans-serif', 'system-ui'],
+        'sans': ['Open Sans', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        'heading': ['Red Hat Display', 'ui-sans-serif', 'system-ui', 'sans-serif'],
       },
     },
   },
