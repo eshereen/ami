@@ -4,6 +4,20 @@
 @section('description', 'Browse our complete range of diesel generators with various power capacities from 0 kVA to 3000+ kVA.')
 
 @section('content')
+@php
+    // Helper function to format numbers: remove .00 for whole numbers, keep decimals otherwise
+    function formatNumber($value) {
+        if ($value === null || $value === '-') {
+            return '-';
+        }
+        // Convert to float and check if it's a whole number
+        $numValue = floatval($value);
+        if ($numValue == intval($numValue)) {
+            return number_format($numValue, 0); // No decimals for whole numbers
+        }
+        return rtrim(rtrim(number_format($numValue, 2), '0'), '.'); // Remove trailing zeros and decimal point if needed
+    }
+@endphp
 <!-- Hero Section -->
 <section class="relative h-[400px] bg-cover bg-center" style="background-image: linear-gradient(rgba(0, 51, 102, 0.7), rgba(0, 51, 102, 0.7)), url('{{ $category && $category->image ? asset('storage/' . $category->image) : asset('imgs/hero-genset.jpg') }}');">
     <div class="container px-4 mx-auto h-full flex items-center">
@@ -144,22 +158,22 @@
                       
                         <!-- Prime KVA -->
                         <td class="py-4 px-4 text-center font-semibold text-gray-800 border-l border-gray-200">
-                            {{ $product->prime_kva->value ?? '-' }}
+                            {{ formatNumber($product->prime_kva->value ?? '-') }}
                         </td>
                         
                         <!-- Prime KW -->
                         <td class="py-4 px-4 text-center font-semibold text-gray-800">
-                            {{ $product->prime_kw->value ?? '-' }}
+                            {{ formatNumber($product->prime_kw->value ?? '-') }}
                         </td>
 
                           <!-- Standby KVA -->
                         <td class="py-4 px-4 text-center font-semibold text-gray-800 border-l border-gray-200">
-                            {{ $product->standby_kva->value ?? '-' }}
+                            {{ formatNumber($product->standby_kva->value ?? '-') }}
                         </td>
                         
                         <!-- Standby KW -->
                         <td class="py-4 px-4 text-center font-semibold text-gray-800">
-                            {{ $product->standby_kw->value ?? '-' }}
+                            {{ formatNumber($product->standby_kw->value ?? '-') }}
                         </td>
                         
                         
@@ -231,8 +245,8 @@
                         <div class="bg-blue-50 p-3 rounded-lg">
                             <p class="text-xs text-gray-600 font-semibold mb-1">Prime Power</p>
                             <div class="flex justify-between items-center">
-                                <span class="text-sm font-bold text-ami-blue">{{ $product->prime_kva->value ?? '-' }} KVA</span>
-                                <span class="text-sm font-bold text-ami-blue">{{ $product->prime_kw->value ?? '-' }} KW</span>
+                                <span class="text-sm font-bold text-ami-blue">{{ formatNumber($product->prime_kva->value ?? '-') }} KVA</span>
+                                <span class="text-sm font-bold text-ami-blue">{{ formatNumber($product->prime_kw->value ?? '-') }} KW</span>
                             </div>
                         </div>
                         
@@ -240,8 +254,8 @@
                         <div class="bg-orange-50 p-3 rounded-lg">
                             <p class="text-xs text-gray-600 font-semibold mb-1">Standby Power</p>
                             <div class="flex justify-between items-center">
-                                <span class="text-sm font-bold text-ami-orange">{{ $product->standby_kva->value ?? '-' }} KVA</span>
-                                <span class="text-sm font-bold text-ami-orange">{{ $product->standby_kw->value ?? '-' }} KW</span>
+                                <span class="text-sm font-bold text-ami-orange">{{ formatNumber($product->standby_kva->value ?? '-') }} KVA</span>
+                                <span class="text-sm font-bold text-ami-orange">{{ formatNumber($product->standby_kw->value ?? '-') }} KW</span>
                             </div>
                         </div>
                     </div>
