@@ -115,7 +115,7 @@
             <table class="w-full bg-white rounded-lg shadow-sm border-collapse">
                 <thead>
                     <tr class="bg-ami-blue text-white">
-                      <!-- Checkbox -->
+                      <!-- Image -->
                         <th class="py-4 px-4 text-left w-20"></th>
                         <th class="py-4 px-2 text-center border-l border-white/20">AMI Model</th>
                           <th class="py-4 px-2 text-center border-l border-white/20">
@@ -145,14 +145,18 @@
                         
                         <!-- Image -->
                         <td class="py-4 px-4">
-                            <img src="{{ $product->image ? asset('storage/' . $product->image) : asset('imgs/products/G1.png') }}" 
-                                 alt="{{ $product->ami_model }}" 
-                                 class="w-24 h-24 object-contain rounded mx-auto">
+                            <a href="{{ route('product.show', $product->slug) }}" class="block transition-transform hover:scale-105">
+                                <img src="{{ $product->image ? asset('storage/' . $product->image) : asset('imgs/products/G1.png') }}" 
+                                     alt="{{ $product->ami_model }}" 
+                                     class="w-24 h-24 object-contain rounded mx-auto">
+                            </a>
                         </td>
                         
                         <!-- Model -->
                         <td class="py-4 px-4">
-                            <h3 class="font-bold text-ami-blue text-lg">{{ $product->ami_model }}</h3>
+                            <a href="{{ route('product.show', $product->slug) }}" class="hover:underline">
+                                <h3 class="font-bold text-ami-blue text-lg hover:text-ami-orange transition-colors">{{ $product->ami_model }}</h3>
+                            </a>
                         </td>
                         
                       
