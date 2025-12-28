@@ -23,6 +23,15 @@ class GallaryResource extends Resource
     protected static string|BackedEnum|null $navigationIcon = Heroicon::Photo;
     protected static ?int $navigationSort = 4;
 
+    // Customize the navigation label (sidebar)
+    protected static ?string $navigationLabel = 'Projects';
+    
+    // Customize the model label (singular)
+    protected static ?string $modelLabel = 'Project';
+    
+    // Customize the plural model label (used in page titles, buttons, etc.)
+    protected static ?string $pluralModelLabel = 'Projects';
+
     protected static ?string $recordTitleAttribute = 'Gallary';
 
     public static function form(Schema $schema): Schema
