@@ -14,11 +14,16 @@ class GallaryForm
     {
         return $schema
             ->components([
-                Section::make('Gallary Details')
+                Section::make('Project Details')
                 ->schema([
                 Select::make('product_id')
-
-                    ->relationship('product', 'name'),
+                    ->relationship(
+                        name: 'product',
+                        titleAttribute: 'name'
+                    )
+                    ->getOptionLabelFromRecordUsing(fn ($record) => $record->name ?? $record->ami_model ?? 'Product #' . $record->id)
+                    ->searchable(['name', 'ami_model'])
+                    ->preload(),
                 TextInput::make('name'),
 
                 TextInput::make('description'),
