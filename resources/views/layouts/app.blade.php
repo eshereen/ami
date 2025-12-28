@@ -49,10 +49,11 @@
     <!-- Preload first slider image for better LCP - mobile-first -->
     <link rel="preload" as="image" href="{{ asset('imgs/1-mobile.webp') }}" media="(max-width: 640px)" fetchpriority="high" imagesrcset="{{ asset('imgs/1-mobile.webp') }} 640w" imagesizes="100vw">
 
-    <!-- Optimized font loading - deferred for mobile performance -->
-   
+    <!-- Optimized font loading - async load for better FCP/LCP -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600&family=Red+Hat+Display:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600&family=Red+Hat+Display:wght@500;600;700;800;900&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600&family=Red+Hat+Display:wght@500;600;700;800;900&display=swap" rel="stylesheet"></noscript>
 
     <!-- Font CSS with font-display swap - inline for performance -->
     <style>
