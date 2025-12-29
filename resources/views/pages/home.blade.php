@@ -135,7 +135,7 @@
                 <button
                     @click="currentSlide = index"
                     class="w-3 h-3 rounded-full"
-                    :class="currentSlide === index ? 'bg-white' : 'bg-white bg-opacity-50'"
+                    :class="currentSlide === index ? 'bg-ami-orange' : 'bg-ami-orange bg-opacity-50'"
                 ></button>
             </template>
         </div>
