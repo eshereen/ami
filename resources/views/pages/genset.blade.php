@@ -136,11 +136,17 @@
                         <th class="py-4 px-2 text-center border-l border-white/20"></th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody x-data="{ 
+                    get visibleProducts() {
+                        if (!selectedBrand) return {{ $products->count() }};
+                        return Array.from(document.querySelectorAll('tbody tr[x-show]')).filter(el => el.style.display !== 'none').length;
+                    }
+                }">
                     @forelse($products as $product)
                     <tr class="border-b border-gray-200 hover:bg-gray-50 transition-colors"
                         x-show="!selectedBrand || '{{ $product->subcategory->name ?? '' }}' === selectedBrand"
-                        x-transition>
+                        x-transition
+                        data-brand="{{ $product->subcategory->name ?? '' }}">
                    
                         
                         <!-- Image -->
@@ -209,12 +215,38 @@
                     @empty
                     <tr>
                         <td colspan="10" class="py-12 text-center">
-                            <i class="fas fa-tools text-6xl text-gray-300 mb-4"></i>
-                            <h3 class="text-xl font-semibold text-gray-600 mb-2">No Generators Available</h3>
-                            <p class="text-gray-500">Please check back later or contact us for more information.</p>
+                            <div class="flex flex-col items-center justify-center">
+                                <div class="flex justify-center items-center mx-auto mb-6 w-24 h-24 bg-gray-100 rounded-full">
+                                    <i class="fas fa-box-open text-4xl text-gray-400"></i>
+                                </div>
+                                <h3 class="text-xl font-semibold text-gray-900 mb-2">No Generators Available</h3>
+                                <p class="text-gray-600 mb-6">We're currently updating our diesel generator catalog. Please check back soon.</p>
+                                <a href="{{ route('products.index') }}" 
+                                   class="px-8 py-3 font-semibold text-white rounded-lg transition bg-ami-orange hover:bg-orange-600">
+                                    Browse Other Products
+                                </a>
+                            </div>
                         </td>
                     </tr>
                     @endforelse
+                    
+                    <!-- No Results for Selected Brand -->
+                    <tr x-show="selectedBrand && !Array.from(document.querySelectorAll('tbody tr[data-brand]')).some(el => el.dataset.brand === selectedBrand && el.style.display !== 'none')"
+                        x-transition>
+                        <td colspan="10" class="py-12 text-center">
+                            <div class="flex flex-col items-center justify-center">
+                                <div class="flex justify-center items-center mx-auto mb-6 w-24 h-24 bg-gray-100 rounded-full">
+                                    <i class="fas fa-search text-4xl text-gray-400"></i>
+                                </div>
+                                <h3 class="text-xl font-semibold text-gray-900 mb-2">No Products Found for <span x-text="selectedBrand" class="text-ami-orange"></span></h3>
+                                <p class="text-gray-600 mb-6">We don't currently have any generators from this brand. Please check back later or browse other brands.</p>
+                                <button @click="selectedBrand = ''" 
+                                        class="px-8 py-3 font-semibold text-white rounded-lg transition bg-ami-orange hover:bg-orange-600">
+                                    View All Brands
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
         </div>
@@ -225,7 +257,8 @@
             
             <div class="bg-white rounded-lg shadow-md overflow-hidden"
                  x-show="!selectedBrand || '{{ $product->subcategory->name ?? '' }}' === selectedBrand"
-                 x-transition>
+                 x-transition
+                 data-brand-mobile="{{ $product->subcategory->name ?? '' }}">
                 <!-- Product Header -->
                 <div class="bg-ami-blue text-white p-4">
                     <div class="flex items-center justify-between">
@@ -292,11 +325,32 @@
             </div>
             @empty
             <div class="bg-white rounded-lg shadow-md p-12 text-center">
-                <i class="fas fa-tools text-6xl text-gray-300 mb-4"></i>
-                <h3 class="text-xl font-semibold text-gray-600 mb-2">No Generators Available</h3>
-                <p class="text-gray-500">Please check back later or contact us for more information.</p>
+                <div class="flex justify-center items-center mx-auto mb-6 w-24 h-24 bg-gray-100 rounded-full">
+                    <i class="fas fa-box-open text-4xl text-gray-400"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-2">No Generators Available</h3>
+                <p class="text-gray-600 mb-6">We're currently updating our diesel generator catalog. Please check back soon.</p>
+                <a href="{{ route('products.index') }}" 
+                   class="inline-block px-8 py-3 font-semibold text-white rounded-lg transition bg-ami-orange hover:bg-orange-600">
+                    Browse Other Products
+                </a>
             </div>
             @endforelse
+            
+            <!-- No Results for Selected Brand (Mobile) -->
+            <div x-show="selectedBrand && !Array.from(document.querySelectorAll('[data-brand-mobile]')).some(el => el.dataset.brandMobile === selectedBrand && el.style.display !== 'none')"
+                 x-transition
+                 class="bg-white rounded-lg shadow-md p-12 text-center">
+                <div class="flex justify-center items-center mx-auto mb-6 w-24 h-24 bg-gray-100 rounded-full">
+                    <i class="fas fa-search text-4xl text-gray-400"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-2">No Products Found for <span x-text="selectedBrand" class="text-ami-orange"></span></h3>
+                <p class="text-gray-600 mb-6">We don't currently have any generators from this brand. Please check back later or browse other brands.</p>
+                <button @click="selectedBrand = ''" 
+                        class="px-8 py-3 font-semibold text-white rounded-lg transition bg-ami-orange hover:bg-orange-600">
+                    View All Brands
+                </button>
+            </div>
         </div>
 
        
