@@ -567,14 +567,6 @@ php artisan view:cache
 
 ---
 
-## 📞 Support
-
-For technical support or issues:
-- **Documentation:** See `PROJECT_DOCUMENTATION.md`
-- **User Guide:** See `USER_GUIDE.md`
-- **Developer Contact:** [Your Contact Information]
-
----
 
 **Last Updated:** 2025-12-30  
 **Version:** 1.0
